@@ -1,0 +1,51 @@
+import { EditorialCarousel, type Slide } from "./EditorialCarousel";
+import { LogoMark } from "./LogoMark";
+import { Reveal } from "./Reveal";
+
+export function ServiceChapter({
+  label,
+  headline,
+  description,
+  cta,
+  slides,
+  tall = false,
+}: {
+  label: string;
+  headline: string;
+  description: string;
+  cta: string;
+  slides: Slide[];
+  tall?: boolean;
+}) {
+  return (
+    <section className="py-24 md:py-40">
+      <div className="mx-auto max-w-4xl px-6 text-center md:px-12">
+        <Reveal>
+          <LogoMark className="mb-8" />
+        </Reveal>
+        <Reveal delay={80}>
+          <p className="label-xs text-muted-foreground">{label}</p>
+        </Reveal>
+        <Reveal delay={80}>
+          <h2 className="display mx-auto mt-8 max-w-3xl text-[2.25rem] sm:text-5xl md:text-[4.25rem]">
+            {headline}
+          </h2>
+        </Reveal>
+        <Reveal delay={160}>
+          <p className="mx-auto mt-8 max-w-xl text-sm leading-relaxed text-muted-foreground md:text-base">
+            {description}
+          </p>
+        </Reveal>
+        <Reveal delay={240}>
+          <a href="#contact" className="label-xs link-underline mt-10 inline-block">
+            {cta} &nbsp;&rarr;
+          </a>
+        </Reveal>
+      </div>
+
+      <Reveal className="mt-16 md:mt-24">
+        <EditorialCarousel slides={slides} tall={tall} />
+      </Reveal>
+    </section>
+  );
+}
