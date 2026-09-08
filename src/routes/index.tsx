@@ -155,8 +155,8 @@ function Index() {
           </Reveal>
         </section>
 
-        {CHAPTERS.map((c) => (
-          <ServiceChapter key={c.label} {...c} />
+        {CHAPTERS.map((c, i) => (
+          <ServiceChapter key={c.label} index={i} {...c} />
         ))}
 
         <AboutSection />
