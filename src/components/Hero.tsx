@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import heroImg from "@/assets/hero.jpg";
 import aboutImg from "@/assets/about.jpg";
 import pers1 from "@/assets/pers-1.jpg";
@@ -11,9 +11,19 @@ const SLIDES = [
   { src: pers1, alt: "Personal styling session with a silk scarf in a warm ivory studio" },
 ];
 
+const WORDS = ["BALAN", "C", "E"];
+
 export function Hero() {
   const [y, setY] = useState(0);
   const [index, setIndex] = useState(0);
+  const [loaded, setLoaded] = useState(false);
+  const heroRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    // Trigger entrance animation after a short delay for dramatic effect
+    const t = setTimeout(() => setLoaded(true), 150);
+    return () => clearTimeout(t);
+  }, []);
 
   useEffect(() => {
     const onScroll = () => setY(window.scrollY);
@@ -22,44 +32,80 @@ export function Hero() {
   }, []);
 
   useEffect(() => {
-    const id = setInterval(() => setIndex((i) => (i + 1) % SLIDES.length), 5200);
+    const id = setInterval(() => setIndex((i) => (i + 1) % SLIDES.length), 6000);
     return () => clearInterval(id);
   }, []);
 
   return (
-    <section id="top" className="relative h-[100svh] w-full overflow-hidden bg-charcoal">
+    <section ref={heroRef} id="top" className="relative h-[100svh] w-full overflow-hidden bg-charcoal">
       {SLIDES.map((s, i) => (
         <img
           key={s.src}
           src={s.src}
           alt={s.alt}
-          className="absolute inset-0 h-[115%] w-full object-cover object-center transition-[opacity,transform] duration-[1500ms] ease-out"
+          className="absolute inset-0 h-[120%] w-full object-cover object-center"
           style={{
-            transform: `translate3d(0, ${y * 0.14}px, 0) scale(${i === index ? 1.06 : 1})`,
+            transform: `translate3d(0, ${y * 0.22}px, 0) scale(${i === index ? 1.12 : 1})`,
             opacity: i === index ? 1 : 0,
-            transitionDuration: i === index ? "1500ms, 7000ms" : "1500ms, 1500ms",
+            transition:
+              i === index
+                ? "opacity 1.6s cubic-bezier(0.16, 1, 0.3, 1), transform 8.5s cubic-bezier(0.16, 1, 0.3, 1)"
+                : "opacity 1.6s cubic-bezier(0.16, 1, 0.3, 1), transform 1.6s cubic-bezier(0.16, 1, 0.3, 1)",
           }}
         />
       ))}
-      <div className="absolute inset-0 bg-charcoal/40" />
-      <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-charcoal/75 to-transparent" />
+      <div className="absolute inset-0 bg-charcoal/35" />
+      <div className="absolute inset-x-0 bottom-0 h-3/4 bg-gradient-to-t from-charcoal/80 via-charcoal/30 to-transparent" />
 
       <div
         className="relative z-10 flex h-full flex-col justify-end px-6 pb-20 text-ivory md:px-12 md:pb-24"
-        style={{ transform: `translate3d(0, ${y * -0.05}px, 0)` }}
+        style={{ transform: `translate3d(0, ${y * -0.08}px, 0)` }}
       >
-        <h1 className="display text-[4.5rem] leading-[0.9] sm:text-[7rem] md:text-[11rem] lg:text-[13rem]">
-          BALAN<span className="text-red">C</span>E
+        <h1
+          aria-label="BALANCE"
+          className="display text-[4.5rem] leading-[0.9] sm:text-[7rem] md:text-[11rem] lg:text-[13rem]"
+        >
+          {WORDS.map((word, i) => (
+            <span
+              key={i}
+              className={`hero-word ${word === "C" ? "text-red" : ""} ${loaded ? "hero-word-in" : ""}`}
+              style={{ transitionDelay: `${400 + i * 120}ms` }}
+            >
+              {word}
+            </span>
+          ))}
         </h1>
-        <p className="label-xs mt-6 opacity-80">Design &amp; Fashion Consultancy</p>
+        <p
+          className={`label-xs mt-6 opacity-80 transition-all duration-1000 ${loaded ? "translate-y-0 opacity-80" : "translate-y-6 opacity-0"}`}
+          style={{ transitionDelay: "900ms", transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)" }}
+        >
+          Design &amp; Fashion Consultancy
+        </p>
 
-        <div className="mt-12 flex flex-wrap items-center gap-4">
-          <a href="#services" className="btn-red label-xs hover:bg-charcoal">
+        <div
+          className={`mt-12 flex flex-wrap items-center gap-4 transition-all duration-1000 ${loaded ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"}`}
+          style={{ transitionDelay: "1100ms", transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)" }}
+        >
+          <a href="#services" className="btn-red label-xs">
             Explore services
           </a>
           <a href="#contact" className="btn-ghost label-xs hover:bg-ivory hover:text-charcoal">
             Book an appointment
           </a>
+        </div>
+
+        <div
+          className={`absolute right-6 top-1/2 hidden -translate-y-1/2 flex-col gap-3 md:right-12 md:flex ${loaded ? "opacity-100" : "opacity-0"}`}
+          style={{ transition: "opacity 1s cubic-bezier(0.16, 1, 0.3, 1) 1.4s" }}
+        >
+          {SLIDES.map((_, i) => (
+            <button
+              key={i}
+              aria-label={`Go to slide ${i + 1}`}
+              onClick={() => setIndex(i)}
+              className={`h-2 w-2 transition-all duration-500 ${i === index ? "scale-125 bg-ivory" : "bg-ivory/40 hover:bg-ivory/70"}`}
+            />
+          ))}
         </div>
       </div>
     </section>
