@@ -2,9 +2,8 @@ import { EditorialCarousel, type Slide } from "./EditorialCarousel";
 import { LogoMark } from "./LogoMark";
 import { Reveal } from "./Reveal";
 
-let chapterCounter = 0;
-
 export function ServiceChapter({
+  index,
   label,
   headline,
   description,
@@ -12,6 +11,7 @@ export function ServiceChapter({
   slides,
   tall = false,
 }: {
+  index: number;
   label: string;
   headline: string;
   description: string;
@@ -19,8 +19,7 @@ export function ServiceChapter({
   slides: Slide[];
   tall?: boolean;
 }) {
-  chapterCounter += 1;
-  const number = String(chapterCounter).padStart(2, "0");
+  const number = String(index + 1).padStart(2, "0");
 
   return (
     <section className="py-28 md:py-44">
