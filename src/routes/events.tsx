@@ -213,6 +213,7 @@ function EventCard({
 function EventsPage() {
   return (
     <main className="relative z-10 bg-background">
+      <SiteHeader />
       <EventsHero />
 
       <section className="px-6 py-28 md:px-12 md:py-44">
