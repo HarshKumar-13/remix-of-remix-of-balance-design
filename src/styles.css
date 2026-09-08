@@ -227,7 +227,7 @@
     background 0.5s var(--ease-editorial),
     transform 0.5s var(--ease-editorial);
 }
-@utility btn-red:hover {
+.btn-red:hover {
   transform: translateY(-2px);
 }
 @utility btn-ghost {
@@ -239,7 +239,7 @@
     color 0.5s var(--ease-editorial),
     transform 0.5s var(--ease-editorial);
 }
-@utility btn-ghost:hover {
+.btn-ghost:hover {
   transform: translateY(-2px);
 }
 

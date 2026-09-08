@@ -6,8 +6,7 @@ import logoLight from "@/assets/logo-light.png.asset.json";
 const NAV = [
   { label: "Home", href: "/#top" },
   { label: "About Us", href: "/#about" },
-  { label: "Services", href: "/#services" },
-  { label: "Journal", href: "/blog" },
+  { label: "Events", href: "/#events" },
   { label: "Contact Us", href: "/#contact" },
 ];
 
@@ -89,7 +88,7 @@ export function SiteHeader() {
           open ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"
         }`}
       >
-        <nav className="flex h-full flex-col justify-center gap-2 px-6 md:px-12">
+        <nav className="flex h-full flex-col justify-center gap-2 px-6 pt-24 md:px-12 md:pt-28">
           {NAV.map((n, i) => (
             <a
               key={n.label}
@@ -106,19 +105,6 @@ export function SiteHeader() {
               {n.label}
             </a>
           ))}
-          <div
-            className="mt-14 max-w-xs transition-opacity duration-700"
-            style={{ opacity: open ? 1 : 0, transitionDelay: open ? "520ms" : "0ms" }}
-          >
-            <p className="label-xs opacity-50">Design &amp; Fashion Consultancy</p>
-            <a
-              href="https://www.balancedesign.in"
-              className="link-underline mt-4 inline-block text-sm"
-              tabIndex={open ? 0 : -1}
-            >
-              www.balancedesign.in
-            </a>
-          </div>
         </nav>
       </div>
     </>
