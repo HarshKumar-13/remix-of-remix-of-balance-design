@@ -3,6 +3,7 @@ import { LogoMark } from "./LogoMark";
 import { Reveal } from "./Reveal";
 
 export function ServiceChapter({
+  index,
   label,
   headline,
   description,
@@ -10,6 +11,7 @@ export function ServiceChapter({
   slides,
   tall = false,
 }: {
+  index: number;
   label: string;
   headline: string;
   description: string;
@@ -17,21 +19,25 @@ export function ServiceChapter({
   slides: Slide[];
   tall?: boolean;
 }) {
+  const number = String(index + 1).padStart(2, "0");
+
   return (
-    <section className="py-24 md:py-40">
+    <section className="py-28 md:py-44">
       <div className="mx-auto max-w-4xl px-6 text-center md:px-12">
         <Reveal>
           <LogoMark className="mb-8" />
         </Reveal>
         <Reveal delay={80}>
-          <p className="label-xs text-muted-foreground">{label}</p>
+          <p className="label-xs text-muted-foreground">
+            {number} / {label}
+          </p>
         </Reveal>
-        <Reveal delay={80}>
-          <h2 className="display mx-auto mt-8 max-w-3xl text-[2.25rem] sm:text-5xl md:text-[4.25rem]">
+        <Reveal delay={120}>
+          <h2 className="display mx-auto mt-8 max-w-3xl text-[2.25rem] leading-[0.95] sm:text-5xl md:text-[4.5rem]">
             {headline}
           </h2>
         </Reveal>
-        <Reveal delay={160}>
+        <Reveal delay={180}>
           <p className="mx-auto mt-8 max-w-xl text-sm leading-relaxed text-muted-foreground md:text-base">
             {description}
           </p>

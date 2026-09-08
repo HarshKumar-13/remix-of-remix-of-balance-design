@@ -51,6 +51,10 @@
   --color-ivory: var(--ivory);
   --color-charcoal: var(--charcoal);
 
+  /* Editorial motion tokens */
+  --ease-editorial: cubic-bezier(0.16, 1, 0.3, 1);
+  --duration-reveal: 1.2s;
+  --duration-hero: 1.5s;
 }
 
 :root {
@@ -125,16 +129,48 @@
   position: relative;
   display: inline-block;
 }
+
+/* Reveal: theatrical fade-up with subtle scale */
 @utility reveal {
   opacity: 0;
-  transform: translateY(28px);
+  transform: translateY(36px) scale(0.98);
   transition:
-    opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1),
-    transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+    opacity var(--duration-reveal) var(--ease-editorial),
+    transform var(--duration-reveal) var(--ease-editorial);
+  will-change: opacity, transform;
 }
 @utility reveal-in {
   opacity: 1;
   transform: none;
+}
+
+/* Hero headline character/word stagger */
+@utility hero-word {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(40px);
+  transition:
+    opacity 1.4s var(--ease-editorial),
+    transform 1.4s var(--ease-editorial);
+}
+@utility hero-word-in {
+  opacity: 1;
+  transform: none;
+}
+
+/* Carousel slide states */
+@utility carousel-slide {
+  transition:
+    transform 0.7s var(--ease-editorial),
+    opacity 0.7s var(--ease-editorial);
+}
+@utility carousel-slide-active {
+  transform: scale(1);
+  opacity: 1;
+}
+@utility carousel-slide-inactive {
+  transform: scale(0.96);
+  opacity: 0.72;
 }
 
 .link-underline::after {
@@ -147,7 +183,7 @@
   background: currentColor;
   transform: scaleX(1);
   transform-origin: right;
-  transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 0.7s var(--ease-editorial);
 }
 .link-underline:hover::after {
   transform: scaleX(0);
@@ -187,21 +223,31 @@
   background: var(--red);
   color: #fff;
   padding: 0.95rem 2.1rem;
-  transition: background 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  transition:
+    background 0.5s var(--ease-editorial),
+    transform 0.5s var(--ease-editorial);
+}
+@utility btn-red:hover {
+  transform: translateY(-2px);
 }
 @utility btn-ghost {
   display: inline-block;
   border: 1px solid currentColor;
   padding: 0.95rem 2.1rem;
   transition:
-    background 0.5s cubic-bezier(0.16, 1, 0.3, 1),
-    color 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    background 0.5s var(--ease-editorial),
+    color 0.5s var(--ease-editorial),
+    transform 0.5s var(--ease-editorial);
+}
+@utility btn-ghost:hover {
+  transform: translateY(-2px);
 }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .marquee-track { animation: none; }
   .reveal { opacity: 1; transform: none; transition: none; }
+  .hero-word { opacity: 1; transform: none; transition: none; }
   *, *::before, *::after {
     animation-duration: 0.001ms !important;
     transition-duration: 0.001ms !important;
