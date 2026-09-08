@@ -6,8 +6,7 @@ import logoLight from "@/assets/logo-light.png.asset.json";
 const NAV = [
   { label: "Home", href: "/#top" },
   { label: "About Us", href: "/#about" },
-  { label: "Services", href: "/#services" },
-  { label: "Journal", href: "/blog" },
+  { label: "Events", href: "/#events" },
   { label: "Contact Us", href: "/#contact" },
 ];
 
