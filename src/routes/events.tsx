@@ -435,7 +435,7 @@ function EventsTabs({ onBook }: { onBook: (e: UpcomingEvent) => void }) {
   const [tab, setTab] = useState<"upcoming" | "past">("upcoming");
 
   return (
-    <section className="border-t border-border px-6 py-24 md:px-12 md:py-36">
+    <section className="border-t border-border px-6 py-16 md:px-12 md:py-24">
       <div className="mx-auto max-w-7xl">
         <div className="flex flex-wrap gap-8 border-b border-border pb-5 md:gap-14">
           {(
