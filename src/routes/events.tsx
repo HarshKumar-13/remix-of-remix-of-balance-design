@@ -464,19 +464,15 @@ function EventsTabs({ onBook }: { onBook: (e: UpcomingEvent) => void }) {
 
         <div
           key={tab}
-          className="mt-20 md:mt-32"
+          className="mt-12 md:mt-16"
           style={{
             animation: "eventsTabIn 0.9s cubic-bezier(0.16,1,0.3,1) both",
           }}
         >
           {tab === "upcoming" ? (
-            <div className="flex flex-col gap-24 md:gap-40">
-              {UPCOMING_EVENTS.map((event, i) => (
-                <UpcomingRow key={event.id} event={event} index={i} onBook={onBook} />
-              ))}
-            </div>
+            <UpcomingCarousel onBook={onBook} />
           ) : (
-            <PastGrid />
+            <PastCarousel />
           )}
         </div>
       </div>
