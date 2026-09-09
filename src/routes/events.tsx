@@ -41,7 +41,7 @@ const UPCOMING_EVENTS = [
     description:
       "A half-day immersive session for leadership teams on dressing with intention, presence and brand alignment.",
     image: eventImg4.url,
-    cta: "Reserve a seat",
+    cta: "Register",
   },
   {
     date: "15 Apr 2027",
