@@ -119,7 +119,7 @@ export function Hero() {
           className={`mt-12 flex flex-wrap items-center gap-4 transition-all duration-1000 ${loaded ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"}`}
           style={{ transitionDelay: "1100ms", transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)" }}
         >
-          <a href="#services" className="btn-ghost label-xs hover:bg-ivory hover:text-charcoal">
+          <a href="#contact" className="btn-ghost label-xs hover:bg-ivory hover:text-charcoal">
             Book an appointment
           </a>
         </div>
