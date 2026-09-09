@@ -245,7 +245,68 @@ function Introduction() {
   );
 }
 
-function UpcomingRow({
+/* ---------- card carousel ---------- */
+
+function CarouselArrow({
+  direction,
+  onClick,
+  disabled,
+}: {
+  direction: "prev" | "next";
+  onClick: () => void;
+  disabled: boolean;
+}) {
+  return (
+    <button
+      aria-label={direction === "prev" ? "Previous events" : "Next events"}
+      onClick={onClick}
+      disabled={disabled}
+      className="group flex h-12 w-12 items-center justify-center rounded-full border border-border transition-all duration-500 hover:border-red hover:bg-red disabled:cursor-not-allowed disabled:opacity-30"
+    >
+      <span
+        className="inline-block text-lg leading-none text-foreground transition-all duration-500 group-hover:text-primary-foreground"
+        style={{ transform: direction === "prev" ? "scaleX(-1)" : "none" }}
+      >
+        &rarr;
+      </span>
+    </button>
+  );
+}
+
+function useCarousel() {
+  const trackRef = useRef<HTMLDivElement>(null);
+  const [atStart, setAtStart] = useState(true);
+  const [atEnd, setAtEnd] = useState(false);
+
+  const update = () => {
+    const el = trackRef.current;
+    if (!el) return;
+    setAtStart(el.scrollLeft <= 8);
+    setAtEnd(el.scrollLeft + el.clientWidth >= el.scrollWidth - 8);
+  };
+
+  useEffect(() => {
+    update();
+    window.addEventListener("resize", update);
+    return () => window.removeEventListener("resize", update);
+  }, []);
+
+  const scrollBy = (dir: 1 | -1) => {
+    const el = trackRef.current;
+    if (!el) return;
+    const card = el.querySelector<HTMLElement>("[data-card]");
+    const step = card ? card.offsetWidth + 24 : el.clientWidth * 0.7;
+    el.scrollBy({ left: dir * step, behavior: "smooth" });
+  };
+
+  return { trackRef, atStart, atEnd, update, scrollBy };
+}
+
+const cardReveal = (i: number) => ({
+  animation: `eventsTabIn 0.9s cubic-bezier(0.16,1,0.3,1) ${i * 90}ms both`,
+});
+
+function UpcomingCard({
   event,
   index,
   onBook,
@@ -254,82 +315,118 @@ function UpcomingRow({
   index: number;
   onBook: (e: UpcomingEvent) => void;
 }) {
-  const flipped = index % 2 === 1;
-  const heights = ["md:h-[76vh]", "md:h-[58vh]", "md:h-[68vh]"];
-  const spans = ["md:col-span-7", "md:col-span-6", "md:col-span-7"];
-
   return (
-    <article className="group grid grid-cols-1 items-center gap-8 md:grid-cols-12 md:gap-14">
-      <div
-        className={`${spans[index % 3]} ${flipped ? "md:order-2 md:col-start-6" : ""}`}
-      >
-        <ClipImage
+    <article
+      data-card
+      style={cardReveal(index)}
+      className="group w-[82vw] shrink-0 snap-start overflow-hidden border border-border bg-card sm:w-[420px]"
+    >
+      <div className="relative h-[46vh] max-h-[380px] min-h-[260px] overflow-hidden">
+        <img
           src={event.image}
           alt={event.title}
-          className={`h-[52vh] w-full ${heights[index % 3]}`}
-          imgClassName="transition-transform duration-[1800ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.05]"
-          parallax={0.045}
+          loading="lazy"
+          className="h-full w-full object-cover transition-transform duration-[1600ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.06]"
         />
+        <span className="label-xs absolute left-5 top-5 bg-background/90 px-3 py-2 text-red backdrop-blur-sm">
+          {event.type}
+        </span>
       </div>
-
-      <div
-        className={`md:col-span-4 ${flipped ? "md:order-1 md:col-start-2" : "md:col-start-9"}`}
-      >
-        <SlideIn from={flipped ? "right" : "left"}>
-          <p className="label-xs text-red">{event.type}</p>
-        </SlideIn>
-        <SlideIn delay={80} from={flipped ? "right" : "left"}>
-          <h3 className="display mt-5 text-[2rem] leading-[0.98] transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:-translate-y-1 sm:text-4xl md:text-[3.25rem]">
-            {event.title}
-          </h3>
-        </SlideIn>
-        <SlideIn delay={160} from={flipped ? "right" : "left"}>
-          <p className="label-xs mt-6 text-muted-foreground">
-            {event.date} &nbsp;·&nbsp; {event.location}
-          </p>
-        </SlideIn>
-        <SlideIn delay={220} from={flipped ? "right" : "left"}>
-          <p className="mt-6 max-w-md text-sm leading-relaxed text-muted-foreground">
-            {event.description}
-          </p>
-        </SlideIn>
-        <SlideIn delay={280} from={flipped ? "right" : "left"}>
-          <button
-            onClick={() => onBook(event)}
-            className="label-xs link-underline mt-9 inline-block text-foreground transition-colors duration-500 hover:text-red"
-          >
-            {event.cta} &nbsp;&rarr;
-          </button>
-        </SlideIn>
+      <div className="p-6 md:p-8">
+        <h3 className="display text-2xl leading-[1.02] transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:-translate-y-1 md:text-[1.9rem]">
+          {event.title}
+        </h3>
+        <p className="label-xs mt-4 text-muted-foreground">
+          {event.date} &nbsp;·&nbsp; {event.location}
+        </p>
+        <p className="mt-4 line-clamp-3 text-sm leading-relaxed text-muted-foreground">
+          {event.description}
+        </p>
+        <button
+          onClick={() => onBook(event)}
+          className="label-xs link-underline mt-7 inline-block text-foreground transition-colors duration-500 hover:text-red"
+        >
+          {event.cta} &nbsp;&rarr;
+        </button>
       </div>
     </article>
   );
 }
 
-function PastGrid() {
+function PastCard({ event, index }: { event: (typeof PAST_EVENTS)[number]; index: number }) {
   return (
-    <div className="grid grid-cols-1 gap-x-10 gap-y-20 sm:grid-cols-2 md:gap-x-16 md:gap-y-28">
-      {PAST_EVENTS.map((event, i) => (
-        <article key={event.id} className={`group ${i % 2 === 1 ? "sm:mt-24" : ""}`}>
-          <ClipImage
-            src={event.image}
-            alt={event.title}
-            delay={i * 60}
-            className="aspect-[4/5] w-full"
-            imgClassName="transition-transform duration-[1800ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.05]"
-          />
-          <p className="label-xs mt-7 text-red">{event.type}</p>
-          <h3 className="display mt-4 text-2xl leading-[1] transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:-translate-y-1 md:text-[2.25rem]">
-            {event.title}
-          </h3>
-          <p className="label-xs mt-4 text-muted-foreground">
-            {event.year} &nbsp;·&nbsp; {event.location}
-          </p>
-          <p className="mt-5 max-w-sm text-sm leading-relaxed text-muted-foreground">
-            {event.description}
-          </p>
-        </article>
-      ))}
+    <article
+      data-card
+      style={cardReveal(index)}
+      className="group w-[70vw] shrink-0 snap-start sm:w-[340px]"
+    >
+      <div className="aspect-[4/5] overflow-hidden border border-border">
+        <img
+          src={event.image}
+          alt={event.title}
+          loading="lazy"
+          className="h-full w-full object-cover transition-transform duration-[1600ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.06]"
+        />
+      </div>
+      <p className="label-xs mt-6 text-red">{event.type}</p>
+      <h3 className="display mt-3 text-xl leading-[1.05] transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:-translate-y-1 md:text-2xl">
+        {event.title}
+      </h3>
+      <p className="label-xs mt-3 text-muted-foreground">
+        {event.year} &nbsp;·&nbsp; {event.location}
+      </p>
+    </article>
+  );
+}
+
+function UpcomingCarousel({ onBook }: { onBook: (e: UpcomingEvent) => void }) {
+  const { trackRef, atStart, atEnd, update, scrollBy } = useCarousel();
+  return (
+    <div>
+      <div className="mb-8 flex items-center justify-between gap-6">
+        <p className="label-xs text-muted-foreground">
+          {String(UPCOMING_EVENTS.length).padStart(2, "0")} events — swipe or use arrows
+        </p>
+        <div className="flex gap-3">
+          <CarouselArrow direction="prev" onClick={() => scrollBy(-1)} disabled={atStart} />
+          <CarouselArrow direction="next" onClick={() => scrollBy(1)} disabled={atEnd} />
+        </div>
+      </div>
+      <div
+        ref={trackRef}
+        onScroll={update}
+        className="-mx-6 flex snap-x snap-mandatory gap-6 overflow-x-auto px-6 pb-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden md:-mx-12 md:px-12"
+      >
+        {UPCOMING_EVENTS.map((event, i) => (
+          <UpcomingCard key={event.id} event={event} index={i} onBook={onBook} />
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function PastCarousel() {
+  const { trackRef, atStart, atEnd, update, scrollBy } = useCarousel();
+  return (
+    <div>
+      <div className="mb-8 flex items-center justify-between gap-6">
+        <p className="label-xs text-muted-foreground">
+          {String(PAST_EVENTS.length).padStart(2, "0")} events — swipe or use arrows
+        </p>
+        <div className="flex gap-3">
+          <CarouselArrow direction="prev" onClick={() => scrollBy(-1)} disabled={atStart} />
+          <CarouselArrow direction="next" onClick={() => scrollBy(1)} disabled={atEnd} />
+        </div>
+      </div>
+      <div
+        ref={trackRef}
+        onScroll={update}
+        className="-mx-6 flex snap-x snap-mandatory gap-6 overflow-x-auto px-6 pb-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden md:-mx-12 md:px-12"
+      >
+        {PAST_EVENTS.map((event, i) => (
+          <PastCard key={event.id} event={event} index={i} />
+        ))}
+      </div>
     </div>
   );
 }
@@ -338,7 +435,7 @@ function EventsTabs({ onBook }: { onBook: (e: UpcomingEvent) => void }) {
   const [tab, setTab] = useState<"upcoming" | "past">("upcoming");
 
   return (
-    <section className="border-t border-border px-6 py-24 md:px-12 md:py-36">
+    <section className="border-t border-border px-6 py-16 md:px-12 md:py-24">
       <div className="mx-auto max-w-7xl">
         <div className="flex flex-wrap gap-8 border-b border-border pb-5 md:gap-14">
           {(
@@ -367,19 +464,15 @@ function EventsTabs({ onBook }: { onBook: (e: UpcomingEvent) => void }) {
 
         <div
           key={tab}
-          className="mt-20 md:mt-32"
+          className="mt-12 md:mt-16"
           style={{
             animation: "eventsTabIn 0.9s cubic-bezier(0.16,1,0.3,1) both",
           }}
         >
           {tab === "upcoming" ? (
-            <div className="flex flex-col gap-24 md:gap-40">
-              {UPCOMING_EVENTS.map((event, i) => (
-                <UpcomingRow key={event.id} event={event} index={i} onBook={onBook} />
-              ))}
-            </div>
+            <UpcomingCarousel onBook={onBook} />
           ) : (
-            <PastGrid />
+            <PastCarousel />
           )}
         </div>
       </div>
