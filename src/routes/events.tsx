@@ -225,7 +225,7 @@ function Introduction() {
             </h2>
           </SlideIn>
           <SlideIn delay={200}>
-            <p className="mt-10 max-w-xl text-sm leading-relaxed text-muted-foreground md:text-base">
+            <p className="mt-10 max-w-xl text-lg leading-relaxed text-muted-foreground md:text-xl">
               From fashion shows and styling sessions to seminars and professional image
               workshops, Balance creates experiences that bring image, identity and impact into
               focus.
@@ -339,7 +339,7 @@ function UpcomingCard({
         <p className="label-xs mt-4 text-muted-foreground">
           {event.date} &nbsp;·&nbsp; {event.location}
         </p>
-        <p className="mt-4 line-clamp-3 text-sm leading-relaxed text-muted-foreground">
+        <p className="mt-4 line-clamp-3 text-lg leading-relaxed text-muted-foreground">
           {event.description}
         </p>
         <button
@@ -384,9 +384,7 @@ function UpcomingCarousel({ onBook }: { onBook: (e: UpcomingEvent) => void }) {
   return (
     <div>
       <div className="mb-8 flex items-center justify-between gap-6">
-        <p className="label-xs text-muted-foreground">
-          {String(UPCOMING_EVENTS.length).padStart(2, "0")} events — swipe or use arrows
-        </p>
+        <p className="label-xs text-muted-foreground">Swipe or use arrows</p>
         <div className="flex gap-3">
           <CarouselArrow direction="prev" onClick={() => scrollBy(-1)} disabled={atStart} />
           <CarouselArrow direction="next" onClick={() => scrollBy(1)} disabled={atEnd} />
@@ -410,9 +408,7 @@ function PastCarousel() {
   return (
     <div>
       <div className="mb-8 flex items-center justify-between gap-6">
-        <p className="label-xs text-muted-foreground">
-          {String(PAST_EVENTS.length).padStart(2, "0")} events — swipe or use arrows
-        </p>
+        <p className="label-xs text-muted-foreground">Swipe or use arrows</p>
         <div className="flex gap-3">
           <CarouselArrow direction="prev" onClick={() => scrollBy(-1)} disabled={atStart} />
           <CarouselArrow direction="next" onClick={() => scrollBy(1)} disabled={atEnd} />
@@ -506,12 +502,12 @@ function FeaturedShow() {
             Fashion Shows
           </h2>
         </SlideIn>
-        <SlideIn delay={140}>
-          <p className="mt-8 max-w-xl text-sm leading-relaxed opacity-80 md:text-base">
-            From concept and styling to presentation, fashion becomes an experience when every
-            detail speaks the same language.
-          </p>
-        </SlideIn>
+          <SlideIn delay={140}>
+            <p className="mt-8 max-w-xl text-lg leading-relaxed opacity-80 md:text-xl">
+              From concept and styling to presentation, fashion becomes an experience when every
+              detail speaks the same language.
+            </p>
+          </SlideIn>
         <SlideIn delay={220}>
           <a href="#events-list" className="label-xs link-underline mt-10 inline-block">
             Explore events &nbsp;&rarr;
@@ -541,7 +537,7 @@ function SeminarsSection() {
             </h2>
           </SlideIn>
           <SlideIn delay={140} from="right">
-            <p className="mt-8 max-w-md text-sm leading-relaxed text-muted-foreground md:text-base">
+            <p className="mt-8 max-w-md text-lg leading-relaxed text-muted-foreground md:text-xl">
               Explore colour, design, wardrobe, styling and professional presentation through
               thoughtfully designed sessions for individuals and organisations.
             </p>
@@ -570,7 +566,7 @@ function FinalCta() {
           </h2>
         </SlideIn>
         <Reveal delay={140}>
-          <p className="mx-auto mt-8 max-w-xl text-sm leading-relaxed opacity-90 md:text-base">
+          <p className="mx-auto mt-8 max-w-xl text-lg leading-relaxed opacity-90 md:text-xl">
             Planning a fashion show, seminar or image-focused experience?
           </p>
         </Reveal>
