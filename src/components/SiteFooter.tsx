@@ -52,7 +52,7 @@ export function SiteFooter() {
                 { l: "Home", h: "/#top" },
                 { l: "About Us", h: "/#about" },
                 { l: "Services", h: "/#services" },
-                { l: "Events", h: "/events" },
+                { l: "Journal", h: "/blog" },
                 { l: "Contact Us", h: "/#contact" },
               ].map((n) => (
                 <a

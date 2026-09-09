@@ -2,7 +2,9 @@ import { createFileRoute } from "@tanstack/react-router";
 
 import { SiteHeader } from "@/components/SiteHeader";
 import { Hero } from "@/components/Hero";
-import { ServicesSequence, type Service } from "@/components/ServicesSequence";
+import { Reveal } from "@/components/Reveal";
+import { LogoMark } from "@/components/LogoMark";
+import { ServiceChapter } from "@/components/ServiceChapter";
 import { AboutSection } from "@/components/AboutSection";
 import { LogoMarquee } from "@/components/LogoMarquee";
 import { DressCode } from "@/components/DressCode";
@@ -10,6 +12,7 @@ import { SelectedWork } from "@/components/SelectedWork";
 import { Testimonials } from "@/components/Testimonials";
 import { CtaSection } from "@/components/CtaSection";
 import { SiteFooter } from "@/components/SiteFooter";
+
 
 import corp1 from "@/assets/Picture6.jpg.asset.json";
 import corp2 from "@/assets/Picture3.jpg.asset.json";
@@ -54,12 +57,12 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
-const SERVICES: Service[] = [
+const CHAPTERS = [
   {
     label: "Corporate Image Consulting",
     headline: "How your people present your brand matters.",
     description:
-      "Balance conducts training and workshops on dressing up for corporates — building a confident, professional and authentic image that aligns teams with the identity and values of their organisation.",
+      "Balance passionately conducts training and workshops on 'Dressing up' for corporates — building a confident, professional and authentic image that aligns teams with the identity and values of their organisation.",
     cta: "Book an appointment",
     slides: [
       { src: corp1.url, alt: "Balance Design consultant leading a corporate image workshop" },
@@ -68,6 +71,7 @@ const SERVICES: Service[] = [
       { src: corp4.url, alt: "Group photo of workshop participants with the Balance Design banner" },
       { src: corp5.url, alt: "Participants working through a corporate image consulting exercise" },
     ],
+
   },
   {
     label: "Personal Image Consulting",
@@ -85,13 +89,13 @@ const SERVICES: Service[] = [
     label: "Trend Forecasting & Line Presentation",
     headline: "See what's next. Design what's now.",
     description:
-      "Filtering the global fashion picture and anticipating what customers will be ready to embrace in upcoming seasons — then defining the styles and style groups needed to meet the business target.",
+      "Filtering the global fashion picture and anticipating what customers will be ready to embrace in upcoming seasons — then defining the individual styles or style groups needed to meet the business target.",
     cta: "Book an appointment",
     slides: [
       { src: trend1.url, alt: "Global Shopper trend board with travel-inspired colour and material story" },
       { src: trend2.url, alt: "Kidswear collage trend story with applique, patchwork and bold palette" },
       { src: trend3.url, alt: "Detail page of colour loops, patchwork and psychedelic prints" },
-      { src: trend4.url, alt: "Polo solid style line sheet in Indigo and Global Shopper colourways" },
+      { src: trend4.url, alt: "Polo solid style line sheet in Indigo / Global Shopper colourways" },
       { src: trend5.url, alt: "Polo solid style line presentation with Fun Trip palette and specs" },
     ],
   },
@@ -99,7 +103,7 @@ const SERVICES: Service[] = [
     label: "Graphic & T-Shirt Design",
     headline: "Ideas made to be worn.",
     description:
-      "CADs for shirts, graphic design for T-shirts and textile print design — expressive directions that bring concepts, culture and visual identity into apparel.",
+      "We do CAD'S for shirts, graphic design for T-shirts and textile print design — expressive directions that bring concepts, culture and visual identity into apparel.",
     cta: "Book an appointment",
     slides: [
       { src: graphic1Asset.url, alt: "Tempt graphic tee development boards with Pantone colour story" },
@@ -111,7 +115,7 @@ const SERVICES: Service[] = [
     label: "Uniform Design",
     headline: "Function meets identity.",
     description:
-      "We design uniforms as per the client's briefing, so the designs represent the objective and vision of the brand while balancing comfort, functionality and visual identity.",
+      "We design uniforms as per the client's briefing, such that the designs represent the objective and vision of the brand while balancing comfort, functionality and visual identity.",
     cta: "Book an appointment",
     slides: [
       { src: uniform1.url, alt: "Waistcoat and shirt uniform combination design boards with colour palette" },
@@ -119,16 +123,42 @@ const SERVICES: Service[] = [
       { src: uniform3.url, alt: "Uniform styling detail with Pantone colour story and motif studies" },
     ],
   },
+
 ];
 
 function Index() {
   return (
     <main>
-      <SiteHeader />
-      <Hero />
       <div className="relative z-10 bg-background">
+        <SiteHeader />
+        <Hero />
         <LogoMarquee />
-        <ServicesSequence services={SERVICES} />
+
+        <section id="services" className="px-6 py-28 text-center md:px-12 md:py-44">
+          <Reveal>
+            <LogoMark className="mb-8" />
+          </Reveal>
+          <Reveal delay={80}>
+            <p className="label-xs text-muted-foreground">Services</p>
+          </Reveal>
+          <Reveal delay={80}>
+            <h2 className="display mx-auto mt-8 max-w-4xl text-[2.5rem] sm:text-6xl md:text-[5rem]">
+              Creating image, identity &amp; impact.
+            </h2>
+          </Reveal>
+          <Reveal delay={160}>
+            <p className="mx-auto mt-10 max-w-xl text-sm leading-relaxed text-muted-foreground md:text-base">
+              From fashion &amp; apparel workshops to corporate identity, Balance brings together
+              fashion, design and image consulting through specialised services for individuals,
+              brands and organisations.
+            </p>
+          </Reveal>
+        </section>
+
+        {CHAPTERS.map((c, i) => (
+          <ServiceChapter key={c.label} index={i} {...c} />
+        ))}
+
         <AboutSection />
         <DressCode />
         <SelectedWork />
@@ -139,3 +169,4 @@ function Index() {
     </main>
   );
 }
+
