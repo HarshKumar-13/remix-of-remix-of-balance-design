@@ -6,6 +6,7 @@ import logoLight from "@/assets/logo-light.png.asset.json";
 const NAV = [
   { label: "Home", href: "/#top" },
   { label: "About Us", href: "/#about" },
+  { label: "Services", href: "/#services" },
   { label: "Events", href: "/events" },
   { label: "Contact Us", href: "/#contact" },
 ];
@@ -45,20 +46,20 @@ export function SiteHeader() {
           open
             ? "bg-transparent"
             : solid
-              ? "border-b border-border bg-background/95 backdrop-blur-sm"
+              ? "bg-background/80 backdrop-blur-md"
               : "bg-transparent"
         }`}
       >
-        <div className={`flex items-center justify-between px-6 py-6 md:px-12 ${tone}`}>
+        <div className={`flex items-center justify-between px-6 py-5 md:px-12 md:py-6 ${tone}`}>
           <a href="/#top" aria-label="Balance Design & Fashion Consultancy" className="block">
             <img
               src={solid && !open ? logoDark.url : logoLight.url}
               alt="Balance Design & Fashion Consultancy"
-              className="h-14 w-auto md:h-20"
+              className="h-12 w-auto transition-all duration-700 md:h-16"
             />
           </a>
 
-          <div className="flex items-center gap-8 md:gap-12">
+          <div className="flex items-center gap-10 md:gap-14">
             <a href="/#contact" className="label-xs link-underline hidden sm:inline-block">
               Contact
             </a>
@@ -84,27 +85,44 @@ export function SiteHeader() {
 
       <div
         aria-hidden={!open}
-        className={`fixed inset-0 z-50 bg-charcoal text-ivory transition-opacity duration-700 ${
+        className={`fixed inset-0 z-50 overflow-hidden text-ivory transition-opacity duration-500 ${
           open ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"
         }`}
       >
-        <nav className="flex h-full flex-col justify-center gap-2 px-6 pt-24 md:px-12 md:pt-28">
+        <div
+          className="absolute inset-0 bg-charcoal transition-transform duration-[900ms] ease-[cubic-bezier(0.16,1,0.3,1)]"
+          style={{ transform: open ? "translateY(0)" : "translateY(-100%)" }}
+        />
+        <nav className="relative flex h-full flex-col justify-center gap-1 px-6 pt-24 md:px-12 md:pt-28">
           {NAV.map((n, i) => (
             <a
               key={n.label}
               href={n.href}
               onClick={() => setOpen(false)}
               tabIndex={open ? 0 : -1}
-              className="display w-fit text-[2.5rem] leading-[1.15] transition-[opacity,transform,color] duration-700 hover:text-red md:text-[5rem]"
+              className="display w-fit text-[2.25rem] leading-[1.2] transition-[opacity,transform,color] duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] hover:text-red md:text-[4.5rem]"
               style={{
                 opacity: open ? 1 : 0,
-                transform: open ? "none" : "translateY(28px)",
-                transitionDelay: `${open ? 120 + i * 70 : 0}ms`,
+                transform: open ? "none" : "translateY(40px)",
+                transitionDelay: `${open ? 260 + i * 70 : 0}ms`,
               }}
             >
               {n.label}
             </a>
           ))}
+          <a
+            href="/#contact"
+            onClick={() => setOpen(false)}
+            tabIndex={open ? 0 : -1}
+            className="label-xs link-underline mt-12 w-fit text-red transition-all duration-700"
+            style={{
+              opacity: open ? 1 : 0,
+              transform: open ? "none" : "translateY(24px)",
+              transitionDelay: `${open ? 640 : 0}ms`,
+            }}
+          >
+            Book an appointment
+          </a>
         </nav>
       </div>
     </>

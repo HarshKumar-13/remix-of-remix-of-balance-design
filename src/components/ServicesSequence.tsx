@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 
 import { LogoMark } from "./LogoMark";
 import { Reveal } from "./Reveal";
-import type { Slide } from "./EditorialCarousel";
+export type Slide = { src: string; alt: string };
 
 export type Service = {
   label: string;
