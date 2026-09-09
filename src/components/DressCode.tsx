@@ -28,7 +28,7 @@ export function DressCode() {
               </h2>
             </Reveal>
             <Reveal delay={140}>
-              <p className="mt-10 max-w-md text-sm leading-relaxed text-ivory/70 md:text-base">
+              <p className="mt-10 max-w-md text-lg leading-relaxed text-ivory/70 md:text-xl">
                 Fashion as communication. Fashion as confidence. Fashion as impact.
               </p>
             </Reveal>
@@ -38,7 +38,7 @@ export function DressCode() {
             <ul className="space-y-6 border-t border-ivory/15 pt-8">
               {POINTS.map((p, i) => (
                 <Reveal key={p} delay={80 + i * 60}>
-                  <li className="flex gap-5 text-sm leading-relaxed text-ivory/85">
+                  <li className="flex gap-5 text-lg leading-relaxed text-ivory/85">
                     <span className="mt-[0.55em] block h-[5px] w-[5px] shrink-0 rotate-45 bg-red" />
                     {p}
                   </li>

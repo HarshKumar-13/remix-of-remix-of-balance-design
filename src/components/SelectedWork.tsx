@@ -93,7 +93,7 @@ export function SelectedWork() {
               <p className="label-xs mt-4 text-muted-foreground">Uniform Design</p>
             </Reveal>
             <Reveal delay={160}>
-              <p className="mt-10 max-w-sm text-sm leading-relaxed text-muted-foreground">
+              <p className="mt-10 max-w-sm text-lg leading-relaxed text-muted-foreground">
                 Work developed for apparel brands, hospitality and institutions — including MAX
                 Fashion, Van Heusen, Raymond, IIM Bangalore, ISB, Leela Palace Bangalore and Taj
                 Palace, New Delhi.

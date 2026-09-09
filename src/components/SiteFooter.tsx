@@ -75,7 +75,7 @@ export function SiteFooter() {
             </div>
             <div>
               <p className="label-xs opacity-50">Enquiries</p>
-              <p className="mt-4 text-sm opacity-60">
+              <p className="mt-4 text-lg opacity-60">
                 Contact details to be supplied by the client.
               </p>
             </div>

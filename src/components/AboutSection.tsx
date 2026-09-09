@@ -70,14 +70,14 @@ export function AboutSection() {
 
           <div className="md:col-span-6 md:pt-12">
             <Reveal delay={80}>
-              <p className="max-w-xl text-sm leading-relaxed text-foreground md:text-base">
+              <p className="max-w-xl text-lg leading-relaxed text-foreground md:text-xl">
                 Balance Design &amp; Fashion Consultancy works across fashion, image and design to
                 help individuals, brands and organisations create a stronger and more meaningful
                 visual expression.
               </p>
             </Reveal>
             <Reveal delay={160}>
-              <p className="mt-6 max-w-xl text-sm leading-relaxed text-muted-foreground md:text-base">
+              <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground md:text-xl">
                 Our expertise spans corporate image consulting, personal image consulting, trend
                 forecasting, line and range presentation, graphic design, uniform design and
                 fashion experiences.

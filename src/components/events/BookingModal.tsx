@@ -90,7 +90,7 @@ export function BookingModal({
                 <p className="label-xs mt-5 text-muted-foreground">
                   {event.date} &nbsp;·&nbsp; {event.location}
                 </p>
-                <p className="mt-5 text-sm leading-relaxed text-muted-foreground">
+                <p className="mt-5 text-lg leading-relaxed text-muted-foreground">
                   {event.description}
                 </p>
 
