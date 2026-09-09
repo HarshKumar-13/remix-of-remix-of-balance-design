@@ -147,7 +147,7 @@ function Index() {
             </h2>
           </Reveal>
           <Reveal delay={160}>
-            <p className="mx-auto mt-10 max-w-xl text-sm leading-relaxed text-muted-foreground md:text-base">
+            <p className="mx-auto mt-10 max-w-xl text-lg leading-relaxed text-muted-foreground md:text-xl">
               From fashion &amp; apparel workshops to corporate identity, Balance brings together
               fashion, design and image consulting through specialised services for individuals,
               brands and organisations.
@@ -155,8 +155,8 @@ function Index() {
           </Reveal>
         </section>
 
-        {CHAPTERS.map((c, i) => (
-          <ServiceChapter key={c.label} index={i} {...c} />
+        {CHAPTERS.map((c) => (
+          <ServiceChapter key={c.label} {...c} />
         ))}
 
         <AboutSection />

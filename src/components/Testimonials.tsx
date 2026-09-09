@@ -47,7 +47,7 @@ export function Testimonials() {
             &ldquo;{active.quote}&rdquo;
           </blockquote>
           <p className="label-xs mt-10">{active.name}</p>
-          <p className="mt-3 text-sm text-muted-foreground">{active.role}</p>
+          <p className="mt-3 text-lg text-muted-foreground">{active.role}</p>
         </div>
 
         <div className="mt-12 flex justify-center gap-4">

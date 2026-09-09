@@ -66,7 +66,7 @@ function BlogIndex() {
                     {post.category} — {post.date}
                   </p>
                   <h2 className="display mt-5 text-2xl leading-snug md:text-4xl">{post.title}</h2>
-                  <p className="mt-5 max-w-xl text-sm leading-relaxed text-muted-foreground md:text-base">
+                  <p className="mt-5 max-w-xl text-lg leading-relaxed text-muted-foreground md:text-xl">
                     {post.excerpt}
                   </p>
                   <span className="label-xs link-underline mt-8 self-start">Read the note</span>
