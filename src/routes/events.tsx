@@ -498,18 +498,21 @@ function EventsPage() {
   const [booking, setBooking] = useState<UpcomingEvent | null>(null);
 
   return (
-    <main className="relative z-10 bg-background">
-      <SiteHeader />
-      <EventsHero />
-      <Introduction />
-      <div id="events-list">
-        <EventsTabs onBook={setBooking} />
+    <main>
+      <div className="relative z-10 bg-background">
+        <SiteHeader />
+        <EventsHero />
+        <Introduction />
+        <div id="events-list">
+          <EventsTabs onBook={setBooking} />
+        </div>
+        <FeaturedShow />
+        <SeminarsSection />
+        <FinalCta />
       </div>
-      <FeaturedShow />
-      <SeminarsSection />
-      <FinalCta />
       <SiteFooter />
       <BookingModal event={booking} onClose={() => setBooking(null)} />
     </main>
+
   );
 }
