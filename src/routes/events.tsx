@@ -41,7 +41,7 @@ const UPCOMING_EVENTS = [
     description:
       "A half-day immersive session for leadership teams on dressing with intention, presence and brand alignment.",
     image: eventImg4.url,
-    cta: "Reserve a seat",
+    cta: "Register",
   },
   {
     date: "15 Apr 2027",
@@ -211,106 +211,97 @@ function EventCard({
 }
 
 function EventsPage() {
+  const [tab, setTab] = useState<"upcoming" | "past">("upcoming");
+
   return (
     <main className="relative z-10 bg-background">
       <SiteHeader />
       <EventsHero />
 
-      <section className="px-6 py-28 md:px-12 md:py-44">
+      <section className="px-6 py-24 md:px-12 md:py-36">
         <div className="mx-auto max-w-7xl">
-          <div className="text-center">
-            <Reveal>
-              <LogoMark className="mx-auto mb-8" />
-            </Reveal>
-            <Reveal delay={80}>
-              <p className="label-xs text-muted-foreground">Upcoming</p>
-            </Reveal>
-            <Reveal delay={140}>
-              <h2 className="display mx-auto mt-6 max-w-2xl text-[2.5rem] leading-[0.95] sm:text-5xl md:text-6xl">
-                Experiences worth dressing for.
-              </h2>
-            </Reveal>
-          </div>
-
-          <div className="mt-20 flex flex-col gap-24 md:mt-32 md:gap-40">
-            {UPCOMING_EVENTS.map((event, i) => (
-              <EventCard key={event.title} event={event} index={i} />
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="border-t border-border px-6 py-28 md:px-12 md:py-44">
-        <div className="mx-auto max-w-7xl">
-          <div className="text-center">
-            <Reveal>
-              <p className="label-xs text-muted-foreground">Archive</p>
-            </Reveal>
-            <Reveal delay={80}>
-              <h2 className="display mx-auto mt-6 max-w-2xl text-[2.5rem] leading-[0.95] sm:text-5xl md:text-6xl">
-                Past moments.
-              </h2>
-            </Reveal>
-          </div>
-
-          <div className="mt-16 grid grid-cols-1 gap-10 sm:grid-cols-2 md:mt-24 md:gap-12">
-            {PAST_EVENTS.map((event, i) => (
-              <Reveal key={event.title} delay={i * 120}>
-                <article className="group">
-                  <div className="overflow-hidden">
-                    <img
-                      src={event.image}
-                      alt={event.title}
-                      loading="lazy"
-                      className="aspect-[4/5] w-full object-cover transition-transform duration-[1600ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.05]"
-                    />
-                  </div>
-                  <p className="label-xs mt-6 text-muted-foreground">
-                    {event.date} &nbsp;·&nbsp; {event.location}
-                  </p>
-                  <h3 className="display mt-3 text-2xl leading-[1] md:text-3xl">
-                    {event.title}
-                  </h3>
-                  <p className="mt-4 max-w-sm text-sm leading-relaxed text-muted-foreground">
-                    {event.description}
-                  </p>
-                  <a
-                    href="#contact"
-                    className="label-xs link-underline mt-6 inline-block"
-                  >
-                    {event.cta} &nbsp;&rarr;
-                  </a>
-                </article>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section
-        id="contact"
-        className="bg-charcoal px-6 py-28 text-ivory md:px-12 md:py-44"
-      >
-        <div className="mx-auto max-w-4xl text-center">
           <Reveal>
-            <p className="label-xs opacity-70">Host with us</p>
+            <LogoMark className="mb-8 md:mx-0" />
           </Reveal>
           <Reveal delay={80}>
-            <h2 className="display mt-6 text-[2.5rem] leading-[0.95] sm:text-5xl md:text-7xl">
+            <h2 className="display max-w-3xl text-[2.5rem] leading-[0.95] sm:text-5xl md:text-[4.5rem]">
+              Experiences worth dressing for.
+            </h2>
+          </Reveal>
+
+          <Reveal delay={140}>
+            <div className="mt-16 flex gap-10 border-b border-border pb-5 md:mt-24">
+              {(
+                [
+                  { id: "upcoming", label: "Upcoming" },
+                  { id: "past", label: "Past Events" },
+                ] as const
+              ).map((t) => (
+                <button
+                  key={t.id}
+                  onClick={() => setTab(t.id)}
+                  aria-pressed={tab === t.id}
+                  className={`label-xs transition-colors duration-500 ${
+                    tab === t.id ? "text-red" : "text-muted-foreground hover:text-foreground"
+                  }`}
+                >
+                  {t.label}
+                </button>
+              ))}
+            </div>
+          </Reveal>
+
+          {tab === "upcoming" ? (
+            <div key="upcoming" className="page-enter mt-20 flex flex-col gap-24 md:mt-32 md:gap-40">
+              {UPCOMING_EVENTS.map((event, i) => (
+                <EventCard key={event.title} event={event} index={i} />
+              ))}
+            </div>
+          ) : (
+            <div key="past" className="page-enter mt-20 flex flex-col gap-20 md:mt-32 md:gap-32">
+              {PAST_EVENTS.map((event, i) => (
+                <article
+                  key={event.title}
+                  className={`group grid grid-cols-1 gap-8 md:grid-cols-12 md:gap-16 ${
+                    i % 2 ? "md:pl-24" : "md:pr-24"
+                  }`}
+                >
+                  <div className="overflow-hidden md:col-span-8">
+                    <Reveal>
+                      <img
+                        src={event.image}
+                        alt={event.title}
+                        loading="lazy"
+                        className="aspect-[16/10] w-full object-cover transition-transform duration-[1600ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.04]"
+                      />
+                    </Reveal>
+                  </div>
+                  <div className="md:col-span-4 md:self-end md:pb-6">
+                    <Reveal delay={80}>
+                      <h3 className="display text-2xl leading-[1] md:text-4xl">{event.title}</h3>
+                    </Reveal>
+                    <Reveal delay={140}>
+                      <p className="label-xs mt-6 text-muted-foreground">
+                        {event.date} &nbsp;·&nbsp; {event.location}
+                      </p>
+                    </Reveal>
+                  </div>
+                </article>
+              ))}
+            </div>
+          )}
+        </div>
+      </section>
+
+      <section id="contact" className="bg-charcoal px-6 py-32 text-ivory md:px-12 md:py-48">
+        <div className="mx-auto max-w-7xl">
+          <Reveal>
+            <h2 className="display max-w-3xl text-[2.5rem] leading-[0.95] sm:text-5xl md:text-[5rem]">
               Want Balance Design at your event?
             </h2>
           </Reveal>
           <Reveal delay={160}>
-            <p className="mx-auto mt-8 max-w-xl text-sm leading-relaxed opacity-80 md:text-base">
-              From corporate styling workshops to fashion experiences, we craft sessions that feel
-              cinematic, considered and completely yours.
-            </p>
-          </Reveal>
-          <Reveal delay={240}>
-            <a
-              href="mailto:hello@balancedesign.in"
-              className="btn-red label-xs mt-10 inline-block"
-            >
+            <a href="mailto:hello@balancedesign.in" className="btn-ghost label-xs mt-16 inline-block hover:bg-ivory hover:text-charcoal md:mt-24">
               Get in touch
             </a>
           </Reveal>
