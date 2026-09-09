@@ -112,9 +112,9 @@
 
 @utility label-xs {
   font-family: var(--font-sans);
-  font-size: 0.6875rem;
+  font-size: 0.8125rem;
   font-weight: 400;
-  letter-spacing: 0.28em;
+  letter-spacing: 0.26em;
   text-transform: uppercase;
 }
 
