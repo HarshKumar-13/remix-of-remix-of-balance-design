@@ -11,6 +11,7 @@ import { DressCode } from "@/components/DressCode";
 import { Testimonials } from "@/components/Testimonials";
 import { CtaSection } from "@/components/CtaSection";
 import { SiteFooter } from "@/components/SiteFooter";
+import { ScrollStory, StoryScene } from "@/components/ScrollStory";
 
 
 import corp1 from "@/assets/Picture6.jpg.asset.json";
@@ -130,38 +131,53 @@ function Index() {
     <main>
       <div className="relative z-10 bg-background">
         <SiteHeader />
-        <Hero />
-        <LogoMarquee />
+        <ScrollStory>
+          <StoryScene className="story-scene-hero">
+            <Hero />
+          </StoryScene>
+          <StoryScene>
+            <LogoMarquee />
+            <section id="services" className="px-6 py-28 text-center md:px-12 md:py-44">
+              <Reveal>
+                <LogoMark className="mb-8" />
+              </Reveal>
+              <Reveal delay={80}>
+                <p className="label-xs text-muted-foreground">Services</p>
+              </Reveal>
+              <Reveal delay={80}>
+                <h2 className="display mx-auto mt-8 max-w-4xl text-[2.5rem] sm:text-6xl md:text-[5rem]">
+                  Creating image, identity &amp; impact.
+                </h2>
+              </Reveal>
+              <Reveal delay={160}>
+                <p className="mx-auto mt-10 max-w-xl text-lg leading-relaxed text-muted-foreground md:text-xl">
+                  From fashion &amp; apparel workshops to corporate identity, Balance brings together
+                  fashion, design and image consulting through specialised services for individuals,
+                  brands and organisations.
+                </p>
+              </Reveal>
+            </section>
+          </StoryScene>
 
-        <section id="services" className="px-6 py-28 text-center md:px-12 md:py-44">
-          <Reveal>
-            <LogoMark className="mb-8" />
-          </Reveal>
-          <Reveal delay={80}>
-            <p className="label-xs text-muted-foreground">Services</p>
-          </Reveal>
-          <Reveal delay={80}>
-            <h2 className="display mx-auto mt-8 max-w-4xl text-[2.5rem] sm:text-6xl md:text-[5rem]">
-              Creating image, identity &amp; impact.
-            </h2>
-          </Reveal>
-          <Reveal delay={160}>
-            <p className="mx-auto mt-10 max-w-xl text-lg leading-relaxed text-muted-foreground md:text-xl">
-              From fashion &amp; apparel workshops to corporate identity, Balance brings together
-              fashion, design and image consulting through specialised services for individuals,
-              brands and organisations.
-            </p>
-          </Reveal>
-        </section>
+          {CHAPTERS.map((c) => (
+            <StoryScene key={c.label}>
+              <ServiceChapter {...c} />
+            </StoryScene>
+          ))}
 
-        {CHAPTERS.map((c) => (
-          <ServiceChapter key={c.label} {...c} />
-        ))}
-
-        <AboutSection />
-        <DressCode />
-        <Testimonials />
-        <CtaSection />
+          <StoryScene>
+            <AboutSection />
+          </StoryScene>
+          <StoryScene>
+            <DressCode />
+          </StoryScene>
+          <StoryScene>
+            <Testimonials />
+          </StoryScene>
+          <StoryScene className="story-scene-final">
+            <CtaSection />
+          </StoryScene>
+        </ScrollStory>
       </div>
       <SiteFooter />
     </main>
