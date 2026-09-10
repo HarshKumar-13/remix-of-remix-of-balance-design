@@ -126,9 +126,9 @@ export function HorizontalServices({ chapters }: { chapters: ServiceChapterData[
           {chapters.map((c) => (
             <div
               key={c.label}
-              className="flex h-full w-screen shrink-0 items-center justify-center overflow-hidden [&>section]:py-10"
+              className="flex h-full w-screen shrink-0 items-center justify-center overflow-hidden [&_.carousel-slide]:md:h-[52vh] [&>section]:py-4 [&>section>div:last-child]:mt-10"
             >
-              <div className="w-full">
+              <div className="w-full min-w-0">
                 <ServiceChapter {...c} />
               </div>
             </div>
