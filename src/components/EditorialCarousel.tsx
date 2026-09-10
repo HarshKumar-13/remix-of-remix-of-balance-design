@@ -51,6 +51,7 @@ export function EditorialCarousel({ slides, tall = false }: { slides: Slide[]; t
 
   useEffect(() => {
     if (isDragging || slides.length < 2) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     autoScrollRef.current = window.setInterval(() => {
       const next = (index + 1) % slides.length;
       scrollToIndex(next);

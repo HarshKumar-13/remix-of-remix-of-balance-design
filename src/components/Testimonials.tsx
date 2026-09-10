@@ -29,6 +29,7 @@ export function Testimonials() {
   const [i, setI] = useState(0);
 
   useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const id = setInterval(() => setI((v) => (v + 1) % QUOTES.length), 6000);
     return () => clearInterval(id);
   }, []);

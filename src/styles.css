@@ -59,17 +59,17 @@
 
 :root {
   --radius: 0px;
-  --ivory: oklch(1 0 0);
+  --ivory: oklch(0.966 0.005 85);
   --charcoal: oklch(0.196 0.004 40);
   --taupe: oklch(0.878 0.008 80);
   --red: oklch(0.472 0.207 28);
   --bronze: var(--red);
 
-  --background: var(--ivory);
+  --background: oklch(1 0 0);
   --foreground: var(--charcoal);
-  --card: var(--ivory);
+  --card: oklch(1 0 0);
   --card-foreground: var(--charcoal);
-  --popover: var(--ivory);
+  --popover: oklch(1 0 0);
   --popover-foreground: var(--charcoal);
   --primary: var(--red);
   --primary-foreground: oklch(1 0 0);
