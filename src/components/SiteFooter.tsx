@@ -51,8 +51,7 @@ export function SiteFooter() {
               {[
                 { l: "Home", h: "/#top" },
                 { l: "About Us", h: "/#about" },
-                { l: "Services", h: "/#services" },
-                { l: "Journal", h: "/blog" },
+                { l: "Events", h: "/events" },
                 { l: "Contact Us", h: "/#contact" },
               ].map((n) => (
                 <a
@@ -93,10 +92,10 @@ export function SiteFooter() {
       </div>
 
       {/* Oversized wordmark that rises into view as the footer is revealed */}
-      <div className="pointer-events-none select-none overflow-hidden">
+      <div className="pointer-events-none w-full select-none overflow-hidden px-2">
         <h2
           aria-hidden="true"
-          className="display whitespace-nowrap text-center text-[22vw] leading-[0.78] text-ivory"
+          className="display w-full whitespace-nowrap text-center text-[17vw] leading-[0.78] text-ivory"
           style={{
             transform: `translateY(${(1 - progress) * 22}%)`,
             opacity: 0.15 + progress * 0.85,

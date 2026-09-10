@@ -8,7 +8,6 @@ import { ServiceChapter } from "@/components/ServiceChapter";
 import { AboutSection } from "@/components/AboutSection";
 import { LogoMarquee } from "@/components/LogoMarquee";
 import { DressCode } from "@/components/DressCode";
-import { SelectedWork } from "@/components/SelectedWork";
 import { Testimonials } from "@/components/Testimonials";
 import { CtaSection } from "@/components/CtaSection";
 import { SiteFooter } from "@/components/SiteFooter";
@@ -161,7 +160,6 @@ function Index() {
 
         <AboutSection />
         <DressCode />
-        <SelectedWork />
         <Testimonials />
         <CtaSection />
       </div>

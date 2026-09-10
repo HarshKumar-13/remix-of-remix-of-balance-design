@@ -65,11 +65,11 @@
   --red: oklch(0.472 0.207 28);
   --bronze: var(--red);
 
-  --background: var(--ivory);
+  --background: oklch(1 0 0);
   --foreground: var(--charcoal);
-  --card: var(--ivory);
+  --card: oklch(1 0 0);
   --card-foreground: var(--charcoal);
-  --popover: var(--ivory);
+  --popover: oklch(1 0 0);
   --popover-foreground: var(--charcoal);
   --primary: var(--red);
   --primary-foreground: oklch(1 0 0);

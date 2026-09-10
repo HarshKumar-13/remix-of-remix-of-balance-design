@@ -6,7 +6,6 @@ export function EditorialCarousel({ slides, tall = false }: { slides: Slide[]; t
   const trackRef = useRef<HTMLDivElement>(null);
   const [index, setIndex] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
-  const [hasInteracted, setHasInteracted] = useState(false);
   const drag = useRef<{ x: number; left: number; active: boolean; moved: boolean }>({
     x: 0,
     left: 0,
@@ -51,7 +50,8 @@ export function EditorialCarousel({ slides, tall = false }: { slides: Slide[]; t
   }, [onScroll]);
 
   useEffect(() => {
-    if (isDragging || hasInteracted) return;
+    if (isDragging || slides.length < 2) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     autoScrollRef.current = window.setInterval(() => {
       const next = (index + 1) % slides.length;
       scrollToIndex(next);
@@ -59,13 +59,7 @@ export function EditorialCarousel({ slides, tall = false }: { slides: Slide[]; t
     return () => {
       if (autoScrollRef.current) window.clearInterval(autoScrollRef.current);
     };
-  }, [index, isDragging, hasInteracted, slides.length, scrollToIndex]);
-
-  const go = (dir: -1 | 1) => {
-    setHasInteracted(true);
-    const next = (index + dir + slides.length) % slides.length;
-    scrollToIndex(next);
-  };
+  }, [index, isDragging, slides.length, scrollToIndex]);
 
   const handlePointerDown = (e: React.PointerEvent) => {
     const el = trackRef.current;
@@ -92,7 +86,6 @@ export function EditorialCarousel({ slides, tall = false }: { slides: Slide[]; t
     el.releasePointerCapture(e.pointerId);
 
     if (drag.current.moved) {
-      setHasInteracted(true);
       const children = Array.from(el.children) as HTMLElement[];
       const center = el.scrollLeft + el.clientWidth / 2;
       let best = 0;
@@ -114,15 +107,6 @@ export function EditorialCarousel({ slides, tall = false }: { slides: Slide[]; t
     const el = trackRef.current;
     if (el) el.releasePointerCapture(e.pointerId);
   };
-
-  useEffect(() => {
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "ArrowLeft") go(-1);
-      if (e.key === "ArrowRight") go(1);
-    };
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, [index]);
 
   return (
     <div className="relative w-full">
@@ -160,32 +144,6 @@ export function EditorialCarousel({ slides, tall = false }: { slides: Slide[]; t
         ))}
       </div>
 
-      <div className="mt-8 flex items-center justify-between px-6 md:px-12">
-        <div className="label-xs text-muted-foreground">
-          <span className="text-foreground">{String(index + 1).padStart(2, "0")}</span>
-          <span className="mx-2">/</span>
-          <span>{String(slides.length).padStart(2, "0")}</span>
-        </div>
-
-        <div className="flex items-center gap-6">
-          <button
-            aria-label="Previous image"
-            onClick={() => go(-1)}
-            className="label-xs group relative flex h-11 min-w-[44px] items-center justify-center transition-opacity duration-500 hover:opacity-50"
-          >
-            <span className="absolute bottom-0 left-0 h-px w-full origin-right scale-x-0 bg-current transition-transform duration-500 group-hover:origin-left group-hover:scale-x-100" />
-            &larr; Prev
-          </button>
-          <button
-            aria-label="Next image"
-            onClick={() => go(1)}
-            className="label-xs group relative flex h-11 min-w-[44px] items-center justify-center transition-opacity duration-500 hover:opacity-50"
-          >
-            <span className="absolute bottom-0 left-0 h-px w-full origin-right scale-x-0 bg-current transition-transform duration-500 group-hover:origin-left group-hover:scale-x-100" />
-            Next &rarr;
-          </button>
-        </div>
-      </div>
     </div>
   );
 }
