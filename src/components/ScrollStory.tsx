@@ -29,11 +29,13 @@ export function ScrollStory({ children }: { children: ReactNode }) {
         const scale = 0.985 + enter * 0.015 - exit * (mobile ? 0.006 : 0.014);
         const opacity = Math.min(1, enter * 1.7) * (1 - exit * (mobile ? 0.16 : 0.38));
         const clip = (1 - enter) * (mobile ? 2.5 : 7);
+        const centerReveal = (1 - enter) * 50;
 
         scene.style.setProperty("--story-y", `${y.toFixed(2)}px`);
         scene.style.setProperty("--story-scale", scale.toFixed(4));
         scene.style.setProperty("--story-opacity", opacity.toFixed(3));
         scene.style.setProperty("--story-clip", `${clip.toFixed(2)}%`);
+        scene.style.setProperty("--story-center-reveal", `${centerReveal.toFixed(2)}%`);
         scene.style.setProperty("--story-depth", `${((1 - enter) * (mobile ? 8 : 22)).toFixed(2)}px`);
       });
     };
