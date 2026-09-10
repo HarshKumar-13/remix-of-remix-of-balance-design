@@ -25,6 +25,7 @@ export function HorizontalServices({ chapters }: { chapters: ServiceChapterData[
   const [isDesktop, setIsDesktop] = useState(false);
   const [reducedMotion, setReducedMotion] = useState(false);
   const [maxShift, setMaxShift] = useState(0);
+  const [fitScale, setFitScale] = useState(1);
 
   // Detect viewport + motion preference
   useEffect(() => {
@@ -52,6 +53,14 @@ export function HorizontalServices({ chapters }: { chapters: ServiceChapterData[
       const track = trackRef.current;
       if (!track) return;
       setMaxShift(Math.max(0, track.scrollWidth - window.innerWidth));
+      // Ensure the tallest chapter fits the viewport: scale panels down if needed
+      const panels = Array.from(track.children) as HTMLElement[];
+      const tallest = panels.reduce((m, p) => {
+        const inner = p.firstElementChild as HTMLElement | null;
+        return Math.max(m, inner ? inner.scrollHeight : 0);
+      }, 0);
+      const avail = window.innerHeight - 120; // room for the fixed header
+      setFitScale(tallest > 0 && tallest > avail ? avail / tallest : 1);
     };
     measure();
     window.addEventListener("resize", measure);
