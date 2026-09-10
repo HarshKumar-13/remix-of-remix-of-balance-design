@@ -245,6 +245,13 @@
 .story-scene-final {
   z-index: 2;
 }
+.story-scene-final .story-scene-content {
+  clip-path: inset(0 var(--story-center-reveal, 0%) 0 var(--story-center-reveal, 0%));
+  transform-origin: 50% 50%;
+}
+.story-scene-testimonials .story-scene-content {
+  transform-origin: 50% 70%;
+}
 
 @media (max-width: 767px) {
   .story-scene-content {

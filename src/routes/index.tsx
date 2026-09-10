@@ -171,7 +171,7 @@ function Index() {
           <StoryScene>
             <DressCode />
           </StoryScene>
-          <StoryScene>
+          <StoryScene className="story-scene-testimonials">
             <Testimonials />
           </StoryScene>
           <StoryScene className="story-scene-final">
