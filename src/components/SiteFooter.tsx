@@ -51,7 +51,7 @@ export function SiteFooter() {
             <nav className="flex flex-col gap-4">
               {[
                 { l: "Home", h: "/#top" },
-                { l: "About Us", h: "/#about" },
+                { l: "About Us", h: "/about" },
                 { l: "Events", h: "/events" },
                 { l: "Contact Us", h: "/#contact" },
               ].map((n) => (
