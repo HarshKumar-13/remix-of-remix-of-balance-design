@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from "react";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 
 export type Slide = { src: string; alt: string };
 
@@ -108,6 +109,12 @@ export function EditorialCarousel({ slides, tall = false }: { slides: Slide[]; t
     if (el) el.releasePointerCapture(e.pointerId);
   };
 
+  const move = (direction: -1 | 1) => {
+    const next = (index + direction + slides.length) % slides.length;
+    setIndex(next);
+    scrollToIndex(next);
+  };
+
   return (
     <div className="relative w-full">
       <div
@@ -143,7 +150,26 @@ export function EditorialCarousel({ slides, tall = false }: { slides: Slide[]; t
           </figure>
         ))}
       </div>
-
+      {slides.length > 1 && (
+        <div className="pointer-events-none absolute inset-x-0 top-1/2 z-10 flex -translate-y-1/2 justify-between px-3 md:px-7">
+          <button
+            type="button"
+            aria-label="Previous image"
+            onClick={() => move(-1)}
+            className="pointer-events-auto grid h-12 w-12 place-items-center border border-ivory/50 bg-charcoal/75 text-ivory backdrop-blur-sm transition-colors duration-500 hover:bg-charcoal focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-4 focus-visible:outline-ivory"
+          >
+            <ArrowLeft aria-hidden="true" size={20} strokeWidth={1.5} />
+          </button>
+          <button
+            type="button"
+            aria-label="Next image"
+            onClick={() => move(1)}
+            className="pointer-events-auto grid h-12 w-12 place-items-center border border-ivory/50 bg-charcoal/75 text-ivory backdrop-blur-sm transition-colors duration-500 hover:bg-charcoal focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-4 focus-visible:outline-ivory"
+          >
+            <ArrowRight aria-hidden="true" size={20} strokeWidth={1.5} />
+          </button>
+        </div>
+      )}
     </div>
   );
 }
