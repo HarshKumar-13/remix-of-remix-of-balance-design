@@ -4,7 +4,7 @@ import { SiteHeader } from "@/components/SiteHeader";
 import { Hero } from "@/components/Hero";
 import { Reveal } from "@/components/Reveal";
 import { LogoMark } from "@/components/LogoMark";
-import { ServiceChapter } from "@/components/ServiceChapter";
+import { HorizontalServices } from "@/components/HorizontalServices";
 import { AboutSection } from "@/components/AboutSection";
 import { LogoMarquee } from "@/components/LogoMarquee";
 import { DressCode } from "@/components/DressCode";
@@ -154,9 +154,7 @@ function Index() {
           </Reveal>
         </section>
 
-        {CHAPTERS.map((c) => (
-          <ServiceChapter key={c.label} {...c} />
-        ))}
+        <HorizontalServices chapters={CHAPTERS} />
 
         <AboutSection />
         <DressCode />
