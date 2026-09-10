@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { Facebook, Instagram, Linkedin } from "lucide-react";
 import logoLight from "@/assets/logo-light.png.asset.json";
 
 export function SiteFooter() {
@@ -28,7 +29,7 @@ export function SiteFooter() {
     <footer
       ref={ref}
       id="contact"
-      className="bg-charcoal text-ivory sticky bottom-0 z-0 overflow-hidden"
+      className="relative z-0 overflow-hidden bg-charcoal text-ivory"
     >
       <div className="mx-auto max-w-7xl px-6 pb-4 pt-20 md:px-12 md:pt-28">
         <div
@@ -64,19 +65,34 @@ export function SiteFooter() {
               ))}
             </nav>
             <div>
-              <p className="label-xs opacity-50">Website</p>
+              <p className="label-xs opacity-50">Enquiries</p>
               <a
-                href="https://www.balancedesign.in"
+                href="mailto:info@balancedesign.in"
                 className="link-underline mt-4 inline-block font-display text-2xl md:text-3xl"
               >
-                www.balancedesign.in
+                info@balancedesign.in
               </a>
             </div>
             <div>
-              <p className="label-xs opacity-50">Enquiries</p>
-              <p className="mt-4 text-lg opacity-60">
-                Contact details to be supplied by the client.
-              </p>
+              <p className="label-xs opacity-50">Connect with us</p>
+              <div className="mt-5 flex items-center gap-5">
+                {[
+                  { label: "Facebook", href: "https://www.facebook.com", Icon: Facebook },
+                  { label: "LinkedIn", href: "https://www.linkedin.com", Icon: Linkedin },
+                  { label: "Instagram", href: "https://www.instagram.com", Icon: Instagram },
+                ].map(({ label, href, Icon }) => (
+                  <a
+                    key={label}
+                    href={href}
+                    target="_blank"
+                    rel="noreferrer"
+                    aria-label={label}
+                    className="transition-opacity duration-500 hover:opacity-50"
+                  >
+                    <Icon aria-hidden="true" size={23} strokeWidth={1.4} />
+                  </a>
+                ))}
+              </div>
             </div>
           </div>
 
