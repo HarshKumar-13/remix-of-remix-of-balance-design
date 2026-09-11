@@ -160,16 +160,12 @@ function Index() {
               </Reveal>
             </section>
           </SlidePanel>
-            <SlidePanel>
-              <ServiceChapter {...CHAPTERS[0]!} />
-            </SlidePanel>
+            {CHAPTERS.map((c, i) => (
+              <SlidePanel key={c.label} className={i % 2 === 0 ? "panel-red" : ""}>
+                <ServiceChapter {...c} tone={i % 2 === 0 ? "red" : "light"} />
+              </SlidePanel>
+            ))}
           </SlideStack>
-
-          {CHAPTERS.slice(1).map((c) => (
-            <StoryScene key={c.label}>
-              <ServiceChapter {...c} />
-            </StoryScene>
-          ))}
 
           <StoryScene>
             <AboutSection />
