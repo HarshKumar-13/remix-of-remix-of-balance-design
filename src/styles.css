@@ -322,3 +322,34 @@
     transition-duration: 0.001ms !important;
   }
 }
+
+/* Full-screen editorial slide panels: each panel pins while the next one
+   slides up over it, driven entirely by scroll position. */
+.slide-stack {
+  position: relative;
+}
+.slide-panel {
+  position: sticky;
+  top: 0;
+  min-height: 100svh;
+  background: var(--background);
+  will-change: transform;
+}
+.slide-panel:last-child {
+  position: relative;
+}
+.slide-panel-inner {
+  min-height: 100svh;
+  transform-origin: 50% 40%;
+  will-change: transform, opacity;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .slide-panel {
+    position: relative;
+  }
+  .slide-panel-inner {
+    transform: none !important;
+    opacity: 1 !important;
+  }
+}

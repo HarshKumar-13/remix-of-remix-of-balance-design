@@ -71,7 +71,7 @@ export function Hero() {
       >
         <h1
           aria-label="YOUR IMAGE. YOUR IDENTITY. YOUR IMPACT."
-          className="display relative text-[4.25rem] leading-[0.9] sm:text-[6.75rem] md:text-[10.75rem] lg:text-[12.75rem]"
+          className="display relative text-[4rem] leading-[0.9] sm:text-[6.5rem] md:text-[10.5rem] lg:text-[12.5rem]"
         >
           <span className="inline-block">YOUR </span>
           <span className="relative inline-grid overflow-hidden align-bottom">
