@@ -12,6 +12,7 @@ import { Testimonials } from "@/components/Testimonials";
 import { CtaSection } from "@/components/CtaSection";
 import { SiteFooter } from "@/components/SiteFooter";
 import { ScrollStory, StoryScene } from "@/components/ScrollStory";
+import { SlideStack, SlidePanel } from "@/components/SlideStack";
 
 
 import corp1 from "@/assets/Picture6.jpg.asset.json";
@@ -132,10 +133,11 @@ function Index() {
       <div className="relative z-10 bg-background">
         <SiteHeader />
         <ScrollStory>
-          <StoryScene className="story-scene-hero">
-            <Hero />
-          </StoryScene>
-          <StoryScene>
+          <SlideStack>
+            <SlidePanel>
+              <Hero />
+            </SlidePanel>
+            <SlidePanel>
             <LogoMarquee />
             <section id="services" className="px-6 py-28 text-center md:px-12 md:py-44">
               <Reveal>
@@ -157,9 +159,13 @@ function Index() {
                 </p>
               </Reveal>
             </section>
-          </StoryScene>
+          </SlidePanel>
+            <SlidePanel>
+              <ServiceChapter {...CHAPTERS[0]} />
+            </SlidePanel>
+          </SlideStack>
 
-          {CHAPTERS.map((c) => (
+          {CHAPTERS.slice(1).map((c) => (
             <StoryScene key={c.label}>
               <ServiceChapter {...c} />
             </StoryScene>
