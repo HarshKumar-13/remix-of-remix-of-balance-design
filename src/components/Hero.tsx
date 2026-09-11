@@ -11,12 +11,13 @@ const SLIDES = [
   { src: pers1, alt: "Personal styling session with a silk scarf in a warm ivory studio" },
 ];
 
-const WORDS = ["BALAN", "C", "E"];
+const STATEMENTS = ["YOUR IMAGE.", "YOUR IDENTITY.", "YOUR IMPACT."];
 
 export function Hero() {
   const [y, setY] = useState(0);
   const [index, setIndex] = useState(0);
   const [loaded, setLoaded] = useState(false);
+  const [stmt, setStmt] = useState(0);
   const heroRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
