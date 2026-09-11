@@ -80,8 +80,8 @@ export function SiteFooter() {
         <div
           className="transition-none"
           style={{
-            opacity: Math.min(1, progress * 1.6),
-            transform: `translateY(${(1 - Math.min(1, progress * 1.4)) * 40}px)`,
+            opacity: Math.max(0, Math.min(1, progress * 1.6)),
+            transform: `translateY(${((1 - progress * 1.4) * 40).toFixed(2)}px)`,
           }}
         >
           <img
