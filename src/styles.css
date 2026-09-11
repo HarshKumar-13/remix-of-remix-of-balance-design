@@ -335,6 +335,20 @@
   background: var(--background);
   will-change: transform;
 }
+.slide-panel.panel-red {
+  background: var(--red);
+}
+.service-red .link-underline,
+.service-red a {
+  color: #fff;
+}
+.service-red button {
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.45);
+}
+.service-red svg {
+  color: #fff;
+}
 .slide-panel:last-child {
   position: relative;
 }
