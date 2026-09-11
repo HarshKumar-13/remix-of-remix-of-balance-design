@@ -18,6 +18,25 @@ export function SlideStack({ children }: { children: ReactNode }) {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
     const panels = Array.from(root.querySelectorAll<HTMLElement>("[data-slide-panel]"));
+
+    // Panels taller than the viewport must finish scrolling through fully
+    // before pinning, otherwise their lower content (e.g. carousels) is
+    // covered by the incoming panel. Stick them at a negative offset equal
+    // to their overflow so the entire panel is visible before the next
+    // one slides over.
+    const setPanelOffsets = () => {
+      const vh = window.innerHeight;
+      panels.forEach((panel) => {
+        const overflow = panel.offsetHeight - vh;
+        panel.style.top = overflow > 0 ? `${-overflow}px` : "0px";
+      });
+      ScrollTrigger.refresh();
+    };
+    setPanelOffsets();
+    const ro = new ResizeObserver(setPanelOffsets);
+    panels.forEach((panel) => ro.observe(panel));
+    window.addEventListener("resize", setPanelOffsets);
+
     const ctx = gsap.context(() => {
       panels.forEach((panel, i) => {
         const next = panels[i + 1];
@@ -44,6 +63,8 @@ export function SlideStack({ children }: { children: ReactNode }) {
     window.addEventListener("load", refresh);
     return () => {
       window.removeEventListener("load", refresh);
+      window.removeEventListener("resize", setPanelOffsets);
+      ro.disconnect();
       ctx.revert();
     };
   }, []);
