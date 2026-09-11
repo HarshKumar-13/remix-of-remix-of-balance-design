@@ -240,6 +240,17 @@
 .story-scene-content > section {
   transform: translate3d(0, calc(var(--story-depth, 0px) * -0.18), 0);
 }
+/* Layered depth: headlines, body copy and media drift at different rates so
+   the outgoing scene recedes while the incoming one settles into place. */
+.story-scene-content h1,
+.story-scene-content h2,
+.story-scene-content blockquote {
+  transform: translate3d(0, calc(var(--story-depth, 0px) * 0.42), 0);
+}
+.story-scene-content p,
+.story-scene-content a {
+  transform: translate3d(0, calc(var(--story-depth, 0px) * 0.66), 0);
+}
 .story-scene-hero {
   z-index: 0;
 }
