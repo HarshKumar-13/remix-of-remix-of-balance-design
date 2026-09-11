@@ -11,7 +11,7 @@ const SLIDES = [
   { src: pers1, alt: "Personal styling session with a silk scarf in a warm ivory studio" },
 ];
 
-const STATEMENTS = ["YOUR IMAGE.", "YOUR IDENTITY.", "YOUR IMPACT."];
+const WORDS = ["IMAGE.", "IDENTITY.", "IMPACT."];
 
 export function Hero() {
   const [y, setY] = useState(0);
