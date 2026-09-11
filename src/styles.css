@@ -305,7 +305,14 @@
   .reveal { opacity: 1; transform: none; transition: none; }
   .hero-word { opacity: 1; transform: none; transition: none; }
   .story-scene-content,
-  .story-scene-content > section {
+  .story-scene-content > section,
+  .story-scene-content h1,
+  .story-scene-content h2,
+  .story-scene-content blockquote,
+  .story-scene-content p,
+  .story-scene-content a,
+  .panel-slide,
+  .panel-media {
     opacity: 1;
     transform: none;
     clip-path: none;
