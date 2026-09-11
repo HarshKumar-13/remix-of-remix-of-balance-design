@@ -349,6 +349,10 @@
 .service-red svg {
   color: #fff;
 }
+.service-red img[alt*="Balance" i],
+.service-red .logo-mark {
+  filter: brightness(0) invert(1);
+}
 .slide-panel:last-child {
   position: relative;
 }
