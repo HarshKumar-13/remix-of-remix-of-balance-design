@@ -158,8 +158,8 @@ export function SiteFooter() {
           aria-hidden="true"
           className="display w-full whitespace-nowrap text-center text-[17vw] leading-[0.78] text-ivory"
           style={{
-            transform: `translateY(${(1 - progress) * 22}%)`,
-            opacity: 0.15 + progress * 0.85,
+            transform: `translateY(${((1 - progress) * 22).toFixed(2)}%)`,
+            opacity: Math.max(0, Math.min(1, 0.15 + progress * 0.85)),
           }}
         >
           BALANCE
