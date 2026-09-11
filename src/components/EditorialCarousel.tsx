@@ -49,12 +49,14 @@ export function EditorialCarousel({ slides, tall = false }: { slides: Slide[]; t
         c.style.opacity = "";
         return;
       }
+      const mobile = window.innerWidth < 768;
       const p = Math.max(-1.6, Math.min(1.6, (cCenter - center) / c.offsetWidth));
-      const abs = Math.abs(p);
-      c.style.transform = `translate3d(${(-p * 26).toFixed(2)}px, 0, 0) scale(${(1 - Math.min(abs, 1) * 0.055).toFixed(4)})`;
-      c.style.opacity = (1 - Math.min(abs, 1) * 0.32).toFixed(3);
+      const abs = Math.min(Math.abs(p), 1);
+      const shift = mobile ? 12 : 26;
+      c.style.transform = `translate3d(${(-p * shift).toFixed(2)}px, 0, 0) scale(${(1 - abs * (mobile ? 0.03 : 0.055)).toFixed(4)})`;
+      c.style.opacity = (1 - abs * (mobile ? 0.18 : 0.32)).toFixed(3);
       const img = c.querySelector("img");
-      if (img) img.style.setProperty("--panel-shift", `${(p * 5).toFixed(2)}%`);
+      if (img) img.style.setProperty("--panel-shift", `${(p * (mobile ? 2.5 : 5)).toFixed(2)}%`);
     });
     if (!isDragging) setIndex(best);
   }, [isDragging]);
