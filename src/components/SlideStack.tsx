@@ -44,8 +44,13 @@ export function SlideStack({ children }: { children: ReactNode }) {
         const inner = panel.querySelector<HTMLElement>(".slide-panel-inner");
         if (!inner) return;
 
+        // Panels taller than the viewport sit stuck with their bottom flush
+        // to the viewport bottom — a vertical recede would push their lower
+        // content (carousels) out of view, so only scale/fade those.
+        const tallerThanViewport = panel.offsetHeight > window.innerHeight;
+
         gsap.to(inner, {
-          yPercent: -10,
+          yPercent: tallerThanViewport ? 0 : -10,
           scale: 0.98,
           opacity: 0.55,
           ease: "none",
