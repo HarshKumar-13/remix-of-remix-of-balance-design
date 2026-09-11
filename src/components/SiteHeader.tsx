@@ -54,7 +54,7 @@ export function SiteHeader() {
             <img
               src={solid && !open ? logoDark.url : logoLight.url}
               alt="Balance Design & Fashion Consultancy"
-              className="h-14 w-auto md:h-20"
+              className="h-[4.375rem] w-auto md:h-[6.25rem]"
             />
           </a>
 
