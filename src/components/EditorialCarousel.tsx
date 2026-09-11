@@ -159,9 +159,7 @@ export function EditorialCarousel({ slides, tall = false }: { slides: Slide[]; t
         {slides.map((s, i) => (
           <figure
             key={s.src}
-            className={`carousel-slide group relative shrink-0 snap-center overflow-hidden ${
-              i === index ? "carousel-slide-active" : "carousel-slide-inactive"
-            } ${
+            className={`panel-slide group relative shrink-0 snap-center overflow-hidden ${
               tall
                 ? "h-[62vh] w-[88vw] md:h-[82vh] md:w-[78vw]"
                 : "h-[46vh] w-[86vw] md:h-[70vh] md:w-[68vw]"
