@@ -81,7 +81,7 @@ export function AboutSection() {
           </div>
 
           {/* Right column: body copy + CTA */}
-          <div className="md:col-span-5 md:col-start-8 lg:col-span-5 lg:col-start-8">
+          <div className="md:col-span-5 lg:col-span-5">
             <Reveal delay={180}>
               <p className="max-w-xl text-xl leading-[1.75] text-foreground md:text-[1.35rem]">
                 Balance Design &amp; Fashion Consultancy works across fashion, image and design to
@@ -99,7 +99,7 @@ export function AboutSection() {
             <Reveal delay={340}>
               <a
                 href="#contact"
-                className="link-underline mt-12 inline-flex items-center gap-3 text-base font-medium uppercase tracking-[0.18em] text-foreground transition-opacity duration-500 hover:opacity-70"
+                className="link-underline mt-12 inline-flex items-center gap-3 text-lg font-medium uppercase tracking-[0.18em] text-foreground transition-opacity duration-500 hover:opacity-70"
               >
                 Get to know us <span aria-hidden="true">&rarr;</span>
               </a>
