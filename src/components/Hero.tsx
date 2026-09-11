@@ -37,6 +37,13 @@ export function Hero() {
     return () => clearInterval(id);
   }, []);
 
+  useEffect(() => {
+    // Reveal statements one by one, then hold on the last
+    if (!loaded || stmt >= STATEMENTS.length - 1) return;
+    const id = setTimeout(() => setStmt((s) => Math.min(s + 1, STATEMENTS.length - 1)), 2600);
+    return () => clearTimeout(id);
+  }, [loaded, stmt]);
+
   return (
     <section ref={heroRef} id="top" className="relative h-[100svh] w-full overflow-hidden bg-charcoal">
       {SLIDES.map((s, i) => (
@@ -63,16 +70,22 @@ export function Hero() {
         style={{ transform: `translate3d(0, ${y * -0.08}px, 0)` }}
       >
         <h1
-          aria-label="BALANCE"
-          className="display text-[4.5rem] leading-[0.9] sm:text-[7rem] md:text-[11rem] lg:text-[13rem]"
+          aria-label="YOUR IMAGE. YOUR IDENTITY. YOUR IMPACT."
+          className="display relative text-[4.5rem] leading-[0.9] sm:text-[7rem] md:text-[11rem] lg:text-[13rem]"
         >
-          {WORDS.map((word, i) => (
+          {STATEMENTS.map((statement, i) => (
             <span
-              key={i}
-              className={`hero-word ${word === "C" ? "text-red" : ""} ${loaded ? "hero-word-in" : ""}`}
-              style={{ transitionDelay: `${400 + i * 120}ms` }}
+              key={statement}
+              aria-hidden={i !== stmt}
+              className={i === 0 ? "block" : "absolute inset-0 block"}
+              style={{
+                opacity: i === stmt && loaded ? 1 : 0,
+                transform: `translate3d(0, ${i === stmt ? 0 : i < stmt ? -24 : 24}px, 0)`,
+                transition: "opacity 1.1s cubic-bezier(0.16, 1, 0.3, 1), transform 1.1s cubic-bezier(0.16, 1, 0.3, 1)",
+                transitionDelay: loaded ? "400ms" : "0ms",
+              }}
             >
-              {word}
+              {statement}
             </span>
           ))}
         </h1>
