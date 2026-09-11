@@ -158,19 +158,20 @@
   transform: none;
 }
 
-/* Carousel slide states */
-@utility carousel-slide {
+/* Continuous panel sequence: transforms are written from scroll position, so
+   only a light smoothing transition is applied here. */
+.panel-slide {
+  transform-origin: 50% 50%;
+  will-change: transform, opacity;
   transition:
-    transform 0.7s var(--ease-editorial),
-    opacity 0.7s var(--ease-editorial);
+    transform 0.25s linear,
+    opacity 0.25s linear;
 }
-@utility carousel-slide-active {
-  transform: scale(1);
-  opacity: 1;
+.panel-media {
+  transform: translate3d(var(--panel-shift, 0%), 0, 0) scale(1.06);
 }
-@utility carousel-slide-inactive {
-  transform: scale(0.96);
-  opacity: 0.72;
+.panel-slide.group:hover .panel-media {
+  transform: translate3d(var(--panel-shift, 0%), 0, 0) scale(1.11);
 }
 
 .link-underline::after {
@@ -239,6 +240,17 @@
 .story-scene-content > section {
   transform: translate3d(0, calc(var(--story-depth, 0px) * -0.18), 0);
 }
+/* Layered depth: headlines, body copy and media drift at different rates so
+   the outgoing scene recedes while the incoming one settles into place. */
+.story-scene-content h1,
+.story-scene-content h2,
+.story-scene-content blockquote {
+  transform: translate3d(0, calc(var(--story-depth, 0px) * 0.42), 0);
+}
+.story-scene-content p,
+.story-scene-content a {
+  transform: translate3d(0, calc(var(--story-depth, 0px) * 0.66), 0);
+}
 .story-scene-hero {
   z-index: 0;
 }
@@ -293,7 +305,14 @@
   .reveal { opacity: 1; transform: none; transition: none; }
   .hero-word { opacity: 1; transform: none; transition: none; }
   .story-scene-content,
-  .story-scene-content > section {
+  .story-scene-content > section,
+  .story-scene-content h1,
+  .story-scene-content h2,
+  .story-scene-content blockquote,
+  .story-scene-content p,
+  .story-scene-content a,
+  .panel-slide,
+  .panel-media {
     opacity: 1;
     transform: none;
     clip-path: none;

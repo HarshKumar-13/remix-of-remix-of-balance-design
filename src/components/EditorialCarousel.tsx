@@ -26,29 +26,61 @@ export function EditorialCarousel({ slides, tall = false }: { slides: Slide[]; t
     el.scrollTo({ left: targetLeft, behavior });
   }, []);
 
-  const onScroll = useCallback(() => {
+  // Continuous, scroll-position-driven panel motion: every panel is placed on
+  // one shared visual sequence so the panel leaving the frame hands over to the
+  // next one without a discrete slide change.
+  const paint = useCallback(() => {
     const el = trackRef.current;
-    if (!el || isDragging) return;
+    if (!el) return;
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const children = Array.from(el.children) as HTMLElement[];
     const center = el.scrollLeft + el.clientWidth / 2;
     let best = 0;
     let bestDist = Infinity;
     children.forEach((c, i) => {
-      const d = Math.abs(c.offsetLeft + c.offsetWidth / 2 - center);
+      const cCenter = c.offsetLeft + c.offsetWidth / 2;
+      const d = Math.abs(cCenter - center);
       if (d < bestDist) {
         bestDist = d;
         best = i;
       }
+      if (reduce) {
+        c.style.transform = "";
+        c.style.opacity = "";
+        return;
+      }
+      const mobile = window.innerWidth < 768;
+      const p = Math.max(-1.6, Math.min(1.6, (cCenter - center) / c.offsetWidth));
+      const abs = Math.min(Math.abs(p), 1);
+      const shift = mobile ? 12 : 26;
+      c.style.transform = `translate3d(${(-p * shift).toFixed(2)}px, 0, 0) scale(${(1 - abs * (mobile ? 0.03 : 0.055)).toFixed(4)})`;
+      c.style.opacity = (1 - abs * (mobile ? 0.18 : 0.32)).toFixed(3);
+      const img = c.querySelector("img");
+      if (img) img.style.setProperty("--panel-shift", `${(p * (mobile ? 2.5 : 5)).toFixed(2)}%`);
     });
-    setIndex(best);
+    if (!isDragging) setIndex(best);
   }, [isDragging]);
 
   useEffect(() => {
     const el = trackRef.current;
     if (!el) return;
+    let frame = 0;
+    const onScroll = () => {
+      if (frame) return;
+      frame = window.requestAnimationFrame(() => {
+        frame = 0;
+        paint();
+      });
+    };
+    onScroll();
     el.addEventListener("scroll", onScroll, { passive: true });
-    return () => el.removeEventListener("scroll", onScroll);
-  }, [onScroll]);
+    window.addEventListener("resize", onScroll);
+    return () => {
+      el.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+      if (frame) window.cancelAnimationFrame(frame);
+    };
+  }, [paint]);
 
   useEffect(() => {
     if (isDragging || slides.length < 2) return;
@@ -129,9 +161,7 @@ export function EditorialCarousel({ slides, tall = false }: { slides: Slide[]; t
         {slides.map((s, i) => (
           <figure
             key={s.src}
-            className={`carousel-slide group relative shrink-0 snap-center overflow-hidden ${
-              i === index ? "carousel-slide-active" : "carousel-slide-inactive"
-            } ${
+            className={`panel-slide group relative shrink-0 snap-center overflow-hidden ${
               tall
                 ? "h-[62vh] w-[88vw] md:h-[82vh] md:w-[78vw]"
                 : "h-[46vh] w-[86vw] md:h-[70vh] md:w-[68vw]"
@@ -144,7 +174,7 @@ export function EditorialCarousel({ slides, tall = false }: { slides: Slide[]; t
               width={1600}
               height={1000}
               draggable={false}
-              className="h-full w-full select-none object-cover transition-transform duration-[1400ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.04]"
+              className="panel-media h-full w-full select-none object-cover transition-transform duration-[1400ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.06]"
             />
             <figcaption className="sr-only">{`Slide ${i + 1}`}</figcaption>
           </figure>

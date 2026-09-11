@@ -7,21 +7,66 @@ export function SiteFooter() {
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
-    const onScroll = () => {
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const mobile = window.innerWidth < 768;
+    let target = 0;
+    let value = 0;
+    let velocity = 0;
+    let raf = 0;
+    let running = false;
+
+    const measure = () => {
       const el = ref.current;
-      if (!el) return;
+      if (!el) return 0;
       const rect = el.getBoundingClientRect();
       const vh = window.innerHeight;
       // 0 when the footer first enters, 1 when it is fully revealed
-      const p = Math.min(1, Math.max(0, (vh - rect.top) / Math.min(rect.height, vh)));
-      setProgress(p);
+      return Math.min(1, Math.max(0, (vh - rect.top) / Math.min(rect.height, vh)));
     };
-    onScroll();
+
+    // Spring-driven reveal: the footer settles with a light elastic overshoot
+    // whose strength follows how fast the reader scrolled into it, and unwinds
+    // the same way when scrolling back up.
+    const tick = () => {
+      const stiffness = mobile ? 0.14 : 0.11;
+      const damping = mobile ? 0.74 : 0.8;
+      velocity += (target - value) * stiffness;
+      velocity *= damping;
+      value += velocity;
+      setProgress(value);
+      if (Math.abs(target - value) > 0.0008 || Math.abs(velocity) > 0.0008) {
+        raf = window.requestAnimationFrame(tick);
+      } else {
+        value = target;
+        velocity = 0;
+        setProgress(value);
+        running = false;
+      }
+    };
+
+    const onScroll = () => {
+      const next = measure();
+      if (reduce) {
+        setProgress(next);
+        return;
+      }
+      velocity += (next - target) * (mobile ? 0.18 : 0.3);
+      target = next;
+      if (!running) {
+        running = true;
+        raf = window.requestAnimationFrame(tick);
+      }
+    };
+
+    target = measure();
+    value = target;
+    setProgress(target);
     window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("resize", onScroll);
     return () => {
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", onScroll);
+      if (raf) window.cancelAnimationFrame(raf);
     };
   }, []);
 
@@ -35,8 +80,8 @@ export function SiteFooter() {
         <div
           className="transition-none"
           style={{
-            opacity: Math.min(1, progress * 1.6),
-            transform: `translateY(${(1 - Math.min(1, progress * 1.4)) * 40}px)`,
+            opacity: Math.max(0, Math.min(1, progress * 1.6)),
+            transform: `translateY(${((1 - progress * 1.4) * 40).toFixed(2)}px)`,
           }}
         >
           <img
@@ -113,8 +158,8 @@ export function SiteFooter() {
           aria-hidden="true"
           className="display w-full whitespace-nowrap text-center text-[17vw] leading-[0.78] text-ivory"
           style={{
-            transform: `translateY(${(1 - progress) * 22}%)`,
-            opacity: 0.15 + progress * 0.85,
+            transform: `translateY(${((1 - progress) * 22).toFixed(2)}%)`,
+            opacity: Math.max(0, Math.min(1, 0.15 + progress * 0.85)),
           }}
         >
           BALANCE
