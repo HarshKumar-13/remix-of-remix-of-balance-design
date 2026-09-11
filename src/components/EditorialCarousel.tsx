@@ -172,7 +172,7 @@ export function EditorialCarousel({ slides, tall = false }: { slides: Slide[]; t
               width={1600}
               height={1000}
               draggable={false}
-              className="h-full w-full select-none object-cover transition-transform duration-[1400ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.04]"
+              className="panel-media h-full w-full select-none object-cover transition-transform duration-[1400ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.06]"
             />
             <figcaption className="sr-only">{`Slide ${i + 1}`}</figcaption>
           </figure>
