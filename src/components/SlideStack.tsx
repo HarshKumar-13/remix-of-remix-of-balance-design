@@ -63,6 +63,8 @@ export function SlideStack({ children }: { children: ReactNode }) {
     window.addEventListener("load", refresh);
     return () => {
       window.removeEventListener("load", refresh);
+      window.removeEventListener("resize", setPanelOffsets);
+      ro.disconnect();
       ctx.revert();
     };
   }, []);
