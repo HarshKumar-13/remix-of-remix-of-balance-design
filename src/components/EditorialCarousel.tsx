@@ -26,29 +26,59 @@ export function EditorialCarousel({ slides, tall = false }: { slides: Slide[]; t
     el.scrollTo({ left: targetLeft, behavior });
   }, []);
 
-  const onScroll = useCallback(() => {
+  // Continuous, scroll-position-driven panel motion: every panel is placed on
+  // one shared visual sequence so the panel leaving the frame hands over to the
+  // next one without a discrete slide change.
+  const paint = useCallback(() => {
     const el = trackRef.current;
-    if (!el || isDragging) return;
+    if (!el) return;
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const children = Array.from(el.children) as HTMLElement[];
     const center = el.scrollLeft + el.clientWidth / 2;
     let best = 0;
     let bestDist = Infinity;
     children.forEach((c, i) => {
-      const d = Math.abs(c.offsetLeft + c.offsetWidth / 2 - center);
+      const cCenter = c.offsetLeft + c.offsetWidth / 2;
+      const d = Math.abs(cCenter - center);
       if (d < bestDist) {
         bestDist = d;
         best = i;
       }
+      if (reduce) {
+        c.style.transform = "";
+        c.style.opacity = "";
+        return;
+      }
+      const p = Math.max(-1.6, Math.min(1.6, (cCenter - center) / c.offsetWidth));
+      const abs = Math.abs(p);
+      c.style.transform = `translate3d(${(-p * 26).toFixed(2)}px, 0, 0) scale(${(1 - Math.min(abs, 1) * 0.055).toFixed(4)})`;
+      c.style.opacity = (1 - Math.min(abs, 1) * 0.32).toFixed(3);
+      const img = c.querySelector("img");
+      if (img) img.style.setProperty("--panel-shift", `${(p * 5).toFixed(2)}%`);
     });
-    setIndex(best);
+    if (!isDragging) setIndex(best);
   }, [isDragging]);
 
   useEffect(() => {
     const el = trackRef.current;
     if (!el) return;
+    let frame = 0;
+    const onScroll = () => {
+      if (frame) return;
+      frame = window.requestAnimationFrame(() => {
+        frame = 0;
+        paint();
+      });
+    };
+    onScroll();
     el.addEventListener("scroll", onScroll, { passive: true });
-    return () => el.removeEventListener("scroll", onScroll);
-  }, [onScroll]);
+    window.addEventListener("resize", onScroll);
+    return () => {
+      el.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+      if (frame) window.cancelAnimationFrame(frame);
+    };
+  }, [paint]);
 
   useEffect(() => {
     if (isDragging || slides.length < 2) return;
