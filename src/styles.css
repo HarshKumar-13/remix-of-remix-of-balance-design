@@ -19,8 +19,14 @@
  */
 
 @theme inline {
-  --font-display: "Cinzel", "Bodoni Moda", Georgia, serif;
-  --font-sans: "Jost", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Alta", Georgia, serif;
+  --font-sans: "Arial", ui-sans-serif, system-ui, sans-serif;
+  --text-base: 1.125rem;
+  --text-base--line-height: 1.5rem;
+  --text-lg: 1.25rem;
+  --text-lg--line-height: 1.75rem;
+  --text-xl: 1.375rem;
+  --text-xl--line-height: 1.75rem;
   --radius-sm: 0px;
   --radius-md: 0px;
   --radius-lg: 0px;
