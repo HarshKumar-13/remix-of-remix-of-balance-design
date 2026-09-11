@@ -38,9 +38,9 @@ export function Hero() {
   }, []);
 
   useEffect(() => {
-    // Reveal statements one by one, then hold on the last
-    if (!loaded || stmt >= STATEMENTS.length - 1) return;
-    const id = setTimeout(() => setStmt((s) => Math.min(s + 1, STATEMENTS.length - 1)), 2600);
+    // Reveal words one by one, then hold on the last
+    if (!loaded || stmt >= WORDS.length - 1) return;
+    const id = setTimeout(() => setStmt((s) => Math.min(s + 1, WORDS.length - 1)), 2600);
     return () => clearTimeout(id);
   }, [loaded, stmt]);
 
