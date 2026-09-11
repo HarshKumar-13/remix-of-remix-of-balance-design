@@ -161,7 +161,7 @@ function Index() {
             </section>
           </SlidePanel>
             <SlidePanel>
-              <ServiceChapter {...CHAPTERS[0]} />
+              <ServiceChapter {...CHAPTERS[0]!} />
             </SlidePanel>
           </SlideStack>
 
