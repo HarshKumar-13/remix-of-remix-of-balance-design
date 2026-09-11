@@ -71,23 +71,26 @@ export function Hero() {
       >
         <h1
           aria-label="YOUR IMAGE. YOUR IDENTITY. YOUR IMPACT."
-          className="display relative text-[4.5rem] leading-[0.9] sm:text-[7rem] md:text-[11rem] lg:text-[13rem]"
+          className="display relative text-[4.25rem] leading-[0.9] sm:text-[6.75rem] md:text-[10.75rem] lg:text-[12.75rem]"
         >
-          {STATEMENTS.map((statement, i) => (
-            <span
-              key={statement}
-              aria-hidden={i !== stmt}
-              className={i === 0 ? "block" : "absolute inset-0 block"}
-              style={{
-                opacity: i === stmt && loaded ? 1 : 0,
-                transform: `translate3d(0, ${i === stmt ? 0 : i < stmt ? -24 : 24}px, 0)`,
-                transition: "opacity 1.1s cubic-bezier(0.16, 1, 0.3, 1), transform 1.1s cubic-bezier(0.16, 1, 0.3, 1)",
-                transitionDelay: loaded ? "400ms" : "0ms",
-              }}
-            >
-              {statement}
-            </span>
-          ))}
+          <span className="inline-block">YOUR </span>
+          <span className="relative inline-grid overflow-hidden align-bottom">
+            {WORDS.map((word, i) => (
+              <span
+                key={word}
+                aria-hidden={i !== stmt}
+                className="col-start-1 row-start-1 block"
+                style={{
+                  opacity: i === stmt && loaded ? 1 : 0,
+                  transform: `translate3d(0, ${i === stmt ? 0 : i < stmt ? -24 : 24}px, 0)`,
+                  transition: "opacity 1.1s cubic-bezier(0.16, 1, 0.3, 1), transform 1.1s cubic-bezier(0.16, 1, 0.3, 1)",
+                  transitionDelay: loaded ? "400ms" : "0ms",
+                }}
+              >
+                {word}
+              </span>
+            ))}
+          </span>
         </h1>
         <p
           className={`label-xs mt-6 opacity-80 transition-all duration-1000 ${loaded ? "translate-y-0 opacity-80" : "translate-y-6 opacity-0"}`}
