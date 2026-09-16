@@ -10,7 +10,7 @@ const NAV = [
   { label: "Contact Us", href: "/#contact" },
 ];
 
-export function SiteHeader() {
+export function SiteHeader({ introComplete = true }: { introComplete?: boolean }) {
   const [solid, setSolid] = useState(false);
   const [open, setOpen] = useState(false);
 
@@ -49,8 +49,15 @@ export function SiteHeader() {
               : "bg-transparent"
         }`}
       >
-        <div className={`flex items-center justify-between px-6 py-6 md:px-12 ${tone}`}>
-          <a href="/#top" aria-label="Balance Design & Fashion Consultancy" className="block">
+        <div
+          className={`flex items-center justify-between px-6 py-6 transition-opacity duration-500 md:px-12 ${tone} ${introComplete ? "opacity-100" : "opacity-0"}`}
+        >
+          <a
+            href="/#top"
+            aria-label="Balance Design & Fashion Consultancy"
+            className="block"
+            data-navbar-logo
+          >
             <img
               src={solid && !open ? logoDark.url : logoLight.url}
               alt="Balance Design & Fashion Consultancy"
