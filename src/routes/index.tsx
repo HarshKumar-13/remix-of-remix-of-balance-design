@@ -128,14 +128,20 @@ const CHAPTERS = [
 
 ];
 
+let hasCompletedHomeIntro = false;
+
 function Index() {
-  const [introComplete, setIntroComplete] = useState(false);
+  const [introComplete, setIntroComplete] = useState(hasCompletedHomeIntro);
 
   useEffect(() => {
+    if (introComplete) return;
     const duration = window.matchMedia("(prefers-reduced-motion: reduce)").matches ? 0 : 2350;
-    const timer = window.setTimeout(() => setIntroComplete(true), duration);
+    const timer = window.setTimeout(() => {
+      hasCompletedHomeIntro = true;
+      setIntroComplete(true);
+    }, duration);
     return () => window.clearTimeout(timer);
-  }, []);
+  }, [introComplete]);
 
   return (
     <main>
