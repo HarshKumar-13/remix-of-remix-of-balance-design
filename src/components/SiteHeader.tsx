@@ -10,7 +10,13 @@ const NAV = [
   { label: "Contact Us", href: "/#contact" },
 ];
 
-export function SiteHeader({ introComplete = true }: { introComplete?: boolean }) {
+export function SiteHeader({
+  introComplete = true,
+  forceSolid = false,
+}: {
+  introComplete?: boolean;
+  forceSolid?: boolean;
+}) {
   const [solid, setSolid] = useState(false);
   const [open, setOpen] = useState(false);
 
@@ -36,7 +42,8 @@ export function SiteHeader({ introComplete = true }: { introComplete?: boolean }
     };
   }, [open]);
 
-  const tone = open ? "text-ivory" : solid ? "text-foreground" : "text-background";
+  const showSolid = solid || forceSolid;
+  const tone = open ? "text-ivory" : showSolid ? "text-foreground" : "text-background";
 
   return (
     <>
@@ -44,7 +51,7 @@ export function SiteHeader({ introComplete = true }: { introComplete?: boolean }
         className={`fixed inset-x-0 top-0 z-[60] transition-all duration-700 ${
           open
             ? "bg-transparent"
-            : solid
+            : showSolid
               ? "border-b border-border bg-background/95 backdrop-blur-sm"
               : "bg-transparent"
         }`}
@@ -59,7 +66,7 @@ export function SiteHeader({ introComplete = true }: { introComplete?: boolean }
             data-navbar-logo
           >
             <img
-              src={solid && !open ? logoDark.url : logoLight.url}
+              src={showSolid && !open ? logoDark.url : logoLight.url}
               alt="Balance Design & Fashion Consultancy"
               className="h-[4.375rem] w-auto md:h-[6.25rem]"
             />

@@ -1,5 +1,5 @@
-import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { useCallback, useState } from "react";
 
 import { SiteHeader } from "@/components/SiteHeader";
 import { Hero } from "@/components/Hero";
@@ -132,20 +132,14 @@ let hasCompletedHomeIntro = false;
 
 function Index() {
   const [introComplete, setIntroComplete] = useState(hasCompletedHomeIntro);
-
-  useEffect(() => {
-    if (introComplete) return;
-    const duration = window.matchMedia("(prefers-reduced-motion: reduce)").matches ? 0 : 2350;
-    const timer = window.setTimeout(() => {
-      hasCompletedHomeIntro = true;
-      setIntroComplete(true);
-    }, duration);
-    return () => window.clearTimeout(timer);
-  }, [introComplete]);
+  const completeIntro = useCallback(() => {
+    hasCompletedHomeIntro = true;
+    setIntroComplete(true);
+  }, []);
 
   return (
     <main>
-      {!introComplete && <LogoIntro />}
+      {!introComplete && <LogoIntro onComplete={completeIntro} />}
       <div className="relative z-10 bg-background">
         <SiteHeader introComplete={introComplete} />
         <ScrollStory>
@@ -172,6 +166,14 @@ function Index() {
                   fashion, design and image consulting through specialised services for individuals,
                   brands and organisations.
                 </p>
+              </Reveal>
+              <Reveal delay={220}>
+                <Link
+                  to="/services/fashion-apparel-workshops"
+                  className="label-xs link-underline mt-10 inline-block text-foreground"
+                >
+                  Explore More &nbsp;&rarr;
+                </Link>
               </Reveal>
             </section>
           </SlidePanel>

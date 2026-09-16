@@ -3,7 +3,7 @@ import gsap from "gsap";
 
 import logoLight from "@/assets/logo-light.png.asset.json";
 
-export function LogoIntro() {
+export function LogoIntro({ onComplete }: { onComplete: () => void }) {
   const layerRef = useRef<HTMLDivElement>(null);
   const logoRef = useRef<HTMLImageElement>(null);
 
@@ -15,6 +15,7 @@ export function LogoIntro() {
     if (!layer || !logo || !navbarLogo) return;
 
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      onComplete();
       return;
     }
 
@@ -39,12 +40,13 @@ export function LogoIntro() {
         duration: 1.35,
         delay: 0.65,
       })
-      .to(layer, { opacity: 0, duration: 0.45, ease: "power2.out" }, "-=0.12");
+      .to(layer, { opacity: 0, duration: 0.45, ease: "power2.out" }, "-=0.12")
+      .call(onComplete);
 
     return () => {
       timeline.kill();
     };
-  }, []);
+  }, [onComplete]);
 
   return (
     <div
