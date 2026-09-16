@@ -3,9 +3,7 @@ import gsap from "gsap";
 
 import logoLight from "@/assets/logo-light.png.asset.json";
 
-let hasPlayedIntro = false;
-
-export function LogoIntro({ onComplete }: { onComplete: () => void }) {
+export function LogoIntro() {
   const layerRef = useRef<HTMLDivElement>(null);
   const logoRef = useRef<HTMLImageElement>(null);
 
@@ -14,27 +12,15 @@ export function LogoIntro({ onComplete }: { onComplete: () => void }) {
     const logo = logoRef.current;
     const navbarLogo = document.querySelector<HTMLElement>("[data-navbar-logo]");
 
-    if (!layer || !logo || !navbarLogo || hasPlayedIntro) {
-      onComplete();
-      return;
-    }
+    if (!layer || !logo || !navbarLogo) return;
 
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      onComplete();
       return;
     }
 
     const destination = navbarLogo.getBoundingClientRect();
     const startWidth = Math.min(window.innerWidth * 0.58, 420);
     const startHeight = startWidth * (destination.height / destination.width);
-    let completed = false;
-    const finish = () => {
-      if (completed) return;
-      completed = true;
-      hasPlayedIntro = true;
-      onComplete();
-    };
-
     gsap.set(logo, {
       left: window.innerWidth / 2 - startWidth / 2,
       top: window.innerHeight / 2 - startHeight / 2,
@@ -42,10 +28,7 @@ export function LogoIntro({ onComplete }: { onComplete: () => void }) {
       height: startHeight,
     });
 
-    const timeline = gsap.timeline({
-      onComplete: finish,
-      defaults: { ease: "power3.inOut" },
-    });
+    const timeline = gsap.timeline({ defaults: { ease: "power3.inOut" } });
 
     timeline
       .to(logo, {
@@ -58,13 +41,10 @@ export function LogoIntro({ onComplete }: { onComplete: () => void }) {
       })
       .to(layer, { opacity: 0, duration: 0.45, ease: "power2.out" }, "-=0.12");
 
-    const completionTimer = window.setTimeout(finish, 2600);
-
     return () => {
-      window.clearTimeout(completionTimer);
       timeline.kill();
     };
-  }, [onComplete]);
+  }, []);
 
   return (
     <div

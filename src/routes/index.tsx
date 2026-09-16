@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useCallback, useState } from "react";
+import { useEffect, useState } from "react";
 
 import { SiteHeader } from "@/components/SiteHeader";
 import { Hero } from "@/components/Hero";
@@ -130,11 +130,16 @@ const CHAPTERS = [
 
 function Index() {
   const [introComplete, setIntroComplete] = useState(false);
-  const completeIntro = useCallback(() => setIntroComplete(true), []);
+
+  useEffect(() => {
+    const duration = window.matchMedia("(prefers-reduced-motion: reduce)").matches ? 0 : 2350;
+    const timer = window.setTimeout(() => setIntroComplete(true), duration);
+    return () => window.clearTimeout(timer);
+  }, []);
 
   return (
     <main>
-      {!introComplete && <LogoIntro onComplete={completeIntro} />}
+      {!introComplete && <LogoIntro />}
       <div className="relative z-10 bg-background">
         <SiteHeader introComplete={introComplete} />
         <ScrollStory>
