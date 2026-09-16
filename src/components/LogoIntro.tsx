@@ -30,6 +30,12 @@ export function LogoIntro({ onComplete }: { onComplete: () => void }) {
     const destination = navbarLogo.getBoundingClientRect();
     const startWidth = Math.min(window.innerWidth * 0.58, 420);
     const startHeight = startWidth * (destination.height / destination.width);
+    let completed = false;
+    const finish = () => {
+      if (completed) return;
+      completed = true;
+      onComplete();
+    };
 
     gsap.set(logo, {
       left: window.innerWidth / 2 - startWidth / 2,
@@ -39,7 +45,7 @@ export function LogoIntro({ onComplete }: { onComplete: () => void }) {
     });
 
     const timeline = gsap.timeline({
-      onComplete,
+      onComplete: finish,
       defaults: { ease: "power3.inOut" },
     });
 
@@ -54,7 +60,10 @@ export function LogoIntro({ onComplete }: { onComplete: () => void }) {
       })
       .to(layer, { opacity: 0, duration: 0.45, ease: "power2.out" }, "-=0.12");
 
+    const completionTimer = window.setTimeout(finish, 2600);
+
     return () => {
+      window.clearTimeout(completionTimer);
       timeline.kill();
     };
   }, [onComplete]);
