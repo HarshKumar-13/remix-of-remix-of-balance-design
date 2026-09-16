@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 
 import { SiteHeader } from "@/components/SiteHeader";
@@ -172,6 +172,14 @@ function Index() {
                   fashion, design and image consulting through specialised services for individuals,
                   brands and organisations.
                 </p>
+              </Reveal>
+              <Reveal delay={220}>
+                <Link
+                  to="/services/fashion-apparel-workshops"
+                  className="label-xs link-underline mt-10 inline-block text-foreground"
+                >
+                  Explore More &nbsp;&rarr;
+                </Link>
               </Reveal>
             </section>
           </SlidePanel>
