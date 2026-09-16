@@ -79,8 +79,9 @@ function EditorialImage({
       ref={ref}
       className={`overflow-hidden ${className}`}
       style={{
-        clipPath: visible ? "inset(0 0 0 0)" : "inset(100% 0 0 0)",
-        transition: `clip-path 1.4s cubic-bezier(0.16,1,0.3,1) ${delay}ms`,
+        opacity: visible ? 1 : 0,
+        transform: visible ? "translate3d(0,0,0)" : "translate3d(0,28px,0)",
+        transition: `opacity 1.1s cubic-bezier(0.16,1,0.3,1) ${delay}ms, transform 1.4s cubic-bezier(0.16,1,0.3,1) ${delay}ms`,
       }}
     >
       <img
