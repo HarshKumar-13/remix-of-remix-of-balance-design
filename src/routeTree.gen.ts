@@ -15,6 +15,7 @@ import { Route as BlogRouteImport } from './routes/blog'
 import { Route as EventsRouteImport } from './routes/events'
 import { Route as BlogIndexRouteImport } from './routes/blog.index'
 import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
+import { Route as ServicesFashionApparelWorkshopsRouteImport } from './routes/services.fashion-apparel-workshops'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -46,6 +47,12 @@ const BlogSlugRoute = BlogSlugRouteImport.update({
   path: '/$slug',
   getParentRoute: () => BlogRoute,
 } as any)
+const ServicesFashionApparelWorkshopsRoute =
+  ServicesFashionApparelWorkshopsRouteImport.update({
+    id: '/services/fashion-apparel-workshops',
+    path: '/services/fashion-apparel-workshops',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -53,6 +60,7 @@ export interface FileRoutesByFullPath {
   '/blog': typeof BlogRouteWithChildren
   '/events': typeof EventsRoute
   '/blog/$slug': typeof BlogSlugRoute
+  '/services/fashion-apparel-workshops': typeof ServicesFashionApparelWorkshopsRoute
   '/blog/': typeof BlogIndexRoute
 }
 export interface FileRoutesByTo {
@@ -60,6 +68,7 @@ export interface FileRoutesByTo {
   '/about': typeof AboutRoute
   '/events': typeof EventsRoute
   '/blog/$slug': typeof BlogSlugRoute
+  '/services/fashion-apparel-workshops': typeof ServicesFashionApparelWorkshopsRoute
   '/blog': typeof BlogIndexRoute
 }
 export interface FileRoutesById {
@@ -69,15 +78,36 @@ export interface FileRoutesById {
   '/blog': typeof BlogRouteWithChildren
   '/events': typeof EventsRoute
   '/blog/$slug': typeof BlogSlugRoute
+  '/services/fashion-apparel-workshops': typeof ServicesFashionApparelWorkshopsRoute
   '/blog/': typeof BlogIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about' | '/blog' | '/events' | '/blog/$slug' | '/blog/'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/blog'
+    | '/events'
+    | '/blog/$slug'
+    | '/services/fashion-apparel-workshops'
+    | '/blog/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/events' | '/blog/$slug' | '/blog'
+  to:
+    | '/'
+    | '/about'
+    | '/events'
+    | '/blog/$slug'
+    | '/services/fashion-apparel-workshops'
+    | '/blog'
   id:
-    '__root__' | '/' | '/about' | '/blog' | '/events' | '/blog/$slug' | '/blog/'
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/blog'
+    | '/events'
+    | '/blog/$slug'
+    | '/services/fashion-apparel-workshops'
+    | '/blog/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -85,6 +115,7 @@ export interface RootRouteChildren {
   AboutRoute: typeof AboutRoute
   BlogRoute: typeof BlogRouteWithChildren
   EventsRoute: typeof EventsRoute
+  ServicesFashionApparelWorkshopsRoute: typeof ServicesFashionApparelWorkshopsRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -131,6 +162,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BlogSlugRouteImport
       parentRoute: typeof BlogRoute
     }
+    '/services/fashion-apparel-workshops': {
+      id: '/services/fashion-apparel-workshops'
+      path: '/services/fashion-apparel-workshops'
+      fullPath: '/services/fashion-apparel-workshops'
+      preLoaderRoute: typeof ServicesFashionApparelWorkshopsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -151,6 +189,7 @@ const rootRouteChildren: RootRouteChildren = {
   AboutRoute: AboutRoute,
   BlogRoute: BlogRouteWithChildren,
   EventsRoute: EventsRoute,
+  ServicesFashionApparelWorkshopsRoute: ServicesFashionApparelWorkshopsRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
