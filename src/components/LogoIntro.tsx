@@ -1,4 +1,4 @@
-import { useLayoutEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import gsap from "gsap";
 
 import logoLight from "@/assets/logo-light.png.asset.json";
@@ -9,18 +9,15 @@ export function LogoIntro({ onComplete }: { onComplete: () => void }) {
   const layerRef = useRef<HTMLDivElement>(null);
   const logoRef = useRef<HTMLImageElement>(null);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     const layer = layerRef.current;
     const logo = logoRef.current;
     const navbarLogo = document.querySelector<HTMLElement>("[data-navbar-logo]");
 
     if (!layer || !logo || !navbarLogo || hasPlayedIntro) {
-      hasPlayedIntro = true;
       onComplete();
       return;
     }
-
-    hasPlayedIntro = true;
 
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       onComplete();
@@ -34,6 +31,7 @@ export function LogoIntro({ onComplete }: { onComplete: () => void }) {
     const finish = () => {
       if (completed) return;
       completed = true;
+      hasPlayedIntro = true;
       onComplete();
     };
 
