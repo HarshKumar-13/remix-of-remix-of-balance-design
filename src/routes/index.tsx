@@ -1,12 +1,13 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useCallback, useState } from "react";
 
 import { SiteHeader } from "@/components/SiteHeader";
 import { Hero } from "@/components/Hero";
+import { LogoIntro } from "@/components/LogoIntro";
 import { Reveal } from "@/components/Reveal";
 import { LogoMark } from "@/components/LogoMark";
 import { ServiceChapter } from "@/components/ServiceChapter";
 import { AboutSection } from "@/components/AboutSection";
-import { LogoMarquee } from "@/components/LogoMarquee";
 import { DressCode } from "@/components/DressCode";
 import { Testimonials } from "@/components/Testimonials";
 import { CtaSection } from "@/components/CtaSection";
@@ -128,23 +129,26 @@ const CHAPTERS = [
 ];
 
 function Index() {
+  const [introComplete, setIntroComplete] = useState(false);
+  const completeIntro = useCallback(() => setIntroComplete(true), []);
+
   return (
     <main>
+      {!introComplete && <LogoIntro onComplete={completeIntro} />}
       <div className="relative z-10 bg-background">
-        <SiteHeader />
+        <SiteHeader introComplete={introComplete} />
         <ScrollStory>
           <SlideStack>
             <SlidePanel>
-              <Hero />
+              <Hero introComplete={introComplete} />
             </SlidePanel>
             <SlidePanel>
-            <LogoMarquee />
             <section id="services" className="px-6 py-28 text-center md:px-12 md:py-44">
               <Reveal>
                 <LogoMark className="mb-8" />
               </Reveal>
               <Reveal delay={80}>
-                <p className="label-xs text-muted-foreground">Services</p>
+                <p className="label-xs text-[17px] text-muted-foreground">Fashion &amp; Apparel Workshops</p>
               </Reveal>
               <Reveal delay={80}>
                 <h2 className="display mx-auto mt-8 max-w-4xl text-[2.5rem] sm:text-6xl md:text-[5rem]">

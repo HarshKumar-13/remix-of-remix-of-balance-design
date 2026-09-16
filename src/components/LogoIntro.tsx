@@ -54,7 +54,9 @@ export function LogoIntro({ onComplete }: { onComplete: () => void }) {
       })
       .to(layer, { opacity: 0, duration: 0.45, ease: "power2.out" }, "-=0.12");
 
-    return () => timeline.kill();
+    return () => {
+      timeline.kill();
+    };
   }, [onComplete]);
 
   return (

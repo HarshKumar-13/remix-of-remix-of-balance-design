@@ -13,7 +13,7 @@ const SLIDES = [
 
 const WORDS = ["IMAGE.", "IDENTITY.", "IMPACT."];
 
-export function Hero() {
+export function Hero({ introComplete = true }: { introComplete?: boolean }) {
   const [y, setY] = useState(0);
   const [index, setIndex] = useState(0);
   const [loaded, setLoaded] = useState(false);
@@ -21,10 +21,11 @@ export function Hero() {
   const heroRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
-    // Trigger entrance animation after a short delay for dramatic effect
+    if (!introComplete) return;
+    // Trigger entrance animation after the logo settles into the navigation.
     const t = setTimeout(() => setLoaded(true), 150);
     return () => clearTimeout(t);
-  }, []);
+  }, [introComplete]);
 
   useEffect(() => {
     const onScroll = () => setY(window.scrollY);
@@ -45,7 +46,11 @@ export function Hero() {
   }, [loaded, stmt]);
 
   return (
-    <section ref={heroRef} id="top" className="relative h-[100svh] w-full overflow-hidden bg-charcoal">
+    <section
+      ref={heroRef}
+      id="top"
+      className={`relative h-[100svh] w-full overflow-hidden bg-charcoal transition-opacity duration-700 ${introComplete ? "opacity-100" : "opacity-0"}`}
+    >
       {SLIDES.map((s, i) => (
         <img
           key={s.src}
