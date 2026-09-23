@@ -21,22 +21,16 @@ import corp1 from "@/assets/Picture6.jpg.asset.json";
 import corp2 from "@/assets/Picture3.jpg.asset.json";
 import corp3 from "@/assets/Picture4.jpg.asset.json";
 import corp4 from "@/assets/Picture5.jpg.asset.json";
-import corp5 from "@/assets/Picture7.jpg.asset.json";
 
 import pers1 from "@/assets/pers-1.jpg";
-import pers2 from "@/assets/pers-2.jpg";
 import pers3 from "@/assets/pers-3.jpg";
 import trend1 from "@/assets/Picture8.jpg.asset.json";
 import trend2 from "@/assets/Picture9.jpg.asset.json";
 import trend3 from "@/assets/Picture10.jpg.asset.json";
 import trend4 from "@/assets/Picture11.gif.asset.json";
-import trend5 from "@/assets/Picture12.gif.asset.json";
 import graphic1Asset from "@/assets/Picture17.jpg.asset.json";
 import graphic2Asset from "@/assets/Picture18.jpg.asset.json";
 import graphic3Asset from "@/assets/Picture19.jpg.asset.json";
-import uniform1 from "@/assets/Picture15.jpg.asset.json";
-import uniform2 from "@/assets/Picture14.jpg.asset.json";
-import uniform3 from "@/assets/Picture13.jpg.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
