@@ -18,6 +18,7 @@ import { SlideStack, SlidePanel } from "@/components/SlideStack";
 import { StylingWorkshops } from "@/components/StylingWorkshops";
 import { CorporateImageConsulting } from "@/components/CorporateImageConsulting";
 import { PersonalImageConsulting } from "@/components/PersonalImageConsulting";
+import { OwnYourSpotlight } from "@/components/OwnYourSpotlight";
 
 
 import corp3 from "@/assets/Picture4.jpg.asset.json";
@@ -62,10 +63,6 @@ const SERVICES: StoryService[] = [
       {
         title: "A) DESIGN AESTHETICS AND & STYLING WORKSHOPS",
         body: "for TEAMS of fashion and retail Brands.like VM and floor sales teams",
-      },
-      {
-        title: "D) OWN YOUR SPOTLIGHT",
-        body: "we coach professionals to look sharp and stylish, build self confidence and have a personality that is magnetic, as they meet and interact with world.",
       },
     ],
     images: [
@@ -153,6 +150,8 @@ function Index() {
           <CorporateImageConsulting />
 
           <PersonalImageConsulting />
+
+          <OwnYourSpotlight />
 
           <ServicesStory services={SERVICES}>
             <ServicesPurpose
