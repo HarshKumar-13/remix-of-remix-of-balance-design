@@ -157,6 +157,8 @@ function Index() {
           </SlidePanel>
           </SlideStack>
 
+          <StylingWorkshops />
+
           <ServicesStory services={SERVICES}>
             <ServicesPurpose
               image={{
