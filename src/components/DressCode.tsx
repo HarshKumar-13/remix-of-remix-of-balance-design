@@ -79,7 +79,7 @@ function PinnedSequence() {
         <div className="mx-auto w-full max-w-7xl px-6 md:px-12">
           <div className="grid grid-cols-12 gap-16">
             <div className="col-span-6">
-              <LogoMark className="mb-8 md:mx-0" />
+              <WhiteLogo className="mb-8 md:mx-0" />
               <Heading />
               <p className="mt-10 max-w-md text-lg leading-relaxed text-ivory/70 md:text-xl">
                 Fashion as communication. Fashion as confidence. Fashion as impact.
@@ -138,7 +138,7 @@ function StackedSequence() {
   return (
     <div className="mx-auto max-w-7xl px-6 md:hidden">
       <Reveal>
-        <LogoMark className="mb-8 md:mx-0" />
+        <WhiteLogo className="mb-8 md:mx-0" />
       </Reveal>
       <Reveal delay={60}>
         <Heading />
