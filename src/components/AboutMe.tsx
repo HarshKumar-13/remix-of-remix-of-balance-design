@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import aboutPortrait from "@/assets/about.jpg";
 import personalPortraitOne from "@/assets/pers-1.jpg";
 import personalPortraitTwo from "@/assets/pers-3.jpg";
+import upmaPortraitAsset from "@/assets/upma-portrait.png.asset.json";
+const upmaPortrait = upmaPortraitAsset.url;
 import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/Reveal";
 
@@ -20,6 +22,11 @@ const PORTRAITS = [
   {
     src: personalPortraitTwo,
     alt: "Editorial portrait in tailored black clothing against a warm architectural backdrop",
+    position: "object-center",
+  },
+  {
+    src: upmaPortrait,
+    alt: "Upma Shrian seated in a red armchair, wearing a polka-dot top",
     position: "object-center",
   },
 ];
