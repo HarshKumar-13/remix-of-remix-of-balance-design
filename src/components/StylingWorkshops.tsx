@@ -2,27 +2,37 @@ import { useEffect, useState } from "react";
 
 import { Reveal } from "@/components/Reveal";
 
-import styling1 from "@/assets/styling-1.jpg";
-import styling2 from "@/assets/styling-2.jpg";
-import styling3 from "@/assets/styling-3.jpg";
-import styling4 from "@/assets/styling-4.jpg";
+import stylingAudience from "@/assets/styling-workshop-audience.jpeg.asset.json";
+import stylingGroupOne from "@/assets/styling-workshop-group-1.jpeg.asset.json";
+import stylingGroupTwo from "@/assets/styling-workshop-group-2.jpeg.asset.json";
+import stylingGroupThree from "@/assets/styling-workshop-group-3.jpeg.asset.json";
+import stylingSessionOne from "@/assets/styling-workshop-session-1.jpeg.asset.json";
+import stylingSessionTwo from "@/assets/styling-workshop-session-2.jpeg.asset.json";
 
 const FILM = [
   {
-    src: styling1,
-    alt: "Stylist adjusting a tailored jacket on a model in a bright atelier",
+    src: stylingGroupOne.url,
+    alt: "Design and styling workshop participants gathered for a group photograph",
   },
   {
-    src: styling2,
-    alt: "Visual merchandising team arranging garments on a rail in a retail space",
+    src: stylingSessionOne.url,
+    alt: "Workshop participants seated around a conference room during a session",
   },
   {
-    src: styling3,
-    alt: "Hands pinning fabric beside fashion sketches on a workshop table",
+    src: stylingGroupTwo.url,
+    alt: "Design workshop participants gathered together after a session",
   },
   {
-    src: styling4,
-    alt: "Presenter walking a team through a fabric and silhouette mood board",
+    src: stylingSessionTwo.url,
+    alt: "Facilitators speaking with participants during a styling workshop",
+  },
+  {
+    src: stylingAudience.url,
+    alt: "Workshop audience attending a presentation in a bright studio classroom",
+  },
+  {
+    src: stylingGroupThree.url,
+    alt: "Fashion and styling workshop participants assembled in a lecture room",
   },
 ];
 
@@ -89,8 +99,8 @@ export function StylingWorkshops() {
                   key={img.src}
                   src={img.src}
                   alt={img.alt}
-                  width={1344}
-                  height={896}
+                  width={1920}
+                  height={1280}
                   loading={i === 0 ? "eager" : "lazy"}
                   decoding="async"
                   className="absolute inset-0 h-full w-full object-cover will-change-transform"
