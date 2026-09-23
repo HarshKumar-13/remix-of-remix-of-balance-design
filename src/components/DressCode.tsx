@@ -140,6 +140,7 @@ function StackedSequence() {
       <Reveal>
         <WhiteLogo className="mb-8 md:mx-0" />
       </Reveal>
+      </Reveal>
       <Reveal delay={60}>
         <Heading />
       </Reveal>
