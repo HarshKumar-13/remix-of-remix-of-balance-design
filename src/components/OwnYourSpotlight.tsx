@@ -1,6 +1,6 @@
 import { Reveal } from "@/components/Reveal";
 
-import spotlightVideo from "@/assets/own-your-spotlight.mp4.asset.json";
+import spotlightVideo from "@/assets/own-your-spotlight-web.mp4.asset.json";
 
 export function OwnYourSpotlight() {
   return (
