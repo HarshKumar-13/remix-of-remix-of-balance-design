@@ -26,7 +26,10 @@ export function SlideStack({ children }: { children: ReactNode }) {
     // one slides over.
     const setPanelOffsets = () => {
       const vh = window.innerHeight;
-      panels.forEach((panel) => {
+      panels.forEach((panel, i) => {
+        // The last panel is position: relative (it never gets covered), so a
+        // negative top would shift it up over the previous panel — skip it.
+        if (i === panels.length - 1) return;
         const overflow = panel.offsetHeight - vh;
         panel.style.top = overflow > 0 ? `${-overflow}px` : "0px";
       });
