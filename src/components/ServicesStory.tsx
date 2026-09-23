@@ -71,7 +71,7 @@ function DesktopStory({ services }: { services: StoryService[] }) {
   const raw = clamp(progress) * n;
   const index = Math.min(n - 1, Math.floor(raw));
   const local = clamp(raw - index);
-  const service = services[index];
+  const service = services[index]!;
 
   // image sequence inside the active service
   const imgs = service.images;
