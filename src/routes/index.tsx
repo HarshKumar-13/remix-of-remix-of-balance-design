@@ -136,6 +136,7 @@ function Index() {
             <RedEditorialService
               eyebrow="GRAPHIC & PRINT DESIGN"
               headline={<>Graphic &amp;<br />Print Design</>}
+              description="We do CAD'S for shirts, graphic design for T-shirts and textile print design — expressive directions that bring concepts, culture and visual identity into apparel"
               images={GRAPHIC_IMAGES}
             />
           </section>
