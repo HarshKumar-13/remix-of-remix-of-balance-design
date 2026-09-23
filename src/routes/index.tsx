@@ -19,6 +19,7 @@ import { StylingWorkshops } from "@/components/StylingWorkshops";
 import { CorporateImageConsulting } from "@/components/CorporateImageConsulting";
 import { PersonalImageConsulting } from "@/components/PersonalImageConsulting";
 import { OwnYourSpotlight } from "@/components/OwnYourSpotlight";
+import { RedEditorialService } from "@/components/RedEditorialService";
 
 
 import corp3 from "@/assets/Picture4.jpg.asset.json";
@@ -70,25 +71,19 @@ const SERVICES: StoryService[] = [
       { src: pers3, alt: "Individual in a minimal monochrome outfit against a warm plaster wall" },
     ],
   },
-  {
-    number: "02",
-    title: "TREND FORECASTING & LINE PRESENTATION",
-    images: [
-      { src: trend1.url, alt: "Global Shopper trend board with travel-inspired colour and material story" },
-      { src: trend2.url, alt: "Kidswear collage trend story with applique, patchwork and bold palette" },
-      { src: trend3.url, alt: "Detail page of colour loops, patchwork and psychedelic prints" },
-      { src: trend4.url, alt: "Polo solid style line sheet in Indigo / Global Shopper colourways" },
-    ],
-  },
-  {
-    number: "03",
-    title: "GRAPHIC & PRINT DESIGN",
-    images: [
-      { src: graphic1Asset.url, alt: "Tempt graphic tee development boards with Pantone colour story" },
-      { src: graphic2Asset.url, alt: "Red Edge streetwear graphic library and colour palette" },
-      { src: graphic3Asset.url, alt: "Womenswear graphic tee and knitwear range flats" },
-    ],
-  },
+];
+
+const TREND_IMAGES = [
+  { src: trend1.url, alt: "Global Shopper trend board with travel-inspired colour and material story" },
+  { src: trend2.url, alt: "Kidswear collage trend story with applique, patchwork and bold palette" },
+  { src: trend3.url, alt: "Detail page of colour loops, patchwork and psychedelic prints" },
+  { src: trend4.url, alt: "Polo solid style line sheet in Indigo / Global Shopper colourways" },
+];
+
+const GRAPHIC_IMAGES = [
+  { src: graphic1Asset.url, alt: "Tempt graphic tee development boards with Pantone colour story" },
+  { src: graphic2Asset.url, alt: "Red Edge streetwear graphic library and colour palette" },
+  { src: graphic3Asset.url, alt: "Womenswear graphic tee and knitwear range flats" },
 ];
 
 
@@ -154,6 +149,17 @@ function Index() {
           <OwnYourSpotlight />
 
           <ServicesStory services={SERVICES}>
+            <RedEditorialService
+              eyebrow="TREND FORECASTING & LINE PRESENTATION"
+              headline={<>See what&rsquo;s next.<br />Design what&rsquo;s now.</>}
+              description="Filtering the global fashion picture and anticipating what customers will be ready to embrace in upcoming seasons — then defining the individual styles or style groups needed to meet the business target."
+              images={TREND_IMAGES}
+            />
+            <RedEditorialService
+              eyebrow="GRAPHIC & PRINT DESIGN"
+              headline={<>Graphic &amp;<br />Print Design</>}
+              images={GRAPHIC_IMAGES}
+            />
             <ServicesPurpose
               image={{
                 src: corp4.url,
