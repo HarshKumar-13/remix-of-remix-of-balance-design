@@ -16,10 +16,9 @@ import { SiteFooter } from "@/components/SiteFooter";
 import { ScrollStory, StoryScene } from "@/components/ScrollStory";
 import { SlideStack, SlidePanel } from "@/components/SlideStack";
 import { StylingWorkshops } from "@/components/StylingWorkshops";
+import { CorporateImageConsulting } from "@/components/CorporateImageConsulting";
 
 
-import corp1 from "@/assets/Picture6.jpg.asset.json";
-import corp2 from "@/assets/Picture3.jpg.asset.json";
 import corp3 from "@/assets/Picture4.jpg.asset.json";
 import corp4 from "@/assets/Picture5.jpg.asset.json";
 
@@ -64,10 +63,6 @@ const SERVICES: StoryService[] = [
         title: "A) DESIGN AESTHETICS AND & STYLING WORKSHOPS",
         body: "for TEAMS of fashion and retail Brands.like VM and floor sales teams",
       },
-      {
-        title: "B) CORPORATE IMAGE CONSULTING",
-        body: "we coach professionals to look sharp and stylish, build self confidence and have a personality that is magnetic, as they meet and interact with world.",
-      },
       { title: "C) PERSONAL IMAGE CONSULTING" },
       {
         title: "D) OWN YOUR SPOTLIGHT",
@@ -75,8 +70,6 @@ const SERVICES: StoryService[] = [
       },
     ],
     images: [
-      { src: corp1.url, alt: "Balance Design consultant leading a corporate image workshop" },
-      { src: corp2.url, alt: "Master the dress code corporate training session in progress" },
       { src: corp3.url, alt: "Corporate styling presentation to a seated audience" },
       { src: pers1, alt: "Personal styling session with a silk scarf in a warm ivory studio" },
       { src: pers3, alt: "Individual in a minimal monochrome outfit against a warm plaster wall" },
@@ -158,6 +151,8 @@ function Index() {
           </SlideStack>
 
           <StylingWorkshops />
+
+          <CorporateImageConsulting />
 
           <ServicesStory services={SERVICES}>
             <ServicesPurpose
