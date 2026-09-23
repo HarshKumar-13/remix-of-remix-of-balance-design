@@ -1,23 +1,22 @@
 import { useEffect, useRef, useState } from "react";
-import heroImg from "@/assets/hero.jpg";
-import aboutImg from "@/assets/about.jpg";
-import pers1 from "@/assets/pers-1.jpg";
-import pers3 from "@/assets/pers-3.jpg";
+import heroSketching from "@/assets/hero-sketching.jpg.asset.json";
+import heroStyling from "@/assets/hero-styling.jpg.asset.json";
+import heroStudio from "@/assets/hero-studio.jpg.asset.json";
+import heroWorkshop from "@/assets/hero-workshop.jpg.asset.json";
+import heroSeminar from "@/assets/hero-seminar.jpg.asset.json";
 
 const SLIDES = [
-  { src: heroImg, alt: "Model in a sculptural ivory couture gown in a minimal concrete gallery" },
-  { src: pers3, alt: "Individual in a minimal monochrome outfit against a warm plaster wall" },
-  { src: aboutImg, alt: "Atelier interior with fabric and design references" },
-  { src: pers1, alt: "Personal styling session with a silk scarf in a warm ivory studio" },
+  { src: heroSketching.url, alt: "Design consultants reviewing sketches and fabric swatches at a work table" },
+  { src: heroStyling.url, alt: "Stylist advising a client beside a rail of curated garments" },
+  { src: heroStudio.url, alt: "Designers collaborating over a laptop in a fashion studio" },
+  { src: heroWorkshop.url, alt: "Workshop session with participants engaged around training tables" },
+  { src: heroSeminar.url, alt: "Seminar room with an audience watching a presentation on screen" },
 ];
-
-const WORDS = ["IMAGE.", "IDENTITY.", "IMPACT."];
 
 export function Hero({ introComplete = true }: { introComplete?: boolean }) {
   const [y, setY] = useState(0);
   const [index, setIndex] = useState(0);
   const [loaded, setLoaded] = useState(false);
-  const [stmt, setStmt] = useState(0);
   const heroRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -34,16 +33,9 @@ export function Hero({ introComplete = true }: { introComplete?: boolean }) {
   }, []);
 
   useEffect(() => {
-    const id = setInterval(() => setIndex((i) => (i + 1) % SLIDES.length), 6000);
+    const id = setInterval(() => setIndex((i) => (i + 1) % SLIDES.length), 2000);
     return () => clearInterval(id);
   }, []);
-
-  useEffect(() => {
-    // Reveal words one by one, then hold on the last
-    if (!loaded || stmt >= WORDS.length - 1) return;
-    const id = setTimeout(() => setStmt((s) => Math.min(s + 1, WORDS.length - 1)), 2600);
-    return () => clearTimeout(id);
-  }, [loaded, stmt]);
 
   return (
     <section
@@ -62,8 +54,8 @@ export function Hero({ introComplete = true }: { introComplete?: boolean }) {
             opacity: i === index ? 1 : 0,
             transition:
               i === index
-                ? "opacity 1.6s cubic-bezier(0.16, 1, 0.3, 1), transform 8.5s cubic-bezier(0.16, 1, 0.3, 1)"
-                : "opacity 1.6s cubic-bezier(0.16, 1, 0.3, 1), transform 1.6s cubic-bezier(0.16, 1, 0.3, 1)",
+                ? "opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 3s cubic-bezier(0.16, 1, 0.3, 1)"
+                : "opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1)",
           }}
         />
       ))}
@@ -75,27 +67,15 @@ export function Hero({ introComplete = true }: { introComplete?: boolean }) {
         style={{ transform: `translate3d(0, ${y * -0.08}px, 0)` }}
       >
         <h1
-          aria-label="YOUR IMAGE. YOUR IDENTITY. YOUR IMPACT."
           className="display relative text-[4rem] leading-[0.9] sm:text-[6.5rem] md:text-[10.5rem] lg:text-[12.5rem]"
+          style={{
+            opacity: loaded ? 1 : 0,
+            transform: `translate3d(0, ${loaded ? 0 : 32}px, 0)`,
+            transition: "opacity 1.1s cubic-bezier(0.16, 1, 0.3, 1), transform 1.1s cubic-bezier(0.16, 1, 0.3, 1)",
+            transitionDelay: "300ms",
+          }}
         >
-          <span className="inline-block">YOUR </span>
-          <span className="relative inline-grid overflow-hidden align-bottom">
-            {WORDS.map((word, i) => (
-              <span
-                key={word}
-                aria-hidden={i !== stmt}
-                className="col-start-1 row-start-1 block"
-                style={{
-                  opacity: i === stmt && loaded ? 1 : 0,
-                  transform: `translate3d(0, ${i === stmt ? 0 : i < stmt ? -24 : 24}px, 0)`,
-                  transition: "opacity 1.1s cubic-bezier(0.16, 1, 0.3, 1), transform 1.1s cubic-bezier(0.16, 1, 0.3, 1)",
-                  transitionDelay: loaded ? "400ms" : "0ms",
-                }}
-              >
-                {word}
-              </span>
-            ))}
-          </span>
+          Balance Design
         </h1>
         <p
           className={`label-xs mt-6 opacity-80 transition-all duration-1000 ${loaded ? "translate-y-0 opacity-80" : "translate-y-6 opacity-0"}`}
