@@ -6,8 +6,6 @@ import { Hero } from "@/components/Hero";
 import { LogoIntro } from "@/components/LogoIntro";
 import { Reveal } from "@/components/Reveal";
 import { LogoMark } from "@/components/LogoMark";
-import { ServicesStory, type StoryService } from "@/components/ServicesStory";
-import { ServicesPurpose } from "@/components/ServicesPurpose";
 import { AboutSection } from "@/components/AboutSection";
 import { DressCode } from "@/components/DressCode";
 import { Testimonials } from "@/components/Testimonials";
@@ -22,10 +20,6 @@ import { OwnYourSpotlight } from "@/components/OwnYourSpotlight";
 import { RedEditorialService } from "@/components/RedEditorialService";
 
 
-import corp3 from "@/assets/Picture4.jpg.asset.json";
-import corp4 from "@/assets/Picture5.jpg.asset.json";
-
-import pers3 from "@/assets/pers-3.jpg";
 import trend1 from "@/assets/Picture8.jpg.asset.json";
 import trend2 from "@/assets/Picture9.jpg.asset.json";
 import trend3 from "@/assets/Picture10.jpg.asset.json";
@@ -55,23 +49,6 @@ export const Route = createFileRoute("/")({
   }),
   component: Index,
 });
-
-const SERVICES: StoryService[] = [
-  {
-    number: "01",
-    title: "DESIGN WORKSHOPS & SEMINARS",
-    items: [
-      {
-        title: "A) DESIGN AESTHETICS AND & STYLING WORKSHOPS",
-        body: "for TEAMS of fashion and retail Brands.like VM and floor sales teams",
-      },
-    ],
-    images: [
-      { src: corp3.url, alt: "Corporate styling presentation to a seated audience" },
-      { src: pers3, alt: "Individual in a minimal monochrome outfit against a warm plaster wall" },
-    ],
-  },
-];
 
 const TREND_IMAGES = [
   { src: trend1.url, alt: "Global Shopper trend board with travel-inspired colour and material story" },
@@ -148,7 +125,7 @@ function Index() {
 
           <OwnYourSpotlight />
 
-          <ServicesStory services={SERVICES}>
+          <section id="services-story" className="relative bg-background">
             <RedEditorialService
               eyebrow="TREND FORECASTING & LINE PRESENTATION"
               headline={<>See what&rsquo;s next.<br />Design what&rsquo;s now.</>}
@@ -160,13 +137,7 @@ function Index() {
               headline={<>Graphic &amp;<br />Print Design</>}
               images={GRAPHIC_IMAGES}
             />
-            <ServicesPurpose
-              image={{
-                src: corp4.url,
-                alt: "Group photo of workshop participants with the Balance Design banner",
-              }}
-            />
-          </ServicesStory>
+          </section>
 
           <StoryScene>
             <AboutSection />
