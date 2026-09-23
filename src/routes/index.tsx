@@ -128,7 +128,7 @@ function Index() {
                 <LogoMark className="mb-8" />
               </Reveal>
               <Reveal delay={80}>
-                <h2 className="display mx-auto mt-0 max-w-5xl text-[1.625rem] leading-[1.08] uppercase sm:text-[2.625rem] md:text-[4.125rem]">
+                <h2 className="display mx-auto mt-0 max-w-5xl text-[1.25rem] leading-[1.08] uppercase sm:text-[2.25rem] md:text-[3.75rem]">
                   Design Workshops &amp; Seminars
                 </h2>
               </Reveal>
