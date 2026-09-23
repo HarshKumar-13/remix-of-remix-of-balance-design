@@ -24,6 +24,11 @@ const PORTRAITS = [
     alt: "Editorial portrait in tailored black clothing against a warm architectural backdrop",
     position: "object-center",
   },
+  {
+    src: upmaPortrait,
+    alt: "Upma Shrian seated in a red armchair, wearing a polka-dot top",
+    position: "object-center",
+  },
 ];
 
 const AUTOPLAY_MS = 3000;
