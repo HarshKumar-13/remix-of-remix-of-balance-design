@@ -15,6 +15,7 @@ import { CtaSection } from "@/components/CtaSection";
 import { SiteFooter } from "@/components/SiteFooter";
 import { ScrollStory, StoryScene } from "@/components/ScrollStory";
 import { SlideStack, SlidePanel } from "@/components/SlideStack";
+import { StylingWorkshops } from "@/components/StylingWorkshops";
 
 
 import corp1 from "@/assets/Picture6.jpg.asset.json";
@@ -155,6 +156,8 @@ function Index() {
             </section>
           </SlidePanel>
           </SlideStack>
+
+          <StylingWorkshops />
 
           <ServicesStory services={SERVICES}>
             <ServicesPurpose
