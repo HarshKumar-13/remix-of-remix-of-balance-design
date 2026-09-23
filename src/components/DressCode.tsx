@@ -5,11 +5,10 @@ import { LogoMark } from "./LogoMark";
 import { Reveal } from "./Reveal";
 
 const POINTS = [
-  "Represent yourself or your brand confidently through dressing.",
-  "Feel comfortable representing your company.",
-  "Feel powerful in professional attire.",
-  "Understand the fashion do's and don'ts.",
-  "Ensure your wardrobe reflects your professional success and stature.",
+  "Understanding and application of design tools such as lines, shapes, patterns, textures, color theory, and their impact on dressing.",
+  "Understanding and applying the 'concept of focus' in apparel dressing, which brings out the visual impact to others.",
+  "Evaluating and assessing ones physical features including body type and skin tone",
+  "Creating wardrobes that enhance our strength areas and diminish our problem areas.",
 ];
 
 function Heading() {
