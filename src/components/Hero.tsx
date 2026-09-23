@@ -67,7 +67,7 @@ export function Hero({ introComplete = true }: { introComplete?: boolean }) {
         style={{ transform: `translate3d(0, ${y * -0.08}px, 0)` }}
       >
         <h1
-          className="display relative text-[4rem] leading-[0.9] sm:text-[6.5rem] md:text-[10.5rem] lg:text-[12.5rem]"
+          className="display relative whitespace-nowrap text-[3.875rem] leading-[0.9] sm:text-[6.375rem] md:text-[10.375rem] lg:text-[12.375rem]"
           style={{
             opacity: loaded ? 1 : 0,
             transform: `translate3d(0, ${loaded ? 0 : 32}px, 0)`,
