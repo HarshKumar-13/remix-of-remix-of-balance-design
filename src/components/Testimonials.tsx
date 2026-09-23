@@ -125,19 +125,19 @@ export function Testimonials() {
   return (
     <section
       ref={sectionRef}
-      className="overflow-hidden border-t border-border bg-background py-24 md:py-40"
+      className="overflow-hidden border-t border-border bg-background py-16 md:py-24"
       aria-roledescription="carousel"
       aria-label="Video testimonials"
     >
       <div className="mx-auto max-w-5xl px-6 md:px-12">
         <Reveal>
-          <LogoMark className="mb-12" />
+          <LogoMark className="mb-8" />
         </Reveal>
       </div>
 
       <Reveal>
         <div
-          className="relative mx-auto flex h-[78vw] max-h-[42rem] min-h-[26rem] touch-pan-y select-none items-center justify-center md:h-[38rem] lg:h-[42rem]"
+          className="relative mx-auto flex h-[96vw] max-h-[34rem] min-h-[24rem] touch-pan-y select-none items-center justify-center md:h-[32rem] lg:h-[36rem]"
           onPointerDown={onPointerDown}
           onPointerUp={onPointerUp}
           onPointerCancel={() => (drag.current.active = false)}
@@ -151,7 +151,7 @@ export function Testimonials() {
                 key={item.id}
                 aria-hidden={!isActive}
                 onClick={() => !isActive && !hidden && select(index)}
-                className="absolute top-1/2 left-1/2 w-[76vw] transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] motion-reduce:transition-none sm:w-[52vw] md:w-[38vw] lg:w-[34vw]"
+                className="absolute top-1/2 left-1/2 w-[58vw] transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] motion-reduce:transition-none sm:w-[46vw] md:w-[min(34vw,20rem)] lg:w-[min(30vw,23rem)]"
                 style={{
                   transform: `translate3d(calc(-50% + ${offset * 62}%), -50%, 0) scale(${isActive ? 1 : 0.78})`,
                   opacity: hidden ? 0 : isActive ? 1 : 0.55,
