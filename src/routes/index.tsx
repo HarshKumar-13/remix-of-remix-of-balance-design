@@ -108,74 +108,6 @@ const SERVICES: StoryService[] = [
   },
 ];
 
-const CHAPTERS = [
-  {
-    label: "Corporate Image Consulting",
-    headline: "How your people present your brand matters.",
-    description:
-      "Balance passionately conducts training and workshops on 'Dressing up' for corporates — building a confident, professional and authentic image that aligns teams with the identity and values of their organisation.",
-    cta: "Book an appointment",
-    slides: [
-      { src: corp1.url, alt: "Balance Design consultant leading a corporate image workshop" },
-      { src: corp2.url, alt: "Master the dress code corporate training session in progress" },
-      { src: corp3.url, alt: "Corporate styling presentation to a seated audience" },
-      { src: corp4.url, alt: "Group photo of workshop participants with the Balance Design banner" },
-      { src: corp5.url, alt: "Participants working through a corporate image consulting exercise" },
-    ],
-
-  },
-  {
-    label: "Personal Image Consulting",
-    headline: "Your image is your personal signature.",
-    description:
-      "Clothing and dressing up is a powerful means of non-verbal communication. We help individuals express themselves through colour, styling and a wardrobe that reflects who they truly are.",
-    cta: "Book an appointment",
-    slides: [
-      { src: pers1, alt: "Personal styling session with a silk scarf in a warm ivory studio" },
-      { src: pers2, alt: "Draped fabric swatches in ivory, camel and bronze tones" },
-      { src: pers3, alt: "Individual in a minimal monochrome outfit against a warm plaster wall" },
-    ],
-  },
-  {
-    label: "Trend Forecasting & Line Presentation",
-    headline: "See what's next. Design what's now.",
-    description:
-      "Filtering the global fashion picture and anticipating what customers will be ready to embrace in upcoming seasons — then defining the individual styles or style groups needed to meet the business target.",
-    cta: "Book an appointment",
-    slides: [
-      { src: trend1.url, alt: "Global Shopper trend board with travel-inspired colour and material story" },
-      { src: trend2.url, alt: "Kidswear collage trend story with applique, patchwork and bold palette" },
-      { src: trend3.url, alt: "Detail page of colour loops, patchwork and psychedelic prints" },
-      { src: trend4.url, alt: "Polo solid style line sheet in Indigo / Global Shopper colourways" },
-      { src: trend5.url, alt: "Polo solid style line presentation with Fun Trip palette and specs" },
-    ],
-  },
-  {
-    label: "Graphic & T-Shirt Design",
-    headline: "Ideas made to be worn.",
-    description:
-      "We do CAD'S for shirts, graphic design for T-shirts and textile print design — expressive directions that bring concepts, culture and visual identity into apparel.",
-    cta: "Book an appointment",
-    slides: [
-      { src: graphic1Asset.url, alt: "Tempt graphic tee development boards with Pantone colour story" },
-      { src: graphic2Asset.url, alt: "Red Edge streetwear graphic library and colour palette" },
-      { src: graphic3Asset.url, alt: "Womenswear graphic tee and knitwear range flats" },
-    ],
-  },
-  {
-    label: "Uniform Design",
-    headline: "Function meets identity.",
-    description:
-      "We design uniforms as per the client's briefing, such that the designs represent the objective and vision of the brand while balancing comfort, functionality and visual identity.",
-    cta: "Book an appointment",
-    slides: [
-      { src: uniform1.url, alt: "Waistcoat and shirt uniform combination design boards with colour palette" },
-      { src: uniform2.url, alt: "Chevron and tulip print development with matching footwear and accessory" },
-      { src: uniform3.url, alt: "Uniform styling detail with Pantone colour story and motif studies" },
-    ],
-  },
-
-];
 
 let hasCompletedHomeIntro = false;
 
@@ -226,12 +158,16 @@ function Index() {
               </Reveal>
             </section>
           </SlidePanel>
-            {CHAPTERS.map((c, i) => (
-              <SlidePanel key={c.label} className={i % 2 === 0 ? "panel-red" : ""}>
-                <ServiceChapter {...c} tone={i % 2 === 0 ? "red" : "light"} />
-              </SlidePanel>
-            ))}
           </SlideStack>
+
+          <ServicesStory services={SERVICES}>
+            <ServicesPurpose
+              image={{
+                src: corp4.url,
+                alt: "Group photo of workshop participants with the Balance Design banner",
+              }}
+            />
+          </ServicesStory>
 
           <StoryScene>
             <AboutSection />
