@@ -1,8 +1,20 @@
 import { useEffect, useRef, useState } from "react";
 import corpImg from "@/assets/Picture3.jpg.asset.json";
 import corpImg2 from "@/assets/Picture7.jpg.asset.json";
-import { LogoMark } from "./LogoMark";
+import whiteLogo from "@/assets/balance-logo-white.png.asset.json";
 import { Reveal } from "./Reveal";
+
+function WhiteLogo({ className = "" }: { className?: string }) {
+  return (
+    <img
+      src={whiteLogo.url}
+      alt="Balance Design & Fashion Consultancy"
+      className={`h-14 w-auto object-contain md:h-20 ${className}`}
+      width={120}
+      height={122}
+    />
+  );
+}
 
 const POINTS = [
   "Understanding and application of design tools such as lines, shapes, patterns, textures, color theory, and their impact on dressing.",
