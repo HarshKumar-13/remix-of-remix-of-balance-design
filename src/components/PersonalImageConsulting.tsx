@@ -1,13 +1,15 @@
 import { useEffect, useRef, useState } from "react";
 
-import personalOne from "@/assets/pers-1.jpg";
-import personalTwo from "@/assets/pers-2.jpg";
-import personalThree from "@/assets/pers-3.jpg";
+import personalWorkshopAsset from "@/assets/personal-workshop.png.asset.json";
+import personalStylingDetailAsset from "@/assets/personal-styling-detail.png.asset.json";
+import personalFittingAsset from "@/assets/personal-fitting.jpg.asset.json";
+import personalConsultationAsset from "@/assets/personal-consultation.jpg.asset.json";
 
 const landscapeImages = [
-  { src: personalOne, alt: "Personal styling session in a warm ivory studio" },
-  { src: personalThree, alt: "Personal image consultation in a refined interior" },
-  { src: personalTwo, alt: "Editorial personal styling composition" },
+  { src: personalWorkshopAsset.url, alt: "Design team reviewing a lookbook together in a bright studio" },
+  { src: personalStylingDetailAsset.url, alt: "Stylist helping a client choose the right accessories" },
+  { src: personalFittingAsset.url, alt: "Personal image consultant adjusting a client's blazer" },
+  { src: personalConsultationAsset.url, alt: "Wardrobe consultation with a curated clothing selection" },
 ];
 
 export function PersonalImageConsulting() {
