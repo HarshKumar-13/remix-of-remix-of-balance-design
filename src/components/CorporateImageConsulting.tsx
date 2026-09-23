@@ -1,37 +1,39 @@
 import { useEffect, useRef, useState } from "react";
 
-import corporatePresentation from "@/assets/Picture3.jpg.asset.json";
-import corporateAudience from "@/assets/Picture4.jpg.asset.json";
-import corporateGroup from "@/assets/Picture5.jpg.asset.json";
-import corporateWorkshop from "@/assets/Picture6.jpg.asset.json";
+import raymondGroup from "@/assets/corporate-raymond-group.jpg.asset.json";
+import raymondColourSession from "@/assets/corporate-raymond-colour-session.jpg.asset.json";
+import raymondVenue from "@/assets/corporate-raymond-venue.jpg.asset.json";
+import teamSession from "@/assets/corporate-team-session.jpg.asset.json";
+import raymondPresentation from "@/assets/corporate-raymond-presentation.jpg.asset.json";
+import raymondInvitation from "@/assets/corporate-raymond-invitation.jpg.asset.json";
 
 const verticalImages = [
   {
-    src: corporateWorkshop.url,
-    alt: "Corporate image consultant coaching professionals in a workshop",
+    src: raymondVenue.url,
+    alt: "Raymond Master the Right Dress Code workshop venue",
   },
   {
-    src: corporateGroup.url,
-    alt: "Professionals gathered during a corporate image workshop",
+    src: raymondInvitation.url,
+    alt: "Raymond exclusive grooming workshop invitation",
   },
   {
-    src: corporatePresentation.url,
-    alt: "Professional styling presentation in progress",
+    src: teamSession.url,
+    alt: "Corporate team gathered after an image consulting session",
   },
 ];
 
 const horizontalImages = [
   {
-    src: corporatePresentation.url,
-    alt: "Professionals attending a corporate appearance and styling presentation",
+    src: raymondPresentation.url,
+    alt: "Corporate dress-code presentation for professionals",
   },
   {
-    src: corporateAudience.url,
-    alt: "Corporate styling presentation to a seated audience",
+    src: raymondColourSession.url,
+    alt: "Professionals attending a colour and styling workshop",
   },
   {
-    src: corporateGroup.url,
-    alt: "Participants at a professional image consulting session",
+    src: raymondGroup.url,
+    alt: "Participants at the Raymond Master the Right Dress Code workshop",
   },
 ];
 
