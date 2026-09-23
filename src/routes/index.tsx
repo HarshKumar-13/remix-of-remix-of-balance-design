@@ -141,14 +141,14 @@ function Index() {
             />
           </section>
 
-          <AboutMe />
-
           <StoryScene>
             <AboutSection />
           </StoryScene>
           <StoryScene>
             <DressCode />
           </StoryScene>
+
+          <AboutMe />
           <StoryScene className="story-scene-testimonials">
             <Testimonials />
           </StoryScene>
