@@ -1,16 +1,16 @@
 import { useEffect, useRef, useState } from "react";
-import heroSketching from "@/assets/hero-sketching.jpg.asset.json";
-import heroStyling from "@/assets/hero-styling.jpg.asset.json";
-import heroStudio from "@/assets/hero-studio.jpg.asset.json";
-import heroWorkshop from "@/assets/hero-workshop.jpg.asset.json";
-import heroSeminar from "@/assets/hero-seminar.jpg.asset.json";
+import heroSketching from "@/assets/hero-sketching.jpg";
+import heroStyling from "@/assets/hero-styling.jpg";
+import heroStudio from "@/assets/hero-studio.jpg";
+import heroWorkshop from "@/assets/hero-workshop.jpg";
+import heroSeminar from "@/assets/hero-seminar.jpg";
 
 const SLIDES = [
-  { src: heroSketching.url, alt: "Design consultants reviewing sketches and fabric swatches at a work table" },
-  { src: heroStyling.url, alt: "Stylist advising a client beside a rail of curated garments" },
-  { src: heroStudio.url, alt: "Designers collaborating over a laptop in a fashion studio" },
-  { src: heroWorkshop.url, alt: "Workshop session with participants engaged around training tables" },
-  { src: heroSeminar.url, alt: "Seminar room with an audience watching a presentation on screen" },
+  { src: heroSketching, alt: "Design consultants reviewing sketches and fabric swatches at a work table" },
+  { src: heroStyling, alt: "Stylist advising a client beside a rail of curated garments" },
+  { src: heroStudio, alt: "Designers collaborating over a laptop in a fashion studio" },
+  { src: heroWorkshop, alt: "Workshop session with participants engaged around training tables" },
+  { src: heroSeminar, alt: "Seminar room with an audience watching a presentation on screen" },
 ];
 
 export function Hero({ introComplete = true }: { introComplete?: boolean }) {

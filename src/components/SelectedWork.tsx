@@ -3,10 +3,10 @@ import { useEffect, useRef, useState } from "react";
 import { LogoMark } from "./LogoMark";
 import { Reveal } from "./Reveal";
 
-import w1 from "@/assets/Picture8.jpg.asset.json";
-import w2 from "@/assets/Picture14.jpg.asset.json";
-import w3 from "@/assets/Picture18.jpg.asset.json";
-import w4 from "@/assets/Picture6.jpg.asset.json";
+import w1 from "@/assets/Picture8.jpg";
+import w2 from "@/assets/Picture14.jpg";
+import w3 from "@/assets/Picture18.jpg";
+import w4 from "@/assets/Picture6.jpg";
 
 function Parallax({
   src,
@@ -72,7 +72,7 @@ export function SelectedWork() {
           <div className="sm:col-span-7">
             <Reveal>
               <Parallax
-                src={w1.url}
+                src={w1}
                 alt="Trend forecasting board with seasonal colour and material story"
                 className="h-[46vh] md:h-[72vh]"
               />
@@ -85,7 +85,7 @@ export function SelectedWork() {
           <div className="sm:col-span-5 sm:self-end">
             <Reveal delay={100}>
               <Parallax
-                src={w2.url}
+                src={w2}
                 alt="Uniform print development with matching footwear and accessory studies"
                 speed={0.1}
                 className="h-[34vh] md:h-[48vh]"
@@ -104,7 +104,7 @@ export function SelectedWork() {
           <div className="sm:col-span-4 sm:col-start-2">
             <Reveal>
               <Parallax
-                src={w3.url}
+                src={w3}
                 alt="Streetwear graphic library and colour palette development"
                 speed={0.08}
                 className="h-[32vh] md:h-[44vh]"
@@ -116,7 +116,7 @@ export function SelectedWork() {
           <div className="sm:col-span-6 sm:col-start-7">
             <Reveal delay={100}>
               <Parallax
-                src={w4.url}
+                src={w4}
                 alt="Balance Design consultant leading a corporate image workshop"
                 className="h-[40vh] md:h-[58vh]"
               />

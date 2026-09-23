@@ -21,13 +21,13 @@ import { RedEditorialService } from "@/components/RedEditorialService";
 import { AboutMe } from "@/components/AboutMe";
 
 
-import trend1 from "@/assets/Picture8.jpg.asset.json";
-import trend2 from "@/assets/Picture9.jpg.asset.json";
-import trend3 from "@/assets/Picture10.jpg.asset.json";
-import trend4 from "@/assets/Picture11.gif.asset.json";
-import graphic1Asset from "@/assets/Picture17.jpg.asset.json";
-import graphic2Asset from "@/assets/Picture18.jpg.asset.json";
-import graphic3Asset from "@/assets/Picture19.jpg.asset.json";
+import trend1 from "@/assets/Picture8.jpg";
+import trend2 from "@/assets/Picture9.jpg";
+import trend3 from "@/assets/Picture10.jpg";
+import trend4 from "@/assets/Picture11.gif";
+import graphic1Asset from "@/assets/Picture17.jpg";
+import graphic2Asset from "@/assets/Picture18.jpg";
+import graphic3Asset from "@/assets/Picture19.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -52,16 +52,16 @@ export const Route = createFileRoute("/")({
 });
 
 const TREND_IMAGES = [
-  { src: trend1.url, alt: "Global Shopper trend board with travel-inspired colour and material story" },
-  { src: trend2.url, alt: "Kidswear collage trend story with applique, patchwork and bold palette" },
-  { src: trend3.url, alt: "Detail page of colour loops, patchwork and psychedelic prints" },
-  { src: trend4.url, alt: "Polo solid style line sheet in Indigo / Global Shopper colourways" },
+  { src: trend1, alt: "Global Shopper trend board with travel-inspired colour and material story" },
+  { src: trend2, alt: "Kidswear collage trend story with applique, patchwork and bold palette" },
+  { src: trend3, alt: "Detail page of colour loops, patchwork and psychedelic prints" },
+  { src: trend4, alt: "Polo solid style line sheet in Indigo / Global Shopper colourways" },
 ];
 
 const GRAPHIC_IMAGES = [
-  { src: graphic1Asset.url, alt: "Tempt graphic tee development boards with Pantone colour story" },
-  { src: graphic2Asset.url, alt: "Red Edge streetwear graphic library and colour palette" },
-  { src: graphic3Asset.url, alt: "Womenswear graphic tee and knitwear range flats" },
+  { src: graphic1Asset, alt: "Tempt graphic tee development boards with Pantone colour story" },
+  { src: graphic2Asset, alt: "Red Edge streetwear graphic library and colour palette" },
+  { src: graphic3Asset, alt: "Womenswear graphic tee and knitwear range flats" },
 ];
 
 

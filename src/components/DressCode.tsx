@@ -1,13 +1,13 @@
 import { useEffect, useRef, useState } from "react";
-import corpImg from "@/assets/Picture3.jpg.asset.json";
-import corpImg2 from "@/assets/Picture7.jpg.asset.json";
-import whiteLogo from "@/assets/balance-logo-white.png.asset.json";
+import corpImg from "@/assets/Picture3.jpg";
+import corpImg2 from "@/assets/Picture7.jpg";
+import whiteLogo from "@/assets/balance-logo-white.png";
 import { Reveal } from "./Reveal";
 
 function WhiteLogo({ className = "" }: { className?: string }) {
   return (
     <img
-      src={whiteLogo.url}
+      src={whiteLogo}
       alt="Balance Design & Fashion Consultancy"
       className={`h-14 w-auto object-contain md:h-20 ${className}`}
       width={120}
@@ -177,7 +177,7 @@ export function DressCode() {
             <Reveal>
               <div className="overflow-hidden">
                 <img
-                  src={corpImg.url}
+                  src={corpImg}
                   alt="Balance Design dress code workshop in session with a corporate audience"
                   loading="lazy"
                   className="h-[42vh] w-full object-cover transition-transform duration-[1600ms] ease-[cubic-bezier(0.16,1,0.3,1)] hover:scale-[1.04] md:h-[60vh]"
@@ -189,7 +189,7 @@ export function DressCode() {
             <Reveal delay={120}>
               <div className="overflow-hidden">
                 <img
-                  src={corpImg2.url}
+                  src={corpImg2}
                   alt="Participants working through a corporate image consulting exercise"
                   loading="lazy"
                   className="h-[32vh] w-full object-cover transition-transform duration-[1600ms] ease-[cubic-bezier(0.16,1,0.3,1)] hover:scale-[1.04] md:h-[44vh]"

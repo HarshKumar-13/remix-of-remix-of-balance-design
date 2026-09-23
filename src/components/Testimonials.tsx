@@ -1,10 +1,10 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 
-import spotlightVideo from "@/assets/own-your-spotlight.webm.asset.json";
-import posterOne from "@/assets/styling-workshop-session-1.jpeg.asset.json";
-import posterTwo from "@/assets/corporate-raymond-presentation.jpg.asset.json";
-import posterThree from "@/assets/personal-workshop.png.asset.json";
-import posterFour from "@/assets/styling-workshop-group-1.jpeg.asset.json";
+import spotlightVideo from "@/assets/own-your-spotlight.webm";
+import posterOne from "@/assets/styling-workshop-session-1.jpeg";
+import posterTwo from "@/assets/corporate-raymond-presentation.jpg";
+import posterThree from "@/assets/personal-workshop.png";
+import posterFour from "@/assets/styling-workshop-group-1.jpeg";
 
 import { LogoMark } from "./LogoMark";
 import { Reveal } from "./Reveal";
@@ -24,29 +24,29 @@ const TESTIMONIALS: VideoTestimonial[] = [
     id: "ananya",
     name: "Ananya Mehta",
     role: "People Director, Meridian Group",
-    video: spotlightVideo.url,
-    poster: posterOne.url,
+    video: spotlightVideo,
+    poster: posterOne,
   },
   {
     id: "rohan",
     name: "Rohan Kapoor",
     role: "Brand Lead, North & Co.",
-    video: spotlightVideo.url,
-    poster: posterTwo.url,
+    video: spotlightVideo,
+    poster: posterTwo,
   },
   {
     id: "mira",
     name: "Mira Shah",
     role: "Creative Head, Atelier Nine",
-    video: spotlightVideo.url,
-    poster: posterThree.url,
+    video: spotlightVideo,
+    poster: posterThree,
   },
   {
     id: "devika",
     name: "Devika Rao",
     role: "Head of Design, Studio Lumen",
-    video: spotlightVideo.url,
-    poster: posterFour.url,
+    video: spotlightVideo,
+    poster: posterFour,
   },
 ];
 

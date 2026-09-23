@@ -1,38 +1,38 @@
 import { useEffect, useRef, useState } from "react";
 
-import raymondGroup from "@/assets/corporate-raymond-group.jpg.asset.json";
-import raymondColourSession from "@/assets/corporate-raymond-colour-session.jpg.asset.json";
-import raymondVenue from "@/assets/corporate-raymond-venue.jpg.asset.json";
-import teamSession from "@/assets/corporate-team-session.jpg.asset.json";
-import raymondPresentation from "@/assets/corporate-raymond-presentation.jpg.asset.json";
-import raymondInvitation from "@/assets/corporate-raymond-invitation.jpg.asset.json";
+import raymondGroup from "@/assets/corporate-raymond-group.jpg";
+import raymondColourSession from "@/assets/corporate-raymond-colour-session.jpg";
+import raymondVenue from "@/assets/corporate-raymond-venue.jpg";
+import teamSession from "@/assets/corporate-team-session.jpg";
+import raymondPresentation from "@/assets/corporate-raymond-presentation.jpg";
+import raymondInvitation from "@/assets/corporate-raymond-invitation.jpg";
 
 const verticalImages = [
   {
-    src: raymondVenue.url,
+    src: raymondVenue,
     alt: "Raymond Master the Right Dress Code workshop venue",
   },
   {
-    src: raymondInvitation.url,
+    src: raymondInvitation,
     alt: "Raymond exclusive grooming workshop invitation",
   },
   {
-    src: teamSession.url,
+    src: teamSession,
     alt: "Corporate team gathered after an image consulting session",
   },
 ];
 
 const horizontalImages = [
   {
-    src: raymondPresentation.url,
+    src: raymondPresentation,
     alt: "Corporate dress-code presentation for professionals",
   },
   {
-    src: raymondColourSession.url,
+    src: raymondColourSession,
     alt: "Professionals attending a colour and styling workshop",
   },
   {
-    src: raymondGroup.url,
+    src: raymondGroup,
     alt: "Participants at the Raymond Master the Right Dress Code workshop",
   },
 ];

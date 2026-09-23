@@ -1,4 +1,4 @@
-import logoMark from "@/assets/balance-logo-mark.png.asset.json";
+import logoMark from "@/assets/balance-logo-mark.png";
 
 const NAMES = [
   "MAX Fashion",
@@ -24,7 +24,7 @@ export function LogoMarquee() {
             <span className="font-display whitespace-nowrap text-lg tracking-wide md:text-2xl">
               {n}
             </span>
-            <img src={logoMark.url} alt="" aria-hidden="true" className="h-4 w-auto opacity-60" />
+            <img src={logoMark} alt="" aria-hidden="true" className="h-4 w-auto opacity-60" />
           </span>
         ))}
       </div>
