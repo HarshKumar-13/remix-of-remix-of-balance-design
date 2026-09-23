@@ -1,0 +1,137 @@
+import { useEffect, useState } from "react";
+
+import aboutPortrait from "@/assets/about.jpg";
+import personalPortraitOne from "@/assets/pers-1.jpg";
+import personalPortraitTwo from "@/assets/pers-3.jpg";
+import { Button } from "@/components/ui/button";
+import { Reveal } from "@/components/Reveal";
+
+const PORTRAITS = [
+  {
+    src: aboutPortrait,
+    alt: "Fashion designer shaping fabric on a dress form in an atelier",
+    position: "object-center",
+  },
+  {
+    src: personalPortraitOne,
+    alt: "Editorial portrait styled with a tailored black jacket and warm scarf",
+    position: "object-center",
+  },
+  {
+    src: personalPortraitTwo,
+    alt: "Editorial portrait in tailored black clothing against a warm architectural backdrop",
+    position: "object-center",
+  },
+];
+
+const AUTOPLAY_MS = 3000;
+
+export function AboutMe() {
+  const [active, setActive] = useState(0);
+  const [timerKey, setTimerKey] = useState(0);
+  const [reducedMotion, setReducedMotion] = useState(false);
+
+  useEffect(() => {
+    const media = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const update = () => setReducedMotion(media.matches);
+    update();
+    media.addEventListener("change", update);
+    return () => media.removeEventListener("change", update);
+  }, []);
+
+  useEffect(() => {
+    if (reducedMotion) return;
+    const interval = window.setInterval(
+      () => setActive((current) => (current + 1) % PORTRAITS.length),
+      AUTOPLAY_MS,
+    );
+    return () => window.clearInterval(interval);
+  }, [reducedMotion, timerKey]);
+
+  const selectPortrait = (index: number) => {
+    setActive(index);
+    setTimerKey((key) => key + 1);
+  };
+
+  return (
+    <section aria-labelledby="about-me-title" className="bg-background px-6 py-24 md:px-10 md:py-32 lg:px-12 lg:py-40">
+      <div className="mx-auto grid max-w-[1500px] grid-cols-1 items-center gap-14 md:grid-cols-[minmax(0,28fr)_minmax(19rem,35fr)_minmax(0,28fr)] md:gap-8 lg:gap-14 xl:gap-20">
+        <Reveal className="md:pr-2">
+          <div className="mx-auto max-w-sm md:mx-0">
+            <h2 id="about-me-title" className="display text-[2.5rem] leading-[1.03] uppercase sm:text-5xl md:text-[2.25rem] lg:text-[2.8rem]">
+              About Me:
+            </h2>
+            <p className="mt-8 text-base leading-[1.75] text-muted-foreground lg:text-lg">
+              With over twenty-eight years of experience in the fashion and apparel industry, I
+              have specialized in defining design direction that aligns with business strategy and
+              evolving consumer trends. I also impart training to enhance team performance in the
+              Apparel and Fashion Industry.
+            </p>
+          </div>
+        </Reveal>
+
+        <Reveal delay={120} className="mx-auto w-full max-w-[31rem]">
+          <div className="relative aspect-[4/5] overflow-hidden rounded-[1.5rem] bg-muted">
+            {PORTRAITS.map((portrait, index) => (
+              <img
+                key={portrait.src}
+                src={portrait.src}
+                alt={portrait.alt}
+                width={1200}
+                height={1500}
+                loading={index === 0 ? "eager" : "lazy"}
+                decoding="async"
+                className={`absolute inset-0 h-full w-full object-cover ${portrait.position}`}
+                style={{
+                  opacity: active === index ? 1 : 0,
+                  transform: reducedMotion ? undefined : `scale(${active === index ? 1 : 1.015})`,
+                  transition: reducedMotion
+                    ? "opacity 300ms ease"
+                    : "opacity 1100ms cubic-bezier(0.16, 1, 0.3, 1), transform 1600ms cubic-bezier(0.16, 1, 0.3, 1)",
+                }}
+              />
+            ))}
+
+            <div className="absolute inset-x-0 bottom-5 z-10 flex justify-center gap-3" aria-label="Choose portrait">
+              {PORTRAITS.map((portrait, index) => (
+                <Button
+                  key={portrait.src}
+                  type="button"
+                  variant="ghost"
+                  size="icon"
+                  onClick={() => selectPortrait(index)}
+                  aria-label={`Show portrait ${index + 1}`}
+                  aria-current={active === index ? "true" : undefined}
+                  className="h-5 w-5 rounded-full p-0 hover:bg-primary-foreground/15"
+                >
+                  <span
+                    className={`block h-2.5 w-2.5 rounded-full border border-primary-foreground transition-colors duration-500 ${
+                      active === index ? "bg-primary-foreground" : "bg-foreground/20"
+                    }`}
+                  />
+                </Button>
+              ))}
+            </div>
+          </div>
+        </Reveal>
+
+        <Reveal delay={240}>
+          <div className="mx-auto max-w-sm text-left md:mx-0 md:text-center">
+            <div aria-hidden="true" className="mx-auto mb-9 hidden w-16 flex-col items-center gap-2 text-border md:flex">
+              <span className="h-12 w-px rotate-12 bg-border" />
+              <span className="h-px w-10 -rotate-6 bg-border" />
+              <span className="h-8 w-px -rotate-12 bg-border" />
+            </div>
+            <p className="text-base leading-[1.75] text-muted-foreground lg:text-lg">
+              My mission is to transform creativity into measurable business impact. Whether it’s
+              launching a new label, crafting consumer-centric brand stories, scaling design
+              processes for growth, through directing design teams, or mentoring the next
+              generation of fashion leaders.
+            </p>
+            <div aria-hidden="true" className="mx-auto mt-10 h-px w-20 bg-border" />
+          </div>
+        </Reveal>
+      </div>
+    </section>
+  );
+}
