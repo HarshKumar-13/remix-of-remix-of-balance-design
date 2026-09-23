@@ -1,6 +1,6 @@
 import { Reveal } from "@/components/Reveal";
 
-import spotlightVideo from "@/assets/own-your-spotlight.webm.asset.json";
+import spotlightVideo from "@/assets/own-your-spotlight.webm";
 
 export function OwnYourSpotlight() {
   return (
@@ -39,7 +39,7 @@ export function OwnYourSpotlight() {
           <div className="relative mt-14 aspect-[4/5] overflow-hidden sm:aspect-[3/2] md:mt-20 md:aspect-[16/9]">
             <video
               className="h-full w-full object-cover"
-              src={spotlightVideo.url}
+              src={spotlightVideo}
               autoPlay
               muted
               loop

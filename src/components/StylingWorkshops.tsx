@@ -2,36 +2,36 @@ import { useEffect, useState } from "react";
 
 import { Reveal } from "@/components/Reveal";
 
-import stylingAudience from "@/assets/styling-workshop-audience.jpeg.asset.json";
-import stylingGroupOne from "@/assets/styling-workshop-group-1.jpeg.asset.json";
-import stylingGroupTwo from "@/assets/styling-workshop-group-2.jpeg.asset.json";
-import stylingGroupThree from "@/assets/styling-workshop-group-3.jpeg.asset.json";
-import stylingSessionOne from "@/assets/styling-workshop-session-1.jpeg.asset.json";
-import stylingSessionTwo from "@/assets/styling-workshop-session-2.jpeg.asset.json";
+import stylingAudience from "@/assets/styling-workshop-audience.jpeg";
+import stylingGroupOne from "@/assets/styling-workshop-group-1.jpeg";
+import stylingGroupTwo from "@/assets/styling-workshop-group-2.jpeg";
+import stylingGroupThree from "@/assets/styling-workshop-group-3.jpeg";
+import stylingSessionOne from "@/assets/styling-workshop-session-1.jpeg";
+import stylingSessionTwo from "@/assets/styling-workshop-session-2.jpeg";
 
 const FILM = [
   {
-    src: stylingGroupOne.url,
+    src: stylingGroupOne,
     alt: "Design and styling workshop participants gathered for a group photograph",
   },
   {
-    src: stylingSessionOne.url,
+    src: stylingSessionOne,
     alt: "Workshop participants seated around a conference room during a session",
   },
   {
-    src: stylingGroupTwo.url,
+    src: stylingGroupTwo,
     alt: "Design workshop participants gathered together after a session",
   },
   {
-    src: stylingSessionTwo.url,
+    src: stylingSessionTwo,
     alt: "Facilitators speaking with participants during a styling workshop",
   },
   {
-    src: stylingAudience.url,
+    src: stylingAudience,
     alt: "Workshop audience attending a presentation in a bright studio classroom",
   },
   {
-    src: stylingGroupThree.url,
+    src: stylingGroupThree,
     alt: "Fashion and styling workshop participants assembled in a lecture room",
   },
 ];

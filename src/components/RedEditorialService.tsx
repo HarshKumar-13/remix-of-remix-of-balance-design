@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef, useState, type CSSProperties } from "react";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 
-import logoMark from "@/assets/balance-logo-mark.png.asset.json";
+import logoMark from "@/assets/balance-logo-mark.png";
 import { Button } from "@/components/ui/button";
 import { Reveal } from "./Reveal";
 
@@ -122,7 +122,7 @@ export function RedEditorialService({
       <div className="mx-auto px-6 text-center md:px-12">
         <Reveal>
           <img
-            src={logoMark.url}
+            src={logoMark}
             alt="Balance Design"
             className="mx-auto h-12 w-auto object-contain brightness-0 invert md:h-16"
             width={120}

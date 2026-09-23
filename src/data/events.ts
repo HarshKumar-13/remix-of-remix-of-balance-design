@@ -7,15 +7,15 @@
  * ============================================================
  */
 
-import p3 from "@/assets/Picture3.jpg.asset.json";
-import p5 from "@/assets/Picture5.jpg.asset.json";
-import p6 from "@/assets/Picture6.jpg.asset.json";
-import p8 from "@/assets/Picture8.jpg.asset.json";
-import p9 from "@/assets/Picture9.jpg.asset.json";
-import p13 from "@/assets/Picture13.jpg.asset.json";
-import p14 from "@/assets/Picture14.jpg.asset.json";
-import p15 from "@/assets/Picture15.jpg.asset.json";
-import p18 from "@/assets/Picture18.jpg.asset.json";
+import p3 from "@/assets/Picture3.jpg";
+import p5 from "@/assets/Picture5.jpg";
+import p6 from "@/assets/Picture6.jpg";
+import p8 from "@/assets/Picture8.jpg";
+import p9 from "@/assets/Picture9.jpg";
+import p13 from "@/assets/Picture13.jpg";
+import p14 from "@/assets/Picture14.jpg";
+import p15 from "@/assets/Picture15.jpg";
+import p18 from "@/assets/Picture18.jpg";
 
 export type UpcomingEvent = {
   id: string;
@@ -49,7 +49,7 @@ export const UPCOMING_EVENTS: UpcomingEvent[] = [
     description:
       "An immersive session exploring colour, silhouettes, wardrobe choices and the relationship between personal style and professional presence.",
     cta: "Book your place",
-    image: p8.url,
+    image: p8,
   },
   {
     id: "upcoming-02",
@@ -60,7 +60,7 @@ export const UPCOMING_EVENTS: UpcomingEvent[] = [
     description:
       "A practical session on professional attire, personal presentation and making confident choices that communicate who you are.",
     cta: "Book your place",
-    image: p6.url,
+    image: p6,
   },
   {
     id: "upcoming-03",
@@ -71,7 +71,7 @@ export const UPCOMING_EVENTS: UpcomingEvent[] = [
     description:
       "An editorial fashion experience bringing together styling, presentation and contemporary fashion perspectives.",
     cta: "Book your place",
-    image: p14.url,
+    image: p14,
   },
 ];
 
@@ -85,7 +85,7 @@ export const PAST_EVENTS: PastEvent[] = [
     location: "Bengaluru",
     description:
       "A leadership-focused seminar on how appearance, behaviour and communication shape professional presence.",
-    image: p5.url,
+    image: p5,
   },
   {
     id: "past-02",
@@ -95,7 +95,7 @@ export const PAST_EVENTS: PastEvent[] = [
     location: "Hyderabad",
     description:
       "A working session decoding dress codes and translating them into a wardrobe that works every day.",
-    image: p9.url,
+    image: p9,
   },
   {
     id: "past-03",
@@ -105,7 +105,7 @@ export const PAST_EVENTS: PastEvent[] = [
     location: "Mumbai",
     description:
       "A runway presentation exploring silhouette, texture and movement as a single visual language.",
-    image: p18.url,
+    image: p18,
   },
   {
     id: "past-04",
@@ -115,13 +115,13 @@ export const PAST_EVENTS: PastEvent[] = [
     location: "New Delhi",
     description:
       "An intimate seminar on identity, self-perception and dressing in a way that feels honest and considered.",
-    image: p13.url,
+    image: p13,
   },
 ];
 
 /* PLACEHOLDER — editorial imagery for feature sections */
 export const EVENTS_MEDIA = {
-  featuredShow: p15.url,
-  seminarPrimary: p3.url,
-  seminarSecondary: p8.url,
+  featuredShow: p15,
+  seminarPrimary: p3,
+  seminarSecondary: p8,
 };

@@ -3,8 +3,8 @@ import { useEffect, useState } from "react";
 import aboutPortrait from "@/assets/about.jpg";
 import personalPortraitOne from "@/assets/pers-1.jpg";
 import personalPortraitTwo from "@/assets/pers-3.jpg";
-import upmaPortraitAsset from "@/assets/upma-portrait.png.asset.json";
-const upmaPortrait = upmaPortraitAsset.url;
+import upmaPortraitAsset from "@/assets/upma-portrait.png";
+const upmaPortrait = upmaPortraitAsset;
 import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/Reveal";
 

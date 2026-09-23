@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Facebook, Instagram, Linkedin } from "lucide-react";
-import logoLight from "@/assets/logo-light.png.asset.json";
+import logoLight from "@/assets/logo-light.png";
 
 export function SiteFooter() {
   const ref = useRef<HTMLElement>(null);
@@ -85,7 +85,7 @@ export function SiteFooter() {
           }}
         >
           <img
-            src={logoLight.url}
+            src={logoLight}
             alt="Balance Design & Fashion Consultancy logo"
             className="h-24 w-auto md:h-32"
           />

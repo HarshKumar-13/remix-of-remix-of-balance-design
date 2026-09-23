@@ -4,15 +4,15 @@ import { useEffect, useRef, useState, type ReactNode } from "react";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
 import aboutImg from "@/assets/about.jpg";
-import corp1 from "@/assets/Picture6.jpg.asset.json";
-import corp2 from "@/assets/Picture3.jpg.asset.json";
-import corp3 from "@/assets/Picture4.jpg.asset.json";
-import corp4 from "@/assets/Picture5.jpg.asset.json";
-import corp5 from "@/assets/Picture7.jpg.asset.json";
+import corp1 from "@/assets/Picture6.jpg";
+import corp2 from "@/assets/Picture3.jpg";
+import corp3 from "@/assets/Picture4.jpg";
+import corp4 from "@/assets/Picture5.jpg";
+import corp5 from "@/assets/Picture7.jpg";
 import pers1 from "@/assets/pers-1.jpg";
 import pers2 from "@/assets/pers-2.jpg";
 import pers3 from "@/assets/pers-3.jpg";
-import trend1 from "@/assets/Picture8.jpg.asset.json";
+import trend1 from "@/assets/Picture8.jpg";
 
 export const Route = createFileRoute("/services/fashion-apparel-workshops")({
   head: () => ({
@@ -183,7 +183,7 @@ const QUESTIONS = [
   "Does the way we look, stop us from interacting and being ourselves with others?",
 ];
 
-const QUESTION_IMAGES = [corp1.url, pers1, corp5.url, pers2, corp3.url, pers3];
+const QUESTION_IMAGES = [corp1, pers1, corp5, pers2, corp3, pers3];
 
 function IntroductionSection() {
   return (
@@ -192,7 +192,7 @@ function IntroductionSection() {
         <div className="grid grid-cols-1 gap-14 md:grid-cols-12 md:gap-8">
           <div className="md:col-span-7">
             <EditorialImage
-              src={corp2.url}
+              src={corp2}
               alt="Corporate image workshop with professionals discussing presentation"
               className="aspect-[4/3] w-full"
             />
@@ -250,7 +250,7 @@ function QuestionsSection() {
                   className={`md:col-span-5 ${imageFirst ? "md:col-start-1" : "md:col-start-8 md:order-2"}`}
                 >
                   <EditorialImage
-                    src={QUESTION_IMAGES[index] ?? corp1.url}
+                    src={QUESTION_IMAGES[index] ?? corp1}
                     alt={`Editorial professional dressing study for question ${index + 1}`}
                     className={`${index % 3 === 0 ? "aspect-[3/4]" : index % 3 === 1 ? "aspect-[4/3]" : "aspect-square"} w-full`}
                     position={index === 1 ? "object-left" : "object-center"}
@@ -286,7 +286,7 @@ function KeyStatement() {
         </EditorialReveal>
         <div className="md:col-span-5 md:pb-10">
           <EditorialImage
-            src={corp4.url}
+            src={corp4}
             alt="Professionals gathered for a leadership and image workshop"
             className="aspect-[3/4] w-full"
             delay={120}
@@ -324,7 +324,7 @@ function WorkshopIntroduction() {
           </EditorialReveal>
           <div className="md:col-span-4 md:col-start-7 md:-mt-20">
             <EditorialImage
-              src={trend1.url}
+              src={trend1}
               alt="Clothing, colour and fabric details prepared for a fashion workshop"
               className="aspect-square w-full"
               delay={140}
@@ -340,7 +340,7 @@ const GOALS = [
   {
     title: "Create a more powerful visual impact",
     text: "“To transform the way we dress, such that our visual impact is more powerful and confident.”",
-    image: corp1.url,
+    image: corp1,
   },
   {
     title: "Build confidence from within",
@@ -350,7 +350,7 @@ const GOALS = [
   {
     title: "Unlock your performance",
     text: "“To authentically believe that each one of us has the highest level of performance capability and each of us is a WINNER.”",
-    image: corp3.url,
+    image: corp3,
   },
 ];
 

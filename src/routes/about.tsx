@@ -5,7 +5,7 @@ import { LogoMark } from "@/components/LogoMark";
 import { Reveal } from "@/components/Reveal";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
-import logoMark from "@/assets/balance-logo-mark.png.asset.json";
+import logoMark from "@/assets/balance-logo-mark.png";
 import heroImg from "@/assets/hero.jpg";
 import aboutImg from "@/assets/about.jpg";
 import pers1 from "@/assets/pers-1.jpg";
@@ -405,7 +405,7 @@ function RecognitionPanel() {
           <Reveal key={name} delay={i * 60}>
             <div className="flex items-center justify-between gap-6 border-b border-border py-8 md:py-10">
               <span className="font-display text-2xl tracking-wide md:text-4xl">{name}</span>
-              <img src={logoMark.url} alt="" aria-hidden="true" className="h-5 w-auto opacity-50" />
+              <img src={logoMark} alt="" aria-hidden="true" className="h-5 w-auto opacity-50" />
             </div>
           </Reveal>
         ))}

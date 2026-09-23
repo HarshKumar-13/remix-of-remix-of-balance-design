@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 
-import logoLight from "@/assets/logo-light.png.asset.json";
+import logoLight from "@/assets/logo-light.png";
 
 export function LogoIntro({ onComplete }: { onComplete: () => void }) {
   const layerRef = useRef<HTMLDivElement>(null);
@@ -56,7 +56,7 @@ export function LogoIntro({ onComplete }: { onComplete: () => void }) {
     >
       <img
         ref={logoRef}
-        src={logoLight.url}
+        src={logoLight}
         alt=""
         className="absolute object-contain"
       />
