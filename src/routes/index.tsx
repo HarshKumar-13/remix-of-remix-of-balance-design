@@ -18,6 +18,7 @@ import { CorporateImageConsulting } from "@/components/CorporateImageConsulting"
 import { PersonalImageConsulting } from "@/components/PersonalImageConsulting";
 import { OwnYourSpotlight } from "@/components/OwnYourSpotlight";
 import { RedEditorialService } from "@/components/RedEditorialService";
+import { AboutMe } from "@/components/AboutMe";
 
 
 import trend1 from "@/assets/Picture8.jpg.asset.json";
@@ -138,6 +139,8 @@ function Index() {
               images={GRAPHIC_IMAGES}
             />
           </section>
+
+          <AboutMe />
 
           <StoryScene>
             <AboutSection />
