@@ -105,7 +105,7 @@ export function CorporateImageConsulting() {
           </p>
         </div>
 
-        <div className="mt-14 grid grid-cols-1 items-start gap-5 md:mt-20 md:grid-cols-12 md:items-stretch md:gap-x-8 lg:gap-x-12">
+        <div className="mt-14 grid grid-cols-1 items-start gap-5 md:mt-20 md:grid-cols-12 md:items-end md:gap-x-8 lg:gap-x-12">
           <div
             className={`relative aspect-[4/5] overflow-hidden transition-[clip-path,opacity,transform] delay-300 duration-[1400ms] ease-[cubic-bezier(0.16,1,0.3,1)] md:col-span-5 md:aspect-[4/5] ${imageReveal}`}
           >
@@ -123,7 +123,7 @@ export function CorporateImageConsulting() {
             ))}
           </div>
           <div
-            className={`relative aspect-[16/10] overflow-hidden transition-[clip-path,opacity,transform] delay-500 duration-[1400ms] ease-[cubic-bezier(0.16,1,0.3,1)] md:col-span-7 md:aspect-auto ${imageReveal}`}
+            className={`relative aspect-[16/10] overflow-hidden transition-[clip-path,opacity,transform] delay-500 duration-[1400ms] ease-[cubic-bezier(0.16,1,0.3,1)] md:col-span-7 ${imageReveal}`}
           >
             {horizontalImages.map((image, index) => (
               <img
