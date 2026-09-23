@@ -128,7 +128,13 @@ export function AboutMe() {
               processes for growth, through directing design teams, or mentoring the next
               generation of fashion leaders.
             </p>
-            <div aria-hidden="true" className="mx-auto mt-10 h-px w-20 bg-border" />
+            <p
+              aria-hidden="true"
+              className="mt-10 text-right text-[2.75rem] leading-none text-foreground md:text-[3.25rem]"
+              style={{ fontFamily: "'Mrs Saint Delafield', cursive" }}
+            >
+              Upma Shrian
+            </p>
           </div>
         </Reveal>
       </div>
