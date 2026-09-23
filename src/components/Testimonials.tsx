@@ -83,7 +83,7 @@ export function Testimonials() {
     const el = sectionRef.current;
     if (!el) return;
     const io = new IntersectionObserver(
-      ([entry]) => setInView(entry.isIntersecting && entry.intersectionRatio > 0.25),
+      ([entry]) => setInView(!!entry && entry.isIntersecting && entry.intersectionRatio > 0.25),
       { threshold: [0, 0.25, 0.5] },
     );
     io.observe(el);
