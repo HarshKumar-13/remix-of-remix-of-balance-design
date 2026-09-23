@@ -82,23 +82,30 @@ export function CorporateImageConsulting() {
     >
       <div className="mx-auto max-w-[1500px]">
         <div className="grid grid-cols-1 gap-8 md:grid-cols-12 md:items-start md:gap-x-10 lg:gap-x-16">
-          <h2
-            id="corporate-image-consulting-title"
-            className={`display text-[2.55rem] leading-[0.98] uppercase transition-[opacity,transform] delay-100 duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] sm:text-6xl md:col-span-6 md:text-[4.25rem] lg:text-[4.75rem] ${reveal}`}
-          >
-            <span className="text-red">Corporate</span>
-            <span className="block text-foreground">Image Consulting</span>
-          </h2>
+          <div className="md:col-span-6">
+            <p
+              className={`label-xs mb-6 text-muted-foreground transition-[opacity,transform] duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] ${reveal}`}
+            >
+              Design Workshops &amp; Seminars
+            </p>
+            <h2
+              id="corporate-image-consulting-title"
+              className={`display text-[2rem] leading-[0.98] uppercase transition-[opacity,transform] delay-100 duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] sm:text-5xl md:text-[3.4rem] lg:text-[4.2rem] ${reveal}`}
+            >
+              <span className="block text-red">Corporate</span>
+              <span className="block whitespace-nowrap text-foreground">Image Consulting</span>
+            </h2>
+          </div>
 
           <p
-            className={`max-w-xl text-left text-lg leading-relaxed text-muted-foreground transition-[opacity,transform] delay-200 duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] md:col-span-5 md:col-start-8 md:pt-2 md:text-xl ${reveal}`}
+            className={`max-w-xl text-left text-lg leading-relaxed text-muted-foreground transition-[opacity,transform] delay-200 duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] md:col-span-5 md:col-start-8 md:pt-10 md:text-xl ${reveal}`}
           >
             we coach professionals to look sharp and stylish, build self confidence and have a
             personality that is magnetic, as they meet and interact with world.
           </p>
         </div>
 
-        <div className="mt-14 grid grid-cols-1 items-start gap-5 md:mt-20 md:grid-cols-12 md:gap-x-8 lg:gap-x-12">
+        <div className="mt-14 grid grid-cols-1 items-start gap-5 md:mt-20 md:grid-cols-12 md:items-stretch md:gap-x-8 lg:gap-x-12">
           <div
             className={`relative aspect-[4/5] overflow-hidden transition-[clip-path,opacity,transform] delay-300 duration-[1400ms] ease-[cubic-bezier(0.16,1,0.3,1)] md:col-span-5 md:aspect-[4/5] ${imageReveal}`}
           >
@@ -116,7 +123,7 @@ export function CorporateImageConsulting() {
             ))}
           </div>
           <div
-            className={`relative aspect-[16/10] overflow-hidden transition-[clip-path,opacity,transform] delay-500 duration-[1400ms] ease-[cubic-bezier(0.16,1,0.3,1)] md:col-span-7 md:mt-[12%] ${imageReveal}`}
+            className={`relative aspect-[16/10] overflow-hidden transition-[clip-path,opacity,transform] delay-500 duration-[1400ms] ease-[cubic-bezier(0.16,1,0.3,1)] md:col-span-7 md:aspect-auto ${imageReveal}`}
           >
             {horizontalImages.map((image, index) => (
               <img
