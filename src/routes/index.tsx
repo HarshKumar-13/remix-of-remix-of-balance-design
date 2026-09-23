@@ -6,7 +6,8 @@ import { Hero } from "@/components/Hero";
 import { LogoIntro } from "@/components/LogoIntro";
 import { Reveal } from "@/components/Reveal";
 import { LogoMark } from "@/components/LogoMark";
-import { ServiceChapter } from "@/components/ServiceChapter";
+import { ServicesStory, type StoryService } from "@/components/ServicesStory";
+import { ServicesPurpose } from "@/components/ServicesPurpose";
 import { AboutSection } from "@/components/AboutSection";
 import { DressCode } from "@/components/DressCode";
 import { Testimonials } from "@/components/Testimonials";
@@ -58,6 +59,54 @@ export const Route = createFileRoute("/")({
   }),
   component: Index,
 });
+
+const SERVICES: StoryService[] = [
+  {
+    number: "01",
+    title: "DESIGN WORKSHOPS & SEMINARS",
+    items: [
+      {
+        title: "A) DESIGN AESTHETICS AND & STYLING WORKSHOPS",
+        body: "for TEAMS of fashion and retail Brands.like VM and floor sales teams",
+      },
+      {
+        title: "B) CORPORATE IMAGE CONSULTING",
+        body: "we coach professionals to look sharp and stylish, build self confidence and have a personality that is magnetic, as they meet and interact with world.",
+      },
+      { title: "C) PERSONAL IMAGE CONSULTING" },
+      {
+        title: "D) OWN YOUR SPOTLIGHT",
+        body: "we coach professionals to look sharp and stylish, build self confidence and have a personality that is magnetic, as they meet and interact with world.",
+      },
+    ],
+    images: [
+      { src: corp1.url, alt: "Balance Design consultant leading a corporate image workshop" },
+      { src: corp2.url, alt: "Master the dress code corporate training session in progress" },
+      { src: corp3.url, alt: "Corporate styling presentation to a seated audience" },
+      { src: pers1, alt: "Personal styling session with a silk scarf in a warm ivory studio" },
+      { src: pers3, alt: "Individual in a minimal monochrome outfit against a warm plaster wall" },
+    ],
+  },
+  {
+    number: "02",
+    title: "TREND FORECASTING & LINE PRESENTATION",
+    images: [
+      { src: trend1.url, alt: "Global Shopper trend board with travel-inspired colour and material story" },
+      { src: trend2.url, alt: "Kidswear collage trend story with applique, patchwork and bold palette" },
+      { src: trend3.url, alt: "Detail page of colour loops, patchwork and psychedelic prints" },
+      { src: trend4.url, alt: "Polo solid style line sheet in Indigo / Global Shopper colourways" },
+    ],
+  },
+  {
+    number: "03",
+    title: "GRAPHIC & PRINT DESIGN",
+    images: [
+      { src: graphic1Asset.url, alt: "Tempt graphic tee development boards with Pantone colour story" },
+      { src: graphic2Asset.url, alt: "Red Edge streetwear graphic library and colour palette" },
+      { src: graphic3Asset.url, alt: "Womenswear graphic tee and knitwear range flats" },
+    ],
+  },
+];
 
 const CHAPTERS = [
   {
