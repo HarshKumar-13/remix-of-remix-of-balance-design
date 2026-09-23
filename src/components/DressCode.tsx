@@ -1,8 +1,20 @@
 import { useEffect, useRef, useState } from "react";
 import corpImg from "@/assets/Picture3.jpg.asset.json";
 import corpImg2 from "@/assets/Picture7.jpg.asset.json";
-import { LogoMark } from "./LogoMark";
+import whiteLogo from "@/assets/balance-logo-white.png.asset.json";
 import { Reveal } from "./Reveal";
+
+function WhiteLogo({ className = "" }: { className?: string }) {
+  return (
+    <img
+      src={whiteLogo.url}
+      alt="Balance Design & Fashion Consultancy"
+      className={`h-14 w-auto object-contain md:h-20 ${className}`}
+      width={120}
+      height={122}
+    />
+  );
+}
 
 const POINTS = [
   "Understanding and application of design tools such as lines, shapes, patterns, textures, color theory, and their impact on dressing.",
@@ -67,7 +79,7 @@ function PinnedSequence() {
         <div className="mx-auto w-full max-w-7xl px-6 md:px-12">
           <div className="grid grid-cols-12 gap-16">
             <div className="col-span-6">
-              <LogoMark className="mb-8 md:mx-0" />
+              <WhiteLogo className="mb-8 md:mx-0" />
               <Heading />
               <p className="mt-10 max-w-md text-lg leading-relaxed text-ivory/70 md:text-xl">
                 Fashion as communication. Fashion as confidence. Fashion as impact.
@@ -126,7 +138,7 @@ function StackedSequence() {
   return (
     <div className="mx-auto max-w-7xl px-6 md:hidden">
       <Reveal>
-        <LogoMark className="mb-8 md:mx-0" />
+        <WhiteLogo className="mb-8 md:mx-0" />
       </Reveal>
       <Reveal delay={60}>
         <Heading />
