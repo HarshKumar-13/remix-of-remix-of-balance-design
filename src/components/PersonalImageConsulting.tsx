@@ -4,13 +4,7 @@ import personalOne from "@/assets/pers-1.jpg";
 import personalTwo from "@/assets/pers-2.jpg";
 import personalThree from "@/assets/pers-3.jpg";
 
-const verticalImages = [
-  { src: personalTwo, alt: "Personal styling portrait in an editorial setting" },
-  { src: personalOne, alt: "Personal styling session with a silk scarf" },
-  { src: personalThree, alt: "Individual in a minimal monochrome outfit" },
-];
-
-const horizontalImages = [
+const landscapeImages = [
   { src: personalOne, alt: "Personal styling session in a warm ivory studio" },
   { src: personalThree, alt: "Personal image consultation in a refined interior" },
   { src: personalTwo, alt: "Editorial personal styling composition" },
@@ -44,7 +38,7 @@ export function PersonalImageConsulting() {
     if (reduceMotion.matches) return;
 
     const interval = window.setInterval(() => {
-      setActiveImage((current) => (current + 1) % verticalImages.length);
+      setActiveImage((current) => (current + 1) % landscapeImages.length);
     }, 5200);
 
     return () => window.clearInterval(interval);
@@ -87,11 +81,11 @@ export function PersonalImageConsulting() {
           </p>
         </div>
 
-        <div className="mt-14 grid grid-cols-1 items-start gap-5 md:mt-20 md:grid-cols-12 md:items-end md:gap-x-8 lg:gap-x-12">
+        <div className="mt-14 grid grid-cols-1 gap-8 md:mt-20 md:grid-cols-12 md:items-stretch md:gap-x-8 lg:gap-x-12">
           <div
-            className={`relative aspect-[4/5] overflow-hidden transition-[clip-path,opacity,transform] delay-300 duration-[1400ms] ease-[cubic-bezier(0.16,1,0.3,1)] md:col-span-5 ${imageReveal}`}
+            className={`relative aspect-[16/10] overflow-hidden transition-[clip-path,opacity,transform] delay-300 duration-[1400ms] ease-[cubic-bezier(0.16,1,0.3,1)] md:col-span-7 ${imageReveal}`}
           >
-            {verticalImages.map((image, index) => (
+            {landscapeImages.map((image, index) => (
               <img
                 key={image.src}
                 src={image.src}
@@ -106,20 +100,11 @@ export function PersonalImageConsulting() {
           </div>
 
           <div
-            className={`relative aspect-[16/10] overflow-hidden transition-[clip-path,opacity,transform] delay-500 duration-[1400ms] ease-[cubic-bezier(0.16,1,0.3,1)] md:col-span-7 ${imageReveal}`}
+            aria-hidden="true"
+            className={`flex min-h-40 flex-col justify-between border-y border-border py-6 transition-[opacity,transform] delay-500 duration-[1200ms] ease-[cubic-bezier(0.16,1,0.3,1)] md:col-span-5 md:min-h-full md:py-8 ${reveal}`}
           >
-            {horizontalImages.map((image, index) => (
-              <img
-                key={image.src}
-                src={image.src}
-                alt={image.alt}
-                loading="lazy"
-                decoding="async"
-                className={`absolute inset-0 h-full w-full object-cover transition-[opacity,transform] duration-[1800ms] ease-[cubic-bezier(0.16,1,0.3,1)] motion-reduce:transition-none ${
-                  activeImage === index ? "scale-100 opacity-100" : "scale-[1.025] opacity-0"
-                }`}
-              />
-            ))}
+            <span className="h-px w-12 bg-foreground" />
+            <span className="h-px w-full bg-border" />
           </div>
         </div>
       </div>
