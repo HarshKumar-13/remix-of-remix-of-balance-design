@@ -1,12 +1,12 @@
 import { useEffect, useRef, useState } from "react";
-import heroSketching from "@/assets/hero-sketching.jpg";
+import heroWorkshopSession from "@/assets/hero-workshop-session.jpg";
 import heroStyling from "@/assets/hero-styling.jpg";
 import heroStudio from "@/assets/hero-studio.jpg";
 import heroWorkshop from "@/assets/hero-workshop.jpg";
 import heroSeminar from "@/assets/hero-seminar.jpg";
 
 const SLIDES = [
-  { src: heroSketching, alt: "Design consultants reviewing sketches and fabric swatches at a work table" },
+  { src: heroWorkshopSession, alt: "Seminar room with participants seated along both sides of long tables watching a presentation on screen" },
   { src: heroStyling, alt: "Stylist advising a client beside a rail of curated garments" },
   { src: heroStudio, alt: "Designers collaborating over a laptop in a fashion studio" },
   { src: heroWorkshop, alt: "Workshop session with participants engaged around training tables" },
