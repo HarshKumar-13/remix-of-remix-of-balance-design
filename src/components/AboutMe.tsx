@@ -1,37 +1,48 @@
 import { useEffect, useState } from "react";
 
-import aboutPortrait from "@/assets/about.jpg";
-import personalPortraitOne from "@/assets/pers-1.jpg";
-import personalPortraitTwo from "@/assets/pers-3.jpg";
-import upmaPortraitAsset from "@/assets/upma-portrait.png";
-const upmaPortrait = upmaPortraitAsset;
+import upmaBurgundyPortrait from "@/assets/about-upma-burgundy.jpg";
+import upmaCloseupPortrait from "@/assets/about-upma-closeup.jpg";
+import upmaCoralPortrait from "@/assets/about-upma-coral.webp";
+import upmaGardenPortrait from "@/assets/about-upma-garden.jpg";
+import upmaPolkaDotPortrait from "@/assets/about-upma-polka-dot.jpg";
+import upmaRedPortrait from "@/assets/about-upma-red.jpg";
 import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/Reveal";
 
 const PORTRAITS = [
   {
-    src: aboutPortrait,
-    alt: "Fashion designer shaping fabric on a dress form in an atelier",
+    src: upmaCoralPortrait,
+    alt: "Upma Shrian seated on a teal bench in a coral outfit",
     position: "object-center",
   },
   {
-    src: personalPortraitOne,
-    alt: "Editorial portrait styled with a tailored black jacket and warm scarf",
+    src: upmaBurgundyPortrait,
+    alt: "Upma Shrian wearing a burgundy top and cream trousers",
     position: "object-center",
   },
   {
-    src: personalPortraitTwo,
-    alt: "Editorial portrait in tailored black clothing against a warm architectural backdrop",
+    src: upmaRedPortrait,
+    alt: "Upma Shrian wearing a red top and tartan trousers",
     position: "object-center",
   },
   {
-    src: upmaPortrait,
-    alt: "Upma Shrian seated in a red armchair, wearing a polka-dot top",
+    src: upmaGardenPortrait,
+    alt: "Upma Shrian seated outdoors in a patterned dress",
+    position: "object-center",
+  },
+  {
+    src: upmaCloseupPortrait,
+    alt: "Close portrait of Upma Shrian wearing a burgundy top",
+    position: "object-center",
+  },
+  {
+    src: upmaPolkaDotPortrait,
+    alt: "Upma Shrian seated in a red chair wearing a polka-dot top",
     position: "object-center",
   },
 ];
 
-const AUTOPLAY_MS = 3000;
+const AUTOPLAY_MS = 2000;
 
 export function AboutMe() {
   const [active, setActive] = useState(0);
