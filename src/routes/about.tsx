@@ -182,7 +182,7 @@ function AboutTabs() {
 function AboutBalancePanel() {
   return (
     <div>
-      <div className="grid grid-cols-1 items-start gap-12 md:grid-cols-12 md:gap-16">
+      <div className="grid grid-cols-1 items-center gap-12 md:grid-cols-12 md:gap-16">
         <div className="md:col-span-5">
           <Reveal>
             <LogoMark className="mb-8 md:mx-0" />
@@ -191,12 +191,12 @@ function AboutBalancePanel() {
             <p className="label-xs text-muted-foreground">Design &amp; Fashion Consultancy</p>
           </Reveal>
           <Reveal delay={140}>
-            <h2 className="display text-accent mt-6 text-[2.75rem] leading-[0.95] sm:text-5xl md:text-[4.25rem]">
+            <h2 className="display text-accent mt-6 text-[2.5rem] leading-[0.95] sm:text-[3.5rem] md:text-[4rem]">
               Fashion is more than what you wear. It is how you are seen.
             </h2>
           </Reveal>
         </div>
-        <div className="md:col-span-7 md:pt-10">
+        <div className="md:col-span-7">
           <Reveal delay={100}>
             <p className="max-w-xl text-lg leading-relaxed text-foreground md:text-xl">
               Balance Design &amp; Fashion Consultancy works across fashion, image and design to
@@ -206,9 +206,19 @@ function AboutBalancePanel() {
           </Reveal>
           <Reveal delay={180}>
             <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground md:text-xl">
-              From corporate and personal image consulting to trend forecasting, line and range
-              presentation, graphic design, uniform design and fashion experiences — every
-              engagement is shaped around identity, clarity and impact.
+              Balance Design &amp; Fashion Consultancy is the venture of its Founder and Creative
+              Head Upma Shrian and was set up in January 2008. It operates with an ever growing
+              network of Design and Fashion consultants who works on projects provided by the
+              Consultancy. Balance bridges the gap in the fashion industry when it comes to
+              providing long term and Short term trends, in the various apparel and design market
+              segments and developing profitable product mix that matches with the target
+              customer's expectations.
+            </p>
+          </Reveal>
+          <Reveal delay={240}>
+            <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground md:text-xl">
+              It also passionately conducts training and workshops on Dressing up for corporates
+              and individuals as means of non-verbal communication and impact.
             </p>
           </Reveal>
         </div>
