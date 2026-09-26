@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import upmaBurgundyPortrait from "@/assets/about-upma-burgundy.jpg";
 import upmaCloseupPortrait from "@/assets/about-upma-closeup.jpg";
 import upmaCoralPortrait from "@/assets/about-upma-coral.webp";
+import upmaCouchPortrait from "@/assets/about-upma-couch.jpg";
 import upmaGardenPortrait from "@/assets/about-upma-garden.jpg";
 import upmaPolkaDotPortrait from "@/assets/about-upma-polka-dot.jpg";
 import upmaRedPortrait from "@/assets/about-upma-red.jpg";
@@ -39,6 +40,11 @@ const PORTRAITS = [
     src: upmaPolkaDotPortrait,
     alt: "Upma Shrian seated in a red chair wearing a polka-dot top",
     position: "object-center",
+  },
+  {
+    src: upmaCouchPortrait,
+    alt: "Upma Shrian seated on a blue velvet sofa wearing a tan wrap dress",
+    position: "object-top",
   },
 ];
 
