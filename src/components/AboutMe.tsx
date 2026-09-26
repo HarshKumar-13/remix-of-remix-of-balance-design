@@ -41,6 +41,11 @@ const PORTRAITS = [
     alt: "Upma Shrian seated in a red chair wearing a polka-dot top",
     position: "object-center",
   },
+  {
+    src: upmaCouchPortrait,
+    alt: "Upma Shrian seated on a blue velvet sofa wearing a tan wrap dress",
+    position: "object-[center_14%]",
+  },
 ];
 
 const AUTOPLAY_MS = 2000;
