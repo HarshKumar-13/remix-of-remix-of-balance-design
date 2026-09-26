@@ -18,12 +18,12 @@ const PORTRAITS = [
   {
     src: upmaBurgundyPortrait,
     alt: "Upma Shrian wearing a burgundy top and cream trousers",
-    position: "object-center",
+    position: "object-[center_24%]",
   },
   {
     src: upmaRedPortrait,
     alt: "Upma Shrian wearing a red top and tartan trousers",
-    position: "object-center",
+    position: "object-[center_24%]",
   },
   {
     src: upmaGardenPortrait,
