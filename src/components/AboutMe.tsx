@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import upmaBurgundyPortrait from "@/assets/about-upma-burgundy.jpg";
 import upmaCloseupPortrait from "@/assets/about-upma-closeup.jpg";
 import upmaCoralPortrait from "@/assets/about-upma-coral.webp";
+import upmaCouchPortrait from "@/assets/about-upma-couch.jpg";
 import upmaGardenPortrait from "@/assets/about-upma-garden.jpg";
 import upmaPolkaDotPortrait from "@/assets/about-upma-polka-dot.jpg";
 import upmaRedPortrait from "@/assets/about-upma-red.jpg";
