@@ -44,7 +44,7 @@ const PORTRAITS = [
   {
     src: upmaCouchPortrait,
     alt: "Upma Shrian seated on a blue velvet sofa wearing a tan wrap dress",
-    position: "object-[center_14%]",
+    position: "object-top",
   },
 ];
 
