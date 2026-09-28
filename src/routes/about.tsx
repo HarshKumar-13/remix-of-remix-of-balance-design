@@ -445,7 +445,7 @@ function RecognitionPanel() {
     <div>
       <div className="max-w-3xl">
         <Reveal>
-          <p className="label-xs text-muted-foreground">Achievements</p>
+          <p className="text-lg leading-relaxed text-foreground md:text-xl">Sharing some examples of Balance Design achievements with various BRANDS.</p>
         </Reveal>
       </div>
       <div className="mt-10 border-t border-border md:mt-14">
