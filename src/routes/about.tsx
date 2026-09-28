@@ -284,10 +284,10 @@ function FounderPanel() {
     return () => clearInterval(t);
   }, []);
   return (
-    <div className="grid grid-cols-1 items-start gap-12 md:grid-cols-12 md:gap-16">
-      <div className="md:col-span-6">
+    <div className="grid grid-cols-1 items-stretch gap-12 md:grid-cols-12 md:gap-16">
+      <div className="md:col-span-6 md:[&>*]:h-full">
         <Reveal>
-          <div className="relative h-[56vh] w-full overflow-hidden md:h-[78vh]">
+          <div className="relative h-[56vh] w-full overflow-hidden md:h-full md:min-h-[60vh]">
             {FOUNDER_IMAGES.map((src, i) => (
               <img
                 key={src}
@@ -300,7 +300,7 @@ function FounderPanel() {
           </div>
         </Reveal>
       </div>
-      <div className="md:col-span-6 md:pt-12">
+      <div className="md:col-span-6">
         <Reveal>
           <p className="label-xs text-muted-foreground">Our Founder</p>
         </Reveal>
@@ -322,7 +322,7 @@ function FounderPanel() {
                 aria-hidden={i !== roleIdx}
                 className={`col-start-1 row-start-1 transition-opacity duration-1000 ease-in-out ${i === roleIdx ? "opacity-100" : "pointer-events-none opacity-0"}`}
               >
-                <p className="label-xs text-primary">{r.title}</p>
+                <p className="label-xs text-primary text-[1.1875rem]">{r.title}</p>
                 <p className="mt-4 text-lg leading-relaxed text-muted-foreground md:text-xl">{r.body}</p>
               </div>
             ))}
