@@ -1,3 +1,5 @@
+import oys1 from "@/assets/oys-session-1.jpeg";
+import oys2 from "@/assets/oys-session-2.jpeg";
 /**
  * ============================================================
  * PLACEHOLDER EVENT DATA — DEMONSTRATION ONLY
@@ -70,7 +72,7 @@ const RAW_PAST_EVENTS: PastEvent[] = [
   { id: "past-07", title: "Bal Bharti School Teachers", type: "MASTER THE RIGHT DRESSS CODE - Styling session", date: "4th March 2024", image: bb1, images: [bb1, bb2, bb3] },
   { id: "past-08", title: "Reliance Trends", type: "DESIGN AESTHETICS AND STYLING WORKSHOP - for Brand teams", date: "May & October 2023", image: p18 },
   { id: "past-09", title: "GMETRI Technologies", type: "DESIGN AESTHETICS AND STYLING WORKSHOP - for Brand teams", date: "19th Sep 2025", image: p15 },
-  { id: "past-10", title: "Own Your Spotlight", type: "Own Your Spotlight – Online Styling & Mindset Coaching Session", date: "20th July 2025", image: p5 },
+  { id: "past-10", title: "Own Your Spotlight", type: "Own Your Spotlight – Online Styling & Mindset Coaching Session", date: "20th July 2025", image: oys1, images: [oys1, oys2] },
 ];
 
 /* PLACEHOLDER — upcoming events */
