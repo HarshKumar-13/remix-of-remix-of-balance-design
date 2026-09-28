@@ -8,7 +8,6 @@ import { SiteHeader } from "@/components/SiteHeader";
 import logoMark from "@/assets/balance-logo-mark.png";
 import heroImg from "@/assets/hero.jpg";
 import aboutImg from "@/assets/about.jpg";
-import pers1 from "@/assets/pers-1.jpg";
 import pers2 from "@/assets/pers-2.jpg";
 import pers3 from "@/assets/pers-3.jpg";
 import founder1 from "@/assets/founder-1.jpeg";
