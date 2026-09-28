@@ -8,9 +8,16 @@ import { SiteHeader } from "@/components/SiteHeader";
 import logoMark from "@/assets/balance-logo-mark.png";
 import heroImg from "@/assets/hero.jpg";
 import aboutImg from "@/assets/about.jpg";
-import pers1 from "@/assets/pers-1.jpg";
 import pers2 from "@/assets/pers-2.jpg";
 import pers3 from "@/assets/pers-3.jpg";
+import founder1 from "@/assets/founder-1.jpeg";
+import founder2 from "@/assets/founder-2.webp";
+import founder3 from "@/assets/founder-3.jpg";
+import founder4 from "@/assets/founder-4.jpg";
+import founder5 from "@/assets/founder-5.jpg";
+import founder6 from "@/assets/founder-6.jpg";
+import founder7 from "@/assets/founder-7.jpg";
+const FOUNDER_IMAGES = [founder1, founder2, founder3, founder4, founder5, founder6, founder7];
 
 export const Route = createFileRoute("/about")({
   head: () => ({
@@ -251,16 +258,26 @@ function AboutBalancePanel() {
 }
 
 function FounderPanel() {
+  const [founderIdx, setFounderIdx] = useState(0);
+  useEffect(() => {
+    const t = setInterval(() => setFounderIdx((i) => (i + 1) % FOUNDER_IMAGES.length), 2000);
+    return () => clearInterval(t);
+  }, []);
   return (
     <div className="grid grid-cols-1 items-start gap-12 md:grid-cols-12 md:gap-16">
       <div className="md:col-span-6">
         <Reveal>
-          <img
-            src={pers1}
-            alt="Founder of Balance Design & Fashion Consultancy at work"
-            loading="lazy"
-            className="h-[56vh] w-full object-cover md:h-[78vh]"
-          />
+          <div className="relative h-[56vh] w-full overflow-hidden md:h-[78vh]">
+            {FOUNDER_IMAGES.map((src, i) => (
+              <img
+                key={src}
+                src={src}
+                alt={i === founderIdx ? "Upma Shrian, Founder of Balance Design & Fashion Consultancy" : ""}
+                aria-hidden={i !== founderIdx}
+                className={`absolute inset-0 h-full w-full object-cover object-[center_20%] transition-opacity duration-1000 ease-in-out ${i === founderIdx ? "opacity-100" : "opacity-0"}`}
+              />
+            ))}
+          </div>
         </Reveal>
       </div>
       <div className="md:col-span-6 md:pt-12">
