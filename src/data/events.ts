@@ -25,6 +25,9 @@ import p18 from "@/assets/Picture18.jpg";
 import vh1 from "@/assets/van-heusen-1.jpg";
 import vh2 from "@/assets/van-heusen-2.jpg";
 import vh3 from "@/assets/van-heusen-3.jpg";
+import bb1 from "@/assets/bal-bharti-1.jpg";
+import bb2 from "@/assets/bal-bharti-2.jpg";
+import bb3 from "@/assets/bal-bharti-3.jpg";
 
 export type UpcomingEvent = {
   id: string;
@@ -53,7 +56,7 @@ export const PAST_EVENTS: PastEvent[] = [
   { id: "past-04", title: "Max Fashion Customers", type: "MASTER THE RIGHT DRESSS CODE - Corporate Dressing up", date: "26th April 2014", image: max1, images: [max1, max2, max3] },
   { id: "past-05", title: "The Raymond Shop Customers", type: "MASTER THE RIGHT DRESSS CODE - Corporate Dressing up", date: "15 July 2018", image: p3 },
   { id: "past-06", title: "Orra Fine Jewellery", type: "MASTER THE RIGHT DRESSS CODE - Styling session", date: "29th October 2023", image: orra1, images: [orra1, orra2, orra3] },
-  { id: "past-07", title: "Bal Bharti School Teachers", type: "MASTER THE RIGHT DRESSS CODE - Styling session", date: "4th March 2024", image: p8 },
+  { id: "past-07", title: "Bal Bharti School Teachers", type: "MASTER THE RIGHT DRESSS CODE - Styling session", date: "4th March 2024", image: bb1, images: [bb1, bb2, bb3] },
   { id: "past-08", title: "Reliance Trends", type: "DESIGN AESTHETICS AND STYLING WORKSHOP - for Brand teams", date: "May & October 2023", image: p18 },
   { id: "past-09", title: "GMETRI Technologies", type: "DESIGN AESTHETICS AND STYLING WORKSHOP - for Brand teams", date: "19th Sep 2025", image: p15 },
   { id: "past-10", title: "Own Your Spotlight", type: "Own Your Spotlight – Online Styling & Mindset Coaching Session", date: "20th July 2025", image: p5 },
