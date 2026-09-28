@@ -257,8 +257,28 @@ function AboutBalancePanel() {
   );
 }
 
+const FOUNDER_ROLES = [
+  {
+    title: "As a Design Head:",
+    body: "My experience includes managing design, research, product development, and trend forecasting for multiple international brands such as Kappa, UCLA, Smiley, Disney, Warner Brothers,Rene Derhy USA/ France, GAP, Yonex,Wall-Mart,K Mart & Petrie.",
+  },
+  {
+    title: "As a Strategist & Creative Head:",
+    body: "I have also led design teams, fostering innovation while ensuring commercial success for Indian retail brands such as Lifestyle Stores, Reliance Trends & Weekender, identified gaps and worked on brand positioning.Introduced structured trend research frameworks, revised process calendars, and competitive bench marking, ensuring alignment between creative direction and commercial outcomes.",
+  },
+  {
+    title: "As Associate Professor :",
+    body: "at NIFT, besides guiding and nurturing young designers, I have bridged academia and industry by leading international-facing initiatives such as buyer meets, Hong Kong fair collections, and also taking on Indian crafts initiative as Hampi cluster project - Promoting the crafts like Lambani embroidery, stone carving, banana fibre from concept to product and market positioning for better sales.",
+  },
+];
+
 function FounderPanel() {
   const [founderIdx, setFounderIdx] = useState(0);
+  const [roleIdx, setRoleIdx] = useState(0);
+  useEffect(() => {
+    const t = setInterval(() => setRoleIdx((i) => (i + 1) % FOUNDER_ROLES.length), 5000);
+    return () => clearInterval(t);
+  }, []);
   useEffect(() => {
     const t = setInterval(() => setFounderIdx((i) => (i + 1) % FOUNDER_IMAGES.length), 2000);
     return () => clearInterval(t);
@@ -291,16 +311,22 @@ function FounderPanel() {
         </Reveal>
         <Reveal delay={180}>
           <p className="mt-10 max-w-xl text-lg leading-relaxed text-foreground md:text-xl">
-            Balance was founded on a simple conviction: that the way a person — or a brand —
-            presents itself shapes how it is understood. Years spent across fashion, styling and
-            design became the foundation of a consultancy built on both instinct and discipline.
+            With over twenty-eight years of experience in the fashion and apparel industry, I have specialized in defining design direction that aligns with business strategy and evolving consumer trends.I also impart training to enhance team performance in the Apparel and Fashion Industry.
           </p>
         </Reveal>
         <Reveal delay={240}>
-          <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground md:text-xl">
-            <span className="text-foreground">[Placeholder]</span> Founder biography, credentials
-            and career milestones will be added here once provided.
-          </p>
+          <div className="mt-10 grid max-w-xl">
+            {FOUNDER_ROLES.map((r, i) => (
+              <div
+                key={r.title}
+                aria-hidden={i !== roleIdx}
+                className={`col-start-1 row-start-1 transition-opacity duration-1000 ease-in-out ${i === roleIdx ? "opacity-100" : "pointer-events-none opacity-0"}`}
+              >
+                <p className="label-xs text-primary">{r.title}</p>
+                <p className="mt-4 text-lg leading-relaxed text-muted-foreground md:text-xl">{r.body}</p>
+              </div>
+            ))}
+          </div>
         </Reveal>
       </div>
     </div>
