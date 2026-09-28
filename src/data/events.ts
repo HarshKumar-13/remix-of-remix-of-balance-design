@@ -22,6 +22,9 @@ import max1 from "@/assets/max-fashion-1.jpg";
 import max2 from "@/assets/max-fashion-2.jpg";
 import max3 from "@/assets/max-fashion-3.jpg";
 import p18 from "@/assets/Picture18.jpg";
+import vh1 from "@/assets/van-heusen-1.jpg";
+import vh2 from "@/assets/van-heusen-2.jpg";
+import vh3 from "@/assets/van-heusen-3.jpg";
 
 export type UpcomingEvent = {
   id: string;
@@ -46,7 +49,7 @@ export type PastEvent = {
 export const PAST_EVENTS: PastEvent[] = [
   { id: "past-01", title: "IIM Bangalore", type: "MASTER THE RIGHT DRESSS CODE ( MTRDC ) - for Graduates & Alumni of Business Schools", date: "3rd Feb 2015", image: p5 },
   { id: "past-02", title: "ISB Mohali", type: "MASTER THE RIGHT DRESSS CODE ( MTRDC ) - for Graduates & Alumni of Business Schools", date: "21st Sep 2018", image: p9 },
-  { id: "past-03", title: "Van Husen Customers", type: "MASTER THE RIGHT DRESSS CODE - Corporate Dressing up", date: "18th May 2013", image: p6 },
+  { id: "past-03", title: "Van Husen Customers", type: "MASTER THE RIGHT DRESSS CODE - Corporate Dressing up", date: "18th May 2013", image: vh1, images: [vh1, vh2, vh3] },
   { id: "past-04", title: "Max Fashion Customers", type: "MASTER THE RIGHT DRESSS CODE - Corporate Dressing up", date: "26th April 2014", image: max1, images: [max1, max2, max3] },
   { id: "past-05", title: "The Raymond Shop Customers", type: "MASTER THE RIGHT DRESSS CODE - Corporate Dressing up", date: "15 July 2018", image: p3 },
   { id: "past-06", title: "Orra Fine Jewellery", type: "MASTER THE RIGHT DRESSS CODE - Styling session", date: "29th October 2023", image: orra1, images: [orra1, orra2, orra3] },
