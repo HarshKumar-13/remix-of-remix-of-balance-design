@@ -60,7 +60,7 @@ export type PastEvent = {
   images?: string[];
 };
 
-export const PAST_EVENTS: PastEvent[] = [
+const RAW_PAST_EVENTS: PastEvent[] = [
   { id: "past-01", title: "IIM Bangalore", type: "MASTER THE RIGHT DRESSS CODE ( MTRDC ) - for Graduates & Alumni of Business Schools", date: "3rd Feb 2015", image: iim1, images: [iim1, iim2, iim3] },
   { id: "past-02", title: "ISB Mohali", type: "MASTER THE RIGHT DRESSS CODE ( MTRDC ) - for Graduates & Alumni of Business Schools", date: "21st Sep 2018", image: isb1, images: [isb1, isb2] },
   { id: "past-03", title: "Van Husen Customers", type: "MASTER THE RIGHT DRESSS CODE - Corporate Dressing up", date: "18th May 2013", image: vh1, images: [vh1, vh2, vh3] },
@@ -74,6 +74,22 @@ export const PAST_EVENTS: PastEvent[] = [
 ];
 
 /* PLACEHOLDER — upcoming events */
+const MONTHS = ["jan","feb","mar","apr","may","jun","jul","aug","sep","oct","nov","dec"];
+
+/** Parses dates like "3rd Feb 2015", "15 July 2018" or "May & October 2023" (uses the latest month). */
+export function parseEventDate(value: string): number {
+  const text = value.toLowerCase();
+  const year = Number(text.match(/\d{4}/)?.[0] ?? 0);
+  let month = 0;
+  MONTHS.forEach((m, idx) => { if (new RegExp(`\\b${m}`).test(text)) month = Math.max(month, idx); });
+  const day = Number(text.replace(/\d{4}/, "").match(/\b(\d{1,2})(st|nd|rd|th)?\b/)?.[1] ?? 1);
+  return new Date(year, month, day).getTime();
+}
+
+export const PAST_EVENTS: PastEvent[] = [...RAW_PAST_EVENTS].sort(
+  (a, b) => parseEventDate(b.date) - parseEventDate(a.date),
+);
+
 export const UPCOMING_EVENTS: UpcomingEvent[] = [
   { id: "upcoming-01", title: "The Art of Personal Style", type: "Personal Image Workshop", date: "18 October 2026", location: "Bengaluru", description: "An immersive session exploring colour, silhouettes, wardrobe choices and the relationship between personal style and professional presence.", cta: "Book your place", image: p8 },
   { id: "upcoming-02", title: "Master the Right Dress Code", type: "Image & Dress Code Seminar", date: "07 November 2026", location: "New Delhi", description: "A practical session on professional attire, personal presentation and making confident choices that communicate who you are.", cta: "Book your place", image: p6 },
