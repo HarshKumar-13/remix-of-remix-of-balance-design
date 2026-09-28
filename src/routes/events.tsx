@@ -356,11 +356,10 @@ function UpcomingCard({
 function PastCard({ event, index }: { event: (typeof PAST_EVENTS)[number]; index: number }) {
   return (
     <article
-      data-card
-      style={cardReveal(index)}
-      className="group w-[70vw] shrink-0 snap-start sm:w-[340px]"
+      style={cardReveal(index % 3)}
+      className="group overflow-hidden border border-border bg-card"
     >
-      <div className="aspect-[4/5] overflow-hidden border border-border">
+      <div className="relative h-[46vh] max-h-[340px] min-h-[240px] overflow-hidden">
         <img
           src={event.image}
           alt={event.title}
@@ -368,14 +367,38 @@ function PastCard({ event, index }: { event: (typeof PAST_EVENTS)[number]; index
           className="h-full w-full object-cover transition-transform duration-[1600ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.06]"
         />
       </div>
-      <p className="label-xs mt-6 text-red">{event.type}</p>
-      <h3 className="display mt-3 text-xl leading-[1.05] transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:-translate-y-1 md:text-2xl">
-        {event.title}
-      </h3>
-      <p className="label-xs mt-3 text-muted-foreground">
-        {event.date}
-      </p>
+      <div className="p-6 md:p-8">
+        <p className="label-xs text-red">{event.type}</p>
+        <h3 className="display mt-4 text-2xl leading-[1.02] transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:-translate-y-1 md:text-[1.9rem]">
+          {event.title}
+        </h3>
+        <p className="label-xs mt-4 text-muted-foreground">{event.date}</p>
+      </div>
     </article>
+  );
+}
+
+function PastGrid() {
+  const [count, setCount] = useState(6);
+  const visible = PAST_EVENTS.slice(0, count);
+  return (
+    <div>
+      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {visible.map((event, i) => (
+          <PastCard key={event.id} event={event} index={i} />
+        ))}
+      </div>
+      {count < PAST_EVENTS.length && (
+        <div className="mt-14 flex justify-center">
+          <button
+            onClick={() => setCount(PAST_EVENTS.length)}
+            className="label-xs border border-foreground px-8 py-4 transition-colors duration-500 hover:border-red hover:bg-red hover:text-primary-foreground"
+          >
+            Load more
+          </button>
+        </div>
+      )}
+    </div>
   );
 }
 
@@ -397,30 +420,6 @@ function UpcomingCarousel({ onBook }: { onBook: (e: UpcomingEvent) => void }) {
       >
         {UPCOMING_EVENTS.map((event, i) => (
           <UpcomingCard key={event.id} event={event} index={i} onBook={onBook} />
-        ))}
-      </div>
-    </div>
-  );
-}
-
-function PastCarousel() {
-  const { trackRef, atStart, atEnd, update, scrollBy } = useCarousel();
-  return (
-    <div>
-      <div className="mb-8 flex items-center justify-between gap-6">
-        <p className="label-xs text-muted-foreground">Swipe or use arrows</p>
-        <div className="flex gap-3">
-          <CarouselArrow direction="prev" onClick={() => scrollBy(-1)} disabled={atStart} />
-          <CarouselArrow direction="next" onClick={() => scrollBy(1)} disabled={atEnd} />
-        </div>
-      </div>
-      <div
-        ref={trackRef}
-        onScroll={update}
-        className="-mx-6 flex snap-x snap-mandatory gap-6 overflow-x-auto px-6 pb-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden md:-mx-12 md:px-12"
-      >
-        {PAST_EVENTS.map((event, i) => (
-          <PastCard key={event.id} event={event} index={i} />
         ))}
       </div>
     </div>
@@ -468,7 +467,7 @@ function EventsTabs({ onBook }: { onBook: (e: UpcomingEvent) => void }) {
           {tab === "upcoming" ? (
             <UpcomingCarousel onBook={onBook} />
           ) : (
-            <PastCarousel />
+            <PastGrid />
           )}
         </div>
       </div>
@@ -486,35 +485,31 @@ function EventsTabs({ onBook }: { onBook: (e: UpcomingEvent) => void }) {
   );
 }
 
-function FeaturedShow() {
+function CyclingFrame({ images, alt, className = "" }: { images: string[]; alt: string; className?: string }) {
+  const [idx, setIdx] = useState(0);
+  useEffect(() => {
+    const t = setInterval(() => setIdx((i) => (i + 1) % images.length), 3000);
+    return () => clearInterval(t);
+  }, [images.length]);
   return (
-    <section className="relative overflow-hidden bg-charcoal text-ivory">
-      <ClipImage
-        src={EVENTS_MEDIA.featuredShow}
-        alt="Runway presentation staged by Balance Design"
-        className="h-[80svh] min-h-[460px] w-full opacity-70"
-        parallax={0.06}
-      />
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-charcoal/85 via-charcoal/30 to-charcoal/40" />
-      <div className="absolute inset-x-0 bottom-0 mx-auto max-w-7xl px-6 pb-16 md:px-12 md:pb-24">
-        <SlideIn>
-          <h2 className="display text-[2.75rem] leading-[0.94] sm:text-6xl md:text-[6rem]">
-            Fashion Shows
-          </h2>
-        </SlideIn>
-          <SlideIn delay={140}>
-            <p className="mt-8 max-w-xl text-lg leading-relaxed opacity-80 md:text-xl">
-              From concept and styling to presentation, fashion becomes an experience when every
-              detail speaks the same language.
-            </p>
-          </SlideIn>
-        <SlideIn delay={220}>
-          <a href="#events-list" className="label-xs link-underline mt-10 inline-block">
-            Explore events &nbsp;&rarr;
-          </a>
-        </SlideIn>
+    <Reveal>
+      <div className={`relative overflow-hidden ${className}`}>
+        {images.map((src, i) => (
+          <img
+            key={src}
+            src={src}
+            alt={alt}
+            loading="lazy"
+            className="absolute inset-0 h-full w-full object-cover"
+            style={{
+              opacity: i === idx ? 1 : 0,
+              transform: `scale(${i === idx ? 1.02 : 1.08})`,
+              transition: "opacity 1.2s ease, transform 3.5s cubic-bezier(0.16,1,0.3,1)",
+            }}
+          />
+        ))}
       </div>
-    </section>
+    </Reveal>
   );
 }
 
@@ -523,11 +518,10 @@ function SeminarsSection() {
     <section className="px-6 py-24 md:px-12 md:py-40">
       <div className="mx-auto grid max-w-7xl grid-cols-1 gap-12 md:grid-cols-12 md:gap-16">
         <div className="md:col-span-7">
-          <ClipImage
-            src={EVENTS_MEDIA.seminarPrimary}
+          <CyclingFrame
+            images={EVENTS_MEDIA.seminarGallery}
             alt="Professional image workshop led by Balance Design"
             className="h-[52vh] w-full md:h-[76vh]"
-            parallax={0.05}
           />
         </div>
         <div className="md:col-span-5 md:pt-16">
@@ -595,7 +589,6 @@ function EventsPage() {
         <div id="events-list">
           <EventsTabs onBook={setBooking} />
         </div>
-        <FeaturedShow />
         <SeminarsSection />
         <FinalCta />
       </div>

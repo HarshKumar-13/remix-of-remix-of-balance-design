@@ -60,5 +60,6 @@ export const UPCOMING_EVENTS: UpcomingEvent[] = [
 export const EVENTS_MEDIA = {
   featuredShow: p15,
   seminarPrimary: p3,
+  seminarGallery: [p3, p5, p9, p13, p6],
   seminarSecondary: p8,
 };
