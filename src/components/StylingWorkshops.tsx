@@ -2,41 +2,21 @@ import { useEffect, useState } from "react";
 
 import { Reveal } from "@/components/Reveal";
 
-import stylingAudience from "@/assets/styling-workshop-audience.jpeg";
-import stylingGroupOne from "@/assets/styling-workshop-group-1.jpeg";
-import stylingGroupTwo from "@/assets/styling-workshop-group-2.jpeg";
-import stylingGroupThree from "@/assets/styling-workshop-group-3.jpeg";
-import stylingSessionOne from "@/assets/styling-workshop-session-1.jpeg";
-import stylingSessionTwo from "@/assets/styling-workshop-session-2.jpeg";
+import daw1 from "@/assets/daw-1.jpeg";
+import daw2 from "@/assets/daw-2.jpeg";
+import daw3 from "@/assets/daw-3.jpeg";
+import daw4 from "@/assets/daw-4.jpeg";
+import daw5 from "@/assets/daw-5.jpeg";
 
 const FILM = [
-  {
-    src: stylingGroupOne,
-    alt: "Design and styling workshop participants gathered for a group photograph",
-  },
-  {
-    src: stylingSessionOne,
-    alt: "Workshop participants seated around a conference room during a session",
-  },
-  {
-    src: stylingGroupTwo,
-    alt: "Design workshop participants gathered together after a session",
-  },
-  {
-    src: stylingSessionTwo,
-    alt: "Facilitators speaking with participants during a styling workshop",
-  },
-  {
-    src: stylingAudience,
-    alt: "Workshop audience attending a presentation in a bright studio classroom",
-  },
-  {
-    src: stylingGroupThree,
-    alt: "Fashion and styling workshop participants assembled in a lecture room",
-  },
+  { src: daw1, alt: "Workshop audience learning about the complementary colour scheme" },
+  { src: daw2, alt: "Participants seated along long tables watching a presentation" },
+  { src: daw3, alt: "Facilitator addressing a styling workshop in a studio classroom" },
+  { src: daw4, alt: "Workshop audience watching a video presentation" },
+  { src: daw5, alt: "Facilitator speaking with engaged workshop participants" },
 ];
 
-const FRAME_MS = 5200;
+const FRAME_MS = 2000;
 
 export function StylingWorkshops() {
   const [active, setActive] = useState(0);
@@ -74,7 +54,7 @@ export function StylingWorkshops() {
             </Reveal>
             <Reveal delay={80}>
               <h2 className="display mt-6 text-[2.4rem] leading-[1.02] uppercase sm:text-6xl md:text-[4.6rem]">
-                Design Aesthetics &amp; Styling Workshops
+                <span className="text-primary">Design Aesthetics</span> &amp; Styling Workshops
               </h2>
             </Reveal>
           </div>
