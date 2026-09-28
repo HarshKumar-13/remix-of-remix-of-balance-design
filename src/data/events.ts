@@ -33,6 +33,12 @@ import isb2 from "@/assets/isb-2.jpg";
 import iim1 from "@/assets/iim-1.jpg";
 import iim2 from "@/assets/iim-2.jpg";
 import iim3 from "@/assets/iim-3.jpg";
+import sem1 from "@/assets/sem-1.jpg";
+import sem2 from "@/assets/sem-2.jpg";
+import sem3 from "@/assets/sem-3.jpg";
+import sem4 from "@/assets/sem-4.jpg";
+import sem5 from "@/assets/sem-5.jpg";
+import sem6 from "@/assets/sem-6.jpg";
 
 export type UpcomingEvent = {
   id: string;
@@ -78,6 +84,6 @@ export const UPCOMING_EVENTS: UpcomingEvent[] = [
 export const EVENTS_MEDIA = {
   featuredShow: p15,
   seminarPrimary: p3,
-  seminarGallery: [p3, p5, p9, p13, p6],
+  seminarGallery: [sem1, sem2, sem3, sem4, sem5, sem6],
   seminarSecondary: p8,
 };
