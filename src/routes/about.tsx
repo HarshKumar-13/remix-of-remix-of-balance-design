@@ -5,6 +5,7 @@ import { LogoMark } from "@/components/LogoMark";
 import { Reveal } from "@/components/Reveal";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
+import { ACHIEVEMENTS } from "@/data/achievements";
 import logoMark from "@/assets/balance-logo-mark.png";
 import heroImg from "@/assets/hero.jpg";
 import aboutImg from "@/assets/about.jpg";
@@ -48,7 +49,7 @@ const TABS: { key: TabKey; label: string }[] = [
   { key: "founder", label: "Our Founder" },
   { key: "philosophy", label: "Our Philosophy" },
   { key: "journey", label: "Our Journey" },
-  { key: "recognition", label: "Recognition" },
+  { key: "recognition", label: "Achievements" },
 ];
 
 const CLIENTS = [
@@ -444,32 +445,44 @@ function RecognitionPanel() {
     <div>
       <div className="max-w-3xl">
         <Reveal>
-          <p className="label-xs text-muted-foreground">Recognition</p>
-        </Reveal>
-        <Reveal delay={100}>
-          <h2 className="display mt-6 text-[2.75rem] leading-[0.95] sm:text-5xl md:text-[4.25rem]">
-            Trusted by houses of distinction.
-          </h2>
+          <p className="label-xs text-muted-foreground">Achievements</p>
         </Reveal>
       </div>
-
-      <div className="mt-16 border-t border-border md:mt-24">
-        {CLIENTS.map((name, i) => (
-          <Reveal key={name} delay={i * 60}>
-            <div className="flex items-center justify-between gap-6 border-b border-border py-8 md:py-10">
-              <span className="font-display text-2xl tracking-wide md:text-4xl">{name}</span>
-              <img src={logoMark} alt="" aria-hidden="true" className="h-5 w-auto opacity-50" />
+      <div className="mt-10 border-t border-border md:mt-14">
+        {ACHIEVEMENTS.map((g, gi) => (
+          <Reveal key={g.title} delay={gi * 60}>
+            <div className="grid grid-cols-1 gap-6 border-b border-border py-10 md:grid-cols-12 md:gap-16 md:py-14">
+              <h3 className="font-display text-2xl leading-tight tracking-wide md:col-span-4 md:text-3xl">
+                {g.title}
+              </h3>
+              <div className="space-y-8 md:col-span-8">
+                {g.items.map((item, ii) => (
+                  <div key={ii}>
+                    {item.heading && (
+                      <p className="label-xs text-[1.1875rem] leading-snug text-primary">{item.heading}</p>
+                    )}
+                    {item.text && (
+                      <p className={`${item.heading ? "mt-4 " : ""}max-w-2xl text-lg leading-relaxed text-muted-foreground md:text-xl`}>
+                        {item.text}
+                      </p>
+                    )}
+                    {item.list && (
+                      <ul className="mt-4 max-w-2xl space-y-3">
+                        {item.list.map((li) => (
+                          <li key={li} className="flex gap-4 text-lg leading-relaxed text-muted-foreground md:text-xl">
+                            <span aria-hidden="true" className="mt-[0.7em] h-px w-5 shrink-0 bg-primary" />
+                            <span>{li}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                  </div>
+                ))}
+              </div>
             </div>
           </Reveal>
         ))}
       </div>
-
-      <Reveal delay={120}>
-        <p className="mt-12 max-w-xl text-lg leading-relaxed text-muted-foreground md:text-xl">
-          <span className="text-foreground">[Placeholder]</span> Awards, press and formal
-          recognition will be listed here once confirmed.
-        </p>
-      </Reveal>
     </div>
   );
 }
