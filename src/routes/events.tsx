@@ -360,12 +360,16 @@ function PastCard({ event, index }: { event: (typeof PAST_EVENTS)[number]; index
       className="group overflow-hidden border border-border bg-card"
     >
       <div className="relative h-[46vh] max-h-[340px] min-h-[240px] overflow-hidden">
-        <img
-          src={event.image}
-          alt={event.title}
-          loading="lazy"
-          className="h-full w-full object-cover transition-transform duration-[1600ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.06]"
-        />
+        {event.images ? (
+          <CardSlides images={event.images} alt={event.title} />
+        ) : (
+          <img
+            src={event.image}
+            alt={event.title}
+            loading="lazy"
+            className="h-full w-full object-cover transition-transform duration-[1600ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.06]"
+          />
+        )}
       </div>
       <div className="p-6 md:p-8">
         <p className="label-xs text-red">{event.type}</p>
@@ -375,6 +379,28 @@ function PastCard({ event, index }: { event: (typeof PAST_EVENTS)[number]; index
         <p className="label-xs mt-4 text-muted-foreground">{event.date}</p>
       </div>
     </article>
+  );
+}
+
+function CardSlides({ images, alt }: { images: string[]; alt: string }) {
+  const [idx, setIdx] = useState(0);
+  useEffect(() => {
+    const t = setInterval(() => setIdx((i) => (i + 1) % images.length), 3000);
+    return () => clearInterval(t);
+  }, [images.length]);
+  return (
+    <>
+      {images.map((src, i) => (
+        <img
+          key={src}
+          src={src}
+          alt={alt}
+          loading="lazy"
+          className="absolute inset-0 h-full w-full object-cover"
+          style={{ opacity: i === idx ? 1 : 0, transition: "opacity 1.2s ease" }}
+        />
+      ))}
+    </>
   );
 }
 
@@ -516,7 +542,7 @@ function CyclingFrame({ images, alt, className = "" }: { images: string[]; alt: 
 function SeminarsSection() {
   return (
     <section className="px-6 py-24 md:px-12 md:py-40">
-      <div className="mx-auto grid max-w-7xl grid-cols-1 gap-12 md:grid-cols-12 md:gap-16">
+      <div className="mx-auto grid max-w-7xl grid-cols-1 items-center gap-12 md:grid-cols-12 md:gap-16">
         <div className="md:col-span-7">
           <CyclingFrame
             images={EVENTS_MEDIA.seminarGallery}
@@ -524,7 +550,7 @@ function SeminarsSection() {
             className="h-[52vh] w-full md:h-[76vh]"
           />
         </div>
-        <div className="md:col-span-5 md:pt-16">
+        <div className="md:col-span-5">
           <SlideIn from="right">
             <h2 className="display text-[2.5rem] leading-[0.95] sm:text-5xl md:text-[4rem]">
               Seminars &amp; Workshops

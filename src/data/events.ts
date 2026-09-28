@@ -15,6 +15,9 @@ import p9 from "@/assets/Picture9.jpg";
 import p13 from "@/assets/Picture13.jpg";
 import p14 from "@/assets/Picture14.jpg";
 import p15 from "@/assets/Picture15.jpg";
+import orra1 from "@/assets/orra-1271.jpg";
+import orra2 from "@/assets/orra-1314.jpg";
+import orra3 from "@/assets/orra-1306.jpg";
 import p18 from "@/assets/Picture18.jpg";
 
 export type UpcomingEvent = {
@@ -34,6 +37,7 @@ export type PastEvent = {
   type: string;
   date: string;
   image: string;
+  images?: string[];
 };
 
 export const PAST_EVENTS: PastEvent[] = [
@@ -42,7 +46,7 @@ export const PAST_EVENTS: PastEvent[] = [
   { id: "past-03", title: "Van Husen Customers", type: "MASTER THE RIGHT DRESSS CODE - Corporate Dressing up", date: "18th May 2013", image: p6 },
   { id: "past-04", title: "Max Fashion Customers", type: "MASTER THE RIGHT DRESSS CODE - Corporate Dressing up", date: "26th April 2014", image: p13 },
   { id: "past-05", title: "The Raymond Shop Customers", type: "MASTER THE RIGHT DRESSS CODE - Corporate Dressing up", date: "15 July 2018", image: p3 },
-  { id: "past-06", title: "Orra Fine Jewellery", type: "MASTER THE RIGHT DRESSS CODE - Styling session", date: "29th October 2023", image: p14 },
+  { id: "past-06", title: "Orra Fine Jewellery", type: "MASTER THE RIGHT DRESSS CODE - Styling session", date: "29th October 2023", image: orra1, images: [orra1, orra2, orra3] },
   { id: "past-07", title: "Bal Bharti School Teachers", type: "MASTER THE RIGHT DRESSS CODE - Styling session", date: "4th March 2024", image: p8 },
   { id: "past-08", title: "Reliance Trends", type: "DESIGN AESTHETICS AND STYLING WORKSHOP - for Brand teams", date: "May & October 2023", image: p18 },
   { id: "past-09", title: "GMETRI Technologies", type: "DESIGN AESTHETICS AND STYLING WORKSHOP - for Brand teams", date: "19th Sep 2025", image: p15 },
