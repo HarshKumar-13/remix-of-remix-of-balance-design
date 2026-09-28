@@ -1,7 +1,7 @@
 export type AchievementItem = { heading?: string; text?: string; list?: string[] };
 export const ACHIEVEMENTS: { title: string; items: AchievementItem[] }[] = [
   {
-    "title": "1)Brand elevation",
+    "title": "Brand elevation",
     "items": [
       {
         "heading": "A.Building a Design-Led Business Model:",
@@ -32,7 +32,7 @@ export const ACHIEVEMENTS: { title: string; items: AchievementItem[] }[] = [
     ]
   },
   {
-    "title": "3) Globally Seasoned Inputs",
+    "title": "Globally Seasoned Inputs",
     "items": [
       {
         "heading": "International Market Exposure and Brand Portfolio:",
