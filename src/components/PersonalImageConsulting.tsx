@@ -102,11 +102,22 @@ export function PersonalImageConsulting() {
           </div>
 
           <div
-            aria-hidden="true"
-            className={`flex min-h-40 flex-col justify-between border-y border-border py-6 transition-[opacity,transform] delay-500 duration-[1200ms] ease-[cubic-bezier(0.16,1,0.3,1)] md:col-span-5 md:min-h-full md:py-8 ${reveal}`}
+            className={`relative aspect-[4/5] overflow-hidden transition-[clip-path,opacity,transform] delay-500 duration-[1400ms] ease-[cubic-bezier(0.16,1,0.3,1)] md:col-span-5 md:aspect-auto ${imageReveal}`}
           >
-            <span className="h-px w-12 bg-foreground" />
-            <span className="h-px w-full bg-border" />
+            {landscapeImages.map((image, index) => (
+              <img
+                key={image.src}
+                src={image.src}
+                alt={image.alt}
+                loading="lazy"
+                decoding="async"
+                className={`absolute inset-0 h-full w-full object-cover transition-[opacity,transform] duration-[1800ms] ease-[cubic-bezier(0.16,1,0.3,1)] motion-reduce:transition-none ${
+                  (activeImage + 2) % landscapeImages.length === index
+                    ? "scale-100 opacity-100"
+                    : "scale-[1.025] opacity-0"
+                }`}
+              />
+            ))}
           </div>
         </div>
       </div>
