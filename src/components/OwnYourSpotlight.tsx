@@ -1,8 +1,23 @@
+import { useEffect, useState } from "react";
+
 import { Reveal } from "@/components/Reveal";
 
-import spotlightVideo from "@/assets/own-your-spotlight.webm";
+import s1 from "@/assets/oys-home-1.jpeg";
+import s2 from "@/assets/oys-home-2.jpeg";
+import s3 from "@/assets/oys-home-3.jpeg";
+import s4 from "@/assets/oys-home-4.jpeg";
+import s5 from "@/assets/oys-home-5.jpeg";
+import s6 from "@/assets/oys-home-6.jpeg";
+import s7 from "@/assets/oys-home-7.jpeg";
+
+const SLIDES = [s1, s2, s3, s4, s5, s6, s7];
 
 export function OwnYourSpotlight() {
+  const [idx, setIdx] = useState(0);
+  useEffect(() => {
+    const t = setInterval(() => setIdx((i) => (i + 1) % SLIDES.length), 2000);
+    return () => clearInterval(t);
+  }, []);
   return (
     <section
       aria-labelledby="own-your-spotlight-title"
@@ -21,7 +36,7 @@ export function OwnYourSpotlight() {
                 id="own-your-spotlight-title"
                 className="display mt-6 text-[2.4rem] leading-[1.02] uppercase sm:text-6xl md:text-[4.6rem]"
               >
-                Own Your Spotlight
+                <span className="text-primary">Own</span> Your Spotlight
               </h2>
             </Reveal>
           </div>
@@ -36,17 +51,16 @@ export function OwnYourSpotlight() {
         </div>
 
         <Reveal delay={200}>
-          <div className="relative mt-14 aspect-[4/5] overflow-hidden sm:aspect-[3/2] md:mt-20 md:aspect-[16/9]">
-            <video
-              className="h-full w-full object-cover"
-              src={spotlightVideo}
-              autoPlay
-              muted
-              loop
-              playsInline
-              preload="metadata"
-              aria-label="Own Your Spotlight coaching session"
-            />
+          <div className="relative mt-14 aspect-[16/10] overflow-hidden bg-foreground sm:aspect-[3/2] md:mt-20 md:aspect-[16/9]">
+            {SLIDES.map((src, i) => (
+              <img
+                key={src}
+                src={src}
+                alt={i === idx ? "Own Your Spotlight online coaching session" : ""}
+                aria-hidden={i !== idx}
+                className={`absolute inset-0 h-full w-full object-contain transition-opacity duration-1000 ease-in-out md:object-cover ${i === idx ? "opacity-100" : "opacity-0"}`}
+              />
+            ))}
           </div>
         </Reveal>
       </div>
