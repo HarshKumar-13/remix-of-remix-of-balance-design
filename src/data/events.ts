@@ -30,6 +30,9 @@ import bb2 from "@/assets/bal-bharti-2.jpg";
 import bb3 from "@/assets/bal-bharti-3.jpg";
 import isb1 from "@/assets/isb-1.jpg";
 import isb2 from "@/assets/isb-2.jpg";
+import iim1 from "@/assets/iim-1.jpg";
+import iim2 from "@/assets/iim-2.jpg";
+import iim3 from "@/assets/iim-3.jpg";
 
 export type UpcomingEvent = {
   id: string;
@@ -52,7 +55,7 @@ export type PastEvent = {
 };
 
 export const PAST_EVENTS: PastEvent[] = [
-  { id: "past-01", title: "IIM Bangalore", type: "MASTER THE RIGHT DRESSS CODE ( MTRDC ) - for Graduates & Alumni of Business Schools", date: "3rd Feb 2015", image: p5 },
+  { id: "past-01", title: "IIM Bangalore", type: "MASTER THE RIGHT DRESSS CODE ( MTRDC ) - for Graduates & Alumni of Business Schools", date: "3rd Feb 2015", image: iim1, images: [iim1, iim2, iim3] },
   { id: "past-02", title: "ISB Mohali", type: "MASTER THE RIGHT DRESSS CODE ( MTRDC ) - for Graduates & Alumni of Business Schools", date: "21st Sep 2018", image: isb1, images: [isb1, isb2] },
   { id: "past-03", title: "Van Husen Customers", type: "MASTER THE RIGHT DRESSS CODE - Corporate Dressing up", date: "18th May 2013", image: vh1, images: [vh1, vh2, vh3] },
   { id: "past-04", title: "Max Fashion Customers", type: "MASTER THE RIGHT DRESSS CODE - Corporate Dressing up", date: "26th April 2014", image: max1, images: [max1, max2, max3] },
