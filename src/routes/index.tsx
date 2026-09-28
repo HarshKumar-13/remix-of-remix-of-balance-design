@@ -90,13 +90,8 @@ function Index() {
                 <LogoMark className="mb-8" />
               </Reveal>
               <Reveal delay={80}>
-                <h2 className="display mx-auto mt-0 max-w-5xl text-[0.875rem] leading-[1.08] sm:text-[1.875rem] md:text-[3.375rem]">
-                  Design workshops &amp; seminars
-                </h2>
-              </Reveal>
-              <Reveal delay={80}>
                 <h2 className="display mx-auto mt-8 max-w-4xl text-[2.5rem] sm:text-6xl md:text-[5rem]">
-                  Creating image, identity &amp; impact.
+                  Design workshops &amp; seminars
                 </h2>
               </Reveal>
               <Reveal delay={160}>
