@@ -91,7 +91,7 @@ export function StylingWorkshops() {
                       : `scale(${isActive ? 1.06 : 1})`,
                     transition: reduced
                       ? "opacity 0.8s ease"
-                      : "opacity 1.8s ease-in-out, transform 6.5s ease-out",
+                      : "opacity 1s ease-in-out, transform 3s ease-out",
                     zIndex: isActive ? 2 : 1,
                   }}
                 />
