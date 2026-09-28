@@ -550,23 +550,26 @@ function SeminarsSection() {
             className="h-[52vh] w-full md:h-[76vh]"
           />
         </div>
-        <div className="md:col-span-5">
-          <SlideIn from="right">
-            <h2 className="display text-[2.5rem] leading-[0.95] sm:text-5xl md:text-[4rem]">
-              Seminars &amp; Workshops
-            </h2>
-          </SlideIn>
-          <SlideIn delay={140} from="right">
-            <p className="mt-8 max-w-md text-lg leading-relaxed text-muted-foreground md:text-xl">
-              Explore colour, design, wardrobe, styling and professional presentation through
-              thoughtfully designed sessions for individuals and organisations.
-            </p>
-          </SlideIn>
-          <div className="mt-12 md:pr-10">
+        <div className="md:col-span-5 md:grid md:h-full md:grid-rows-[1fr_auto_1fr] md:self-stretch">
+          <div aria-hidden className="hidden md:block" />
+          <div className="md:row-start-2">
+            <SlideIn from="right">
+              <h2 className="display text-[2.5rem] leading-[0.95] sm:text-5xl md:text-[4rem]">
+                Seminars &amp; Workshops
+              </h2>
+            </SlideIn>
+            <SlideIn delay={140} from="right">
+              <p className="mt-8 max-w-md text-lg leading-relaxed text-muted-foreground md:text-xl">
+                Explore colour, design, wardrobe, styling and professional presentation through
+                thoughtfully designed sessions for individuals and organisations.
+              </p>
+            </SlideIn>
+          </div>
+          <div className="mt-12 md:row-start-3 md:mt-8 md:flex md:items-end md:pr-10">
             <ClipImage
               src={EVENTS_MEDIA.seminarSecondary}
               alt="Colour and wardrobe study from a Balance Design session"
-              className="h-[30vh] w-full md:h-[36vh]"
+              className="h-[30vh] w-full md:h-[18vh]"
               delay={120}
             />
           </div>
