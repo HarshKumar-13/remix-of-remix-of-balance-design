@@ -49,6 +49,13 @@ export const PAST_EVENTS: PastEvent[] = [
   { id: "past-10", title: "Own Your Spotlight", type: "Own Your Spotlight – Online Styling & Mindset Coaching Session", date: "20th July 2025", image: p5 },
 ];
 
+/* PLACEHOLDER — upcoming events */
+export const UPCOMING_EVENTS: UpcomingEvent[] = [
+  { id: "upcoming-01", title: "The Art of Personal Style", type: "Personal Image Workshop", date: "18 October 2026", location: "Bengaluru", description: "An immersive session exploring colour, silhouettes, wardrobe choices and the relationship between personal style and professional presence.", cta: "Book your place", image: p8 },
+  { id: "upcoming-02", title: "Master the Right Dress Code", type: "Image & Dress Code Seminar", date: "07 November 2026", location: "New Delhi", description: "A practical session on professional attire, personal presentation and making confident choices that communicate who you are.", cta: "Book your place", image: p6 },
+  { id: "upcoming-03", title: "Fashion in Motion", type: "Fashion Show", date: "28 November 2026", location: "Mumbai", description: "An editorial fashion experience bringing together styling, presentation and contemporary fashion perspectives.", cta: "Book your place", image: p14 },
+];
+
 /* PLACEHOLDER — editorial imagery for feature sections */
 export const EVENTS_MEDIA = {
   featuredShow: p15,

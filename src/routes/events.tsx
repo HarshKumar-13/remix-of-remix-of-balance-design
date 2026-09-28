@@ -373,7 +373,7 @@ function PastCard({ event, index }: { event: (typeof PAST_EVENTS)[number]; index
         {event.title}
       </h3>
       <p className="label-xs mt-3 text-muted-foreground">
-        {event.year} &nbsp;·&nbsp; {event.location}
+        {event.date}
       </p>
     </article>
   );
