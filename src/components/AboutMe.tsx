@@ -155,7 +155,7 @@ export function AboutMe() {
             <p
               aria-hidden="true"
               className="mt-10 text-right text-[2.75rem] leading-none text-foreground md:text-[3.25rem]"
-              style={{ fontFamily: "'Mrs Saint Delafield', cursive" }}
+              style={{ fontFamily: "'Mr Dafoe', cursive" }}
             >
               Upma Shrian
             </p>
