@@ -1,16 +1,27 @@
 import { useEffect, useRef, useState } from "react";
-import heroWorkshopSession from "@/assets/hero-workshop-session.jpg";
-import heroStyling from "@/assets/hero-styling.jpg";
-import heroStudio from "@/assets/hero-studio.jpg";
-import heroWorkshop from "@/assets/hero-workshop.jpg";
-import heroSeminar from "@/assets/hero-seminar.jpg";
+import h1 from "@/assets/hero-new-1.jpg";
+import h2 from "@/assets/hero-new-2.jpg";
+import h3 from "@/assets/hero-new-3.jpg";
+import h4 from "@/assets/hero-new-4.jpg";
+import h5 from "@/assets/hero-new-5.jpg";
+import h6 from "@/assets/hero-new-6.jpg";
+import h7 from "@/assets/hero-new-7.jpg";
+import h8 from "@/assets/hero-new-8.jpg";
+import h9 from "@/assets/hero-new-9.jpg";
+import heroVideo from "@/assets/hero-video.mp4";
 
-const SLIDES = [
-  { src: heroWorkshopSession, alt: "Seminar room with participants seated along both sides of long tables watching a presentation on screen" },
-  { src: heroStyling, alt: "Stylist advising a client beside a rail of curated garments" },
-  { src: heroStudio, alt: "Designers collaborating over a laptop in a fashion studio" },
-  { src: heroWorkshop, alt: "Workshop session with participants engaged around training tables" },
-  { src: heroSeminar, alt: "Seminar room with an audience watching a presentation on screen" },
+type Slide = { type: "image" | "video"; src: string; alt: string };
+const SLIDES: Slide[] = [
+  { type: "image", src: h1, alt: "Workshop participants seated along long tables watching a presentation" },
+  { type: "image", src: h2, alt: "Upma Shrian leading an interactive workshop discussion" },
+  { type: "image", src: h3, alt: "Styling workshop session in a training room" },
+  { type: "image", src: h4, alt: "Upma Shrian seated in a floral armchair" },
+  { type: "image", src: h5, alt: "Upma Shrian seated on a blue velvet sofa" },
+  { type: "image", src: h6, alt: "Workshop at IIM Bangalore" },
+  { type: "image", src: h7, alt: "Upma Shrian speaking on stage in front of a screen reading I Create Who I Am" },
+  { type: "image", src: h8, alt: "Seminar audience watching a video presentation" },
+  { type: "image", src: h9, alt: "Audience viewing a complementary colour scheme presentation" },
+  { type: "video", src: heroVideo, alt: "Styling videos by Upma Shrian" },
 ];
 
 export function Hero({ introComplete = true }: { introComplete?: boolean }) {
@@ -18,10 +29,10 @@ export function Hero({ introComplete = true }: { introComplete?: boolean }) {
   const [index, setIndex] = useState(0);
   const [loaded, setLoaded] = useState(false);
   const heroRef = useRef<HTMLElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
     if (!introComplete) return;
-    // Trigger entrance animation after the logo settles into the navigation.
     const t = setTimeout(() => setLoaded(true), 150);
     return () => clearTimeout(t);
   }, [introComplete]);
@@ -32,10 +43,21 @@ export function Hero({ introComplete = true }: { introComplete?: boolean }) {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  const next = () => setIndex((i) => (i + 1) % SLIDES.length);
+
   useEffect(() => {
-    const id = setInterval(() => setIndex((i) => (i + 1) % SLIDES.length), 2000);
-    return () => clearInterval(id);
-  }, []);
+    const v = videoRef.current;
+    if (SLIDES[index]?.type === "video") {
+      if (v) {
+        v.currentTime = 0;
+        v.play().catch(() => {});
+      }
+      return;
+    }
+    v?.pause();
+    const t = setTimeout(next, 2000);
+    return () => clearTimeout(t);
+  }, [index]);
 
   return (
     <section
@@ -43,22 +65,38 @@ export function Hero({ introComplete = true }: { introComplete?: boolean }) {
       id="top"
       className={`relative h-[100svh] w-full overflow-hidden bg-charcoal transition-opacity duration-700 ${introComplete ? "opacity-100" : "opacity-0"}`}
     >
-      {SLIDES.map((s, i) => (
-        <img
-          key={s.src}
-          src={s.src}
-          alt={s.alt}
-          className="absolute inset-0 h-[120%] w-full object-cover object-center"
-          style={{
-            transform: `translate3d(0, ${y * 0.22}px, 0) scale(${i === index ? 1.12 : 1})`,
-            opacity: i === index ? 1 : 0,
-            transition:
-              i === index
-                ? "opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 3s cubic-bezier(0.16, 1, 0.3, 1)"
-                : "opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1)",
-          }}
-        />
-      ))}
+      {SLIDES.map((s, i) => {
+        const style = {
+          transform: `translate3d(0, ${y * 0.22}px, 0) scale(${i === index && s.type === "image" ? 1.12 : 1})`,
+          opacity: i === index ? 1 : 0,
+          transition:
+            i === index
+              ? "opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 3s cubic-bezier(0.16, 1, 0.3, 1)"
+              : "opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1)",
+        };
+        return s.type === "video" ? (
+          <video
+            key={s.src}
+            ref={videoRef}
+            src={s.src}
+            muted
+            playsInline
+            preload="metadata"
+            onEnded={next}
+            aria-label={s.alt}
+            className="absolute inset-0 h-[120%] w-full object-cover object-center"
+            style={style}
+          />
+        ) : (
+          <img
+            key={s.src}
+            src={s.src}
+            alt={s.alt}
+            className="absolute inset-0 h-[120%] w-full object-cover object-[center_30%]"
+            style={style}
+          />
+        );
+      })}
       <div className="absolute inset-0 bg-charcoal/35" />
       <div className="absolute inset-x-0 bottom-0 h-3/4 bg-gradient-to-t from-charcoal/80 via-charcoal/30 to-transparent" />
 
