@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 
 import logoDark from "@/assets/balance-logo-navbar.png";
-import logoOnBlack from "@/assets/balance-logo-on-black.png";
 
 const NAV = [
   { label: "Home", href: "/#top" },
@@ -66,7 +65,7 @@ export function SiteHeader({
             data-navbar-logo
           >
             <img
-              src={showSolid && !open ? logoDark : logoOnBlack}
+              src={logoDark}
               alt="Balance Design & Fashion Consultancy"
               className="h-[4.375rem] w-auto md:h-[6.25rem]"
             />
