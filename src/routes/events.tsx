@@ -433,7 +433,7 @@ function UpcomingCarousel({ onBook }: { onBook: (e: UpcomingEvent) => void }) {
   return (
     <div>
       <div className="mb-8 flex items-center justify-between gap-6">
-        <p className="label-xs text-muted-foreground">Swipe or use arrows</p>
+        <span aria-hidden="true" />
         <div className="flex gap-3">
           <CarouselArrow direction="prev" onClick={() => scrollBy(-1)} disabled={atStart} />
           <CarouselArrow direction="next" onClick={() => scrollBy(1)} disabled={atEnd} />
