@@ -31,7 +31,6 @@ const TESTIMONIALS: VideoTestimonial[] = [
   { id: "t2b", name: "Rohan Kapoor", role: "Brand Lead, North & Co.", video: videoTwo, poster: posterTwo },
 ];
 
-const AUTO_ADVANCE_MS = 9000;
 const COUNT = TESTIMONIALS.length;
 
 function offsetFrom(index: number, active: number) {
@@ -43,7 +42,7 @@ function offsetFrom(index: number, active: number) {
 
 export function Testimonials() {
   const [active, setActive] = useState(0);
-  const [timerKey, setTimerKey] = useState(0);
+  const [, setTimerKey] = useState(0);
   const [inView, setInView] = useState(false);
   const [soundOn, setSoundOn] = useState(true);
   const [reach, setReach] = useState(2);
@@ -102,13 +101,6 @@ export function Testimonials() {
     });
   }, [active, inView, soundOn]);
 
-  // Keep the carousel moving
-  useEffect(() => {
-    if (!inView) return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const id = window.setTimeout(() => go(1), AUTO_ADVANCE_MS);
-    return () => window.clearTimeout(id);
-  }, [active, timerKey, inView, go]);
 
   const onPointerDown = (event: React.PointerEvent) => {
     drag.current = { x: event.clientX, active: true };
@@ -129,7 +121,13 @@ export function Testimonials() {
     >
       <div className="mx-auto max-w-5xl px-6 md:px-12">
         <Reveal>
-          <LogoMark className="mb-12 md:mb-16" />
+          <LogoMark className="mb-8 md:mb-10" />
+        </Reveal>
+        <Reveal delay={80}>
+          <p className="label-xs text-center text-red">Testimonials</p>
+          <h2 className="display mt-4 mb-12 text-center text-4xl leading-[1.05] md:mb-16 md:text-6xl">
+            What People Say About Us
+          </h2>
         </Reveal>
       </div>
 
