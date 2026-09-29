@@ -131,13 +131,13 @@ export function Testimonials() {
     >
       <div className="mx-auto max-w-5xl px-6 md:px-12">
         <Reveal>
-          <LogoMark className="mb-8" />
+          <LogoMark className="mb-12 md:mb-16" />
         </Reveal>
       </div>
 
       <Reveal>
         <div
-          className="relative mx-auto flex h-[96vw] max-h-[34rem] min-h-[24rem] touch-pan-y select-none items-center justify-center md:h-[32rem] lg:h-[36rem]"
+          className="relative mx-auto flex h-[112vw] max-h-[40rem] min-h-[27rem] w-full touch-pan-y select-none items-center justify-center md:h-[37rem] md:w-[92vw] lg:h-[42rem] lg:w-[70vw]"
           onPointerDown={onPointerDown}
           onPointerUp={onPointerUp}
           onPointerCancel={() => (drag.current.active = false)}
@@ -151,10 +151,10 @@ export function Testimonials() {
                 key={item.id}
                 aria-hidden={!isActive}
                 onClick={() => !isActive && !hidden && select(index)}
-                className="absolute top-1/2 left-1/2 w-[58vw] transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] motion-reduce:transition-none sm:w-[46vw] md:w-[min(34vw,20rem)] lg:w-[min(30vw,23rem)]"
+                className="absolute top-1/2 left-1/2 w-[64vw] transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] motion-reduce:transition-none sm:w-[52vw] md:w-[min(38vw,23rem)] lg:w-[min(24vw,27rem)]"
                 style={{
-                  transform: `translate3d(calc(-50% + ${offset * 62}%), -50%, 0) scale(${isActive ? 1 : 0.78})`,
-                  opacity: hidden ? 0 : isActive ? 1 : 0.55,
+                  transform: `translate3d(calc(-50% + ${offset * 92}%), -50%, 0) scale(${isActive ? 1 : 0.82})`,
+                  opacity: hidden ? 0 : isActive ? 1 : 0.68,
                   zIndex: isActive ? 20 : 10 - Math.abs(offset),
                   pointerEvents: hidden ? "none" : "auto",
                   cursor: isActive ? "default" : "pointer",
@@ -175,7 +175,7 @@ export function Testimonials() {
                   />
                 </div>
                 <div
-                  className={`mt-6 text-center transition-opacity duration-700 ${isActive ? "opacity-100" : "opacity-0"}`}
+                  className={`mt-8 text-center transition-opacity duration-700 ${isActive ? "opacity-100" : "opacity-0"}`}
                 >
                   <p className="label-xs">{item.name}</p>
                   <p className="mt-2 text-base text-muted-foreground">{item.role}</p>
@@ -188,7 +188,7 @@ export function Testimonials() {
             type="button"
             aria-label="Previous testimonial"
             onClick={() => go(-1)}
-            className="absolute left-4 z-30 text-2xl text-foreground/50 transition-colors hover:text-foreground md:left-10"
+            className="absolute top-[calc(50%-2rem)] left-2 z-30 -translate-y-1/2 text-2xl text-foreground/50 transition-colors hover:text-foreground md:-left-4 lg:-left-16"
           >
             &#8592;
           </button>
@@ -196,7 +196,7 @@ export function Testimonials() {
             type="button"
             aria-label="Next testimonial"
             onClick={() => go(1)}
-            className="absolute right-4 z-30 text-2xl text-foreground/50 transition-colors hover:text-foreground md:right-10"
+            className="absolute top-[calc(50%-2rem)] right-2 z-30 -translate-y-1/2 text-2xl text-foreground/50 transition-colors hover:text-foreground md:-right-4 lg:-right-16"
           >
             &#8594;
           </button>
