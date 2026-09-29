@@ -73,18 +73,11 @@ const GRAPHIC_IMAGES = [
 ];
 
 
-let hasCompletedHomeIntro = false;
-
 function Index() {
-  const [introComplete, setIntroComplete] = useState(hasCompletedHomeIntro);
-  const completeIntro = useCallback(() => {
-    hasCompletedHomeIntro = true;
-    setIntroComplete(true);
-  }, []);
+  const introComplete = true;
 
   return (
     <main>
-      {!introComplete && <LogoIntro onComplete={completeIntro} />}
       <div className="relative z-10 bg-background">
         <SiteHeader introComplete={introComplete} />
         <ScrollStory>
