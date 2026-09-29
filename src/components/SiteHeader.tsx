@@ -6,7 +6,7 @@ const NAV = [
   { label: "Home", href: "/#top" },
   { label: "About Us", href: "/about" },
   { label: "Events", href: "/events" },
-  { label: "Contact Us", href: "/#contact" },
+  { label: "Contact Us", href: "/contact" },
 ];
 
 export function SiteHeader({
@@ -72,7 +72,7 @@ export function SiteHeader({
           </a>
 
           <div className="flex items-center gap-8 md:gap-12">
-            <a href="/#contact" className="label-xs link-underline hidden sm:inline-block">
+            <a href="/contact" className="label-xs link-underline hidden sm:inline-block">
               Contact
             </a>
             <button
