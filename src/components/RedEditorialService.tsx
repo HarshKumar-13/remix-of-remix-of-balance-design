@@ -16,36 +16,31 @@ type RedEditorialServiceProps = {
 };
 
 function SingleImageSlideshow({ images, label }: { images: ServiceImage[]; label: string }) {
-  const [active, setActive] = useState(0);
-  const [paused, setPaused] = useState(false);
-
-  useEffect(() => {
-    if (paused || images.length < 2) return;
-    const t = window.setInterval(() => setActive((i) => (i + 1) % images.length), 3500);
-    return () => window.clearInterval(t);
-  }, [images.length, paused]);
-
+  const oddLast = images.length % 2 === 1 && images.length > 1;
   return (
     <div
-      className="relative mx-auto h-[62vh] w-full max-w-6xl px-6 md:h-[82vh] md:px-12"
+      className="mx-auto grid w-full max-w-6xl grid-cols-1 items-start gap-6 px-6 sm:grid-cols-2 md:gap-8 md:px-12"
       aria-label={`${label} image gallery`}
-      onMouseEnter={() => setPaused(true)}
-      onMouseLeave={() => setPaused(false)}
-      onTouchStart={() => setPaused(true)}
-      onTouchEnd={() => setPaused(false)}
     >
-      {images.map((image, i) => (
-        <img
-          key={image.src}
-          src={image.src}
-          alt={i === active ? image.alt : ""}
-          aria-hidden={i !== active}
-          decoding="async"
-          className={`absolute inset-0 m-auto h-full w-full object-contain px-6 transition-opacity duration-[1400ms] ease-in-out md:px-12 ${
-            i === active ? "opacity-100" : "opacity-0"
-          }`}
-        />
-      ))}
+      {images.map((image, i) => {
+        const wide = oddLast && i === images.length - 1;
+        return (
+          <figure
+            key={image.src}
+            className={`overflow-hidden bg-background/95 p-3 md:p-4 ${wide ? "sm:col-span-2" : ""} ${
+              i % 2 === 1 && !wide ? "sm:mt-16" : ""
+            }`}
+          >
+            <img
+              src={image.src}
+              alt={image.alt}
+              loading="lazy"
+              decoding="async"
+              className="block h-auto w-full object-contain transition-transform duration-700 ease-out hover:scale-[1.02]"
+            />
+          </figure>
+        );
+      })}
     </div>
   );
 }
