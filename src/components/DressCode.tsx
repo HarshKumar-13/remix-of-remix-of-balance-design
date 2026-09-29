@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from "react";
-import corpImg from "@/assets/Picture3.jpg";
-import corpImg2 from "@/assets/Picture7.jpg";
+import mtrdc1 from "@/assets/mtrdc-1.jpg";
+import mtrdc2 from "@/assets/mtrdc-2.jpg";
+import mtrdc3 from "@/assets/mtrdc-3.jpg";
+import mtrdc4 from "@/assets/mtrdc-4.jpg";
 import whiteLogo from "@/assets/balance-logo-on-black.png";
 import { Reveal } from "./Reveal";
 
@@ -13,6 +15,37 @@ function WhiteLogo({ className = "" }: { className?: string }) {
       width={120}
       height={122}
     />
+  );
+}
+
+const PHOTOS = [
+  { src: mtrdc1, alt: "Upma Shrian addressing participants at IIM Bangalore" },
+  { src: mtrdc2, alt: "Master the Right Dress Code seminar in a hotel ballroom" },
+  { src: mtrdc3, alt: "Van Heusen customers taking notes during the dress code workshop" },
+  { src: mtrdc4, alt: "Body shapes demonstration at the Van Heusen workshop" },
+];
+
+function BlendFrame({ offset, className }: { offset: number; className: string }) {
+  const [i, setI] = useState(0);
+  useEffect(() => {
+    const id = window.setInterval(() => setI((v) => (v + 1) % PHOTOS.length), 2500);
+    return () => window.clearInterval(id);
+  }, []);
+  const current = (i + offset) % PHOTOS.length;
+  return (
+    <div className={`relative overflow-hidden ${className}`}>
+      {PHOTOS.map((p, idx) => (
+        <img
+          key={p.src}
+          src={p.src}
+          alt={idx === current ? p.alt : ""}
+          aria-hidden={idx !== current}
+          loading="lazy"
+          className="absolute inset-0 h-full w-full object-cover transition-opacity duration-[1400ms] ease-in-out"
+          style={{ opacity: idx === current ? 1 : 0 }}
+        />
+      ))}
+    </div>
   );
 }
 
@@ -175,26 +208,12 @@ export function DressCode() {
         <div className="mt-16 grid grid-cols-1 gap-6 pb-0 sm:grid-cols-12 md:mt-0 md:gap-8 md:pb-40 md:pt-8">
           <div className="sm:col-span-7">
             <Reveal>
-              <div className="overflow-hidden">
-                <img
-                  src={corpImg}
-                  alt="Balance Design dress code workshop in session with a corporate audience"
-                  loading="lazy"
-                  className="h-[42vh] w-full object-cover transition-transform duration-[1600ms] ease-[cubic-bezier(0.16,1,0.3,1)] hover:scale-[1.04] md:h-[60vh]"
-                />
-              </div>
+              <BlendFrame offset={0} className="h-[42vh] md:h-[60vh]" />
             </Reveal>
           </div>
           <div className="sm:col-span-5 sm:self-end">
             <Reveal delay={120}>
-              <div className="overflow-hidden">
-                <img
-                  src={corpImg2}
-                  alt="Participants working through a corporate image consulting exercise"
-                  loading="lazy"
-                  className="h-[32vh] w-full object-cover transition-transform duration-[1600ms] ease-[cubic-bezier(0.16,1,0.3,1)] hover:scale-[1.04] md:h-[44vh]"
-                />
-              </div>
+              <BlendFrame offset={2} className="h-[32vh] md:h-[44vh]" />
             </Reveal>
           </div>
         </div>
