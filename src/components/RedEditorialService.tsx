@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef, useState, type CSSProperties } from "react";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 
-import logoMark from "@/assets/balance-logo-mark.png";
+import logoMark from "@/assets/balance-logo-on-red.png";
 import { Button } from "@/components/ui/button";
 import { Reveal } from "./Reveal";
 
@@ -124,7 +124,8 @@ export function RedEditorialService({
           <img
             src={logoMark}
             alt="Balance Design"
-            className="mx-auto h-12 w-auto object-contain brightness-0 invert md:h-16"
+            data-bg-logo
+            className="mx-auto h-14 w-auto object-contain md:h-20"
             width={120}
             height={80}
           />
