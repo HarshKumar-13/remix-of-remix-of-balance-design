@@ -4,6 +4,11 @@ import videoOne from "@/assets/testimonial-1.mp4";
 import videoTwo from "@/assets/testimonial-2.mp4";
 import posterOne from "@/assets/testimonial-1-poster.jpg";
 import posterTwo from "@/assets/testimonial-2-poster.jpg";
+import videoThree from "@/assets/testimonial-3.mp4";
+import videoFour from "@/assets/testimonial-4.mp4";
+import posterThree from "@/assets/testimonial-3-poster.jpg";
+import posterFour from "@/assets/testimonial-4-poster.jpg";
+import { Volume2, VolumeX } from "lucide-react";
 
 import { LogoMark } from "./LogoMark";
 import { Reveal } from "./Reveal";
@@ -20,10 +25,10 @@ type VideoTestimonial = {
 const TESTIMONIALS: VideoTestimonial[] = [
   { id: "t1", name: "Ananya Mehta", role: "People Director, Meridian Group", video: videoOne, poster: posterOne },
   { id: "t2", name: "Rohan Kapoor", role: "Brand Lead, North & Co.", video: videoTwo, poster: posterTwo },
+  { id: "t3", name: "", role: "", video: videoThree, poster: posterThree },
+  { id: "t4", name: "", role: "", video: videoFour, poster: posterFour },
   { id: "t1b", name: "Ananya Mehta", role: "People Director, Meridian Group", video: videoOne, poster: posterOne },
   { id: "t2b", name: "Rohan Kapoor", role: "Brand Lead, North & Co.", video: videoTwo, poster: posterTwo },
-  { id: "t1c", name: "Ananya Mehta", role: "People Director, Meridian Group", video: videoOne, poster: posterOne },
-  { id: "t2c", name: "Rohan Kapoor", role: "Brand Lead, North & Co.", video: videoTwo, poster: posterTwo },
 ];
 
 const AUTO_ADVANCE_MS = 9000;
@@ -40,6 +45,7 @@ export function Testimonials() {
   const [active, setActive] = useState(0);
   const [timerKey, setTimerKey] = useState(0);
   const [inView, setInView] = useState(false);
+  const [soundOn, setSoundOn] = useState(true);
   const [reach, setReach] = useState(2);
 
   useEffect(() => {
@@ -80,14 +86,21 @@ export function Testimonials() {
     videoRefs.current.forEach((video, index) => {
       if (!video) return;
       if (index === active && inView) {
+        video.muted = !soundOn;
         const play = video.play();
-        if (play && typeof play.catch === "function") play.catch(() => {});
+        if (play && typeof play.catch === "function")
+          play.catch(() => {
+            video.muted = true;
+            setSoundOn(false);
+            video.play().catch(() => {});
+          });
       } else {
         video.pause();
+        video.muted = true;
         if (index !== active) video.currentTime = 0;
       }
     });
-  }, [active, inView]);
+  }, [active, inView, soundOn]);
 
   // Keep the carousel moving
   useEffect(() => {
@@ -165,6 +178,20 @@ export function Testimonials() {
                     onEnded={() => isActive && go(1)}
                     className="h-full w-full object-cover"
                   />
+                  {isActive && (
+                    <button
+                      type="button"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setSoundOn((v) => !v);
+                      }}
+                      onPointerDown={(e) => e.stopPropagation()}
+                      aria-label={soundOn ? "Mute video" : "Unmute video"}
+                      className="absolute bottom-4 right-4 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-charcoal/50 text-ivory backdrop-blur-sm transition-colors hover:bg-charcoal/80"
+                    >
+                      {soundOn ? <Volume2 className="h-5 w-5" /> : <VolumeX className="h-5 w-5" />}
+                    </button>
+                  )}
                 </div>
                 <div
                   className={`mt-8 text-center transition-opacity duration-700 ${isActive ? "opacity-100" : "opacity-0"}`}
