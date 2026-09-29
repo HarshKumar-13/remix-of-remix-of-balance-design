@@ -1,15 +1,21 @@
 import { useEffect, useRef, useState } from "react";
 
-import personalWorkshopAsset from "@/assets/personal-workshop.png";
-import personalStylingDetailAsset from "@/assets/personal-styling-detail.png";
-import personalFittingAsset from "@/assets/personal-fitting.jpg";
-import personalConsultationAsset from "@/assets/personal-consultation.jpg";
+import p1 from "@/assets/personal-new-1.jpg";
+import p2 from "@/assets/personal-new-2.jpg";
+import p3 from "@/assets/personal-new-3.jpg";
+import p4 from "@/assets/personal-new-4.jpg";
+import p5 from "@/assets/personal-new-5.jpg";
+import p6 from "@/assets/personal-new-6.jpg";
+import p7 from "@/assets/personal-new-7.jpg";
 
 const landscapeImages = [
-  { src: personalWorkshopAsset, alt: "Design team reviewing a lookbook together in a bright studio" },
-  { src: personalStylingDetailAsset, alt: "Stylist helping a client choose the right accessories" },
-  { src: personalFittingAsset, alt: "Personal image consultant adjusting a client's blazer" },
-  { src: personalConsultationAsset, alt: "Wardrobe consultation with a curated clothing selection" },
+  { src: p1, alt: "Colour swatch fan, style sketches and image consulting books on a desk" },
+  { src: p2, alt: "Woman choosing clothes from a wardrobe rail" },
+  { src: p3, alt: "Menswear rail with briefcase, watch and accessories in a styling studio" },
+  { src: p4, alt: "Coral blazer styled with black top, striped skirt and accessories" },
+  { src: p5, alt: "Polka-dot dress on a mannequin with black blazer, bag and heels" },
+  { src: p6, alt: "What colours look good on you - women, ivory to deep bronze" },
+  { src: p7, alt: "Red cardigan styled with beige skirt, red bag and nude heels" },
 ];
 
 export function PersonalImageConsulting() {
