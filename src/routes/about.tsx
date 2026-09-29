@@ -10,7 +10,6 @@ import logoMark from "@/assets/balance-logo-mark.png";
 import heroImg from "@/assets/hero.jpg";
 import aboutImg from "@/assets/about.jpg";
 import pers2 from "@/assets/pers-2.jpg";
-import pers3 from "@/assets/pers-3.jpg";
 import aboutBal1 from "@/assets/about-balance-1.jpg";
 import aboutBal2 from "@/assets/about-balance-2.jpg";
 import aboutBal3 from "@/assets/about-balance-3.jpg";
