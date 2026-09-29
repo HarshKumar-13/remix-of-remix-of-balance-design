@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Facebook, Instagram, Linkedin } from "lucide-react";
-import logoLight from "@/assets/logo-light.png";
+import logoLight from "@/assets/balance-logo-on-black.png";
 
 export function SiteFooter() {
   const ref = useRef<HTMLElement>(null);

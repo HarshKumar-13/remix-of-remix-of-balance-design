@@ -394,7 +394,7 @@
 .service-red svg {
   color: #fff;
 }
-.service-red img[alt*="Balance" i],
+.service-red img[alt*="Balance" i]:not([data-bg-logo]),
 .service-red .logo-mark {
   filter: brightness(0) invert(1);
 }

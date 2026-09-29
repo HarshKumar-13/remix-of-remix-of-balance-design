@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import corpImg from "@/assets/Picture3.jpg";
 import corpImg2 from "@/assets/Picture7.jpg";
-import whiteLogo from "@/assets/balance-logo-white.png";
+import whiteLogo from "@/assets/balance-logo-on-black.png";
 import { Reveal } from "./Reveal";
 
 function WhiteLogo({ className = "" }: { className?: string }) {
