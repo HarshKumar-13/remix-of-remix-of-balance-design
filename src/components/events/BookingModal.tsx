@@ -36,7 +36,7 @@ export function BookingModal({
 
   return (
     <div
-      className="fixed inset-0 z-[60] flex items-end justify-center overflow-y-auto sm:items-center"
+      className="fixed inset-0 z-[60] flex items-center justify-center p-4 sm:p-8"
       role="dialog"
       aria-modal="true"
       aria-label={`Book ${event.title}`}
@@ -49,12 +49,19 @@ export function BookingModal({
         }`}
       />
       <div
-        className={`relative z-10 my-0 w-full max-w-4xl bg-background transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] sm:my-10 ${
+        className={`relative z-10 flex max-h-[calc(100svh-2rem)] w-full max-w-[1150px] flex-col overflow-hidden rounded-[3px] bg-background transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] sm:max-h-[min(640px,calc(100svh-4rem))] sm:w-[88vw] ${
           mounted ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
         }`}
       >
-        <div className="grid grid-cols-1 md:grid-cols-2">
-          <div className="relative hidden overflow-hidden md:block">
+        <button
+          onClick={onClose}
+          aria-label="Close"
+          className="label-xs absolute right-5 top-5 z-20 bg-background/90 px-2 py-1 text-muted-foreground transition-colors hover:text-red"
+        >
+          Close
+        </button>
+        <div className="grid min-h-0 flex-1 grid-cols-1 overflow-y-auto md:grid-cols-[45%_55%] md:overflow-hidden">
+          <div className="relative h-48 shrink-0 overflow-hidden sm:h-64 md:h-full">
             <img
               src={event.image}
               alt={event.title}
@@ -62,7 +69,7 @@ export function BookingModal({
             />
           </div>
 
-          <div className="relative px-6 py-10 sm:px-10 md:py-14">
+          <div className="relative min-h-0 px-6 py-8 sm:px-10 md:overflow-y-auto md:px-12 md:py-10">
             <button
               onClick={onClose}
               aria-label="Close"
