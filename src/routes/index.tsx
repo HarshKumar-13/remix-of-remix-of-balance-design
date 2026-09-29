@@ -25,6 +25,9 @@ import trend1 from "@/assets/Picture8.jpg";
 import trend2 from "@/assets/Picture9.jpg";
 import trend3 from "@/assets/Picture10.jpg";
 import trend4 from "@/assets/Picture11.gif";
+import trendScrapbook from "@/assets/trend-scrapbook.jpeg";
+import trendReworked from "@/assets/trend-reworked.jpeg";
+import trendAbstract from "@/assets/trend-abstract-prints.jpeg";
 import graphic1Asset from "@/assets/Picture17.jpg";
 import graphic2Asset from "@/assets/Picture18.jpg";
 import graphic3Asset from "@/assets/Picture19.jpg";
@@ -56,6 +59,9 @@ const TREND_IMAGES = [
   { src: trend2, alt: "Kidswear collage trend story with applique, patchwork and bold palette" },
   { src: trend3, alt: "Detail page of colour loops, patchwork and psychedelic prints" },
   { src: trend4, alt: "Polo solid style line sheet in Indigo / Global Shopper colourways" },
+  { src: trendScrapbook, alt: "Boys 2-8 yrs Scrapbook trend page with illustration and Pantone palette" },
+  { src: trendReworked, alt: "Reworked Boys 9-14 yrs trend page with felt textures, checks and Pantone palette" },
+  { src: trendAbstract, alt: "Abstract Prints trend board with kaleidoscopic and circular motifs" },
 ];
 
 const GRAPHIC_IMAGES = [
