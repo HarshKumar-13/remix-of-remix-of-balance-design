@@ -31,7 +31,6 @@ const TESTIMONIALS: VideoTestimonial[] = [
   { id: "t2b", name: "Rohan Kapoor", role: "Brand Lead, North & Co.", video: videoTwo, poster: posterTwo },
 ];
 
-const AUTO_ADVANCE_MS = 9000;
 const COUNT = TESTIMONIALS.length;
 
 function offsetFrom(index: number, active: number) {
