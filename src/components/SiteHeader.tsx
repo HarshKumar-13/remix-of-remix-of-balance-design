@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import logoDark from "@/assets/logo-dark.png";
+import logoDark from "@/assets/balance-logo-navbar.png";
 import logoOnBlack from "@/assets/balance-logo-on-black.png";
 
 const NAV = [
