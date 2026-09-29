@@ -1,22 +1,35 @@
 import { useEffect, useRef, useState } from "react";
 
-import aboutImg from "@/assets/about.jpg";
-import aboutImg2 from "@/assets/pers-3.jpg";
+import board1 from "@/assets/about-board-1.jpg";
+import board2 from "@/assets/about-board-2.jpg";
+import board3 from "@/assets/about-board-3.jpg";
+import board4 from "@/assets/about-board-4.jpg";
+
+const BOARDS = [
+  { src: board1, alt: "Super heroes Boys 2-8 yrs trend board with Pantone palette" },
+  { src: board2, alt: "Assembling Girls 2-8 yrs trend page with folk prints and Pantone palette" },
+  { src: board3, alt: "The Remixing colour palette page across age groups" },
+  { src: board4, alt: "The Remixing mood board of red and yellow folk prints" },
+];
 import { Reveal } from "./Reveal";
 
 function ParallaxImage({
-  src,
-  alt,
+  offset: start,
   speed = 0.06,
   className = "",
 }: {
-  src: string;
-  alt: string;
+  offset: number;
   speed?: number;
   className?: string;
 }) {
   const ref = useRef<HTMLDivElement>(null);
   const [offset, setOffset] = useState(0);
+  const [tick, setTick] = useState(0);
+  useEffect(() => {
+    const id = window.setInterval(() => setTick((v) => v + 1), 2500);
+    return () => window.clearInterval(id);
+  }, []);
+  const current = (tick + start) % BOARDS.length;
 
   useEffect(() => {
     const onScroll = () => {
@@ -36,14 +49,18 @@ function ParallaxImage({
   }, [speed]);
 
   return (
-    <div ref={ref} className={`overflow-hidden ${className}`}>
-      <img
-        src={src}
-        alt={alt}
-        loading="lazy"
-        className="h-full w-full scale-[1.15] object-cover transition-transform duration-[1600ms] ease-[cubic-bezier(0.16,1,0.3,1)] hover:scale-[1.08]"
-        style={{ transform: `translate3d(0, ${offset}px, 0) scale(1.15)` }}
-      />
+    <div ref={ref} className={`relative overflow-hidden ${className}`}>
+      {BOARDS.map((b, i) => (
+        <img
+          key={b.src}
+          src={b.src}
+          alt={i === current ? b.alt : ""}
+          aria-hidden={i !== current}
+          loading="lazy"
+          className="absolute inset-0 h-full w-full object-cover transition-opacity duration-[1400ms] ease-in-out"
+          style={{ transform: `translate3d(0, ${offset}px, 0) scale(1.15)`, opacity: i === current ? 1 : 0 }}
+        />
+      ))}
     </div>
   );
 }
@@ -111,8 +128,7 @@ export function AboutSection() {
           <div className="sm:col-span-5 sm:col-start-3 sm:self-end">
             <Reveal>
               <ParallaxImage
-                src={aboutImg}
-                alt="Designer draping fabric on a mannequin in a sunlit atelier"
+                offset={0}
                 className="h-[38vh] w-full md:h-[46vh]"
               />
             </Reveal>
@@ -120,8 +136,7 @@ export function AboutSection() {
           <div className="sm:col-span-5">
             <Reveal delay={120}>
               <ParallaxImage
-                src={aboutImg2}
-                alt="Individual in a minimal monochrome outfit against a warm plaster wall"
+                offset={2}
                 speed={0.09}
                 className="h-[52vh] w-full md:h-[70vh]"
               />
