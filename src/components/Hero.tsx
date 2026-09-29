@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { Volume2, VolumeX } from "lucide-react";
 import h1 from "@/assets/hero-new-1.jpg";
 import h2 from "@/assets/hero-new-2.jpg";
 import h3 from "@/assets/hero-new-3.jpg";
@@ -30,7 +31,7 @@ export function Hero({ introComplete = true }: { introComplete?: boolean }) {
   const [loaded, setLoaded] = useState(false);
   const heroRef = useRef<HTMLElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
-  const [muted, setMuted] = useState(true);
+  const [muted, setMuted] = useState(false);
 
   useEffect(() => {
     if (!introComplete) return;
@@ -51,7 +52,12 @@ export function Hero({ introComplete = true }: { introComplete?: boolean }) {
     if (SLIDES[index]?.type === "video") {
       if (v) {
         v.currentTime = 0;
-        v.play().catch(() => {});
+        v.muted = muted;
+        v.play().catch(() => {
+          v.muted = true;
+          setMuted(true);
+          v.play().catch(() => {});
+        });
       }
       return;
     }
@@ -105,10 +111,10 @@ export function Hero({ introComplete = true }: { introComplete?: boolean }) {
         <button
           type="button"
           onClick={() => setMuted((m) => !m)}
-          aria-label={muted ? "Turn sound on" : "Turn sound off"}
-          className="label-xs absolute right-6 top-24 z-20 flex items-center gap-2 border border-ivory/60 px-4 py-2 text-ivory transition-colors hover:bg-ivory hover:text-charcoal md:right-12 md:top-28"
+          aria-label={muted ? "Unmute video" : "Mute video"}
+          className="absolute bottom-6 right-6 z-20 flex h-11 w-11 items-center justify-center rounded-full border border-ivory/60 text-ivory transition-colors hover:bg-ivory hover:text-charcoal md:bottom-10 md:right-12"
         >
-          {muted ? "Sound off" : "Sound on"}
+          {muted ? <VolumeX className="h-5 w-5" /> : <Volume2 className="h-5 w-5" />}
         </button>
       )}
       <div
