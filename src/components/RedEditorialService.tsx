@@ -12,7 +12,43 @@ type RedEditorialServiceProps = {
   headline: React.ReactNode;
   description?: string;
   images: ServiceImage[];
+  single?: boolean;
 };
+
+function SingleImageSlideshow({ images, label }: { images: ServiceImage[]; label: string }) {
+  const [active, setActive] = useState(0);
+  const [paused, setPaused] = useState(false);
+
+  useEffect(() => {
+    if (paused || images.length < 2) return;
+    const t = window.setInterval(() => setActive((i) => (i + 1) % images.length), 3500);
+    return () => window.clearInterval(t);
+  }, [images.length, paused]);
+
+  return (
+    <div
+      className="relative mx-auto h-[62vh] w-full max-w-6xl px-6 md:h-[82vh] md:px-12"
+      aria-label={`${label} image gallery`}
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
+      onTouchStart={() => setPaused(true)}
+      onTouchEnd={() => setPaused(false)}
+    >
+      {images.map((image, i) => (
+        <img
+          key={image.src}
+          src={image.src}
+          alt={i === active ? image.alt : ""}
+          aria-hidden={i !== active}
+          decoding="async"
+          className={`absolute inset-0 m-auto h-full w-full object-contain px-6 transition-opacity duration-[1400ms] ease-in-out md:px-12 ${
+            i === active ? "opacity-100" : "opacity-0"
+          }`}
+        />
+      ))}
+    </div>
+  );
+}
 
 const AUTOPLAY_DELAY = 2000;
 
@@ -116,6 +152,7 @@ export function RedEditorialService({
   headline,
   description,
   images,
+  single = false,
 }: RedEditorialServiceProps) {
   return (
     <section className="overflow-hidden bg-red py-24 text-primary-foreground md:py-36" aria-label={eyebrow}>
@@ -158,7 +195,11 @@ export function RedEditorialService({
       </div>
 
       <Reveal delay={390} className="mt-20 md:mt-28">
-        <EditorialCarousel images={images} label={eyebrow} />
+        {single ? (
+          <SingleImageSlideshow images={images} label={eyebrow} />
+        ) : (
+          <EditorialCarousel images={images} label={eyebrow} />
+        )}
       </Reveal>
     </section>
   );
