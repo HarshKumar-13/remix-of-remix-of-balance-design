@@ -330,6 +330,20 @@ function FounderPanel() {
           </div>
         </Reveal>
       </div>
+      <div className="md:col-span-12">
+        <Reveal>
+          <div className="relative aspect-video w-full overflow-hidden">
+            <iframe
+              src="https://www.youtube.com/embed/fNXmuiE3k-M"
+              title="Upma Shrian — Balance Design & Fashion Consultancy"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowFullScreen
+              loading="lazy"
+              className="absolute inset-0 h-full w-full border-0"
+            />
+          </div>
+        </Reveal>
+      </div>
     </div>
   );
 }
