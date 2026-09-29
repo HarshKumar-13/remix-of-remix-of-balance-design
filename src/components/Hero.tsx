@@ -30,6 +30,7 @@ export function Hero({ introComplete = true }: { introComplete?: boolean }) {
   const [loaded, setLoaded] = useState(false);
   const heroRef = useRef<HTMLElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
+  const [muted, setMuted] = useState(true);
 
   useEffect(() => {
     if (!introComplete) return;
@@ -79,7 +80,7 @@ export function Hero({ introComplete = true }: { introComplete?: boolean }) {
             key={s.src}
             ref={videoRef}
             src={s.src}
-            muted
+            muted={muted}
             playsInline
             preload="metadata"
             onEnded={next}
@@ -100,6 +101,16 @@ export function Hero({ introComplete = true }: { introComplete?: boolean }) {
       <div className="absolute inset-0 bg-charcoal/35" />
       <div className="absolute inset-x-0 bottom-0 h-3/4 bg-gradient-to-t from-charcoal/80 via-charcoal/30 to-transparent" />
 
+      {SLIDES[index]?.type === "video" && (
+        <button
+          type="button"
+          onClick={() => setMuted((m) => !m)}
+          aria-label={muted ? "Turn sound on" : "Turn sound off"}
+          className="label-xs absolute right-6 top-24 z-20 flex items-center gap-2 border border-ivory/60 px-4 py-2 text-ivory transition-colors hover:bg-ivory hover:text-charcoal md:right-12 md:top-28"
+        >
+          {muted ? "Sound off" : "Sound on"}
+        </button>
+      )}
       <div
         className="relative z-10 flex h-full flex-col justify-end px-6 pb-20 text-ivory md:px-12 md:pb-24"
         style={{ transform: `translate3d(0, ${y * -0.08}px, 0)` }}
