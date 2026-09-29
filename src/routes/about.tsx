@@ -11,6 +11,13 @@ import heroImg from "@/assets/hero.jpg";
 import aboutImg from "@/assets/about.jpg";
 import pers2 from "@/assets/pers-2.jpg";
 import pers3 from "@/assets/pers-3.jpg";
+import aboutBal1 from "@/assets/about-balance-1.jpg";
+import aboutBal2 from "@/assets/about-balance-2.jpg";
+import aboutBal3 from "@/assets/about-balance-3.jpg";
+import aboutBal4 from "@/assets/about-balance-4.jpg";
+import aboutBal5 from "@/assets/about-balance-5.jpg";
+import aboutBal6 from "@/assets/about-balance-6.jpg";
+import aboutBal7 from "@/assets/about-balance-7.jpg";
 import founder1 from "@/assets/founder-1.jpeg";
 import founder2 from "@/assets/founder-2.webp";
 import founder3 from "@/assets/founder-3.jpg";
@@ -187,6 +194,30 @@ function AboutTabs() {
 
 /* ---------- panels ---------- */
 
+const ABOUT_BALANCE_IMAGES = [aboutBal1, aboutBal2, aboutBal3, aboutBal4, aboutBal5, aboutBal6, aboutBal7];
+
+function FadeFrame({ offset, className }: { offset: number; className: string }) {
+  const [idx, setIdx] = useState(offset);
+  useEffect(() => {
+    const t = setInterval(() => setIdx((i) => (i + 1) % ABOUT_BALANCE_IMAGES.length), 2500);
+    return () => clearInterval(t);
+  }, []);
+  return (
+    <div className={`relative w-full overflow-hidden ${className}`}>
+      {ABOUT_BALANCE_IMAGES.map((src, i) => (
+        <img
+          key={src}
+          src={src}
+          alt={i === idx ? "Balance Design workshop and seminar moments" : ""}
+          aria-hidden={i !== idx}
+          loading="lazy"
+          className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-1000 ease-in-out ${i === idx ? "opacity-100" : "opacity-0"}`}
+        />
+      ))}
+    </div>
+  );
+}
+
 function AboutBalancePanel() {
   return (
     <div>
@@ -235,22 +266,12 @@ function AboutBalancePanel() {
       <div className="mt-16 grid grid-cols-1 gap-6 sm:grid-cols-12 md:mt-24 md:gap-8">
         <div className="sm:col-span-5 sm:col-start-2 sm:self-end">
           <Reveal>
-            <img
-              src={aboutImg}
-              alt="Designer draping fabric on a mannequin in a sunlit atelier"
-              loading="lazy"
-              className="h-[38vh] w-full object-cover md:h-[46vh]"
-            />
+            <FadeFrame offset={0} className="h-[38vh] md:h-[46vh]" />
           </Reveal>
         </div>
         <div className="sm:col-span-5">
           <Reveal delay={120}>
-            <img
-              src={pers3}
-              alt="Individual in a minimal monochrome outfit against a warm plaster wall"
-              loading="lazy"
-              className="h-[52vh] w-full object-cover md:h-[68vh]"
-            />
+            <FadeFrame offset={3} className="h-[52vh] md:h-[68vh]" />
           </Reveal>
         </div>
       </div>
