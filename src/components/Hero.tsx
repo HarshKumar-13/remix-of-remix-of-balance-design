@@ -49,7 +49,7 @@ export function Hero({ introComplete = true }: { introComplete?: boolean }) {
   useEffect(() => {
     const el = heroRef.current;
     if (!el) return;
-    const io = new IntersectionObserver(([e]) => setInView(e.isIntersecting && e.intersectionRatio >= 0.4), {
+    const io = new IntersectionObserver(([e]) => setInView(!!e && e.isIntersecting && e.intersectionRatio >= 0.4), {
       threshold: [0, 0.4, 1],
     });
     io.observe(el);
