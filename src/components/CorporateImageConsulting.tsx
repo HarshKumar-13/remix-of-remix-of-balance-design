@@ -6,6 +6,10 @@ import raymondVenue from "@/assets/corporate-raymond-venue.jpg";
 import teamSession from "@/assets/corporate-team-session.jpg";
 import raymondPresentation from "@/assets/corporate-raymond-presentation.jpg";
 import raymondInvitation from "@/assets/corporate-raymond-invitation.jpg";
+import corpP1 from "@/assets/corporate-Picture1.jpg";
+import corpP2 from "@/assets/corporate-Picture2.jpg";
+import corpP4 from "@/assets/corporate-Picture4-2.jpg";
+import corpP5 from "@/assets/corporate-Picture5.jpg";
 
 const verticalImages = [
   {
@@ -20,6 +24,8 @@ const verticalImages = [
     src: teamSession,
     alt: "Corporate team gathered after an image consulting session",
   },
+  { src: corpP2, alt: "Presenter addressing a small corporate group at round tables" },
+  { src: corpP1, alt: "Presenter engaging participants in a corporate image session" },
 ];
 
 const horizontalImages = [
@@ -35,6 +41,8 @@ const horizontalImages = [
     src: raymondGroup,
     alt: "Participants at the Raymond Master the Right Dress Code workshop",
   },
+  { src: corpP4, alt: "Corporate seminar in a hotel ballroom with a colour wheel presentation" },
+  { src: corpP5, alt: "Presenter speaking to professionals seated at round tables" },
 ];
 
 export function CorporateImageConsulting() {
