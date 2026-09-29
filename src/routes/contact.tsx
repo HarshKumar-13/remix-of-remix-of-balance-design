@@ -71,7 +71,7 @@ function ContactPage() {
 
   return (
     <>
-      <SiteHeader />
+      <SiteHeader forceSolid />
       <main className="bg-background pb-24 pt-36 md:pb-32 md:pt-44">
         <div className="mx-auto grid max-w-7xl grid-cols-1 gap-16 px-6 md:grid-cols-[40%_1fr] md:gap-24 md:px-12">
           <div>
