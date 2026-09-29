@@ -3,7 +3,6 @@ import { useEffect, useRef, useState } from "react";
 import raymondGroup from "@/assets/corporate-raymond-group.jpg";
 import raymondColourSession from "@/assets/corporate-raymond-colour-session.jpg";
 import raymondVenue from "@/assets/corporate-raymond-venue.jpg";
-import teamSession from "@/assets/corporate-team-session.jpg";
 import raymondPresentation from "@/assets/corporate-raymond-presentation.jpg";
 import raymondInvitation from "@/assets/corporate-raymond-invitation.jpg";
 import corpP1 from "@/assets/corporate-Picture1.jpg";
@@ -22,10 +21,6 @@ const verticalImages = [
   {
     src: raymondInvitation,
     alt: "Raymond exclusive grooming workshop invitation",
-  },
-  {
-    src: teamSession,
-    alt: "Corporate team gathered after an image consulting session",
   },
   { src: corpP2, alt: "Presenter addressing a small corporate group at round tables" },
   { src: corpP1, alt: "Presenter engaging participants in a corporate image session" },
