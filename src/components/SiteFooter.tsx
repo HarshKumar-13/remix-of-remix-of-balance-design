@@ -98,7 +98,7 @@ export function SiteFooter() {
                 { l: "Home", h: "/#top" },
                 { l: "About Us", h: "/about" },
                 { l: "Events", h: "/events" },
-                { l: "Contact Us", h: "/#contact" },
+                { l: "Contact Us", h: "/contact" },
               ].map((n) => (
                 <a
                   key={n.l}
