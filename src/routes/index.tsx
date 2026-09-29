@@ -29,9 +29,8 @@ import trendScrapbook from "@/assets/trend-scrapbook.jpeg";
 import trendReworked from "@/assets/trend-reworked.jpeg";
 import trendAbstract from "@/assets/trend-abstract-prints.jpeg";
 import trendFolksy from "@/assets/trend-folksy.jpeg";
-import graphic1Asset from "@/assets/Picture17.jpg";
-import graphic2Asset from "@/assets/Picture18.jpg";
-import graphic3Asset from "@/assets/Picture19.jpg";
+import graphic1Asset from "@/assets/graphic-1.jpeg";
+import graphic2Asset from "@/assets/graphic-2.jpeg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -67,9 +66,8 @@ const TREND_IMAGES = [
 ];
 
 const GRAPHIC_IMAGES = [
-  { src: graphic1Asset, alt: "Tempt graphic tee development boards with Pantone colour story" },
-  { src: graphic2Asset, alt: "Red Edge streetwear graphic library and colour palette" },
-  { src: graphic3Asset, alt: "Womenswear graphic tee and knitwear range flats" },
+  { src: graphic1Asset, alt: "Boys' garment CAD flats range board" },
+  { src: graphic2Asset, alt: "Super heroes boys 2-8 yrs theme board with Pantone colours" },
 ];
 
 
@@ -134,6 +132,7 @@ function Index() {
               headline={<>Graphic &amp;<br />Print Design</>}
               description="We do CAD'S for shirts, graphic design for T-shirts and textile print design — expressive directions that bring concepts, culture and visual identity into apparel"
               images={GRAPHIC_IMAGES}
+              single
             />
           </section>
 
