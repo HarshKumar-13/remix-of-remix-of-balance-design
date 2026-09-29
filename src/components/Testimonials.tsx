@@ -193,12 +193,6 @@ export function Testimonials() {
                     </button>
                   )}
                 </div>
-                <div
-                  className={`mt-8 text-center transition-opacity duration-700 ${isActive ? "opacity-100" : "opacity-0"}`}
-                >
-                  <p className="label-xs">{item.name}</p>
-                  <p className="mt-2 text-base text-muted-foreground">{item.role}</p>
-                </div>
               </article>
             );
           })}
