@@ -213,7 +213,7 @@ function EventsHero() {
 
 function Introduction() {
   return (
-    <section className="px-6 py-24 md:px-12 md:py-40">
+    <section className="px-6 pt-12 pb-24 md:px-12 md:pt-16 md:pb-40">
       <div className="mx-auto grid max-w-7xl grid-cols-1 items-end gap-12 md:grid-cols-12 md:gap-16">
         <div className="md:col-span-7">
           <Reveal>
