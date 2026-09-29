@@ -42,7 +42,7 @@ function offsetFrom(index: number, active: number) {
 
 export function Testimonials() {
   const [active, setActive] = useState(0);
-  const [timerKey, setTimerKey] = useState(0);
+  const [, setTimerKey] = useState(0);
   const [inView, setInView] = useState(false);
   const [soundOn, setSoundOn] = useState(true);
   const [reach, setReach] = useState(2);
