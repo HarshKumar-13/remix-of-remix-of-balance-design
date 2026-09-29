@@ -373,6 +373,11 @@ function PhilosophyPanel() {
             honest, assured and unmistakably your own.
           </p>
         </Reveal>
+        <Reveal delay={300}>
+          <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground md:text-xl">
+            My mission is to transform creativity into measurable business impact .Whether it’s launching a new label, crafting consumer-centric brand stories, scaling design processes for growth, through directing design teams, or mentoring the next generation of fashion leaders.
+          </p>
+        </Reveal>
       </div>
 
       <div className="mt-16 grid grid-cols-1 gap-6 sm:grid-cols-12 md:mt-24 md:gap-8">
