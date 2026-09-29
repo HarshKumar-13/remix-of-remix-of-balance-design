@@ -45,6 +45,34 @@ export function Hero({ introComplete = true }: { introComplete?: boolean }) {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  const [inView, setInView] = useState(true);
+  useEffect(() => {
+    const el = heroRef.current;
+    if (!el) return;
+    const io = new IntersectionObserver(([e]) => setInView(!!e && e.isIntersecting && e.intersectionRatio >= 0.4), {
+      threshold: [0, 0.4, 1],
+    });
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
+  // Sound only while the hero is on screen
+  useEffect(() => {
+    const v = videoRef.current;
+    if (!v) return;
+    if (!inView) {
+      v.muted = true;
+      return;
+    }
+    v.muted = muted;
+    if (!muted && !v.paused) {
+      v.play().catch(() => {
+        v.muted = true;
+        setMuted(true);
+      });
+    }
+  }, [inView, muted]);
+
   const next = () => setIndex((i) => (i + 1) % SLIDES.length);
 
   useEffect(() => {
@@ -52,7 +80,7 @@ export function Hero({ introComplete = true }: { introComplete?: boolean }) {
     if (SLIDES[index]?.type === "video") {
       if (v) {
         v.currentTime = 0;
-        v.muted = muted;
+        v.muted = muted || !inView;
         v.play().catch(() => {
           v.muted = true;
           setMuted(true);
@@ -86,7 +114,7 @@ export function Hero({ introComplete = true }: { introComplete?: boolean }) {
             key={s.src}
             ref={videoRef}
             src={s.src}
-            muted={muted}
+            muted={muted || !inView}
             playsInline
             preload="metadata"
             onEnded={next}
