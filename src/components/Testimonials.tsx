@@ -22,6 +22,8 @@ const TESTIMONIALS: VideoTestimonial[] = [
   { id: "t2", name: "Rohan Kapoor", role: "Brand Lead, North & Co.", video: videoTwo, poster: posterTwo },
   { id: "t1b", name: "Ananya Mehta", role: "People Director, Meridian Group", video: videoOne, poster: posterOne },
   { id: "t2b", name: "Rohan Kapoor", role: "Brand Lead, North & Co.", video: videoTwo, poster: posterTwo },
+  { id: "t1c", name: "Ananya Mehta", role: "People Director, Meridian Group", video: videoOne, poster: posterOne },
+  { id: "t2c", name: "Rohan Kapoor", role: "Brand Lead, North & Co.", video: videoTwo, poster: posterTwo },
 ];
 
 const AUTO_ADVANCE_MS = 9000;
@@ -38,6 +40,15 @@ export function Testimonials() {
   const [active, setActive] = useState(0);
   const [timerKey, setTimerKey] = useState(0);
   const [inView, setInView] = useState(false);
+  const [reach, setReach] = useState(2);
+
+  useEffect(() => {
+    const mq = window.matchMedia("(min-width: 1024px)");
+    const update = () => setReach(mq.matches ? 2 : 1);
+    update();
+    mq.addEventListener("change", update);
+    return () => mq.removeEventListener("change", update);
+  }, []);
   const sectionRef = useRef<HTMLElement | null>(null);
   const videoRefs = useRef<Array<HTMLVideoElement | null>>([]);
   const drag = useRef<{ x: number; active: boolean }>({ x: 0, active: false });
@@ -111,7 +122,7 @@ export function Testimonials() {
 
       <Reveal>
         <div
-          className="relative mx-auto flex h-[112vw] max-h-[40rem] min-h-[27rem] w-full touch-pan-y select-none items-center justify-center md:h-[37rem] md:w-[92vw] lg:h-[42rem] lg:w-[70vw]"
+          className="relative mx-auto flex h-[112vw] max-h-[40rem] min-h-[27rem] w-full touch-pan-y select-none items-center justify-center md:h-[37rem] md:w-[92vw] lg:h-[max(30vw,30rem)] lg:max-h-[38rem] lg:w-[92vw]"
           onPointerDown={onPointerDown}
           onPointerUp={onPointerUp}
           onPointerCancel={() => (drag.current.active = false)}
@@ -119,17 +130,24 @@ export function Testimonials() {
           {TESTIMONIALS.map((item, index) => {
             const offset = offsetFrom(index, active);
             const isActive = offset === 0;
-            const hidden = Math.abs(offset) > 1;
+            const dist = Math.abs(offset);
+            const hidden = dist > reach;
+            const sign = Math.sign(offset);
+            // Position (in card widths) and depth per distance from center.
+            const POS = reach === 2 ? [0, 0.98, 1.84, 2.5] : [0, 0.92, 1.6, 2.2];
+            const SCALE = reach === 2 ? [1, 0.85, 0.72, 0.6] : [1, 0.82, 0.66, 0.6];
+            const OPACITY = reach === 2 ? [1, 0.72, 0.42, 0] : [1, 0.68, 0, 0];
+            const step = Math.min(dist, 3);
             return (
               <article
                 key={item.id}
                 aria-hidden={!isActive}
                 onClick={() => !isActive && !hidden && select(index)}
-                className="absolute top-1/2 left-1/2 w-[64vw] transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] motion-reduce:transition-none sm:w-[52vw] md:w-[min(38vw,23rem)] lg:w-[min(24vw,27rem)]"
+                className="absolute top-1/2 left-1/2 w-[64vw] transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] motion-reduce:transition-none sm:w-[52vw] md:w-[min(38vw,23rem)] lg:w-[min(18vw,22rem)]"
                 style={{
-                  transform: `translate3d(calc(-50% + ${offset * 92}%), -50%, 0) scale(${isActive ? 1 : 0.82})`,
-                  opacity: hidden ? 0 : isActive ? 1 : 0.68,
-                  zIndex: isActive ? 20 : 10 - Math.abs(offset),
+                  transform: `translate3d(calc(-50% + ${sign * (POS[step] ?? 0) * 100}%), -50%, 0) scale(${SCALE[step] ?? 1})`,
+                  opacity: hidden ? 0 : (OPACITY[step] ?? 0),
+                  zIndex: 20 - dist,
                   pointerEvents: hidden ? "none" : "auto",
                   cursor: isActive ? "default" : "pointer",
                 }}
@@ -162,17 +180,17 @@ export function Testimonials() {
             type="button"
             aria-label="Previous testimonial"
             onClick={() => go(-1)}
-            className="absolute top-[calc(50%-2rem)] left-2 z-30 -translate-y-1/2 text-2xl text-foreground/50 transition-colors hover:text-foreground md:-left-4 lg:-left-16"
+            className="group absolute top-[calc(50%-2rem)] left-2 z-30 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-foreground/25 text-foreground/70 transition-all duration-300 hover:scale-105 hover:border-foreground hover:bg-foreground hover:text-background md:left-4 lg:left-2"
           >
-            &#8592;
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7" /></svg>
           </button>
           <button
             type="button"
             aria-label="Next testimonial"
             onClick={() => go(1)}
-            className="absolute top-[calc(50%-2rem)] right-2 z-30 -translate-y-1/2 text-2xl text-foreground/50 transition-colors hover:text-foreground md:-right-4 lg:-right-16"
+            className="group absolute top-[calc(50%-2rem)] right-2 z-30 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-foreground/25 text-foreground/70 transition-all duration-300 hover:scale-105 hover:border-foreground hover:bg-foreground hover:text-background md:right-4 lg:right-2"
           >
-            &#8594;
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7" /></svg>
           </button>
         </div>
       </Reveal>
