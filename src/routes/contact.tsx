@@ -152,7 +152,7 @@ function ContactPage() {
   );
 }
 
-function Field({ label, name, type, error }: { label: string; name: string; type: string; error?: string }) {
+function Field({ label, name, type, error }: { label: string; name: string; type: string; error?: string | undefined }) {
   return (
     <label className="block">
       <span className="label-xs text-muted-foreground">{label}</span>
