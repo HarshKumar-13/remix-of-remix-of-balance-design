@@ -1,10 +1,9 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 
-import spotlightVideo from "@/assets/own-your-spotlight.webm";
-import posterOne from "@/assets/styling-workshop-session-1.jpeg";
-import posterTwo from "@/assets/corporate-raymond-presentation.jpg";
-import posterThree from "@/assets/personal-workshop.png";
-import posterFour from "@/assets/styling-workshop-group-1.jpeg";
+import videoOne from "@/assets/testimonial-1.mp4";
+import videoTwo from "@/assets/testimonial-2.mp4";
+import posterOne from "@/assets/testimonial-1-poster.jpg";
+import posterTwo from "@/assets/testimonial-2-poster.jpg";
 
 import { LogoMark } from "./LogoMark";
 import { Reveal } from "./Reveal";
@@ -13,41 +12,16 @@ type VideoTestimonial = {
   id: string;
   name: string;
   role: string;
-  /** Replace with the final testimonial video URL. */
   video: string;
   poster: string;
 };
 
-// Placeholder media — swap `video` / `poster` for the approved testimonial films.
+// Two supplied films, repeated so the three-card layout stays full.
 const TESTIMONIALS: VideoTestimonial[] = [
-  {
-    id: "ananya",
-    name: "Ananya Mehta",
-    role: "People Director, Meridian Group",
-    video: spotlightVideo,
-    poster: posterOne,
-  },
-  {
-    id: "rohan",
-    name: "Rohan Kapoor",
-    role: "Brand Lead, North & Co.",
-    video: spotlightVideo,
-    poster: posterTwo,
-  },
-  {
-    id: "mira",
-    name: "Mira Shah",
-    role: "Creative Head, Atelier Nine",
-    video: spotlightVideo,
-    poster: posterThree,
-  },
-  {
-    id: "devika",
-    name: "Devika Rao",
-    role: "Head of Design, Studio Lumen",
-    video: spotlightVideo,
-    poster: posterFour,
-  },
+  { id: "t1", name: "Ananya Mehta", role: "People Director, Meridian Group", video: videoOne, poster: posterOne },
+  { id: "t2", name: "Rohan Kapoor", role: "Brand Lead, North & Co.", video: videoTwo, poster: posterTwo },
+  { id: "t1b", name: "Ananya Mehta", role: "People Director, Meridian Group", video: videoOne, poster: posterOne },
+  { id: "t2b", name: "Rohan Kapoor", role: "Brand Lead, North & Co.", video: videoTwo, poster: posterTwo },
 ];
 
 const AUTO_ADVANCE_MS = 9000;
