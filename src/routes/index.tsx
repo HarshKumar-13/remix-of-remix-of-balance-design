@@ -28,6 +28,7 @@ import trend4 from "@/assets/Picture11.gif";
 import trendScrapbook from "@/assets/trend-scrapbook.jpeg";
 import trendReworked from "@/assets/trend-reworked.jpeg";
 import trendAbstract from "@/assets/trend-abstract-prints.jpeg";
+import trendFolksy from "@/assets/trend-folksy.jpeg";
 import graphic1Asset from "@/assets/Picture17.jpg";
 import graphic2Asset from "@/assets/Picture18.jpg";
 import graphic3Asset from "@/assets/Picture19.jpg";
@@ -62,6 +63,7 @@ const TREND_IMAGES = [
   { src: trendScrapbook, alt: "Boys 2-8 yrs Scrapbook trend page with illustration and Pantone palette" },
   { src: trendReworked, alt: "Reworked Boys 9-14 yrs trend page with felt textures, checks and Pantone palette" },
   { src: trendAbstract, alt: "Abstract Prints trend board with kaleidoscopic and circular motifs" },
+  { src: trendFolksy, alt: "Folksy trend board with embroidered garment flats, knits, fringes and braids" },
 ];
 
 const GRAPHIC_IMAGES = [
