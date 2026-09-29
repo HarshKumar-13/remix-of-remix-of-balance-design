@@ -149,7 +149,7 @@ export function CorporateImageConsulting() {
                 loading="lazy"
                 decoding="async"
                 className={`absolute inset-0 h-full w-full object-cover transition-[opacity,transform] duration-[1800ms] ease-[cubic-bezier(0.16,1,0.3,1)] motion-reduce:transition-none ${
-                  activeImage === index ? "scale-100 opacity-100" : "scale-[1.025] opacity-0"
+                  activeImage % horizontalImages.length === index ? "scale-100 opacity-100" : "scale-[1.025] opacity-0"
                 }`}
               />
             ))}
