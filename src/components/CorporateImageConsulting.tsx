@@ -10,6 +10,9 @@ import corpP1 from "@/assets/corporate-Picture1.jpg";
 import corpP2 from "@/assets/corporate-Picture2.jpg";
 import corpP4 from "@/assets/corporate-Picture4-2.jpg";
 import corpP5 from "@/assets/corporate-Picture5.jpg";
+import corpP6 from "@/assets/corporate-Picture6.jpg";
+import corpP7 from "@/assets/corporate-Picture7.jpg";
+import corpP8 from "@/assets/corporate-Picture8.jpg";
 
 const verticalImages = [
   {
@@ -26,6 +29,9 @@ const verticalImages = [
   },
   { src: corpP2, alt: "Presenter addressing a small corporate group at round tables" },
   { src: corpP1, alt: "Presenter engaging participants in a corporate image session" },
+  { src: corpP6, alt: "Raymond Jayanagar Master The Right Dress Code led by Upma Shrian banner" },
+  { src: corpP7, alt: "Upma Shrian presenting warm and cool colours" },
+  { src: corpP8, alt: "Upma Shrian presenting at a Balance corporate workshop" },
 ];
 
 const horizontalImages = [
@@ -143,7 +149,7 @@ export function CorporateImageConsulting() {
                 loading="lazy"
                 decoding="async"
                 className={`absolute inset-0 h-full w-full object-cover transition-[opacity,transform] duration-[1800ms] ease-[cubic-bezier(0.16,1,0.3,1)] motion-reduce:transition-none ${
-                  activeImage === index ? "scale-100 opacity-100" : "scale-[1.025] opacity-0"
+                  activeImage % horizontalImages.length === index ? "scale-100 opacity-100" : "scale-[1.025] opacity-0"
                 }`}
               />
             ))}
