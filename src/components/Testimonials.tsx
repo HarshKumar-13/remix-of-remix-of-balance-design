@@ -145,8 +145,8 @@ export function Testimonials() {
                 onClick={() => !isActive && !hidden && select(index)}
                 className="absolute top-1/2 left-1/2 w-[64vw] transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] motion-reduce:transition-none sm:w-[52vw] md:w-[min(38vw,23rem)] lg:w-[min(18vw,22rem)]"
                 style={{
-                  transform: `translate3d(calc(-50% + ${sign * POS[step] * 100}%), -50%, 0) scale(${SCALE[step]})`,
-                  opacity: hidden ? 0 : OPACITY[step],
+                  transform: `translate3d(calc(-50% + ${sign * (POS[step] ?? 0) * 100}%), -50%, 0) scale(${SCALE[step] ?? 1})`,
+                  opacity: hidden ? 0 : (OPACITY[step] ?? 0),
                   zIndex: 20 - dist,
                   pointerEvents: hidden ? "none" : "auto",
                   cursor: isActive ? "default" : "pointer",
