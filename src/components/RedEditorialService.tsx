@@ -179,14 +179,6 @@ export function RedEditorialService({
             </Reveal>
           )}
         </div>
-        <Reveal delay={310}>
-          <a
-            href="mailto:contact@balancedesign.in"
-            className="label-xs link-underline mt-7 inline-block text-primary-foreground"
-          >
-            Book an appointment &nbsp;&rarr;
-          </a>
-        </Reveal>
       </div>
 
       <Reveal delay={390} className="mt-20 md:mt-28">
