@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 export type CurvedImage = { src: string; alt: string };
 
 /** Convex, auto-advancing image row (one step every 2s). Hover gently enlarges an image. */
-export function CurvedSlider({ images }: { images: CurvedImage[] }) {
+export function CurvedSlider({ images, contain = false }: { images: CurvedImage[]; contain?: boolean }) {
   const [offset, setOffset] = useState(0);
   const [hovered, setHovered] = useState<number | null>(null);
   // Cloned slides (3 copies) so the wrap-around happens far off-screen — seamless loop.
@@ -49,7 +49,7 @@ export function CurvedSlider({ images }: { images: CurvedImage[] }) {
               className="aspect-[10/9] overflow-hidden transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]"
               style={{ transform: `scale(${hovered === i ? 1.25 : 1})` }}
             >
-              <img src={img.src} alt={img.alt} loading="lazy" className="h-full w-full object-cover" />
+              <img src={img.src} alt={img.alt} loading="lazy" className={`h-full w-full ${contain ? "object-contain" : "object-cover"}`} />
             </div>
           </div>
         );
