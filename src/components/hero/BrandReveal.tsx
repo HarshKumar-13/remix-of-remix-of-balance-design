@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 
 const COLS = 14;
 const ROWS = 8;
@@ -24,7 +25,7 @@ export function BrandReveal({ onDone }: { onDone: () => void }) {
 
   if (phase === "gone") return null;
 
-  return (
+  return createPortal(
     <motion.div
       aria-hidden
       className="fixed inset-x-0 top-0 z-[70] overflow-hidden bg-background"
@@ -87,6 +88,7 @@ export function BrandReveal({ onDone }: { onDone: () => void }) {
           </motion.h2>
         </div>
       </div>
-    </motion.div>
+    </motion.div>,
+    document.body,
   );
 }
