@@ -81,7 +81,7 @@ export function PersonalImageConsulting() {
           </div>
 
           <p
-            className={`max-w-xl text-left text-lg leading-relaxed text-muted-foreground transition-[opacity,transform] delay-200 duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] md:col-span-5 md:col-start-8 md:pt-10 md:text-xl ${reveal}`}
+            className={`max-w-xl text-left text-[calc(1.294rem+2px)] font-medium leading-relaxed text-red transition-[opacity,transform] delay-200 duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] md:col-span-5 md:col-start-8 md:pt-10 md:text-[calc(1.4375rem+2px)] ${reveal}`}
           >
             "Master the Right Dress Code" is a highly visual and interactive seminar, sharing the
             design tools, such that the individual can make decisions for themselves, about which
