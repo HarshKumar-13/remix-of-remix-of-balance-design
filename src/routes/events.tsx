@@ -578,7 +578,7 @@ function FinalCta() {
         </SlideIn>
         <Reveal delay={140}>
           <p className="mx-auto mt-8 max-w-xl text-lg leading-relaxed opacity-90 md:text-xl">
-            Planning a fashion show, seminar or image-focused experience?
+            Planning a seminar or image-focused experience?
           </p>
         </Reveal>
         <Reveal delay={220}>
