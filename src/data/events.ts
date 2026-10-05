@@ -24,6 +24,8 @@ import max1 from "@/assets/max-fashion-1.jpg";
 import max2 from "@/assets/max-fashion-2.jpg";
 import max3 from "@/assets/max-fashion-3.jpg";
 import p18 from "@/assets/Picture18.jpg";
+import leela1 from "@/assets/leela-1.jpg";
+import leela2 from "@/assets/leela-2.jpg";
 import rt1 from "@/assets/reliance-1.jpg";
 import rt2 from "@/assets/reliance-2.jpg";
 import rt3 from "@/assets/reliance-3.jpg";
@@ -80,7 +82,7 @@ const RAW_PAST_EVENTS: PastEvent[] = [
 
 /* Pinned to the end of the list. Type, date and photos are stand-ins until the real details are supplied. */
 const PINNED_LAST_EVENTS: PastEvent[] = [
-  { id: "past-leela", title: "Leela Palace", type: "", date: "", image: sem1 },
+  { id: "past-leela", title: "Leela Palace", type: "", date: "", image: leela1, images: [leela1, leela2] },
   { id: "past-taj", title: "Taj Mahal Delhi", type: "", date: "", image: sem2 },
 ];
 
