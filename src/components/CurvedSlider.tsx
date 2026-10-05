@@ -46,7 +46,7 @@ export function CurvedSlider({ images, contain = false }: { images: CurvedImage[
             onMouseLeave={() => setHovered((h) => (h === i ? null : h))}
           >
             <div
-              className="aspect-[10/9] overflow-hidden transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]"
+              className={`aspect-[10/9] overflow-hidden ${contain ? "flex items-center justify-center bg-white" : ""} transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]`}
               style={{ transform: `scale(${hovered === i ? 1.25 : 1})` }}
             >
               <img src={img.src} alt={img.alt} loading="lazy" className={`h-full w-full ${contain ? "object-contain" : "object-cover"}`} />
