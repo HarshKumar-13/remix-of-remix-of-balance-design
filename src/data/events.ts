@@ -85,7 +85,7 @@ const RAW_PAST_EVENTS: PastEvent[] = [
 
 /* Pinned to the end of the list. Type, date and photos are stand-ins until the real details are supplied. */
 const PINNED_LAST_EVENTS: PastEvent[] = [
-  { id: "past-leela", title: "Leela Palace", type: "", date: "", image: leela1, images: [leela1, leela2] },
+  { id: "past-leela", title: "Leela Palace", type: "Corporate Image Consulting", date: "", image: leela1, images: [leela1, leela2] },
   { id: "past-taj", title: "Taj Mahal Delhi", type: "Corporate Image Consulting", date: "", image: taj1, images: [taj1, taj2, taj3] },
 ];
 
