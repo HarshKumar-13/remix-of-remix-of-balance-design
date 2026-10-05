@@ -4,6 +4,15 @@ import p1 from "@/assets/pers-upd-1.jpg";
 import p2 from "@/assets/pers-upd-2.jpg";
 import p3 from "@/assets/pers-upd-3.jpg";
 import p4 from "@/assets/pers-upd-4.jpg";
+import s1 from "@/assets/pers-sq-1.jpg";
+import s2 from "@/assets/pers-sq-2.jpg";
+import s3 from "@/assets/pers-sq-3.jpg";
+
+const squareImages = [
+  { src: s1, alt: "Participants seated at a personal image consulting seminar" },
+  { src: s2, alt: "Presenter explaining colour concepts at a Balance seminar" },
+  { src: s3, alt: "Presenter explaining warm and cool colours" },
+];
 
 const landscapeImages = [
   { src: p1, alt: "Coral blazer styled with black top, striped skirt and accessories" },
@@ -108,7 +117,7 @@ export function PersonalImageConsulting() {
           <div
             className={`relative aspect-[4/5] overflow-hidden transition-[clip-path,opacity,transform] delay-500 duration-[1400ms] ease-[cubic-bezier(0.16,1,0.3,1)] md:col-span-5 md:aspect-auto ${imageReveal}`}
           >
-            {landscapeImages.map((image, index) => (
+            {squareImages.map((image, index) => (
               <img
                 key={image.src}
                 src={image.src}
@@ -116,7 +125,7 @@ export function PersonalImageConsulting() {
                 loading="lazy"
                 decoding="async"
                 className={`absolute inset-0 h-full w-full object-cover transition-[opacity,transform] duration-[1800ms] ease-[cubic-bezier(0.16,1,0.3,1)] motion-reduce:transition-none ${
-                  (activeImage + 2) % landscapeImages.length === index
+                  activeImage % squareImages.length === index
                     ? "scale-100 opacity-100"
                     : "scale-[1.025] opacity-0"
                 }`}
