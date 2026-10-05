@@ -56,7 +56,7 @@ export function SiteHeader({
         }`}
       >
         <div
-          className={`flex items-center justify-between px-6 py-6 transition-opacity duration-500 md:px-12 ${tone} ${introComplete ? "opacity-100" : "opacity-0"}`}
+          className={`flex items-center justify-between px-6 py-3 transition-opacity duration-700 md:px-12 ${tone} ${introComplete ? "opacity-100" : "opacity-0"}`}
         >
           <a
             href="/#top"
