@@ -1,5 +1,6 @@
 import { Reveal } from "@/components/Reveal";
 import { CurvedSlider } from "@/components/CurvedSlider";
+import { RotatingPoints } from "@/components/RotatingPoints";
 
 import daw1 from "@/assets/daw-1.jpeg";
 import daw2 from "@/assets/daw-2.jpeg";
@@ -43,6 +44,7 @@ export function StylingWorkshops() {
                 <span className="text-primary">Design Aesthetics</span> &amp; Styling Workshops
               </h2>
             </Reveal>
+            <RotatingPoints />
           </div>
           <div className="md:col-span-5">
             <Reveal delay={160}>
