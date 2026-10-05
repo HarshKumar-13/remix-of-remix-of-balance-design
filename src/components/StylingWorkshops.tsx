@@ -1,6 +1,5 @@
-import { useEffect, useState } from "react";
-
 import { Reveal } from "@/components/Reveal";
+import { CurvedSlider } from "@/components/CurvedSlider";
 
 import daw1 from "@/assets/daw-1.jpeg";
 import daw2 from "@/assets/daw-2.jpeg";
@@ -16,29 +15,7 @@ const FILM = [
   { src: daw5, alt: "Facilitator speaking with engaged workshop participants" },
 ];
 
-const FRAME_MS = 2000;
-
 export function StylingWorkshops() {
-  const [active, setActive] = useState(0);
-  const [reduced, setReduced] = useState(false);
-
-  useEffect(() => {
-    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const update = () => setReduced(mq.matches);
-    update();
-    mq.addEventListener("change", update);
-    return () => mq.removeEventListener("change", update);
-  }, []);
-
-  useEffect(() => {
-    if (reduced) return;
-    const id = window.setInterval(
-      () => setActive((i) => (i + 1) % FILM.length),
-      FRAME_MS,
-    );
-    return () => window.clearInterval(id);
-  }, [reduced]);
-
   return (
     <section
       aria-label="Design Aesthetics and Styling Workshops"
@@ -60,43 +37,22 @@ export function StylingWorkshops() {
           </div>
           <div className="md:col-span-5">
             <Reveal delay={160}>
-              <p className="max-w-md text-lg leading-relaxed text-muted-foreground md:ml-auto md:text-xl">
-                For constant exposure and growth of internal teams, we design
-                workshops to raise the quality of team productivity to a new
-                level. for TEAMS of fashion and retail Brands.like VM and floor
-                sales teams.
+              <p className="max-w-md text-[calc(1.125rem+2px)] leading-relaxed text-muted-foreground md:ml-auto md:text-[calc(1.25rem+2px)]">
+                or TEAMS of fashion and retail brands.
+                <br />
+                <br />
+                *for VM teams, such that the retail stores look more attractive to shop
+                <br />
+                <br />
+                *for &ldquo;sales team&rdquo; such that they become stylists for the customers and guide them as they shop.
               </p>
             </Reveal>
           </div>
         </div>
 
         <Reveal delay={200}>
-          <div className="relative mt-14 aspect-[4/5] overflow-hidden sm:aspect-[3/2] md:mt-20 md:aspect-[16/9]">
-            {FILM.map((img, i) => {
-              const isActive = i === active;
-              return (
-                <img
-                  key={img.src}
-                  src={img.src}
-                  alt={img.alt}
-                  width={1920}
-                  height={1280}
-                  loading={i === 0 ? "eager" : "lazy"}
-                  decoding="async"
-                  className="absolute inset-0 h-full w-full object-cover will-change-transform"
-                  style={{
-                    opacity: isActive ? 1 : 0,
-                    transform: reduced
-                      ? undefined
-                      : `scale(${isActive ? 1.06 : 1})`,
-                    transition: reduced
-                      ? "opacity 0.8s ease"
-                      : "opacity 1s ease-in-out, transform 3s ease-out",
-                    zIndex: isActive ? 2 : 1,
-                  }}
-                />
-              );
-            })}
+          <div className="-mx-6 mt-14 md:-mx-12 md:mt-20">
+            <CurvedSlider images={FILM} />
           </div>
         </Reveal>
       </div>

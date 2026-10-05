@@ -18,7 +18,7 @@ export function CurvedSlider({ images }: { images: CurvedImage[] }) {
 
   return (
     <div
-      className="relative mx-auto h-[220px] w-full overflow-hidden sm:h-[280px] md:h-[340px]"
+      className="relative mx-auto h-[240px] w-full overflow-hidden sm:h-[305px] md:h-[370px]"
       style={{ perspective: "1400px" }}
     >
       {slides.map((img, i) => {
@@ -30,7 +30,7 @@ export function CurvedSlider({ images }: { images: CurvedImage[] }) {
         return (
           <div
             key={`${img.src}-${i}`}
-            className="absolute left-1/2 top-1/2 w-[44vw] sm:w-[30vw] md:w-[22vw] lg:w-[19vw]"
+            className="absolute left-1/2 top-1/2 w-[48vw] sm:w-[33vw] md:w-[24vw] lg:w-[21vw]"
             style={{
               transform: `translate(-50%, -50%) translateX(${pos * 104}%) translateZ(${z * z * 22}px) rotateY(${-Math.max(-VISIBLE - 1, Math.min(VISIBLE + 1, pos)) * 14}deg)`,
               opacity: hidden ? 0 : 1,
