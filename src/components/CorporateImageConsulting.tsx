@@ -1,56 +1,27 @@
 import { useEffect, useRef, useState } from "react";
 import { CurvedSlider } from "@/components/CurvedSlider";
 
-import raymondGroup from "@/assets/corporate-raymond-group.jpg";
-import raymondColourSession from "@/assets/corporate-raymond-colour-session.jpg";
-import raymondVenue from "@/assets/corporate-raymond-venue.jpg";
-import raymondPresentation from "@/assets/corporate-raymond-presentation.jpg";
-import raymondInvitation from "@/assets/corporate-raymond-invitation.jpg";
-import corpP1 from "@/assets/corporate-Picture1.jpg";
-import corpP2 from "@/assets/corporate-Picture2.jpg";
-import corpP4 from "@/assets/corporate-Picture4-2.jpg";
-import corpP5 from "@/assets/corporate-Picture5.jpg";
-import corpP6 from "@/assets/corporate-Picture6.jpg";
-import corpP7 from "@/assets/corporate-Picture7.jpg";
-import corpP8 from "@/assets/corporate-Picture8.jpg";
+import c1 from "@/assets/corp-new-1.jpg";
+import c2 from "@/assets/corp-new-2.jpg";
+import c3 from "@/assets/corp-new-3.jpg";
+import c4 from "@/assets/corp-new-4.jpg";
+import c5 from "@/assets/corp-new-5.jpg";
+import c6 from "@/assets/corp-new-6.jpg";
+import c7 from "@/assets/corp-new-7.jpg";
 
-const verticalImages = [
-  {
-    src: raymondVenue,
-    alt: "Raymond Master the Right Dress Code workshop venue",
-  },
-  {
-    src: raymondInvitation,
-    alt: "Raymond exclusive grooming workshop invitation",
-  },
-  { src: corpP2, alt: "Presenter addressing a small corporate group at round tables" },
-  { src: corpP1, alt: "Presenter engaging participants in a corporate image session" },
-  { src: corpP6, alt: "Raymond Jayanagar Master The Right Dress Code led by Upma Shrian banner" },
-  { src: corpP7, alt: "Upma Shrian presenting warm and cool colours" },
-  { src: corpP8, alt: "Upma Shrian presenting at a Balance corporate workshop" },
-];
-
-const horizontalImages = [
-  {
-    src: raymondPresentation,
-    alt: "Corporate dress-code presentation for professionals",
-  },
-  {
-    src: raymondColourSession,
-    alt: "Professionals attending a colour and styling workshop",
-  },
-  {
-    src: raymondGroup,
-    alt: "Participants at the Raymond Master the Right Dress Code workshop",
-  },
-  { src: corpP4, alt: "Corporate seminar in a hotel ballroom with a colour wheel presentation" },
-  { src: corpP5, alt: "Presenter speaking to professionals seated at round tables" },
+const IMAGES = [
+  { src: c1, alt: "Van Heusen Master the Right Dress Code seminar audience" },
+  { src: c2, alt: "Corporate Image Consulting presentation for Van Heusen" },
+  { src: c3, alt: "Upma Shrian addressing Van Heusen professionals" },
+  { src: c4, alt: "Van Heusen participants working on seminar exercises" },
+  { src: c5, alt: "Presentation to Van Heusen team at round tables" },
+  { src: c6, alt: "Colour wheel presentation at a corporate seminar" },
+  { src: c7, alt: "Upma Shrian engaging participants at a corporate seminar" },
 ];
 
 export function CorporateImageConsulting() {
   const sectionRef = useRef<HTMLElement>(null);
   const [visible, setVisible] = useState(false);
-  const [activeImage, setActiveImage] = useState(0);
 
   useEffect(() => {
     const section = sectionRef.current;
@@ -70,21 +41,7 @@ export function CorporateImageConsulting() {
     return () => observer.disconnect();
   }, []);
 
-  useEffect(() => {
-    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-    if (reduceMotion.matches) return;
-
-    const interval = window.setInterval(() => {
-      setActiveImage((current) => (current + 1) % verticalImages.length);
-    }, 5200);
-
-    return () => window.clearInterval(interval);
-  }, []);
-
   const reveal = visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4";
-  const imageReveal = visible
-    ? "opacity-100 translate-y-0 [clip-path:inset(0_0_0_0)]"
-    : "opacity-0 translate-y-5 [clip-path:inset(10%_0_18%_0)]";
 
   return (
     <section
@@ -122,7 +79,7 @@ export function CorporateImageConsulting() {
         <div
           className={`relative left-1/2 mt-14 w-screen -translate-x-1/2 transition-opacity delay-300 duration-[1400ms] md:mt-20 ${visible ? "opacity-100" : "opacity-0"}`}
         >
-          <CurvedSlider images={[...verticalImages, ...horizontalImages]} contain />
+          <CurvedSlider images={IMAGES} contain />
         </div>
       </div>
     </section>
