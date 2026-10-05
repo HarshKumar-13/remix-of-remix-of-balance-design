@@ -83,9 +83,13 @@ export function PersonalImageConsulting() {
           <p
             className={`max-w-xl text-left text-lg leading-relaxed text-muted-foreground transition-[opacity,transform] delay-200 duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] md:col-span-5 md:col-start-8 md:pt-10 md:text-xl ${reveal}`}
           >
-            Clothing and Dressing up is a powerful means of non-verbal communication. We all carry
-            in our minds an image we look up to or would want to look like. And each one of us has
-            the need to look acceptable and presentable to ourselves and to others.
+            "Master the Right Dress Code" is a highly visual and interactive seminar, sharing the
+            design tools, such that the individual can make decisions for themselves, about which
+            colour, fit and style shall suit their skin tone, height and body type.
+            <span className="mt-5 block">
+              Our styling seminars transform the way YOU dress up, such that their visual impact is
+              more powerful and confident for your lifetime.
+            </span>
           </p>
         </div>
 
