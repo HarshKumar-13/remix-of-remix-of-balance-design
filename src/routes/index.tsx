@@ -32,22 +32,26 @@ import trendFolksy from "@/assets/trend-folksy.jpeg";
 import graphic1Asset from "@/assets/graphic-1.jpeg";
 import graphic2Asset from "@/assets/graphic-2.jpeg";
 import { CurvedSlider } from "@/components/CurvedSlider";
-import daw1 from "@/assets/daw-1.jpeg";
-import daw2 from "@/assets/daw-2.jpeg";
-import daw3 from "@/assets/daw-3.jpeg";
-import daw4 from "@/assets/daw-4.jpeg";
-import daw5 from "@/assets/daw-5.jpeg";
-import styling1 from "@/assets/styling-1.jpg";
-import styling4 from "@/assets/styling-4.jpg";
+import dws1 from "@/assets/dws-1.jpg";
+import dws2 from "@/assets/dws-2.jpg";
+import dws3 from "@/assets/dws-3.jpg";
+import dws4 from "@/assets/dws-4.jpg";
+import dws5 from "@/assets/dws-5.jpg";
+import dws6 from "@/assets/dws-6.jpg";
+import dws7 from "@/assets/dws-7.jpg";
+import dws8 from "@/assets/dws-8.jpg";
+import dws9 from "@/assets/dws-9.jpg";
 
 const WORKSHOP_IMAGES = [
-  { src: daw1, alt: "Workshop audience learning about the complementary colour scheme" },
-  { src: daw2, alt: "Participants seated along long tables watching a presentation" },
-  { src: daw3, alt: "Facilitator addressing a styling workshop in a studio classroom" },
-  { src: styling1, alt: "Styling workshop session" },
-  { src: daw4, alt: "Workshop audience watching a video presentation" },
-  { src: daw5, alt: "Facilitator speaking with engaged workshop participants" },
-  { src: styling4, alt: "Styling workshop participants" },
+  { src: dws1, alt: "Workshop in a warm conference room" },
+  { src: dws2, alt: "Style workshop body shapes demonstration" },
+  { src: dws3, alt: "Audience watching a colour theory presentation" },
+  { src: dws4, alt: "Facilitator speaking in front of the stage" },
+  { src: dws5, alt: "Participants exploring colour material at Max" },
+  { src: dws6, alt: "Session at ORRA Fine Jewellery" },
+  { src: dws7, alt: "Audience at ORRA Fine Jewellery session" },
+  { src: dws8, alt: "Participants applauding at Max workshop" },
+  { src: dws9, alt: "Master the Right Dress Code seminar" },
 ];
 
 export const Route = createFileRoute("/")({
@@ -120,7 +124,7 @@ function Index() {
               </Reveal>
               <Reveal delay={200}>
                 <div className="-mx-6 mt-14 md:-mx-12">
-                  <CurvedSlider images={WORKSHOP_IMAGES} />
+                  <CurvedSlider images={WORKSHOP_IMAGES} contain />
                 </div>
               </Reveal>
             </section>
