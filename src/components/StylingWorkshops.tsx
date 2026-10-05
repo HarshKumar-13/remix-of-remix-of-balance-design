@@ -37,21 +37,21 @@ export function StylingWorkshops() {
           </div>
           <div className="md:col-span-5">
             <Reveal delay={160}>
-              <p className="max-w-md text-[calc(1.125rem+2px)] leading-relaxed text-muted-foreground md:ml-auto md:text-[calc(1.25rem+2px)]">
-                or TEAMS of fashion and retail brands.
+              <p className="mx-auto max-w-xl text-center text-[calc(1.294rem+2px)] leading-relaxed text-red md:text-[calc(1.4375rem+2px)]">
+                For <span className="font-medium">TEAMS</span> of fashion and retail brands.
                 <br />
                 <br />
-                *for VM teams, such that the retail stores look more attractive to shop
+                For <span className="font-medium">VM teams</span>, such that the retail stores look more attractive to shop
                 <br />
                 <br />
-                *for &ldquo;sales team&rdquo; such that they become stylists for the customers and guide them as they shop.
+                For <span className="font-medium">Sales team</span> such that they become stylists for the customers and guide them as they shop.
               </p>
             </Reveal>
           </div>
         </div>
 
         <Reveal delay={200}>
-          <div className="-mx-6 mt-14 md:-mx-12 md:mt-20">
+          <div className="relative left-1/2 mt-14 w-screen -translate-x-1/2 md:mt-20">
             <CurvedSlider images={FILM} />
           </div>
         </Reveal>
