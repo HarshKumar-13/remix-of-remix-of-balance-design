@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 
-import logoLight from "@/assets/logo-light.png";
+import logoOriginal from "@/assets/balance-logo-navbar.png";
 
 export function LogoIntro({ onComplete }: { onComplete: () => void }) {
   const layerRef = useRef<HTMLDivElement>(null);
@@ -38,7 +38,7 @@ export function LogoIntro({ onComplete }: { onComplete: () => void }) {
         width: destination.width,
         height: destination.height,
         duration: 1.35,
-        delay: 0.65,
+        delay: 1.1,
       })
       .to(layer, { opacity: 0, duration: 0.45, ease: "power2.out" }, "-=0.12")
       .call(onComplete);
@@ -51,12 +51,12 @@ export function LogoIntro({ onComplete }: { onComplete: () => void }) {
   return (
     <div
       ref={layerRef}
-      className="fixed inset-0 z-[80] overflow-hidden bg-charcoal"
+      className="fixed inset-0 z-[80] overflow-hidden bg-white"
       aria-hidden="true"
     >
       <img
         ref={logoRef}
-        src={logoLight}
+        src={logoOriginal}
         alt=""
         className="absolute object-contain"
       />

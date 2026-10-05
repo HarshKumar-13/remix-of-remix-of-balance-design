@@ -42,7 +42,7 @@ export function SiteHeader({
   }, [open]);
 
   const showSolid = solid || forceSolid;
-  const tone = open ? "text-ivory" : showSolid ? "text-foreground" : "text-background";
+  const tone = open ? "text-ivory" : "text-foreground";
 
   return (
     <>
@@ -52,7 +52,7 @@ export function SiteHeader({
             ? "bg-transparent"
             : showSolid
               ? "border-b border-border bg-background/95 backdrop-blur-sm"
-              : "bg-transparent"
+              : "bg-white/70 backdrop-blur-md"
         }`}
       >
         <div

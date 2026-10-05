@@ -94,11 +94,13 @@ const GRAPHIC_IMAGES = [
 
 
 function Index() {
-  const introComplete = true;
+  const [introComplete, setIntroComplete] = useState(false);
+  const finishIntro = useCallback(() => setIntroComplete(true), []);
 
   return (
     <main>
       <div className="relative z-10 bg-background">
+        {!introComplete && <LogoIntro onComplete={finishIntro} />}
         <SiteHeader introComplete={introComplete} />
         <ScrollStory>
           <SlideStack>
