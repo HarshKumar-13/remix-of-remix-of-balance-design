@@ -112,23 +112,16 @@ function Index() {
                 </h2>
               </Reveal>
               <Reveal delay={160}>
-                <p className="mx-auto mt-10 max-w-xl text-[1.294rem] leading-relaxed text-red md:text-[1.4375rem]">
-                  Are conducted For TEAMS of Apparel and Fashion Brands in areas of Design Aesthetics,
-                  Fashion Styling, Trend Forecasting.
+                <p className="mx-auto mt-10 max-w-5xl text-[calc(1.294rem+2px)] font-medium leading-relaxed text-red md:text-[calc(1.4375rem+2px)]">
+                  Are conducted For TEAMS of Apparel and Fashion Brands
+                  <br />
+                  in areas of Design Aesthetics, Fashion Styling, Trend Forecasting.
                 </p>
               </Reveal>
               <Reveal delay={200}>
                 <div className="-mx-6 mt-14 md:-mx-12">
                   <CurvedSlider images={WORKSHOP_IMAGES} />
                 </div>
-              </Reveal>
-              <Reveal delay={220}>
-                <Link
-                  to="/services/fashion-apparel-workshops"
-                  className="label-xs link-underline mt-10 inline-block text-foreground"
-                >
-                  Explore More &nbsp;&rarr;
-                </Link>
               </Reveal>
             </section>
           </SlidePanel>
