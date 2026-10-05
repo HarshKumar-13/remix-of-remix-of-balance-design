@@ -6,6 +6,7 @@ import {
   useRouter,
   HeadContent,
   Scripts,
+  type ErrorComponentProps,
 } from "@tanstack/react-router";
 import { useEffect, type ReactNode } from "react";
 
@@ -34,7 +35,7 @@ function NotFoundComponent() {
   );
 }
 
-function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
+function ErrorComponent({ error, reset }: { error: Error; reset: () => void; info?: unknown }) {
   console.error(error);
   const router = useRouter();
   useEffect(() => {
@@ -109,7 +110,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
   shellComponent: RootShell,
   component: RootComponent,
   notFoundComponent: NotFoundComponent,
-  errorComponent: ErrorComponent,
+  errorComponent: (props: ErrorComponentProps) => (
+    <ErrorComponent
+      error={props.error as Error}
+      reset={(props as { reset?: () => void }).reset ?? (() => window.location.reload())}
+    />
+  ),
 });
 
 function RootShell({ children }: { children: ReactNode }) {
