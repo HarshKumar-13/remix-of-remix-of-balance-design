@@ -37,12 +37,10 @@ export function StylingWorkshops() {
           </div>
           <div className="md:col-span-5">
             <Reveal delay={160}>
-              <p className="mx-auto max-w-xl text-center text-[calc(1.294rem+2px)] leading-relaxed text-red md:text-[calc(1.4375rem+2px)]">
+              <p className="max-w-xl text-left text-[calc(1.294rem+2px)] leading-relaxed text-red md:text-[calc(1.4375rem+2px)]">
                 For <span className="font-medium">TEAMS</span> of fashion and retail brands.
                 <br />
-                <br />
                 For <span className="font-medium">VM teams</span>, such that the retail stores look more attractive to shop
-                <br />
                 <br />
                 For <span className="font-medium">Sales team</span> such that they become stylists for the customers and guide them as they shop.
               </p>
