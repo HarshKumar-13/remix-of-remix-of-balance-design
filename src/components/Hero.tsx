@@ -30,8 +30,10 @@ export function Hero(_props: { introComplete?: boolean }) {
   const [revealed, setRevealed] = useState(false);
   const [settled, setSettled] = useState(false);
   const [y, setY] = useState(0);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       setRevealed(true);
       setSettled(true);
@@ -46,7 +48,7 @@ export function Hero(_props: { introComplete?: boolean }) {
 
   return (
     <section id="top" className="relative h-[100svh] w-full overflow-hidden bg-background">
-      {!revealed && <BrandReveal onDone={onRevealed} />}
+      {mounted && !revealed && <BrandReveal onDone={onRevealed} />}
 
       {/* Editorial frame: image fills the right of the viewport on desktop, the full frame on mobile */}
       <div className="absolute bottom-0 right-0 top-[118px] w-full md:top-[148px] md:w-[66vw]">
