@@ -405,25 +405,13 @@ function CardSlides({ images, alt }: { images: string[]; alt: string }) {
 }
 
 function PastGrid() {
-  const [count, setCount] = useState(6);
-  const visible = PAST_EVENTS.slice(0, count);
   return (
     <div>
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {visible.map((event, i) => (
+        {PAST_EVENTS.map((event, i) => (
           <PastCard key={event.id} event={event} index={i} />
         ))}
       </div>
-      {count < PAST_EVENTS.length && (
-        <div className="mt-14 flex justify-center">
-          <button
-            onClick={() => setCount(PAST_EVENTS.length)}
-            className="label-xs border border-foreground px-8 py-4 transition-colors duration-500 hover:border-red hover:bg-red hover:text-primary-foreground"
-          >
-            Load more
-          </button>
-        </div>
-      )}
     </div>
   );
 }
