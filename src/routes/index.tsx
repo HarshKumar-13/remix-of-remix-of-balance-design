@@ -77,7 +77,7 @@ function Index() {
   return (
     <main>
       <div className="relative z-10 bg-background">
-        <SiteHeader introComplete={introComplete} forceSolid />
+        <SiteHeader introComplete={introComplete} />
         <ScrollStory>
           <SlideStack>
             <SlidePanel>
