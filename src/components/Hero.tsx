@@ -9,7 +9,6 @@ import h6 from "@/assets/hero-new-6.jpg";
 import h7 from "@/assets/hero-new-7.jpg";
 import h8 from "@/assets/hero-new-8.jpg";
 import h9 from "@/assets/hero-new-9.jpg";
-import heroVideo from "@/assets/hero-video.mp4";
 
 type Slide = { type: "image" | "video"; src: string; alt: string };
 const SLIDES: Slide[] = [
@@ -22,7 +21,6 @@ const SLIDES: Slide[] = [
   { type: "image", src: h7, alt: "Upma Shrian speaking on stage in front of a screen reading I Create Who I Am" },
   { type: "image", src: h8, alt: "Seminar audience watching a video presentation" },
   { type: "image", src: h9, alt: "Audience viewing a complementary colour scheme presentation" },
-  { type: "video", src: heroVideo, alt: "Styling videos by Upma Shrian" },
 ];
 
 export function Hero({ introComplete = true }: { introComplete?: boolean }) {
