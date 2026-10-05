@@ -31,6 +31,24 @@ import trendAbstract from "@/assets/trend-abstract-prints.jpeg";
 import trendFolksy from "@/assets/trend-folksy.jpeg";
 import graphic1Asset from "@/assets/graphic-1.jpeg";
 import graphic2Asset from "@/assets/graphic-2.jpeg";
+import { CurvedSlider } from "@/components/CurvedSlider";
+import daw1 from "@/assets/daw-1.jpeg";
+import daw2 from "@/assets/daw-2.jpeg";
+import daw3 from "@/assets/daw-3.jpeg";
+import daw4 from "@/assets/daw-4.jpeg";
+import daw5 from "@/assets/daw-5.jpeg";
+import styling1 from "@/assets/styling-1.jpg";
+import styling4 from "@/assets/styling-4.jpg";
+
+const WORKSHOP_IMAGES = [
+  { src: daw1, alt: "Workshop audience learning about the complementary colour scheme" },
+  { src: daw2, alt: "Participants seated along long tables watching a presentation" },
+  { src: daw3, alt: "Facilitator addressing a styling workshop in a studio classroom" },
+  { src: styling1, alt: "Styling workshop session" },
+  { src: daw4, alt: "Workshop audience watching a video presentation" },
+  { src: daw5, alt: "Facilitator speaking with engaged workshop participants" },
+  { src: styling4, alt: "Styling workshop participants" },
+];
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -94,11 +112,15 @@ function Index() {
                 </h2>
               </Reveal>
               <Reveal delay={160}>
-                <p className="mx-auto mt-10 max-w-xl text-lg leading-relaxed text-muted-foreground md:text-xl">
-                  From fashion &amp; apparel workshops to corporate identity, Balance brings together
-                  fashion, design and image consulting through specialised services for individuals,
-                  brands and organisations.
+                <p className="mx-auto mt-10 max-w-xl text-[1.294rem] leading-relaxed text-red md:text-[1.4375rem]">
+                  Are conducted For TEAMS of Apparel and Fashion Brands in areas of Design Aesthetics,
+                  Fashion Styling, Trend Forecasting.
                 </p>
+              </Reveal>
+              <Reveal delay={200}>
+                <div className="-mx-6 mt-14 md:-mx-12">
+                  <CurvedSlider images={WORKSHOP_IMAGES} />
+                </div>
               </Reveal>
               <Reveal delay={220}>
                 <Link
