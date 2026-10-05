@@ -112,7 +112,9 @@ export function CorporateImageConsulting() {
             className={`max-w-xl text-left text-lg leading-relaxed text-muted-foreground transition-[opacity,transform] delay-200 duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] md:col-span-5 md:col-start-8 md:pt-10 md:text-xl ${reveal}`}
           >
             we coach professionals to look sharp and stylish, build self confidence and have a
-            personality that is magnetic, as they meet and interact with world.
+            personality that is magnetic. Through a combination of styling sessions and mindset
+            coaching, professionals learn to command respect, and own their presence in meetings,
+            presentations and high stake conversations.
           </p>
         </div>
 
