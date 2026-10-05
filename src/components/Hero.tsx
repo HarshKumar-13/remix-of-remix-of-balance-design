@@ -51,7 +51,7 @@ export function Hero(_props: { introComplete?: boolean }) {
       {mounted && !revealed && <BrandReveal onDone={onRevealed} />}
 
       {/* Editorial frame: image fills the right of the viewport on desktop, the full frame on mobile */}
-      <div className="absolute bottom-0 right-0 top-[118px] w-full md:top-[148px] md:w-[66vw]">
+      <div className="absolute bottom-0 right-0 top-[118px] w-full md:top-[148px]">
         <HeroMedia slides={SLIDES} scrollY={y} />
       </div>
 
