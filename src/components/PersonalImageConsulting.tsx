@@ -1,21 +1,15 @@
 import { useEffect, useRef, useState } from "react";
 
-import p1 from "@/assets/personal-new-1.jpg";
-import p2 from "@/assets/personal-new-2.jpg";
-import p3 from "@/assets/personal-new-3.jpg";
-import p4 from "@/assets/personal-new-4.jpg";
-import p5 from "@/assets/personal-new-5.jpg";
-import p6 from "@/assets/personal-new-6.jpg";
-import p7 from "@/assets/personal-new-7.jpg";
+import p1 from "@/assets/pers-upd-1.jpg";
+import p2 from "@/assets/pers-upd-2.jpg";
+import p3 from "@/assets/pers-upd-3.jpg";
+import p4 from "@/assets/pers-upd-4.jpg";
 
 const landscapeImages = [
-  { src: p1, alt: "Colour swatch fan, style sketches and image consulting books on a desk" },
-  { src: p2, alt: "Woman choosing clothes from a wardrobe rail" },
-  { src: p3, alt: "Menswear rail with briefcase, watch and accessories in a styling studio" },
-  { src: p4, alt: "Coral blazer styled with black top, striped skirt and accessories" },
-  { src: p5, alt: "Polka-dot dress on a mannequin with black blazer, bag and heels" },
-  { src: p6, alt: "What colours look good on you - women, ivory to deep bronze" },
-  { src: p7, alt: "Red cardigan styled with beige skirt, red bag and nude heels" },
+  { src: p1, alt: "Coral blazer styled with black top, striped skirt and accessories" },
+  { src: p2, alt: "Red cardigan styled with beige skirt, red bag and nude heels" },
+  { src: p3, alt: "What colours look good on you - women, ivory to deep bronze" },
+  { src: p4, alt: "Polka-dot dress on a mannequin with black blazer, bag and heels" },
 ];
 
 export function PersonalImageConsulting() {
