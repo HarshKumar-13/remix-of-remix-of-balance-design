@@ -32,7 +32,7 @@ export function StylingWorkshops() {
       className="bg-background px-6 py-24 md:px-12 md:py-36"
     >
       <div className="mx-auto max-w-[1500px]">
-        <div className="grid grid-cols-1 gap-10 md:grid-cols-12 md:items-end">
+        <div className="grid grid-cols-1 gap-10 md:grid-cols-12 md:items-center">
           <div className="md:col-span-7">
             <Reveal>
               <p className="label-xs text-muted-foreground">
