@@ -3,7 +3,7 @@ import gsap from "gsap";
 
 import logoOriginal from "@/assets/balance-logo-navbar.png";
 
-export function LogoIntro({ onComplete }: { onComplete: () => void }) {
+export function LogoIntro({ onComplete, onFinish }: { onComplete: () => void; onFinish?: () => void }) {
   const layerRef = useRef<HTMLDivElement>(null);
   const logoRef = useRef<HTMLImageElement>(null);
 
@@ -16,6 +16,7 @@ export function LogoIntro({ onComplete }: { onComplete: () => void }) {
 
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       onComplete();
+      onFinish?.();
       return;
     }
 
@@ -29,29 +30,38 @@ export function LogoIntro({ onComplete }: { onComplete: () => void }) {
       height: startHeight,
     });
 
-    const timeline = gsap.timeline({ defaults: { ease: "power3.inOut" } });
+    gsap.set(logo, { opacity: 0, scale: 0.96 });
+    const timeline = gsap.timeline({ defaults: { ease: "power2.inOut" } });
 
     timeline
-      .to(logo, {
-        left: destination.left,
-        top: destination.top,
-        width: destination.width,
-        height: destination.height,
-        duration: 1.35,
-        delay: 1.1,
-      })
-      .to(layer, { opacity: 0, duration: 0.45, ease: "power2.out" }, "-=0.12")
-      .call(onComplete);
+      .to(logo, { opacity: 1, scale: 1, duration: 0.9, ease: "power2.out" })
+      .addLabel("move", "+=0.7")
+      .to(
+        logo,
+        {
+          left: destination.left,
+          top: destination.top,
+          width: destination.width,
+          height: destination.height,
+          duration: 1.6,
+          ease: "power3.inOut",
+        },
+        "move",
+      )
+      .to(layer, { backgroundColor: "rgba(255,255,255,0)", duration: 1.6 }, "move")
+      .call(onComplete, [], "move+=0.9")
+      .to(logo, { opacity: 0, duration: 0.5, ease: "power1.out" }, "move+=1.6")
+      .call(() => onFinish?.());
 
     return () => {
       timeline.kill();
     };
-  }, [onComplete]);
+  }, [onComplete, onFinish]);
 
   return (
     <div
       ref={layerRef}
-      className="fixed inset-0 z-[80] overflow-hidden bg-white"
+      className="pointer-events-none fixed inset-0 z-[80] overflow-hidden bg-white"
       aria-hidden="true"
     >
       <img
