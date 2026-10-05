@@ -4,7 +4,7 @@ import diamond from "@/assets/balance-diamond.png";
 
 const TERMS = ["Design Aesthetics", "Fashion Styling", "Trend Forecasting & VM"];
 const POINT_MS = 3000;
-const TERM_MS = 1000; // 3 terms × 1s = 3s for point 2
+const TERM_MS = 3000;
 const FADE_MS = 700;
 
 /** Step 0 = point 1; steps 1..3 = point 2 with each rotating term. */
@@ -48,7 +48,7 @@ export function RotatingPoints() {
       >
         <img src={diamond} alt="" aria-hidden="true" className="mt-[0.3em] h-4 w-auto shrink-0 md:h-5" />
         {step === 0 ? (
-          <span>elevate their skill and knowledge</span>
+          <span>Elevate their skill and knowledge</span>
         ) : (
           <span>
             Enhance productivity in areas of{" "}
