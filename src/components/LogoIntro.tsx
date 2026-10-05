@@ -16,6 +16,7 @@ export function LogoIntro({ onComplete, onFinish }: { onComplete: () => void; on
 
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       onComplete();
+      onFinish?.();
       return;
     }
 
