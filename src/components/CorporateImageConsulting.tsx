@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { CurvedSlider } from "@/components/CurvedSlider";
 
 import raymondGroup from "@/assets/corporate-raymond-group.jpg";
 import raymondColourSession from "@/assets/corporate-raymond-colour-session.jpg";
@@ -109,7 +110,7 @@ export function CorporateImageConsulting() {
           </div>
 
           <p
-            className={`max-w-xl text-left text-lg leading-relaxed text-muted-foreground transition-[opacity,transform] delay-200 duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] md:col-span-5 md:col-start-8 md:pt-10 md:text-xl ${reveal}`}
+            className={`max-w-xl text-left text-[calc(1.294rem+2px)] font-medium leading-relaxed text-red transition-[opacity,transform] delay-200 duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] md:col-span-5 md:col-start-8 md:pt-10 md:text-[calc(1.4375rem+2px)] ${reveal}`}
           >
             we coach professionals to look sharp and stylish, build self confidence and have a
             personality that is magnetic. Through a combination of styling sessions and mindset
@@ -118,39 +119,10 @@ export function CorporateImageConsulting() {
           </p>
         </div>
 
-        <div className="mt-14 grid grid-cols-1 items-start gap-5 md:mt-20 md:grid-cols-12 md:items-end md:gap-x-8 lg:gap-x-12">
-          <div
-            className={`relative aspect-[4/5] overflow-hidden transition-[clip-path,opacity,transform] delay-300 duration-[1400ms] ease-[cubic-bezier(0.16,1,0.3,1)] md:col-span-5 md:aspect-[4/5] ${imageReveal}`}
-          >
-            {verticalImages.map((image, index) => (
-              <img
-                key={image.src}
-                src={image.src}
-                alt={image.alt}
-                loading="lazy"
-                decoding="async"
-                className={`absolute inset-0 h-full w-full object-cover transition-[opacity,transform] duration-[1800ms] ease-[cubic-bezier(0.16,1,0.3,1)] motion-reduce:transition-none ${
-                  activeImage === index ? "scale-100 opacity-100" : "scale-[1.025] opacity-0"
-                }`}
-              />
-            ))}
-          </div>
-          <div
-            className={`relative aspect-[16/10] overflow-hidden transition-[clip-path,opacity,transform] delay-500 duration-[1400ms] ease-[cubic-bezier(0.16,1,0.3,1)] md:col-span-7 ${imageReveal}`}
-          >
-            {horizontalImages.map((image, index) => (
-              <img
-                key={image.src}
-                src={image.src}
-                alt={image.alt}
-                loading="lazy"
-                decoding="async"
-                className={`absolute inset-0 h-full w-full object-cover transition-[opacity,transform] duration-[1800ms] ease-[cubic-bezier(0.16,1,0.3,1)] motion-reduce:transition-none ${
-                  activeImage % horizontalImages.length === index ? "scale-100 opacity-100" : "scale-[1.025] opacity-0"
-                }`}
-              />
-            ))}
-          </div>
+        <div
+          className={`relative left-1/2 mt-14 w-screen -translate-x-1/2 transition-opacity delay-300 duration-[1400ms] md:mt-20 ${visible ? "opacity-100" : "opacity-0"}`}
+        >
+          <CurvedSlider images={[...verticalImages, ...horizontalImages]} contain />
         </div>
       </div>
     </section>
