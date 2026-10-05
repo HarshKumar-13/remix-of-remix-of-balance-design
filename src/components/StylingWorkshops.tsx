@@ -6,6 +6,11 @@ import daw2 from "@/assets/daw-2.jpeg";
 import daw3 from "@/assets/daw-3.jpeg";
 import daw4 from "@/assets/daw-4.jpeg";
 import daw5 from "@/assets/daw-5.jpeg";
+import dawNew1 from "@/assets/daw-new-1.jpg";
+import dawNew2 from "@/assets/daw-new-2.jpg";
+import dawNew3 from "@/assets/daw-new-3.jpg";
+import dawNew4 from "@/assets/daw-new-4.jpg";
+
 
 const FILM = [
   { src: daw1, alt: "Workshop audience learning about the complementary colour scheme" },
@@ -13,6 +18,10 @@ const FILM = [
   { src: daw3, alt: "Facilitator addressing a styling workshop in a studio classroom" },
   { src: daw4, alt: "Workshop audience watching a video presentation" },
   { src: daw5, alt: "Facilitator speaking with engaged workshop participants" },
+  { src: dawNew1, alt: "Retail team seated around long tables at a workshop" },
+  { src: dawNew2, alt: "Team members attending a workshop session" },
+  { src: dawNew3, alt: "Facilitator addressing a retail team workshop" },
+  { src: dawNew4, alt: "Team watching a styling presentation on screen" },
 ];
 
 export function StylingWorkshops() {
