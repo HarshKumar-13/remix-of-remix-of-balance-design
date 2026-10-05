@@ -372,11 +372,11 @@ function PastCard({ event, index }: { event: (typeof PAST_EVENTS)[number]; index
         )}
       </div>
       <div className="p-6 md:p-8">
-        <p className="label-xs text-red">{event.type}</p>
-        <h3 className="display mt-4 text-2xl leading-[1.02] transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:-translate-y-1 md:text-[1.9rem]">
+        {event.type && <p className="label-xs mb-4 text-red">{event.type}</p>}
+        <h3 className="display text-2xl leading-[1.02] transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:-translate-y-1 md:text-[1.9rem]">
           {event.title}
         </h3>
-        <p className="label-xs mt-4 text-muted-foreground">{event.date}</p>
+        {event.date && <p className="label-xs mt-4 text-muted-foreground">{event.date}</p>}
       </div>
     </article>
   );
@@ -453,7 +453,7 @@ function UpcomingCarousel({ onBook }: { onBook: (e: UpcomingEvent) => void }) {
 }
 
 function EventsTabs({ onBook }: { onBook: (e: UpcomingEvent) => void }) {
-  const [tab, setTab] = useState<"upcoming" | "past">("upcoming");
+  const [tab, setTab] = useState<"upcoming" | "past">("past");
 
   return (
     <section className="border-t border-border px-6 py-16 md:px-12 md:py-24">
@@ -461,8 +461,8 @@ function EventsTabs({ onBook }: { onBook: (e: UpcomingEvent) => void }) {
         <div className="flex flex-wrap gap-8 border-b border-border pb-5 md:gap-14">
           {(
             [
-              ["upcoming", "Upcoming Events"],
               ["past", "Past Events"],
+              ["upcoming", "Upcoming Events"],
             ] as const
           ).map(([key, label]) => (
             <button

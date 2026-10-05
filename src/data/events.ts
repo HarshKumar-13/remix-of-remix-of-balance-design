@@ -71,8 +71,13 @@ const RAW_PAST_EVENTS: PastEvent[] = [
   { id: "past-06", title: "Orra Fine Jewellery", type: "MASTER THE RIGHT DRESSS CODE - Styling session", date: "29th October 2023", image: orra1, images: [orra1, orra2, orra3] },
   { id: "past-07", title: "Bal Bharti School Teachers", type: "MASTER THE RIGHT DRESSS CODE - Styling session", date: "4th March 2024", image: bb1, images: [bb1, bb2, bb3] },
   { id: "past-08", title: "Reliance Trends", type: "DESIGN AESTHETICS AND STYLING WORKSHOP - for Brand teams", date: "May & October 2023", image: p18 },
-  { id: "past-09", title: "GMETRI Technologies", type: "DESIGN AESTHETICS AND STYLING WORKSHOP - for Brand teams", date: "19th Sep 2025", image: p15 },
   { id: "past-10", title: "Own Your Spotlight", type: "Own Your Spotlight – Online Styling & Mindset Coaching Session", date: "20th July 2025", image: oys1, images: [oys1, oys2] },
+];
+
+/* Pinned to the end of the list. Type, date and photos are stand-ins until the real details are supplied. */
+const PINNED_LAST_EVENTS: PastEvent[] = [
+  { id: "past-leela", title: "Leela Palace", type: "", date: "", image: sem1 },
+  { id: "past-taj", title: "Taj Mahal Delhi", type: "", date: "", image: sem2 },
 ];
 
 /* PLACEHOLDER — upcoming events */
@@ -88,9 +93,10 @@ export function parseEventDate(value: string): number {
   return new Date(year, month, day).getTime();
 }
 
-export const PAST_EVENTS: PastEvent[] = [...RAW_PAST_EVENTS].sort(
-  (a, b) => parseEventDate(b.date) - parseEventDate(a.date),
-);
+export const PAST_EVENTS: PastEvent[] = [
+  ...[...RAW_PAST_EVENTS].sort((a, b) => parseEventDate(b.date) - parseEventDate(a.date)),
+  ...PINNED_LAST_EVENTS,
+];
 
 export const UPCOMING_EVENTS: UpcomingEvent[] = [
   { id: "upcoming-01", title: "The Art of Personal Style", type: "Personal Image Workshop", date: "18 October 2026", location: "Bengaluru", description: "An immersive session exploring colour, silhouettes, wardrobe choices and the relationship between personal style and professional presence.", cta: "Book your place", image: p8 },
