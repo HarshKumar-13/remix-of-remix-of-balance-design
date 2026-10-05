@@ -8,6 +8,24 @@ import videoThree from "@/assets/testimonial-3.mp4";
 import videoFour from "@/assets/testimonial-4.mp4";
 import posterThree from "@/assets/testimonial-3-poster.jpg";
 import posterFour from "@/assets/testimonial-4-poster.jpg";
+import video5 from "@/assets/testimonial-5.mp4";
+import video6 from "@/assets/testimonial-6.mp4";
+import video7 from "@/assets/testimonial-7.mp4";
+import video8 from "@/assets/testimonial-8.mp4";
+import video9 from "@/assets/testimonial-9.mp4";
+import video10 from "@/assets/testimonial-10.mp4";
+import video11 from "@/assets/testimonial-11.mp4";
+import video12 from "@/assets/testimonial-12.mp4";
+import video13 from "@/assets/testimonial-13.mp4";
+import poster5 from "@/assets/testimonial-5-poster.jpg";
+import poster6 from "@/assets/testimonial-6-poster.jpg";
+import poster7 from "@/assets/testimonial-7-poster.jpg";
+import poster8 from "@/assets/testimonial-8-poster.jpg";
+import poster9 from "@/assets/testimonial-9-poster.jpg";
+import poster10 from "@/assets/testimonial-10-poster.jpg";
+import poster11 from "@/assets/testimonial-11-poster.jpg";
+import poster12 from "@/assets/testimonial-12-poster.jpg";
+import poster13 from "@/assets/testimonial-13-poster.jpg";
 import { Volume2, VolumeX } from "lucide-react";
 
 import { LogoMark } from "./LogoMark";
@@ -21,14 +39,20 @@ type VideoTestimonial = {
   poster: string;
 };
 
-// Two supplied films, repeated so the three-card layout stays full.
 const TESTIMONIALS: VideoTestimonial[] = [
-  { id: "t1", name: "Ananya Mehta", role: "People Director, Meridian Group", video: videoOne, poster: posterOne },
-  { id: "t2", name: "Rohan Kapoor", role: "Brand Lead, North & Co.", video: videoTwo, poster: posterTwo },
+  { id: "t1", name: "", role: "", video: videoOne, poster: posterOne },
+  { id: "t2", name: "", role: "", video: videoTwo, poster: posterTwo },
   { id: "t3", name: "", role: "", video: videoThree, poster: posterThree },
   { id: "t4", name: "", role: "", video: videoFour, poster: posterFour },
-  { id: "t1b", name: "Ananya Mehta", role: "People Director, Meridian Group", video: videoOne, poster: posterOne },
-  { id: "t2b", name: "Rohan Kapoor", role: "Brand Lead, North & Co.", video: videoTwo, poster: posterTwo },
+  { id: "t5", name: "", role: "", video: video5, poster: poster5 },
+  { id: "t6", name: "", role: "", video: video6, poster: poster6 },
+  { id: "t7", name: "", role: "", video: video7, poster: poster7 },
+  { id: "t8", name: "", role: "", video: video8, poster: poster8 },
+  { id: "t9", name: "", role: "", video: video9, poster: poster9 },
+  { id: "t10", name: "", role: "", video: video10, poster: poster10 },
+  { id: "t11", name: "", role: "", video: video11, poster: poster11 },
+  { id: "t12", name: "", role: "", video: video12, poster: poster12 },
+  { id: "t13", name: "", role: "", video: video13, poster: poster13 },
 ];
 
 const COUNT = TESTIMONIALS.length;
