@@ -32,31 +32,27 @@ export function StylingWorkshops() {
       className="bg-background px-6 py-24 md:px-12 md:py-36"
     >
       <div className="mx-auto max-w-[1500px]">
-        <div className="grid grid-cols-1 gap-10 md:grid-cols-12 md:items-center">
-          <div className="md:col-span-7">
-            <Reveal>
-              <p className="label-xs text-muted-foreground">
-                Design Workshops &amp; Seminars
-              </p>
-            </Reveal>
-            <Reveal delay={80}>
-              <h2 className="display mt-6 text-[2.4rem] leading-[1.02] uppercase sm:text-6xl md:text-[4.6rem]">
-                <span className="text-primary">Design Aesthetics</span> &amp; Styling Workshops
-              </h2>
-            </Reveal>
-            <RotatingPoints />
-          </div>
-          <div className="md:col-span-5">
-            <Reveal delay={160}>
-              <p className="max-w-xl text-left text-[calc(1.294rem+2px)] leading-relaxed text-red md:text-[calc(1.4375rem+2px)]">
-                For <span className="font-medium">TEAMS</span> of fashion and retail brands.
-                <br />
-                For <span className="font-medium">VM teams</span>, such that the retail stores look more attractive to shop
-                <br />
-                For <span className="font-medium">Sales team</span> such that they become stylists for the customers and guide them as they shop.
-              </p>
-            </Reveal>
-          </div>
+        <div className="flex flex-col items-center text-center">
+          <Reveal>
+            <p className="label-xs font-semibold text-muted-foreground">
+              Design Workshops &amp; Seminars
+            </p>
+          </Reveal>
+          <Reveal delay={80}>
+            <h2 className="display mx-auto mt-6 max-w-5xl text-[2.4rem] leading-[1.02] uppercase sm:text-6xl md:text-[4.6rem]">
+              <span className="text-primary">Design Aesthetics</span> &amp; Styling Workshops
+            </h2>
+          </Reveal>
+          <RotatingPoints />
+          <Reveal delay={160}>
+            <p className="mx-auto mt-8 max-w-5xl text-center text-[calc(1.294rem+2px)] leading-relaxed text-red md:text-[calc(1.4375rem+2px)]">
+              For <span className="font-medium">TEAMS</span> of fashion and retail brands.
+              <br />
+              For <span className="font-medium">VM teams</span>, such that the retail stores look more attractive to shop
+              <br />
+              For <span className="font-medium">Sales team</span> such that they become stylists for the customers and guide them as they shop.
+            </p>
+          </Reveal>
         </div>
 
         <Reveal delay={200}>
