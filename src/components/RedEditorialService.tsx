@@ -173,7 +173,7 @@ export function RedEditorialService({
         <div className="mx-auto mt-9 min-h-20 max-w-2xl md:min-h-24">
           {description && (
             <Reveal delay={230}>
-              <p className="text-base leading-[1.75] text-muted-foreground sm:text-lg md:text-xl">
+              <p className="text-[calc(1.294rem+2px)] leading-relaxed md:text-[calc(1.4375rem+2px)] text-muted-foreground">
                 {description}
               </p>
             </Reveal>
