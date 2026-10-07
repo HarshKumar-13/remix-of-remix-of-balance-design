@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import gsap from "gsap";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import h0560 from "@/assets/hero-0560.jpg";
@@ -12,7 +12,9 @@ import h1629 from "@/assets/hero-1629.jpg";
 import h1630 from "@/assets/hero-1630.jpg";
 import h1631 from "@/assets/hero-1631.jpg";
 
-const PHOTOS = [
+type Photo = { src: string; alt: string };
+
+const PHOTOS: Photo[] = [
   { src: h0560, alt: "Workshop audience watching a presentation on screen" },
   { src: h0541, alt: "Seminar audience in an auditorium watching a presentation" },
   { src: h0545, alt: "Audience viewing a colour and styling presentation in a hall" },
@@ -34,10 +36,179 @@ const PHRASES = [
 ];
 const EASE = [0.65, 0, 0.35, 1] as const;
 
+/**
+ * A photo, shown whole, with its own edge reflected outward to fill the frame.
+ * The sharp picture keeps its exact proportions — nothing is cropped, nothing
+ * is invented — and the reflection takes up whatever the picture leaves over.
+ * On a portrait screen the reflection runs above and below instead of beside,
+ * and is softened further so it reads as a tonal fold rather than a mirror.
+ */
+function HeroPhoto({
+  image,
+  active,
+  hero,
+  reduced,
+  eager,
+}: {
+  image: Photo;
+  active: boolean;
+  hero: { w: number; h: number };
+  reduced: boolean;
+  eager: boolean;
+}) {
+  const [nat, setNat] = useState<{ w: number; h: number } | null>(null);
+
+  const fit = useMemo(() => {
+    if (!nat || !hero.w || !hero.h) return null;
+    const aspect = nat.w / nat.h;
+    if (aspect < hero.w / hero.h) {
+      return { axis: "x" as const, w: Math.round(hero.h * aspect), h: hero.h };
+    }
+    return { axis: "y" as const, w: hero.w, h: Math.round(hero.w / aspect) };
+  }, [nat, hero]);
+
+  const bg = { backgroundImage: `url(${image.src})` };
+  const onImgLoad = (e: React.SyntheticEvent<HTMLImageElement>) => {
+    const el = e.currentTarget;
+    if (el.naturalWidth && el.naturalHeight) {
+      setNat({ w: el.naturalWidth, h: el.naturalHeight });
+    }
+  };
+
+  return (
+    <motion.div
+      aria-hidden={!active}
+      initial={false}
+      animate={{ opacity: active ? 1 : 0, y: active ? 0 : 8 }}
+      transition={{ duration: reduced ? 0 : 1.6, ease: EASE }}
+      className="absolute inset-0 h-full w-full"
+    >
+      {/* Underlying wash: keeps the outer edge of a reflection from ending flat. */}
+      <img
+        src={image.src}
+        alt=""
+        aria-hidden="true"
+        loading={eager ? "eager" : "lazy"}
+        onLoad={onImgLoad}
+        className="absolute inset-0 h-full w-full scale-110 object-cover blur-2xl"
+      />
+
+      {fit?.axis === "x" && (
+        <div className="absolute inset-0 flex">
+          <div
+            className="hero-wing relative h-full min-w-0 flex-1 overflow-hidden"
+            style={{
+              ...bg,
+              maskImage: "linear-gradient(to left, #000 18%, transparent 88%)",
+              WebkitMaskImage: "linear-gradient(to left, #000 18%, transparent 88%)",
+            }}
+          >
+            <div
+              className="absolute inset-0"
+              style={{
+                ...bg,
+                backgroundSize: "auto 100%",
+                backgroundPosition: "left",
+                transform: "scaleX(-1)",
+              }}
+            />
+          </div>
+          <img
+            src={image.src}
+            alt={image.alt}
+            loading={eager ? "eager" : "lazy"}
+            onLoad={onImgLoad}
+            style={{ width: fit.w, height: fit.h }}
+            className="relative block flex-none"
+          />
+          <div
+            className="hero-wing relative h-full min-w-0 flex-1 overflow-hidden"
+            style={{
+              ...bg,
+              maskImage: "linear-gradient(to right, #000 18%, transparent 88%)",
+              WebkitMaskImage: "linear-gradient(to right, #000 18%, transparent 88%)",
+            }}
+          >
+            <div
+              className="absolute inset-0"
+              style={{
+                ...bg,
+                backgroundSize: "auto 100%",
+                backgroundPosition: "right",
+                transform: "scaleX(-1)",
+              }}
+            />
+          </div>
+        </div>
+      )}
+
+      {fit?.axis === "y" && (
+        <div className="absolute inset-0 flex flex-col">
+          <div
+            className="hero-wing hero-wing-soft relative w-full min-h-0 flex-1 overflow-hidden"
+            style={{
+              ...bg,
+              maskImage: "linear-gradient(to top, #000 18%, transparent 88%)",
+              WebkitMaskImage: "linear-gradient(to top, #000 18%, transparent 88%)",
+            }}
+          >
+            <div
+              className="absolute inset-0"
+              style={{
+                ...bg,
+                backgroundSize: "100% auto",
+                backgroundPosition: "top",
+                transform: "scaleY(-1)",
+              }}
+            />
+          </div>
+          <img
+            src={image.src}
+            alt={image.alt}
+            loading={eager ? "eager" : "lazy"}
+            onLoad={onImgLoad}
+            style={{ width: fit.w, height: fit.h }}
+            className="relative block flex-none"
+          />
+          <div
+            className="hero-wing hero-wing-soft relative w-full min-h-0 flex-1 overflow-hidden"
+            style={{
+              ...bg,
+              maskImage: "linear-gradient(to bottom, #000 18%, transparent 88%)",
+              WebkitMaskImage: "linear-gradient(to bottom, #000 18%, transparent 88%)",
+            }}
+          >
+            <div
+              className="absolute inset-0"
+              style={{
+                ...bg,
+                backgroundSize: "100% auto",
+                backgroundPosition: "bottom",
+                transform: "scaleY(-1)",
+              }}
+            />
+          </div>
+        </div>
+      )}
+
+      {!fit && (
+        <img
+          src={image.src}
+          alt={image.alt}
+          loading={eager ? "eager" : "lazy"}
+          onLoad={onImgLoad}
+          className="absolute inset-0 h-full w-full object-contain"
+        />
+      )}
+    </motion.div>
+  );
+}
+
 export function Hero({ introComplete = true }: { introComplete?: boolean }) {
   const reducedMotion = useReducedMotion();
   const [phrase, setPhrase] = useState<number | null>(null);
   const [photo, setPhoto] = useState(0);
+  const [hero, setHero] = useState({ w: 0, h: 0 });
   const heroRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -64,6 +235,18 @@ export function Hero({ introComplete = true }: { introComplete?: boolean }) {
     return () => { clock.kill(); observer.disconnect(); };
   }, [introComplete, reducedMotion]);
 
+  // The reflection wings are sized from the live frame, so they follow the
+  // viewport instead of assuming a shape for the picture.
+  useEffect(() => {
+    const element = heroRef.current;
+    if (!element) return;
+    const measure = () => setHero({ w: element.clientWidth, h: element.clientHeight });
+    measure();
+    const ro = new ResizeObserver(measure);
+    ro.observe(element);
+    return () => ro.disconnect();
+  }, []);
+
   const currentPhrase = reducedMotion ? 0 : phrase;
 
   return (
@@ -76,28 +259,14 @@ export function Hero({ introComplete = true }: { introComplete?: boolean }) {
       className="relative h-[100svh] min-h-[600px] w-full overflow-hidden bg-charcoal"
     >
       {PHOTOS.map((image, index) => (
-        <motion.div
+        <HeroPhoto
           key={image.src}
-          aria-hidden={photo !== index}
-          initial={false}
-          animate={{ opacity: photo === index ? 1 : 0, y: photo === index ? 0 : 8 }}
-          transition={{ duration: reducedMotion ? 0 : 1.6, ease: EASE }}
-          className="absolute inset-0 h-full w-full"
-        >
-          <img
-            src={image.src}
-            alt=""
-            aria-hidden="true"
-            loading={index < 2 ? "eager" : "lazy"}
-            className="absolute inset-0 h-full w-full scale-110 object-cover object-[center_30%] blur-2xl"
-          />
-          <img
-            src={image.src}
-            alt={image.alt}
-            loading={index < 2 ? "eager" : "lazy"}
-            className="absolute inset-0 h-full w-full object-contain object-[center_18%]"
-          />
-        </motion.div>
+          image={image}
+          active={photo === index}
+          hero={hero}
+          reduced={!!reducedMotion}
+          eager={index < 2}
+        />
       ))}
       <div aria-hidden="true" className="hero-overlay pointer-events-none absolute inset-0" />
       <motion.div
