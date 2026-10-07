@@ -72,7 +72,7 @@ export function PersonalImageConsulting() {
     <section
       ref={sectionRef}
       aria-labelledby="personal-image-consulting-title"
-      className="bg-background px-6 py-24 md:px-12 md:py-36"
+      className="bg-background px-6 py-16 sm:py-20 md:px-12 md:py-24"
     >
       <div className="mx-auto max-w-[1500px]">
         <div className="flex flex-col items-center gap-8 text-center">
