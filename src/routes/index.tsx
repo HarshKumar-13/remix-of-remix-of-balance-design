@@ -116,7 +116,7 @@ function Index() {
               <Hero introComplete={introComplete} />
             </SlidePanel>
             <SlidePanel>
-            <section id="services" className="px-6 py-28 text-center md:px-12 md:py-44">
+            <section id="services" className="px-6 py-20 text-center sm:py-24 md:px-12 md:py-32">
               <Reveal>
                 <LogoMark className="mb-8" />
               </Reveal>
@@ -133,7 +133,7 @@ function Index() {
                 </p>
               </Reveal>
               <Reveal delay={200}>
-                <div className="-mx-6 mt-14 md:-mx-12">
+                <div className="-mx-6 mt-10 md:-mx-12 md:mt-14">
                   <CurvedSlider images={WORKSHOP_IMAGES} contain />
                 </div>
               </Reveal>
