@@ -89,7 +89,7 @@ export function Hero({ introComplete = true }: { introComplete?: boolean }) {
             alt=""
             aria-hidden="true"
             loading={index < 2 ? "eager" : "lazy"}
-            className="absolute inset-0 h-full w-full scale-110 object-cover object-[center_30%] blur-2xl brightness-[0.55]"
+            className="absolute inset-0 h-full w-full scale-110 object-cover object-[center_30%] blur-2xl brightness-[0.82]"
           />
           <img
             src={image.src}
