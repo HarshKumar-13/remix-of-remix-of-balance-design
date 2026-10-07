@@ -168,7 +168,7 @@ export function PersonalImageConsulting() {
             >
               {ribbonStatements.map((statement) => (
                 <span key={statement} className="flex items-center">
-                  <span className="whitespace-nowrap px-8 text-[0.95rem] leading-relaxed text-foreground md:px-10 md:text-lg">
+                  <span className="whitespace-nowrap px-8 text-[calc(0.95rem+2px)] leading-relaxed text-foreground md:px-10 md:text-[calc(1.125rem+2px)]">
                     {statement}
                   </span>
                   <img
