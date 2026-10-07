@@ -33,13 +33,13 @@ export const Route = createFileRoute("/about")({
       {
         name: "description",
         content:
-          "The story, philosophy and people behind Balance Design & Fashion Consultancy — fashion, image and design for individuals, brands and organisations.",
+          "The story and people behind Balance Design & Fashion Consultancy — fashion, image and design for individuals, brands and organisations.",
       },
       { property: "og:title", content: "About Us — Balance Design & Fashion Consultancy" },
       {
         property: "og:description",
         content:
-          "The story, philosophy and people behind Balance Design & Fashion Consultancy.",
+          "The story and people behind Balance Design & Fashion Consultancy.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -48,13 +48,11 @@ export const Route = createFileRoute("/about")({
   component: AboutPage,
 });
 
-type TabKey = "about" | "founder" | "philosophy" | "journey" | "recognition";
+type TabKey = "about" | "founder" | "recognition";
 
 const TABS: { key: TabKey; label: string }[] = [
   { key: "about", label: "About Balance" },
   { key: "founder", label: "Our Founder" },
-  { key: "philosophy", label: "Our Philosophy" },
-  { key: "journey", label: "Our Journey" },
   { key: "recognition", label: "Achievements" },
 ];
 
@@ -172,8 +170,6 @@ function AboutTabs() {
         >
           {tab === "about" && <AboutBalancePanel />}
           {tab === "founder" && <FounderPanel />}
-          {tab === "philosophy" && <PhilosophyPanel />}
-          {tab === "journey" && <JourneyPanel />}
           {tab === "recognition" && <RecognitionPanel />}
         </div>
       </div>
@@ -363,117 +359,6 @@ function FounderPanel() {
             />
           </div>
         </Reveal>
-      </div>
-    </div>
-  );
-}
-
-function PhilosophyPanel() {
-  return (
-    <div>
-      <div className="max-w-4xl">
-        <Reveal>
-          <p className="label-xs text-muted-foreground">Our Philosophy</p>
-        </Reveal>
-        <Reveal delay={100}>
-          <h2 className="display mt-6 text-[2.75rem] leading-[0.95] sm:text-6xl md:text-[5.25rem]">
-            Image is identity made visible.
-          </h2>
-        </Reveal>
-        <Reveal delay={180}>
-          <p className="mt-10 max-w-xl text-lg leading-relaxed text-muted-foreground md:text-xl">
-            We believe confidence begins with coherence — when what you wear, how you present and
-            what you stand for speak the same language. Design, in this sense, is not decoration;
-            it is clarity with intent.
-          </p>
-        </Reveal>
-        <Reveal delay={240}>
-          <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground md:text-xl">
-            Every engagement at Balance is measured by a single outcome: a presence that feels
-            honest, assured and unmistakably your own.
-          </p>
-        </Reveal>
-        <Reveal delay={300}>
-          <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground md:text-xl">
-            My mission is to transform creativity into measurable business impact .Whether it’s launching a new label, crafting consumer-centric brand stories, scaling design processes for growth, through directing design teams, or mentoring the next generation of fashion leaders.
-          </p>
-        </Reveal>
-      </div>
-
-      <div className="mt-16 grid grid-cols-1 gap-6 sm:grid-cols-12 md:mt-24 md:gap-8">
-        <div className="sm:col-span-7">
-          <Reveal>
-            <img
-              src={pers2}
-              alt="Editorial portrait reflecting the Balance design philosophy"
-              loading="lazy"
-              className="h-[46vh] w-full object-cover md:h-[64vh]"
-            />
-          </Reveal>
-        </div>
-        <div className="sm:col-span-4 sm:self-end">
-          <Reveal delay={120}>
-            <img
-              src={aboutImg}
-              alt="Atelier detail — fabric, form and craftsmanship"
-              loading="lazy"
-              className="h-[32vh] w-full object-cover md:h-[40vh]"
-            />
-          </Reveal>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function JourneyPanel() {
-  const MILESTONES = [
-    {
-      phase: "The Beginning",
-      text: "[Placeholder] The founding of Balance — the idea, the first studio, the first client.",
-    },
-    {
-      phase: "Growing Practice",
-      text: "[Placeholder] Early collaborations and the development of the consultancy's core services.",
-    },
-    {
-      phase: "Wider Canvas",
-      text: "[Placeholder] Expansion into corporate image, fashion experiences and organisational design work.",
-    },
-    {
-      phase: "Today",
-      text: "[Placeholder] Balance today — the consultancy's current focus and direction.",
-    },
-  ];
-
-  return (
-    <div>
-      <div className="max-w-3xl">
-        <Reveal>
-          <p className="label-xs text-muted-foreground">Our Journey</p>
-        </Reveal>
-        <Reveal delay={100}>
-          <h2 className="display mt-6 text-[2.75rem] leading-[0.95] sm:text-5xl md:text-[4.25rem]">
-            A journey written in chapters.
-          </h2>
-        </Reveal>
-      </div>
-
-      <div className="mt-16 md:mt-24">
-        {MILESTONES.map((m, i) => (
-          <Reveal key={m.phase} delay={i * 80}>
-            <div className="grid grid-cols-1 gap-4 border-t border-border py-10 md:grid-cols-12 md:gap-8 md:py-14">
-              <div className="md:col-span-4">
-                <h3 className="display text-2xl md:text-[2.5rem]">{m.phase}</h3>
-              </div>
-              <div className="md:col-span-7 md:col-start-6">
-                <p className="max-w-xl text-lg leading-relaxed text-muted-foreground md:text-xl">
-                  {m.text}
-                </p>
-              </div>
-            </div>
-          </Reveal>
-        ))}
       </div>
     </div>
   );
