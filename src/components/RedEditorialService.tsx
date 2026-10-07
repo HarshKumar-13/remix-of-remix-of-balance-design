@@ -187,7 +187,7 @@ export function RedEditorialService({
         </Reveal>
         <div
           className={`mx-auto mt-9 min-h-20 md:min-h-24 ${
-            wideDescription ? "max-w-[900px]" : "max-w-2xl"
+            wideDescription ? "max-w-[900px] xl:max-w-[1100px]" : "max-w-2xl"
           }`}
         >
           {description && (
