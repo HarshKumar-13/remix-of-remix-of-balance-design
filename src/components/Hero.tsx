@@ -104,6 +104,7 @@ function HeroPhoto({
     >
       {/* Underlying wash: keeps the outer edge of a reflection from ending flat. */}
       <img
+        ref={baseRef}
         src={image.src}
         alt=""
         aria-hidden="true"
@@ -132,9 +133,8 @@ function HeroPhoto({
               }}
             />
           </div>
-      <img
-        ref={baseRef}
-        src={image.src}
+          <img
+            src={image.src}
             alt={image.alt}
             loading={eager ? "eager" : "lazy"}
             onLoad={onImgLoad}
