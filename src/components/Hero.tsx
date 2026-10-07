@@ -109,7 +109,7 @@ export function Hero({ introComplete = true }: { introComplete?: boolean }) {
         <h1 className="display whitespace-nowrap text-[calc(12.6vw_-_14px)] leading-[0.98] md:text-[calc(min(12vw_-_16px,15rem_-_4px))]">
           Balance Design
         </h1>
-        <p className="label-xs mt-5 opacity-80">Design &amp; Fashion Consultancy</p>
+        <p className="label-xs mt-5">Design &amp; Fashion Consultancy</p>
         <div className="relative mt-7 h-14 max-w-3xl sm:h-16" aria-label="Consultancy specialisms">
           <AnimatePresence mode="wait">
             {currentPhrase !== null && (
@@ -128,7 +128,7 @@ export function Hero({ introComplete = true }: { introComplete?: boolean }) {
         </div>
         <div className="mt-4 flex flex-wrap items-center gap-4">
           <a href="#services" className="btn-red label-xs">Explore services</a>
-          <a href="#contact" className="btn-ghost label-xs bg-charcoal/30 backdrop-blur-[3px] hover:bg-ivory hover:text-charcoal">Book an appointment</a>
+          <a href="#contact" className="btn-ghost label-xs bg-charcoal/50 backdrop-blur-[3px] hover:bg-ivory hover:text-charcoal">Book an appointment</a>
         </div>
         </div>
       </motion.div>
