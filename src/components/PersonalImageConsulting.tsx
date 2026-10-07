@@ -4,6 +4,10 @@ import p1 from "@/assets/pers-upd-1.jpg";
 import p2 from "@/assets/pers-upd-2.jpg";
 import p3 from "@/assets/pers-upd-3.jpg";
 import p4 from "@/assets/pers-upd-4.jpg";
+import p5 from "@/assets/pers-upd-5.jpg";
+import p6 from "@/assets/pers-upd-6.jpg";
+import p7 from "@/assets/pers-upd-7.jpg";
+import p8 from "@/assets/pers-upd-8.jpg";
 import s1 from "@/assets/pers-sq-1.jpg";
 import s2 from "@/assets/pers-sq-2.jpg";
 import s3 from "@/assets/pers-sq-3.jpg";
@@ -22,11 +26,15 @@ const squareImages: { src: string; alt: string; pos?: string }[] = [
   { src: s7, alt: "Upma Shrian in a polka-dot top and red skirt", pos: "50% 30%" },
 ];
 
-const landscapeImages = [
-  { src: p1, alt: "Coral blazer styled with black top, striped skirt and accessories" },
-  { src: p2, alt: "Red cardigan styled with beige skirt, red bag and nude heels" },
-  { src: p3, alt: "What colours look good on you - women, ivory to deep bronze" },
-  { src: p4, alt: "Polka-dot dress on a mannequin with black blazer, bag and heels" },
+const landscapeImages: { src: string; alt: string; fit: "cover" | "contain" }[] = [
+  { src: p1, alt: "Coral blazer styled with black top, striped skirt and accessories", fit: "cover" },
+  { src: p2, alt: "Red cardigan styled with beige skirt, red bag and nude heels", fit: "cover" },
+  { src: p3, alt: "What colours look good on you - women, ivory to deep bronze", fit: "cover" },
+  { src: p4, alt: "Polka-dot dress on a mannequin with black blazer, bag and heels", fit: "cover" },
+  { src: p5, alt: "Five styled day-to-evening outfits in contrasting colour combinations", fit: "contain" },
+  { src: p6, alt: "Four colour-blocking outfits in red, royal blue and bright yellow", fit: "contain" },
+  { src: p7, alt: "Analogous colour outfits in purple, berry, deep red and coral with a colour palette", fit: "contain" },
+  { src: p8, alt: "Three monochromatic outfits in yellow, green and blush pink", fit: "contain" },
 ];
 
 export function PersonalImageConsulting() {
@@ -106,7 +114,7 @@ export function PersonalImageConsulting() {
 
         <div className="mt-10 grid grid-cols-1 gap-8 md:mt-14 md:grid-cols-12 md:items-stretch md:gap-x-8 lg:gap-x-12">
           <div
-            className={`relative aspect-[16/10] overflow-hidden transition-[clip-path,opacity,transform] delay-300 duration-[1400ms] ease-[cubic-bezier(0.16,1,0.3,1)] md:col-span-7 ${imageReveal}`}
+            className={`relative aspect-[16/10] overflow-hidden bg-white transition-[clip-path,opacity,transform] delay-300 duration-[1400ms] ease-[cubic-bezier(0.16,1,0.3,1)] md:col-span-7 ${imageReveal}`}
           >
             {landscapeImages.map((image, index) => (
               <img
@@ -115,7 +123,8 @@ export function PersonalImageConsulting() {
                 alt={image.alt}
                 loading="lazy"
                 decoding="async"
-                className={`absolute inset-0 h-full w-full object-cover transition-[opacity,transform] duration-[1800ms] ease-[cubic-bezier(0.16,1,0.3,1)] motion-reduce:transition-none ${
+                style={{ objectFit: image.fit, objectPosition: "center" }}
+                className={`absolute inset-0 h-full w-full transition-[opacity,transform] duration-[1800ms] ease-[cubic-bezier(0.16,1,0.3,1)] motion-reduce:transition-none ${
                   activeImage === index ? "scale-100 opacity-100" : "scale-[1.025] opacity-0"
                 }`}
               />
