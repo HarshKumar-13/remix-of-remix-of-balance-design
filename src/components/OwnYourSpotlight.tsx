@@ -8,9 +8,8 @@ import s3 from "@/assets/oys-home-3.jpeg";
 import s4 from "@/assets/oys-home-4.jpeg";
 import s5 from "@/assets/oys-home-5.jpeg";
 import s6 from "@/assets/oys-home-6.jpeg";
-import s7 from "@/assets/oys-home-7.jpeg";
 
-const SLIDES = [s1, s2, s3, s4, s5, s6, s7];
+const SLIDES = [s1, s2, s3, s4, s5, s6];
 
 export function OwnYourSpotlight() {
   const [idx, setIdx] = useState(0);
