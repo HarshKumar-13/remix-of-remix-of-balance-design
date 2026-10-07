@@ -1,50 +1,20 @@
 import { useEffect, useState } from "react";
 
-import upmaBurgundyPortrait from "@/assets/about-upma-burgundy.jpg";
-import upmaCloseupPortrait from "@/assets/about-upma-closeup.jpg";
-import upmaCoralPortrait from "@/assets/about-upma-coral.webp";
-import upmaCouchPortrait from "@/assets/about-upma-couch.jpg";
-import upmaGardenPortrait from "@/assets/about-upma-garden.jpg";
-import upmaPolkaDotPortrait from "@/assets/about-upma-polka-dot.jpg";
-import upmaRedPortrait from "@/assets/about-upma-red.jpg";
+import aboutMe1 from "@/assets/about-me-1.jpg";
+import aboutMe2 from "@/assets/about-me-2.jpg";
 import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/Reveal";
 
 const PORTRAITS = [
   {
-    src: upmaCoralPortrait,
-    alt: "Upma Shrian seated on a teal bench in a coral outfit",
-    position: "object-center",
+    src: aboutMe1,
+    alt: "Upma Shrian seated on a red sofa in a polka-dot top",
+    position: "object-[center_30%]",
   },
   {
-    src: upmaBurgundyPortrait,
-    alt: "Upma Shrian wearing a burgundy top and cream trousers",
-    position: "object-[center_24%]",
-  },
-  {
-    src: upmaRedPortrait,
-    alt: "Upma Shrian wearing a red top and tartan trousers",
-    position: "object-[center_24%]",
-  },
-  {
-    src: upmaGardenPortrait,
-    alt: "Upma Shrian seated outdoors in a patterned dress",
-    position: "object-center",
-  },
-  {
-    src: upmaCloseupPortrait,
-    alt: "Close portrait of Upma Shrian wearing a burgundy top",
-    position: "object-center",
-  },
-  {
-    src: upmaPolkaDotPortrait,
-    alt: "Upma Shrian seated in a red chair wearing a polka-dot top",
-    position: "object-center",
-  },
-  {
-    src: upmaCouchPortrait,
-    alt: "Upma Shrian seated on a blue velvet sofa wearing a tan wrap dress",
-    position: "object-top",
+    src: aboutMe2,
+    alt: "Upma Shrian in a burgundy top with a silver necklace",
+    position: "object-[center_30%]",
   },
 ];
 
