@@ -9,23 +9,30 @@ import v4 from "@/assets/corp-vh-4.jpg";
 import c6 from "@/assets/corp-new-6.jpg";
 import c7 from "@/assets/corp-new-7.jpg";
 
+// Written on the slides themselves: the service, then the client beneath it.
+const VH = { title: "Corporate Image Consulting", sub: "VAN HEUSEN" };
+
 const IMAGES = [
-  { src: c1, alt: "Van Heusen Master the Right Dress Code seminar audience" },
+  { src: c1, alt: "Van Heusen Master the Right Dress Code seminar audience", caption: VH },
   {
     src: v1,
     alt: "Presenter addressing participants seated at round tables at a Van Heusen corporate seminar",
+    caption: VH,
   },
   {
     src: v2,
     alt: "Participants completing seminar exercises at round tables beside a Van Heusen standee",
+    caption: VH,
   },
   {
     src: v3,
     alt: "Presenter beside a projection screen at a Van Heusen corporate image consulting seminar",
+    caption: VH,
   },
   {
     src: v4,
     alt: "Presenter guiding four participants demonstrating dress styles at a Van Heusen seminar",
+    caption: VH,
   },
   { src: c6, alt: "Colour wheel presentation at a corporate seminar" },
   { src: c7, alt: "Upma Shrian engaging participants at a corporate seminar" },
@@ -86,13 +93,6 @@ export function CorporateImageConsulting() {
             coaching, professionals learn to command respect, and own their presence in meetings,
             presentations and high stake conversations.
           </p>
-          <div
-            className={`flex items-center justify-center gap-4 transition-[opacity,transform] delay-300 duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] ${reveal}`}
-          >
-            <span aria-hidden="true" className="h-px w-8 bg-border md:w-12" />
-            <p className="label-xs text-foreground">Van Heusen</p>
-            <span aria-hidden="true" className="h-px w-8 bg-border md:w-12" />
-          </div>
         </div>
 
         <div

@@ -1,6 +1,11 @@
 import { useEffect, useState } from "react";
 
-export type CurvedImage = { src: string; alt: string };
+export type CurvedImage = {
+  src: string;
+  alt: string;
+  /** Words written on the slide itself: a line, then a line beneath it in capitals. */
+  caption?: { title: string; sub: string };
+};
 
 /** Convex, auto-advancing image row (one step every 2s). Hover gently enlarges an image. */
 export function CurvedSlider({ images, imageFit = "cover" }: { images: CurvedImage[]; contain?: boolean; imageFit?: "cover" | "contain" }) {
@@ -51,6 +56,18 @@ export function CurvedSlider({ images, imageFit = "cover" }: { images: CurvedIma
             >
               <img src={img.src} alt={img.alt} loading="lazy" className={`block h-full w-full object-center ${imageFit === "contain" ? "object-contain" : "object-cover"}`} />
             </div>
+            {img.caption && (
+              <div className="pointer-events-none absolute inset-x-0 bottom-0 flex flex-col items-center gap-1.5 px-4 pb-5 pt-14 text-center">
+                <span
+                  aria-hidden="true"
+                  className="absolute inset-0 bg-gradient-to-t from-charcoal/80 via-charcoal/35 to-transparent"
+                />
+                <p className="label-xs relative font-semibold text-ivory/85">{img.caption.title}</p>
+                <p className="display relative text-[1.05rem] uppercase leading-none tracking-[0.18em] text-ivory sm:text-[1.3rem]">
+                  {img.caption.sub}
+                </p>
+              </div>
+            )}
           </div>
         );
       })}
