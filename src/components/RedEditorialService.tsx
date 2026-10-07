@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef, useState, type CSSProperties } from "react";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 
-import logoMark from "@/assets/balance-logo-on-red.png";
+import logoMark from "@/assets/balance-logo-mark.png";
 import { Button } from "@/components/ui/button";
 import { Reveal } from "./Reveal";
 
@@ -150,7 +150,7 @@ export function RedEditorialService({
   single = false,
 }: RedEditorialServiceProps) {
   return (
-    <section className="overflow-hidden bg-red py-24 text-primary-foreground md:py-36" aria-label={eyebrow}>
+    <section className="overflow-hidden bg-background py-24 text-foreground md:py-36" aria-label={eyebrow}>
       <div className="mx-auto px-6 text-center md:px-12">
         <Reveal>
           <img
@@ -163,7 +163,7 @@ export function RedEditorialService({
           />
         </Reveal>
         <Reveal delay={80}>
-          <p className="label-xs mt-8 text-primary-foreground/85">{eyebrow}</p>
+          <p className="label-xs mt-8 font-semibold text-muted-foreground">{eyebrow}</p>
         </Reveal>
         <Reveal delay={150}>
           <h2 className="display mx-auto mt-7 max-w-5xl text-[2.65rem] leading-[1.02] sm:text-6xl md:text-[5.25rem]">
@@ -173,7 +173,7 @@ export function RedEditorialService({
         <div className="mx-auto mt-9 min-h-20 max-w-2xl md:min-h-24">
           {description && (
             <Reveal delay={230}>
-              <p className="text-base leading-[1.75] text-primary-foreground/85 sm:text-lg md:text-xl">
+              <p className="text-base leading-[1.75] text-muted-foreground sm:text-lg md:text-xl">
                 {description}
               </p>
             </Reveal>
