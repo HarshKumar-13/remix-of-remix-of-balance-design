@@ -57,6 +57,25 @@ function HeroPhoto({
   eager: boolean;
 }) {
   const [nat, setNat] = useState<{ w: number; h: number } | null>(null);
+  const baseRef = useRef<HTMLImageElement>(null);
+
+  // A cached photo can finish loading before React attaches its load handler, so
+  // the picture's own proportions are read from the element itself.
+  useEffect(() => {
+    const el = baseRef.current;
+    if (!el) return;
+    const read = () => {
+      if (el.naturalWidth && el.naturalHeight) {
+        setNat({ w: el.naturalWidth, h: el.naturalHeight });
+      }
+    };
+    if (el.complete) {
+      read();
+      return;
+    }
+    el.addEventListener("load", read);
+    return () => el.removeEventListener("load", read);
+  }, [image.src]);
 
   const fit = useMemo(() => {
     if (!nat || !hero.w || !hero.h) return null;
@@ -113,8 +132,9 @@ function HeroPhoto({
               }}
             />
           </div>
-          <img
-            src={image.src}
+      <img
+        ref={baseRef}
+        src={image.src}
             alt={image.alt}
             loading={eager ? "eager" : "lazy"}
             onLoad={onImgLoad}
