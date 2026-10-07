@@ -36,6 +36,9 @@ import trend1613 from "@/assets/trend-1613.jpg";
 import trend1614 from "@/assets/trend-1614.jpg";
 import trend1615 from "@/assets/trend-1615.jpg";
 import trend1616 from "@/assets/trend-1616.jpg";
+import trend1629 from "@/assets/hero-1629.jpg";
+import trend1630 from "@/assets/hero-1630.jpg";
+import trend1631 from "@/assets/hero-1631.jpg";
 import graphic1Asset from "@/assets/graphic-1.jpeg";
 import graphic2Asset from "@/assets/graphic-2.jpeg";
 import graphic3Asset from "@/assets/graphic-3.jpg";
@@ -95,6 +98,9 @@ const TREND_IMAGES = [
   { src: trend1614, alt: "Scrapbook Boys 2-8 yrs trend board with illustration and Pantone palette" },
   { src: trend1615, alt: "Fabrics and Prints board with graphic tees, stripes and overlapped prints" },
   { src: trend1616, alt: "Boys outerwear and shirt CAD flats board with Pantone palette" },
+  { src: trend1629, alt: "Illusive — Tweens Girls board, model in black lace body paint with 'Which is the real skin'" },
+  { src: trend1630, alt: "Black and white ornamental geometric print board" },
+  { src: trend1631, alt: "Prints board with four illustrated figures in swirling retro prints" },
 ];
 
 const GRAPHIC_IMAGES = [
@@ -159,9 +165,8 @@ function Index() {
 
           <section id="services-story" className="relative bg-background">
             <RedEditorialService
-              eyebrow="TREND FORECASTING & LINE PRESENTATION"
-              headline={<>See what&rsquo;s next.<br />Design what&rsquo;s now.</>}
-              description="Filtering the global fashion picture and anticipating what customers will be ready to embrace in upcoming seasons — then defining the individual styles or style groups needed to meet the business target."
+              headline={<>Trend Forecasting &amp;<br />Line Presentation</>}
+              description="Filtering the global fashion picture and anticipating what customers will be ready to embrace in upcoming seasons. Tracking trends and interpreting those trends for the company's target market. Balancing a product line by including a range of seasonal & staple styles, fashions & basic styles and setting the width & depth of the collection with reference to the brand image, price points, size range, style, colous and previous season sales record."
               images={TREND_IMAGES}
               imageFit="contain"
             />

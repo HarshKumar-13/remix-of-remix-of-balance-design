@@ -17,7 +17,7 @@ function padImages<T>(list: T[]): T[] {
 type ServiceImage = { src: string; alt: string };
 
 type RedEditorialServiceProps = {
-  eyebrow: string;
+  eyebrow?: string;
   headline: React.ReactNode;
   description?: string;
   images: ServiceImage[];
@@ -161,7 +161,7 @@ export function RedEditorialService({
   imageFit = "cover",
 }: RedEditorialServiceProps) {
   return (
-    <section className="overflow-hidden bg-background py-16 text-foreground sm:py-20 md:py-24" aria-label={eyebrow}>
+    <section className="overflow-hidden bg-background py-16 text-foreground sm:py-20 md:py-24" aria-label={typeof eyebrow === "string" && eyebrow ? eyebrow : "Service"}>
       <div className="mx-auto px-6 text-center md:px-12">
         <Reveal>
           <img
@@ -173,9 +173,11 @@ export function RedEditorialService({
             height={80}
           />
         </Reveal>
-        <Reveal delay={80}>
-          <p className="label-xs mt-8 font-semibold text-muted-foreground">{eyebrow}</p>
-        </Reveal>
+        {eyebrow && (
+          <Reveal delay={80}>
+            <p className="label-xs mt-8 font-semibold text-muted-foreground">{eyebrow}</p>
+          </Reveal>
+        )}
         <Reveal delay={150}>
           <h2 className="display mx-auto mt-7 max-w-5xl text-[2.65rem] leading-[1.02] sm:text-6xl md:text-[5.25rem]">
             {headline}
