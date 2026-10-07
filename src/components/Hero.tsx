@@ -119,7 +119,7 @@ export function Hero({ introComplete = true }: { introComplete?: boolean }) {
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 1.02, y: -3, transition: { duration: 0.5, ease: EASE } }}
                 transition={{ duration: reducedMotion ? 0 : 0.6, ease: EASE }}
-                className="absolute inset-x-0 top-0 origin-left font-sans text-2xl font-medium leading-tight sm:text-3xl md:text-4xl"
+                className="hero-ink absolute inset-x-0 top-0 origin-left font-sans text-2xl font-medium leading-tight sm:text-3xl md:text-4xl"
               >
                 {PHRASES[currentPhrase]}
               </motion.p>
