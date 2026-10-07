@@ -42,7 +42,7 @@ export function RotatingPoints() {
   return (
     <div className="mt-8 min-h-[4.5rem] md:mt-10">
       <p
-        className="flex items-start gap-3 text-lg leading-snug text-foreground md:text-xl"
+        className="flex items-start justify-center gap-3 text-center text-lg leading-snug text-foreground md:text-xl"
         style={{ opacity: visible ? 1 : 0, transition: `opacity ${FADE_MS}ms ease-in-out` }}
         aria-live="polite"
       >
