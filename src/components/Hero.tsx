@@ -36,12 +36,16 @@ const PHRASES = [
 ];
 const EASE = [0.65, 0, 0.35, 1] as const;
 
+// A reflection is never a 1:1 copy of the picture — squashing it and softening
+// it is what stops the edge reading as a duplicated person.
+const REFLECT_SQUASH_X = 0.42;
+const REFLECT_SQUASH_Y = 0.5;
+
 /**
  * A photo, shown whole, with its own edge reflected outward to fill the frame.
  * The sharp picture keeps its exact proportions — nothing is cropped, nothing
  * is invented — and the reflection takes up whatever the picture leaves over.
- * On a portrait screen the reflection runs above and below instead of beside,
- * and is softened further so it reads as a tonal fold rather than a mirror.
+ * On a portrait screen the reflection runs above and below instead of beside.
  */
 function HeroPhoto({
   image,
@@ -94,6 +98,17 @@ function HeroPhoto({
     }
   };
 
+  // The reflection keeps the picture's own edge column where the two meet, so
+  // the join lines up; everything beyond it is squashed and faded.
+  const sideMask =
+    "linear-gradient(to left, rgba(0,0,0,0.42) 0%, rgba(0,0,0,0.9) 16%, transparent 74%)";
+  const sideMaskFlip =
+    "linear-gradient(to right, rgba(0,0,0,0.42) 0%, rgba(0,0,0,0.9) 16%, transparent 74%)";
+  const topMask =
+    "linear-gradient(to top, rgba(0,0,0,0.42) 0%, rgba(0,0,0,0.9) 16%, transparent 74%)";
+  const bottomMask =
+    "linear-gradient(to bottom, rgba(0,0,0,0.42) 0%, rgba(0,0,0,0.9) 16%, transparent 74%)";
+
   return (
     <motion.div
       aria-hidden={!active}
@@ -117,17 +132,13 @@ function HeroPhoto({
         <div className="absolute inset-0 flex">
           <div
             className="hero-wing relative h-full min-w-0 flex-1 overflow-hidden"
-            style={{
-              ...bg,
-              maskImage: "linear-gradient(to left, #000 18%, transparent 88%)",
-              WebkitMaskImage: "linear-gradient(to left, #000 18%, transparent 88%)",
-            }}
+            style={{ ...bg, maskImage: sideMask, WebkitMaskImage: sideMask }}
           >
             <div
               className="absolute inset-0"
               style={{
                 ...bg,
-                backgroundSize: "auto 100%",
+                backgroundSize: `${Math.round(fit.w * REFLECT_SQUASH_X)}px 100%`,
                 backgroundPosition: "left",
                 transform: "scaleX(-1)",
               }}
@@ -143,17 +154,13 @@ function HeroPhoto({
           />
           <div
             className="hero-wing relative h-full min-w-0 flex-1 overflow-hidden"
-            style={{
-              ...bg,
-              maskImage: "linear-gradient(to right, #000 18%, transparent 88%)",
-              WebkitMaskImage: "linear-gradient(to right, #000 18%, transparent 88%)",
-            }}
+            style={{ ...bg, maskImage: sideMaskFlip, WebkitMaskImage: sideMaskFlip }}
           >
             <div
               className="absolute inset-0"
               style={{
                 ...bg,
-                backgroundSize: "auto 100%",
+                backgroundSize: `${Math.round(fit.w * REFLECT_SQUASH_X)}px 100%`,
                 backgroundPosition: "right",
                 transform: "scaleX(-1)",
               }}
@@ -166,17 +173,13 @@ function HeroPhoto({
         <div className="absolute inset-0 flex flex-col">
           <div
             className="hero-wing hero-wing-soft relative w-full min-h-0 flex-1 overflow-hidden"
-            style={{
-              ...bg,
-              maskImage: "linear-gradient(to top, #000 18%, transparent 88%)",
-              WebkitMaskImage: "linear-gradient(to top, #000 18%, transparent 88%)",
-            }}
+            style={{ ...bg, maskImage: topMask, WebkitMaskImage: topMask }}
           >
             <div
               className="absolute inset-0"
               style={{
                 ...bg,
-                backgroundSize: "100% auto",
+                backgroundSize: `100% ${Math.round(fit.h * REFLECT_SQUASH_Y)}px`,
                 backgroundPosition: "top",
                 transform: "scaleY(-1)",
               }}
@@ -192,17 +195,13 @@ function HeroPhoto({
           />
           <div
             className="hero-wing hero-wing-soft relative w-full min-h-0 flex-1 overflow-hidden"
-            style={{
-              ...bg,
-              maskImage: "linear-gradient(to bottom, #000 18%, transparent 88%)",
-              WebkitMaskImage: "linear-gradient(to bottom, #000 18%, transparent 88%)",
-            }}
+            style={{ ...bg, maskImage: bottomMask, WebkitMaskImage: bottomMask }}
           >
             <div
               className="absolute inset-0"
               style={{
                 ...bg,
-                backgroundSize: "100% auto",
+                backgroundSize: `100% ${Math.round(fit.h * REFLECT_SQUASH_Y)}px`,
                 backgroundPosition: "bottom",
                 transform: "scaleY(-1)",
               }}
