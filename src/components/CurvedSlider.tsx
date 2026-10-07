@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 export type CurvedImage = { src: string; alt: string };
 
 /** Convex, auto-advancing image row (one step every 2s). Hover gently enlarges an image. */
-export function CurvedSlider({ images, contain = false }: { images: CurvedImage[]; contain?: boolean }) {
+export function CurvedSlider({ images }: { images: CurvedImage[]; contain?: boolean }) {
   const [offset, setOffset] = useState(0);
   const [hovered, setHovered] = useState<number | null>(null);
   // Cloned slides (3 copies) so the wrap-around happens far off-screen — seamless loop.
@@ -20,7 +20,7 @@ export function CurvedSlider({ images, contain = false }: { images: CurvedImage[
 
   return (
     <div
-      className="relative mx-auto h-[340px] w-full overflow-hidden sm:h-[430px] md:h-[520px]"
+      className="relative mx-auto h-[340px] w-full gap-[var(--slide-gap)] overflow-hidden [--slide-gap:16px] sm:h-[430px] sm:[--slide-gap:24px] md:h-[520px] md:[--slide-gap:28px]"
       style={{ perspective: "1400px" }}
     >
       {slides.map((img, i) => {
@@ -32,9 +32,9 @@ export function CurvedSlider({ images, contain = false }: { images: CurvedImage[
         return (
           <div
             key={`${img.src}-${i}`}
-            className="absolute left-1/2 top-1/2 w-[48vw] sm:w-[33vw] md:w-[24vw] lg:w-[21vw]"
+            className="absolute left-1/2 top-1/2 w-[73vw] sm:w-[50vw] md:w-[37vw] lg:w-[32vw]"
             style={{
-              transform: `translate(-50%, -50%) translateX(${pos * 104}%) translateZ(${z * z * 22}px) rotateY(${-Math.max(-VISIBLE - 1, Math.min(VISIBLE + 1, pos)) * 14}deg)`,
+              transform: `translate(-50%, -50%) translateX(calc(${pos * 100}% + ${pos} * var(--slide-gap))) translateZ(${z * z * 22}px) rotateY(${-Math.max(-VISIBLE - 1, Math.min(VISIBLE + 1, pos)) * 14}deg)`,
               opacity: hidden ? 0 : 1,
               visibility: hidden ? "hidden" : "visible",
               zIndex: hovered === i ? 50 : 10 - z,
@@ -46,10 +46,10 @@ export function CurvedSlider({ images, contain = false }: { images: CurvedImage[
             onMouseLeave={() => setHovered((h) => (h === i ? null : h))}
           >
             <div
-              className={`aspect-[10/9] overflow-hidden ${contain ? "flex items-center justify-center bg-white" : ""} transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]`}
+              className="aspect-[4/3] overflow-hidden transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]"
               style={{ transform: `scale(${hovered === i ? 1.25 : 1})` }}
             >
-              <img src={img.src} alt={img.alt} loading="lazy" className={`h-full w-full ${contain ? "object-contain" : "object-cover"}`} />
+              <img src={img.src} alt={img.alt} loading="lazy" className="block h-full w-full object-cover object-center" />
             </div>
           </div>
         );
