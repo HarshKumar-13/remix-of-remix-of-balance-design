@@ -35,7 +35,7 @@ export function OwnYourSpotlight() {
                 id="own-your-spotlight-title"
                 className="display mt-6 text-[2.4rem] leading-[1.02] uppercase sm:text-6xl md:text-[4.6rem]"
               >
-                <span className="text-primary">Own</span> Your Spotlight
+                <span className="text-primary">Own</span> Your Spotlight Webinar
               </h2>
             </Reveal>
           </div>
