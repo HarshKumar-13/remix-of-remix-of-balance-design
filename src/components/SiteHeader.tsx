@@ -48,12 +48,12 @@ export function SiteHeader({
   return (
     <>
       <header
-        className={`fixed inset-x-0 top-0 z-[60] transition-all duration-700 ${
+        className={`fixed inset-x-0 top-0 z-[60] transition-all duration-700 ease-in-out ${introComplete ? "opacity-100" : "pointer-events-none opacity-0"} ${
           open
             ? "bg-transparent"
             : showSolid
               ? "border-b border-border bg-background/95 backdrop-blur-sm"
-              : "bg-white/70 backdrop-blur-md"
+              : "bg-background/70 backdrop-blur-md"
         }`}
       >
         <div

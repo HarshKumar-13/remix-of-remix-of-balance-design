@@ -10,9 +10,7 @@ export function LogoIntro({ onComplete, onFinish }: { onComplete: () => void; on
   useEffect(() => {
     const layer = layerRef.current;
     const logo = logoRef.current;
-    const navbarLogo = document.querySelector<HTMLElement>("[data-navbar-logo]");
-
-    if (!layer || !logo || !navbarLogo) return;
+    if (!layer || !logo) return;
 
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       onComplete();
@@ -20,38 +18,15 @@ export function LogoIntro({ onComplete, onFinish }: { onComplete: () => void; on
       return;
     }
 
-    const destination = navbarLogo.getBoundingClientRect();
-    const startWidth = Math.min(window.innerWidth * 0.58, 420);
-    const startHeight = startWidth * (destination.height / destination.width);
-    gsap.set(logo, {
-      left: window.innerWidth / 2 - startWidth / 2,
-      top: window.innerHeight / 2 - startHeight / 2,
-      width: startWidth,
-      height: startHeight,
-    });
-
     gsap.set(logo, { opacity: 0, scale: 0.96 });
     const timeline = gsap.timeline({ defaults: { ease: "power2.inOut" } });
 
     timeline
-      .to(logo, { opacity: 1, scale: 1, duration: 0.9, ease: "power2.out" })
-      .addLabel("move", "+=0.7")
-      .to(
-        logo,
-        {
-          left: destination.left,
-          top: destination.top,
-          width: destination.width,
-          height: destination.height,
-          duration: 1.6,
-          ease: "power3.inOut",
-        },
-        "move",
-      )
-      .to(layer, { backgroundColor: "rgba(255,255,255,0)", duration: 1.6 }, "move")
-      .call(onComplete, [], "move+=0.9")
-      .to(logo, { opacity: 0, duration: 0.5, ease: "power1.out" }, "move+=1.6")
-      .call(() => onFinish?.());
+      .to(logo, { opacity: 1, scale: 1, duration: 0.7 }, 0.8)
+      .call(onComplete, [], 3.5)
+      .to(logo, { opacity: 0, duration: 0.6 }, 3.5)
+      .to(layer, { opacity: 0, duration: 0.7 }, 3.5)
+      .call(() => onFinish?.(), [], 4.2);
 
     return () => {
       timeline.kill();
@@ -61,14 +36,14 @@ export function LogoIntro({ onComplete, onFinish }: { onComplete: () => void; on
   return (
     <div
       ref={layerRef}
-      className="pointer-events-none fixed inset-0 z-[80] overflow-hidden bg-white"
+      className="fixed inset-0 z-[80] flex items-center justify-center overflow-hidden bg-background"
       aria-hidden="true"
     >
       <img
         ref={logoRef}
         src={logoOriginal}
         alt=""
-        className="absolute object-contain"
+        className="h-auto w-[58%] max-w-[420px] object-contain opacity-0"
       />
     </div>
   );
