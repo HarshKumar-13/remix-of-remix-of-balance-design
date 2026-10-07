@@ -64,6 +64,8 @@
   --taupe: oklch(0.878 0.008 80);
   --red: oklch(0.472 0.207 28);
   --bronze: var(--red);
+  --hero-overlay: oklch(0 0 0 / 0.18);
+  --hero-foreground: oklch(1 0 0);
 
   --background: oklch(1 0 0);
   --foreground: var(--charcoal);
@@ -350,25 +352,29 @@
   transform: translateY(-2px);
 }
 
-/* Hero copy sits directly on the photo, so a soft shadow keeps the ivory
-   type readable without darkening the image behind it. */
-.hero-copy {
-  text-shadow:
-    0 1px 2px rgb(0 0 0 / 0.6),
-    0 4px 16px rgb(0 0 0 / 0.5);
+.hero-overlay {
+  background: var(--hero-overlay);
 }
 
-/* Small hero type needs a tighter halo than the display line so it still
-   reads over bright, busy mood boards. */
+.hero-copy,
 .hero-ink {
-  text-shadow:
-    0 1px 2px rgb(0 0 0 / 0.8),
-    0 2px 6px rgb(0 0 0 / 0.6);
+  color: var(--hero-foreground);
+  text-shadow: none;
+}
+
+.hero-copy .hero-title {
+  letter-spacing: 0;
+  text-shadow: none;
+  outline: none;
 }
 
 /* The hero caption line reads a touch larger than the site-wide label. */
 .hero-label {
-  font-size: 1.0625rem;
+  font-size: 1.328125rem;
+  letter-spacing: 0.27625rem;
+  background: none;
+  border: none;
+  box-shadow: none;
 }
 
 
