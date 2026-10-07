@@ -75,10 +75,10 @@ export function PersonalImageConsulting() {
       className="bg-background px-6 py-24 md:px-12 md:py-36"
     >
       <div className="mx-auto max-w-[1500px]">
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-12 md:items-start md:gap-x-10 lg:gap-x-16">
-          <div className="md:col-span-6">
+        <div className="flex flex-col items-center gap-8 text-center">
+          <div>
             <p
-              className={`label-xs mb-6 text-muted-foreground transition-[opacity,transform] duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] ${reveal}`}
+              className={`label-xs mb-6 font-semibold text-muted-foreground transition-[opacity,transform] duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] ${reveal}`}
             >
               Design Workshops &amp; Seminars
             </p>
@@ -92,7 +92,7 @@ export function PersonalImageConsulting() {
           </div>
 
           <p
-            className={`max-w-xl text-left text-[calc(1.294rem+2px)] font-medium leading-relaxed text-red transition-[opacity,transform] delay-200 duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] md:col-span-5 md:col-start-8 md:pt-10 md:text-[calc(1.4375rem+2px)] ${reveal}`}
+            className={`mx-auto max-w-4xl text-center text-[calc(1.294rem+2px)] font-medium leading-relaxed text-red transition-[opacity,transform] delay-200 duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)]  md:text-[calc(1.4375rem+2px)] ${reveal}`}
           >
             "Master the Right Dress Code" is a highly visual and interactive seminar, sharing the
             design tools, such that the individual can make decisions for themselves, about which
