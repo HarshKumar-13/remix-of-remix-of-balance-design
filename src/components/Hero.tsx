@@ -82,7 +82,7 @@ export function Hero({ introComplete = true }: { introComplete?: boolean }) {
         transition={{ duration: reducedMotion ? 0 : 0.9, ease: EASE, delay: reducedMotion ? 0 : 0.15 }}
         className="relative z-10 flex h-full flex-col justify-end px-6 pb-14 text-ivory md:px-12 md:pb-20"
       >
-        <h1 className="display max-w-6xl text-5xl leading-[0.98] sm:text-7xl md:text-8xl lg:text-9xl xl:text-[10rem]">
+        <h1 className="display whitespace-nowrap text-[calc(12.6vw-10px)] leading-[0.98] md:text-[calc(min(12vw_-_12px,15rem))]">
           Balance Design
         </h1>
         <p className="label-xs mt-5 opacity-80">Design &amp; Fashion Consultancy</p>
