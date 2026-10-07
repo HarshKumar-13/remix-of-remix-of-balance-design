@@ -23,6 +23,7 @@ type RedEditorialServiceProps = {
   images: ServiceImage[];
   single?: boolean;
   imageFit?: "cover" | "contain";
+  wideDescription?: boolean;
 };
 
 function SingleImageSlideshow({ images, label }: { images: ServiceImage[]; label: string }) {
@@ -159,6 +160,7 @@ export function RedEditorialService({
   images,
   single = false,
   imageFit = "cover",
+  wideDescription = false,
 }: RedEditorialServiceProps) {
   return (
     <section className="overflow-hidden bg-background py-16 text-foreground sm:py-20 md:py-24" aria-label={typeof eyebrow === "string" && eyebrow ? eyebrow : "Service"}>
@@ -183,7 +185,11 @@ export function RedEditorialService({
             {headline}
           </h2>
         </Reveal>
-        <div className="mx-auto mt-9 min-h-20 max-w-2xl md:min-h-24">
+        <div
+          className={`mx-auto mt-9 min-h-20 md:min-h-24 ${
+            wideDescription ? "max-w-[900px] xl:max-w-[1100px]" : "max-w-2xl"
+          }`}
+        >
           {description && (
             <Reveal delay={230}>
               <p className="text-[calc(1.294rem+2px)] leading-relaxed md:text-[calc(1.4375rem+2px)] font-medium text-red">

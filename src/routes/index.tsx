@@ -169,6 +169,7 @@ function Index() {
               description="Filtering the global fashion picture and anticipating what customers will be ready to embrace in upcoming seasons. Tracking trends and interpreting those trends for the company's target market. Balancing a product line by including a range of seasonal & staple styles, fashions & basic styles and setting the width & depth of the collection with reference to the brand image, price points, size range, style, colous and previous season sales record."
               images={TREND_IMAGES}
               imageFit="contain"
+              wideDescription
             />
             <RedEditorialService
               eyebrow="GRAPHIC & PRINT DESIGN"
