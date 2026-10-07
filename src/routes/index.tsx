@@ -29,6 +29,13 @@ import trendScrapbook from "@/assets/trend-scrapbook.jpeg";
 import trendReworked from "@/assets/trend-reworked.jpeg";
 import trendAbstract from "@/assets/trend-abstract-prints.jpeg";
 import trendFolksy from "@/assets/trend-folksy.jpeg";
+import trend1606 from "@/assets/trend-1606.jpg";
+import trend1607 from "@/assets/trend-1607.jpg";
+import trend1612 from "@/assets/trend-1612.jpg";
+import trend1613 from "@/assets/trend-1613.jpg";
+import trend1614 from "@/assets/trend-1614.jpg";
+import trend1615 from "@/assets/trend-1615.jpg";
+import trend1616 from "@/assets/trend-1616.jpg";
 import graphic1Asset from "@/assets/graphic-1.jpeg";
 import graphic2Asset from "@/assets/graphic-2.jpeg";
 import { CurvedSlider } from "@/components/CurvedSlider";
@@ -77,14 +84,13 @@ export const Route = createFileRoute("/")({
 });
 
 const TREND_IMAGES = [
-  { src: trend1, alt: "Global Shopper trend board with travel-inspired colour and material story" },
-  { src: trend2, alt: "Kidswear collage trend story with applique, patchwork and bold palette" },
-  { src: trend3, alt: "Detail page of colour loops, patchwork and psychedelic prints" },
-  { src: trend4, alt: "Polo solid style line sheet in Indigo / Global Shopper colourways" },
-  { src: trendScrapbook, alt: "Boys 2-8 yrs Scrapbook trend page with illustration and Pantone palette" },
-  { src: trendReworked, alt: "Reworked Boys 9-14 yrs trend page with felt textures, checks and Pantone palette" },
-  { src: trendAbstract, alt: "Abstract Prints trend board with kaleidoscopic and circular motifs" },
-  { src: trendFolksy, alt: "Folksy trend board with embroidered garment flats, knits, fringes and braids" },
+  { src: trend1606, alt: "Night Sparkles Girls 9-14 yrs trend board with kaleidoscopic mosaic prints" },
+  { src: trend1607, alt: "Multi-colour stripes trend board with knitwear and digital prints" },
+  { src: trend1612, alt: "Assembling Girls 2-8 yrs folk theme trend board with Pantone palette" },
+  { src: trend1613, alt: "Fusion of art and craft trend board with crochet bags and folk motifs" },
+  { src: trend1614, alt: "Scrapbook Boys 2-8 yrs trend board with illustration and Pantone palette" },
+  { src: trend1615, alt: "Fabrics and Prints board with graphic tees, stripes and overlapped prints" },
+  { src: trend1616, alt: "Boys outerwear and shirt CAD flats board with Pantone palette" },
 ];
 
 const GRAPHIC_IMAGES = [
