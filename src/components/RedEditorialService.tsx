@@ -4,6 +4,15 @@ import { ArrowLeft, ArrowRight } from "lucide-react";
 import logoMark from "@/assets/balance-logo-mark.png";
 import { Button } from "@/components/ui/button";
 import { Reveal } from "./Reveal";
+import { CurvedSlider } from "./CurvedSlider";
+
+/** Repeat short image lists so the curved slider always looks full. */
+function padImages<T>(list: T[]): T[] {
+  if (list.length === 0) return list;
+  const out = [...list];
+  while (out.length < 8) out.push(...list);
+  return out;
+}
 
 type ServiceImage = { src: string; alt: string };
 
@@ -181,12 +190,8 @@ export function RedEditorialService({
         </div>
       </div>
 
-      <Reveal delay={390} className="mt-20 md:mt-28">
-        {single ? (
-          <SingleImageSlideshow images={images} label={eyebrow} />
-        ) : (
-          <EditorialCarousel images={images} label={eyebrow} />
-        )}
+      <Reveal delay={390} className="mt-14 md:mt-20">
+        <CurvedSlider images={padImages(images)} contain />
       </Reveal>
     </section>
   );
