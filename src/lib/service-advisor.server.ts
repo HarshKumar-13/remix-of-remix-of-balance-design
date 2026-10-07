@@ -26,7 +26,7 @@ export class AdvisorError extends Error {
 }
 
 export async function recommendService(goals: string): Promise<AdvisorResult> {
-  const apiKey = process.env.LOVABLE_API_KEY;
+  const apiKey = process.env['LOVABLE_API_KEY'];
   if (!apiKey) throw new AdvisorError("The advisor is not configured yet.", 500);
 
   const runIdFetch = createLovableAiGatewayRunIdFetch();
