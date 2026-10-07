@@ -89,7 +89,7 @@ export function Hero({ introComplete = true }: { introComplete?: boolean }) {
             alt=""
             aria-hidden="true"
             loading={index < 2 ? "eager" : "lazy"}
-            className="absolute inset-0 h-full w-full scale-110 object-cover object-[center_30%] blur-2xl brightness-[0.82]"
+            className="absolute inset-0 h-full w-full scale-110 object-cover object-[center_30%] blur-2xl"
           />
           <img
             src={image.src}
@@ -99,6 +99,7 @@ export function Hero({ introComplete = true }: { introComplete?: boolean }) {
           />
         </motion.div>
       ))}
+      <div aria-hidden="true" className="hero-overlay pointer-events-none absolute inset-0" />
       <motion.div
         initial={{ opacity: 0, y: 8 }}
         animate={{ opacity: introComplete ? 1 : 0, y: introComplete ? 0 : 8 }}
@@ -106,10 +107,10 @@ export function Hero({ introComplete = true }: { introComplete?: boolean }) {
         className="hero-copy relative z-10 flex h-full flex-col justify-end text-ivory"
       >
         <div className="w-full px-6 pb-10 pt-16 md:px-12 md:pb-20 md:pt-40">
-        <h1 className="display whitespace-nowrap text-[calc(12.6vw_-_16px)] leading-[0.98] md:text-[calc(min(12vw_-_18px,15rem_-_6px))]">
+        <h1 className="hero-title display whitespace-nowrap text-[calc(9.45vw_-_12px)] leading-[0.98] md:text-[calc(min(9vw_-_13.5px,11.25rem_-_4.5px))]">
           Balance Design
         </h1>
-        <p className="hero-label hero-ink label-xs mt-5 inline-block bg-charcoal/60 px-3 py-1.5 backdrop-blur-[2px]">&amp; Fashion Consultancy</p>
+        <p className="hero-label hero-ink label-xs mt-5 inline-block">&amp; Fashion Consultancy</p>
         <div className="relative mt-7 h-14 max-w-3xl sm:h-16" aria-label="Consultancy specialisms">
           <AnimatePresence mode="wait">
             {currentPhrase !== null && (
