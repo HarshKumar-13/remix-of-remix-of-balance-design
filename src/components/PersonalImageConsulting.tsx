@@ -26,15 +26,15 @@ const squareImages: { src: string; alt: string; pos?: string }[] = [
   { src: s7, alt: "Upma Shrian in a polka-dot top and red skirt", pos: "50% 30%" },
 ];
 
-const landscapeImages = [
-  { src: p1, alt: "Coral blazer styled with black top, striped skirt and accessories" },
-  { src: p2, alt: "Red cardigan styled with beige skirt, red bag and nude heels" },
-  { src: p3, alt: "What colours look good on you - women, ivory to deep bronze" },
-  { src: p4, alt: "Polka-dot dress on a mannequin with black blazer, bag and heels" },
-  { src: p5, alt: "Five styled day-to-evening outfits in contrasting colour combinations" },
-  { src: p6, alt: "Four colour-blocking outfits in red, royal blue and bright yellow" },
-  { src: p7, alt: "Analogous colour outfits in purple, berry, deep red and coral with a colour palette" },
-  { src: p8, alt: "Three monochromatic outfits in yellow, green and blush pink" },
+const landscapeImages: { src: string; alt: string; fit: "cover" | "contain" }[] = [
+  { src: p1, alt: "Coral blazer styled with black top, striped skirt and accessories", fit: "cover" },
+  { src: p2, alt: "Red cardigan styled with beige skirt, red bag and nude heels", fit: "cover" },
+  { src: p3, alt: "What colours look good on you - women, ivory to deep bronze", fit: "cover" },
+  { src: p4, alt: "Polka-dot dress on a mannequin with black blazer, bag and heels", fit: "cover" },
+  { src: p5, alt: "Five styled day-to-evening outfits in contrasting colour combinations", fit: "contain" },
+  { src: p6, alt: "Four colour-blocking outfits in red, royal blue and bright yellow", fit: "contain" },
+  { src: p7, alt: "Analogous colour outfits in purple, berry, deep red and coral with a colour palette", fit: "contain" },
+  { src: p8, alt: "Three monochromatic outfits in yellow, green and blush pink", fit: "contain" },
 ];
 
 export function PersonalImageConsulting() {
@@ -114,7 +114,7 @@ export function PersonalImageConsulting() {
 
         <div className="mt-10 grid grid-cols-1 gap-8 md:mt-14 md:grid-cols-12 md:items-stretch md:gap-x-8 lg:gap-x-12">
           <div
-            className={`relative aspect-[16/10] overflow-hidden transition-[clip-path,opacity,transform] delay-300 duration-[1400ms] ease-[cubic-bezier(0.16,1,0.3,1)] md:col-span-7 ${imageReveal}`}
+            className={`relative aspect-[16/10] overflow-hidden bg-white transition-[clip-path,opacity,transform] delay-300 duration-[1400ms] ease-[cubic-bezier(0.16,1,0.3,1)] md:col-span-7 ${imageReveal}`}
           >
             {landscapeImages.map((image, index) => (
               <img
