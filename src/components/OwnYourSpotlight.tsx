@@ -24,10 +24,10 @@ export function OwnYourSpotlight() {
       className="bg-background px-6 py-24 md:px-12 md:py-36"
     >
       <div className="mx-auto max-w-[1500px]">
-        <div className="grid grid-cols-1 gap-10 md:grid-cols-12 md:items-end">
-          <div className="md:col-span-7">
+        <div className="flex flex-col items-center gap-10 text-center">
+          <div>
             <Reveal>
-              <p className="label-xs text-muted-foreground">
+              <p className="label-xs font-semibold text-muted-foreground">
                 Design Workshops &amp; Seminars
               </p>
             </Reveal>
@@ -40,9 +40,9 @@ export function OwnYourSpotlight() {
               </h2>
             </Reveal>
           </div>
-          <div className="md:col-span-5">
+          <div>
             <Reveal delay={160}>
-              <p className="max-w-md text-lg leading-relaxed text-muted-foreground md:ml-auto md:text-xl">
+              <p className="mx-auto max-w-2xl text-lg leading-relaxed text-muted-foreground md:text-xl">
                 We coach professionals to look sharp and stylish, build self confidence and have a
                 personality that is magnetic, as they meet and interact with world.
               </p>
