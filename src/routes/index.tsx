@@ -38,6 +38,10 @@ import trend1615 from "@/assets/trend-1615.jpg";
 import trend1616 from "@/assets/trend-1616.jpg";
 import graphic1Asset from "@/assets/graphic-1.jpeg";
 import graphic2Asset from "@/assets/graphic-2.jpeg";
+import graphic3Asset from "@/assets/graphic-3.jpg";
+import graphic4Asset from "@/assets/graphic-4.jpg";
+import graphic5Asset from "@/assets/graphic-5.jpg";
+import graphic6Asset from "@/assets/graphic-6.jpg";
 import { CurvedSlider } from "@/components/CurvedSlider";
 import dws1 from "@/assets/dws-1.jpg";
 import dws2 from "@/assets/dws-2.jpg";
@@ -96,6 +100,10 @@ const TREND_IMAGES = [
 const GRAPHIC_IMAGES = [
   { src: graphic1Asset, alt: "Boys' garment CAD flats range board" },
   { src: graphic2Asset, alt: "Super heroes boys 2-8 yrs theme board with Pantone colours" },
+  { src: graphic3Asset, alt: "The Remixing — Make Do and Mend mood board with vintage red prints" },
+  { src: graphic4Asset, alt: "The Remixing — Exploring new aesthetics board with Klimt gown and colour chips" },
+  { src: graphic5Asset, alt: "Waist Coat Combo 1 uniform design with pink blazer, chevron shirt and floral chevron print" },
+  { src: graphic6Asset, alt: "Chevron floral print board with striped kitten heels and bow brooch" },
 ];
 
 
@@ -162,7 +170,7 @@ function Index() {
               headline={<>Graphic &amp;<br />Print Design</>}
               description="We do CAD'S for shirts, graphic design for T-shirts and textile print design — expressive directions that bring concepts, culture and visual identity into apparel"
               images={GRAPHIC_IMAGES}
-              single
+              imageFit="contain"
             />
           </section>
 
