@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useCallback, useState } from "react";
 
 import { SiteHeader } from "@/components/SiteHeader";
@@ -130,7 +130,10 @@ function Index() {
               <Hero introComplete={introComplete} />
             </SlidePanel>
             <SlidePanel>
-            <section id="services" className="px-6 py-20 text-center sm:py-24 md:px-12 md:py-32">
+            <section
+              id="services"
+              className="px-6 pt-20 pb-14 text-center sm:pt-24 sm:pb-12 md:px-12 md:pt-32 md:pb-16"
+            >
               <Reveal>
                 <LogoMark className="mb-8" />
               </Reveal>
@@ -149,6 +152,13 @@ function Index() {
               <Reveal delay={200}>
                 <div className="-mx-6 mt-10 md:-mx-12 md:mt-14">
                   <CurvedSlider images={WORKSHOP_IMAGES} contain />
+                </div>
+              </Reveal>
+              <Reveal delay={260}>
+                <div className="mt-8 flex justify-center md:mt-10">
+                  <Link to="/contact" className="btn-red label-xs">
+                    Book your workshop
+                  </Link>
                 </div>
               </Reveal>
             </section>
