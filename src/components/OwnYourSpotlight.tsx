@@ -51,7 +51,7 @@ export function OwnYourSpotlight() {
         </div>
 
         <Reveal delay={200}>
-          <div className="relative mt-14 aspect-[16/10] overflow-hidden bg-foreground sm:aspect-[3/2] md:mt-20 md:aspect-[16/9]">
+          <div className="relative mt-10 aspect-[16/10] overflow-hidden bg-foreground sm:aspect-[3/2] md:mt-14 md:aspect-[16/9]">
             {SLIDES.map((src, i) => (
               <img
                 key={src}

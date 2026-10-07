@@ -56,7 +56,7 @@ export function StylingWorkshops() {
         </div>
 
         <Reveal delay={200}>
-          <div className="relative left-1/2 mt-14 w-screen -translate-x-1/2 md:mt-20">
+          <div className="relative left-1/2 mt-10 w-screen -translate-x-1/2 md:mt-14">
             <CurvedSlider images={FILM} />
           </div>
         </Reveal>

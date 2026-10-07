@@ -77,7 +77,7 @@ export function CorporateImageConsulting() {
         </div>
 
         <div
-          className={`relative left-1/2 mt-14 w-screen -translate-x-1/2 transition-opacity delay-300 duration-[1400ms] md:mt-20 ${visible ? "opacity-100" : "opacity-0"}`}
+          className={`relative left-1/2 mt-10 w-screen -translate-x-1/2 transition-opacity delay-300 duration-[1400ms] md:mt-14 ${visible ? "opacity-100" : "opacity-0"}`}
         >
           <CurvedSlider images={IMAGES} contain />
         </div>
