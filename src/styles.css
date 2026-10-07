@@ -359,6 +359,15 @@
     0 0 70px rgb(0 0 0 / 0.35);
 }
 
+/* Small hero type needs a tighter halo than the display line so it still
+   reads over bright, busy mood boards. */
+.hero-ink {
+  text-shadow:
+    0 1px 2px rgb(0 0 0 / 0.85),
+    0 2px 8px rgb(0 0 0 / 0.7),
+    0 0 24px rgb(0 0 0 / 0.55);
+}
+
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
