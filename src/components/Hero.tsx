@@ -106,7 +106,7 @@ export function Hero({ introComplete = true }: { introComplete?: boolean }) {
         className="hero-copy relative z-10 flex h-full flex-col justify-end text-ivory"
       >
         <div className="w-full px-6 pb-10 pt-16 md:px-12 md:pb-20 md:pt-40">
-        <h1 className="display whitespace-nowrap text-[calc(12.6vw_-_14px)] leading-[0.98] md:text-[calc(min(12vw_-_16px,15rem_-_4px))]">
+        <h1 className="display whitespace-nowrap text-[calc(12.6vw_-_16px)] leading-[0.98] md:text-[calc(min(12vw_-_18px,15rem_-_6px))]">
           Balance Design
         </h1>
         <p className="hero-label hero-ink label-xs mt-5 inline-block bg-charcoal/60 px-3 py-1.5 backdrop-blur-[2px]">&amp; Fashion Consultancy</p>
