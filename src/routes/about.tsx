@@ -33,13 +33,13 @@ export const Route = createFileRoute("/about")({
       {
         name: "description",
         content:
-          "The story, philosophy and people behind Balance Design & Fashion Consultancy — fashion, image and design for individuals, brands and organisations.",
+          "The story and people behind Balance Design & Fashion Consultancy — fashion, image and design for individuals, brands and organisations.",
       },
       { property: "og:title", content: "About Us — Balance Design & Fashion Consultancy" },
       {
         property: "og:description",
         content:
-          "The story, philosophy and people behind Balance Design & Fashion Consultancy.",
+          "The story and people behind Balance Design & Fashion Consultancy.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -48,13 +48,11 @@ export const Route = createFileRoute("/about")({
   component: AboutPage,
 });
 
-type TabKey = "about" | "founder" | "philosophy" | "journey" | "recognition";
+type TabKey = "about" | "founder" | "recognition";
 
 const TABS: { key: TabKey; label: string }[] = [
   { key: "about", label: "About Balance" },
   { key: "founder", label: "Our Founder" },
-  { key: "philosophy", label: "Our Philosophy" },
-  { key: "journey", label: "Our Journey" },
   { key: "recognition", label: "Achievements" },
 ];
 
@@ -172,8 +170,6 @@ function AboutTabs() {
         >
           {tab === "about" && <AboutBalancePanel />}
           {tab === "founder" && <FounderPanel />}
-          {tab === "philosophy" && <PhilosophyPanel />}
-          {tab === "journey" && <JourneyPanel />}
           {tab === "recognition" && <RecognitionPanel />}
         </div>
       </div>
