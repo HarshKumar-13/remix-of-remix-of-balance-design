@@ -3,24 +3,23 @@ import { Link, useLocation } from "@tanstack/react-router";
 
 /**
  * Persistent workshop enquiry CTA. It emerges once the reader is past the
- * opening screen and steps aside before the closing contact panel, so the two
- * never compete for the same attention.
+ * opening screen, steps aside before the closing contact panel, and stays out
+ * of the way of the "Design workshops & seminars" section's own CTA so the two
+ * identical buttons never sit on screen together.
  */
 export function FloatingBookCta() {
   const location = useLocation();
-  const [visible, setVisible] = useState(false);
+  const [pastIntro, setPastIntro] = useState(false);
+  const [awayFromEnd, setAwayFromEnd] = useState(true);
+  const [nearSectionCta, setNearSectionCta] = useState(false);
 
   useEffect(() => {
-    if (location.pathname === "/contact") {
-      setVisible(false);
-      return;
-    }
-
     const onScroll = () => {
       const y = window.scrollY;
       const vh = window.innerHeight;
       const remaining = document.documentElement.scrollHeight - (y + vh);
-      setVisible(y > vh * 0.85 && remaining > vh * 0.6);
+      setPastIntro(y > vh * 0.85);
+      setAwayFromEnd(remaining > vh * 0.6);
     };
 
     onScroll();
@@ -31,6 +30,22 @@ export function FloatingBookCta() {
       window.removeEventListener("resize", onScroll);
     };
   }, [location.pathname]);
+
+  useEffect(() => {
+    const section = document.getElementById("services");
+    if (!section) {
+      setNearSectionCta(false);
+      return;
+    }
+    const io = new IntersectionObserver(([entry]) => setNearSectionCta(entry.isIntersecting), {
+      threshold: 0.01,
+    });
+    io.observe(section);
+    return () => io.disconnect();
+  }, [location.pathname]);
+
+  const visible =
+    !nearSectionCta && pastIntro && awayFromEnd && location.pathname !== "/contact";
 
   return (
     <div
