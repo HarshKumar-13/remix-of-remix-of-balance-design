@@ -97,7 +97,8 @@ export function PersonalImageConsulting() {
               className={`display text-[2rem] leading-[0.98] uppercase transition-[opacity,transform] delay-100 duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] sm:text-5xl md:text-[3.4rem] lg:text-[4.2rem] ${reveal}`}
             >
               <span className="block text-red">Personal</span>
-              <span className="block whitespace-nowrap text-foreground">Image Consulting</span>
+              <span className="block whitespace-nowrap text-foreground">Image Consulting:</span>
+              <span className="block text-foreground">Master the Right Dress Code</span>
             </h2>
           </div>
 
