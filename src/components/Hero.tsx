@@ -109,7 +109,7 @@ export function Hero({ introComplete = true }: { introComplete?: boolean }) {
         <h1 className="display whitespace-nowrap text-[calc(12.6vw_-_14px)] leading-[0.98] md:text-[calc(min(12vw_-_16px,15rem_-_4px))]">
           Balance Design
         </h1>
-        <p className="hero-ink label-xs mt-5 inline-block bg-charcoal/60 px-3 py-1.5 backdrop-blur-[2px]">Design &amp; Fashion Consultancy</p>
+        <p className="hero-label hero-ink label-xs mt-5 inline-block bg-charcoal/60 px-3 py-1.5 backdrop-blur-[2px]">&amp; Fashion Consultancy</p>
         <div className="relative mt-7 h-14 max-w-3xl sm:h-16" aria-label="Consultancy specialisms">
           <AnimatePresence mode="wait">
             {currentPhrase !== null && (
