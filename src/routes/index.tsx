@@ -155,6 +155,7 @@ function Index() {
               headline={<>See what&rsquo;s next.<br />Design what&rsquo;s now.</>}
               description="Filtering the global fashion picture and anticipating what customers will be ready to embrace in upcoming seasons — then defining the individual styles or style groups needed to meet the business target."
               images={TREND_IMAGES}
+              imageFit="contain"
             />
             <RedEditorialService
               eyebrow="GRAPHIC & PRINT DESIGN"

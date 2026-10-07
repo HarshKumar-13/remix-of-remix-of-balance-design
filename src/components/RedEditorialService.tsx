@@ -22,6 +22,7 @@ type RedEditorialServiceProps = {
   description?: string;
   images: ServiceImage[];
   single?: boolean;
+  imageFit?: "cover" | "contain";
 };
 
 function SingleImageSlideshow({ images, label }: { images: ServiceImage[]; label: string }) {
@@ -157,6 +158,7 @@ export function RedEditorialService({
   description,
   images,
   single = false,
+  imageFit = "cover",
 }: RedEditorialServiceProps) {
   return (
     <section className="overflow-hidden bg-background py-16 text-foreground sm:py-20 md:py-24" aria-label={eyebrow}>
@@ -191,7 +193,7 @@ export function RedEditorialService({
       </div>
 
       <Reveal delay={390} className="mt-10 md:mt-14">
-        <CurvedSlider images={padImages(images)} contain />
+        <CurvedSlider images={padImages(images)} imageFit={imageFit} />
       </Reveal>
     </section>
   );
