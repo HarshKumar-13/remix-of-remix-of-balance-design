@@ -69,7 +69,7 @@ export function CorporateImageConsulting() {
           <p
             className={`mx-auto max-w-4xl text-center text-[calc(1.294rem+2px)] font-medium leading-relaxed text-red transition-[opacity,transform] delay-200 duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)]  md:text-[calc(1.4375rem+2px)] ${reveal}`}
           >
-            we coach professionals to look sharp and stylish, build self confidence and have a
+            We coach professionals to look sharp and stylish, build self confidence and have a
             personality that is magnetic. Through a combination of styling sessions and mindset
             coaching, professionals learn to command respect, and own their presence in meetings,
             presentations and high stake conversations.
