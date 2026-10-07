@@ -27,6 +27,10 @@ const landscapeImages = [
   { src: p2, alt: "Red cardigan styled with beige skirt, red bag and nude heels" },
   { src: p3, alt: "What colours look good on you - women, ivory to deep bronze" },
   { src: p4, alt: "Polka-dot dress on a mannequin with black blazer, bag and heels" },
+  { src: p5, alt: "Five styled day-to-evening outfits in contrasting colour combinations" },
+  { src: p6, alt: "Four colour-blocking outfits in red, royal blue and bright yellow" },
+  { src: p7, alt: "Analogous colour outfits in purple, berry, deep red and coral with a colour palette" },
+  { src: p8, alt: "Three monochromatic outfits in yellow, green and blush pink" },
 ];
 
 export function PersonalImageConsulting() {
