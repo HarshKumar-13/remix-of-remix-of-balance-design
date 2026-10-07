@@ -18,6 +18,7 @@ type ServiceImage = { src: string; alt: string };
 
 type RedEditorialServiceProps = {
   eyebrow?: string;
+  sectionLabel?: string;
   headline: React.ReactNode;
   description?: string;
   images: ServiceImage[];
@@ -155,6 +156,7 @@ function EditorialCarousel({ images, label }: { images: ServiceImage[]; label: s
 
 export function RedEditorialService({
   eyebrow,
+  sectionLabel,
   headline,
   description,
   images,
@@ -163,7 +165,7 @@ export function RedEditorialService({
   wideDescription = false,
 }: RedEditorialServiceProps) {
   return (
-    <section className="overflow-hidden bg-background py-16 text-foreground sm:py-20 md:py-24" aria-label={typeof eyebrow === "string" && eyebrow ? eyebrow : "Service"}>
+    <section className="overflow-hidden bg-background py-16 text-foreground sm:py-20 md:py-24" aria-label={sectionLabel ?? (typeof eyebrow === "string" && eyebrow ? eyebrow : "Service")}>
       <div className="mx-auto px-6 text-center md:px-12">
         <Reveal>
           <img
