@@ -67,7 +67,7 @@ export function CorporateImageConsulting() {
           </div>
 
           <p
-            className={`mx-auto max-w-4xl text-center text-[calc(1.294rem+2px)] leading-relaxed text-red transition-[opacity,transform] delay-200 duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)]  md:text-[calc(1.4375rem+2px)] ${reveal}`}
+            className={`mx-auto max-w-4xl text-center text-[calc(1.294rem+2px)] font-medium leading-relaxed text-red transition-[opacity,transform] delay-200 duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)]  md:text-[calc(1.4375rem+2px)] ${reveal}`}
           >
             We coach professionals to look sharp and stylish, build self confidence and have a
             personality that is magnetic. Through a combination of styling sessions and mindset
