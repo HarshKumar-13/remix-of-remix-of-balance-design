@@ -89,7 +89,7 @@ export function Hero({ introComplete = true }: { introComplete?: boolean }) {
             alt=""
             aria-hidden="true"
             loading={index < 2 ? "eager" : "lazy"}
-            className="absolute inset-0 h-full w-full scale-110 object-cover object-[center_30%] blur-2xl brightness-[0.55]"
+            className="absolute inset-0 h-full w-full scale-110 object-cover object-[center_30%] blur-2xl brightness-[0.82]"
           />
           <img
             src={image.src}
@@ -99,18 +99,17 @@ export function Hero({ introComplete = true }: { introComplete?: boolean }) {
           />
         </motion.div>
       ))}
-      <div className="absolute inset-0 bg-charcoal/10" />
       <motion.div
         initial={{ opacity: 0, y: 8 }}
         animate={{ opacity: introComplete ? 1 : 0, y: introComplete ? 0 : 8 }}
         transition={{ duration: reducedMotion ? 0 : 0.9, ease: EASE, delay: reducedMotion ? 0 : 0.15 }}
-        className="relative z-10 flex h-full flex-col justify-end text-ivory"
+        className="hero-copy relative z-10 flex h-full flex-col justify-end text-ivory"
       >
-        <div className="w-full bg-gradient-to-t from-charcoal via-charcoal/90 to-transparent px-6 pb-10 pt-16 md:px-12 md:pb-20 md:pt-40">
-        <h1 className="display whitespace-nowrap text-[calc(12.6vw-10px)] leading-[0.98] md:text-[calc(min(12vw_-_12px,15rem))]">
+        <div className="w-full px-6 pb-10 pt-16 md:px-12 md:pb-20 md:pt-40">
+        <h1 className="display whitespace-nowrap text-[calc(12.6vw_-_14px)] leading-[0.98] md:text-[calc(min(12vw_-_16px,15rem_-_4px))]">
           Balance Design
         </h1>
-        <p className="label-xs mt-5 opacity-80">Design &amp; Fashion Consultancy</p>
+        <p className="hero-ink label-xs mt-5 inline-block bg-charcoal/60 px-3 py-1.5 backdrop-blur-[2px]">Design &amp; Fashion Consultancy</p>
         <div className="relative mt-7 h-14 max-w-3xl sm:h-16" aria-label="Consultancy specialisms">
           <AnimatePresence mode="wait">
             {currentPhrase !== null && (
@@ -120,7 +119,7 @@ export function Hero({ introComplete = true }: { introComplete?: boolean }) {
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 1.02, y: -3, transition: { duration: 0.5, ease: EASE } }}
                 transition={{ duration: reducedMotion ? 0 : 0.6, ease: EASE }}
-                className="absolute inset-x-0 top-0 origin-left font-sans text-2xl font-medium leading-tight sm:text-3xl md:text-4xl"
+                className="hero-ink absolute inset-x-0 top-0 origin-left font-sans text-2xl font-medium leading-tight sm:text-3xl md:text-4xl"
               >
                 {PHRASES[currentPhrase]}
               </motion.p>
@@ -129,7 +128,7 @@ export function Hero({ introComplete = true }: { introComplete?: boolean }) {
         </div>
         <div className="mt-4 flex flex-wrap items-center gap-4">
           <a href="#services" className="btn-red label-xs">Explore services</a>
-          <a href="#contact" className="btn-ghost label-xs hover:bg-ivory hover:text-charcoal">Book an appointment</a>
+          <a href="#contact" className="btn-ghost label-xs bg-charcoal/50 backdrop-blur-[3px] hover:bg-ivory hover:text-charcoal">Book an appointment</a>
         </div>
         </div>
       </motion.div>
