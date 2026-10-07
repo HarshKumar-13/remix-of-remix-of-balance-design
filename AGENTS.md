@@ -10,3 +10,4 @@
 <!-- LOVABLE:END -->
 
 - Keep user-supplied site media as source-controlled files under `src/assets` when portability to GitHub, local downloads, and Vercel is required; this avoids host-specific asset URLs.
+- AI features call Lovable AI Gateway from server-only *.server.ts modules (Responses API, streamed) behind createServerFn in *.functions.ts; keeps the API key off the client.
