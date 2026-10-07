@@ -29,7 +29,7 @@ export function StylingWorkshops() {
   return (
     <section
       aria-label="Design Aesthetics and Styling Workshops"
-      className="bg-background px-6 py-24 md:px-12 md:py-36"
+      className="bg-background px-6 py-16 sm:py-20 md:px-12 md:py-24"
     >
       <div className="mx-auto max-w-[1500px]">
         <div className="flex flex-col items-center text-center">
@@ -56,7 +56,7 @@ export function StylingWorkshops() {
         </div>
 
         <Reveal delay={200}>
-          <div className="relative left-1/2 mt-14 w-screen -translate-x-1/2 md:mt-20">
+          <div className="relative left-1/2 mt-10 w-screen -translate-x-1/2 md:mt-14">
             <CurvedSlider images={FILM} />
           </div>
         </Reveal>

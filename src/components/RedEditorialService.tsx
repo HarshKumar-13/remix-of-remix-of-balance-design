@@ -159,7 +159,7 @@ export function RedEditorialService({
   single = false,
 }: RedEditorialServiceProps) {
   return (
-    <section className="overflow-hidden bg-background py-24 text-foreground md:py-36" aria-label={eyebrow}>
+    <section className="overflow-hidden bg-background py-16 text-foreground sm:py-20 md:py-24" aria-label={eyebrow}>
       <div className="mx-auto px-6 text-center md:px-12">
         <Reveal>
           <img
@@ -190,7 +190,7 @@ export function RedEditorialService({
         </div>
       </div>
 
-      <Reveal delay={390} className="mt-14 md:mt-20">
+      <Reveal delay={390} className="mt-10 md:mt-14">
         <CurvedSlider images={padImages(images)} contain />
       </Reveal>
     </section>

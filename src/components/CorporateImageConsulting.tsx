@@ -47,7 +47,7 @@ export function CorporateImageConsulting() {
     <section
       ref={sectionRef}
       aria-labelledby="corporate-image-consulting-title"
-      className="bg-background px-6 py-24 md:px-12 md:py-36"
+      className="bg-background px-6 py-16 sm:py-20 md:px-12 md:py-24"
     >
       <div className="mx-auto max-w-[1500px]">
         <div className="flex flex-col items-center gap-8 text-center">
@@ -77,7 +77,7 @@ export function CorporateImageConsulting() {
         </div>
 
         <div
-          className={`relative left-1/2 mt-14 w-screen -translate-x-1/2 transition-opacity delay-300 duration-[1400ms] md:mt-20 ${visible ? "opacity-100" : "opacity-0"}`}
+          className={`relative left-1/2 mt-10 w-screen -translate-x-1/2 transition-opacity delay-300 duration-[1400ms] md:mt-14 ${visible ? "opacity-100" : "opacity-0"}`}
         >
           <CurvedSlider images={IMAGES} contain />
         </div>
