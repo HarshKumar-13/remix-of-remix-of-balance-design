@@ -12,18 +12,12 @@ import s1 from "@/assets/pers-sq-1.jpg";
 import s2 from "@/assets/pers-sq-2.jpg";
 import s3 from "@/assets/pers-sq-3.jpg";
 import s4 from "@/assets/pers-sq-4.jpg";
-import s5 from "@/assets/pers-sq-5.jpg";
-import s6 from "@/assets/pers-sq-6.jpg";
-import s7 from "@/assets/pers-sq-7.jpg";
 
-const squareImages: { src: string; alt: string; pos?: string }[] = [
-  { src: s1, alt: "Participants seated at a personal image consulting seminar" },
-  { src: s2, alt: "Presenter explaining colour concepts at a Balance seminar" },
-  { src: s3, alt: "Presenter explaining warm and cool colours" },
-  { src: s4, alt: "Upma Shrian in a colourful printed dress", pos: "50% 22%" },
-  { src: s5, alt: "Upma Shrian in a red top and tartan trousers", pos: "50% 12%" },
-  { src: s6, alt: "Upma Shrian in a black and white striped dress", pos: "50% 8%" },
-  { src: s7, alt: "Upma Shrian in a polka-dot top and red skirt", pos: "50% 30%" },
+const squareImages: { src: string; alt: string }[] = [
+  { src: s1, alt: "Presenter explaining warm and cool colours at a personal image consulting seminar" },
+  { src: s2, alt: "Presenter at a Balance Design seminar with colour palette handouts on the tables" },
+  { src: s3, alt: "Presenter addressing a personal image consulting seminar in a conference hall" },
+  { src: s4, alt: "Participants taking notes during a Balance Design workshop" },
 ];
 
 const landscapeImages: { src: string; alt: string; fit: "cover" | "contain" }[] = [
@@ -141,7 +135,6 @@ export function PersonalImageConsulting() {
                 alt={image.alt}
                 loading="lazy"
                 decoding="async"
-                style={image.pos ? { objectPosition: image.pos } : undefined}
                 className={`absolute inset-0 h-full w-full object-cover transition-[opacity,transform] duration-[1800ms] ease-[cubic-bezier(0.16,1,0.3,1)] motion-reduce:transition-none ${
                   activeImage % squareImages.length === index
                     ? "scale-100 opacity-100"
