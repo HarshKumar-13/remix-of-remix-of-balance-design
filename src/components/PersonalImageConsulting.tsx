@@ -135,7 +135,6 @@ export function PersonalImageConsulting() {
                 alt={image.alt}
                 loading="lazy"
                 decoding="async"
-                style={image.pos ? { objectPosition: image.pos } : undefined}
                 className={`absolute inset-0 h-full w-full object-cover transition-[opacity,transform] duration-[1800ms] ease-[cubic-bezier(0.16,1,0.3,1)] motion-reduce:transition-none ${
                   activeImage % squareImages.length === index
                     ? "scale-100 opacity-100"
