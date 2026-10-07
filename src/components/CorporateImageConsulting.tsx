@@ -2,19 +2,31 @@ import { useEffect, useRef, useState } from "react";
 import { CurvedSlider } from "@/components/CurvedSlider";
 
 import c1 from "@/assets/corp-new-1.jpg";
-import c2 from "@/assets/corp-new-2.jpg";
-import c3 from "@/assets/corp-new-3.jpg";
-import c4 from "@/assets/corp-new-4.jpg";
-import c5 from "@/assets/corp-new-5.jpg";
+import v1 from "@/assets/corp-vh-1.jpg";
+import v2 from "@/assets/corp-vh-2.jpg";
+import v3 from "@/assets/corp-vh-3.jpg";
+import v4 from "@/assets/corp-vh-4.jpg";
 import c6 from "@/assets/corp-new-6.jpg";
 import c7 from "@/assets/corp-new-7.jpg";
 
 const IMAGES = [
   { src: c1, alt: "Van Heusen Master the Right Dress Code seminar audience" },
-  { src: c2, alt: "Corporate Image Consulting presentation for Van Heusen" },
-  { src: c3, alt: "Upma Shrian addressing Van Heusen professionals" },
-  { src: c4, alt: "Van Heusen participants working on seminar exercises" },
-  { src: c5, alt: "Presentation to Van Heusen team at round tables" },
+  {
+    src: v1,
+    alt: "Presenter addressing participants seated at round tables at a Van Heusen corporate seminar",
+  },
+  {
+    src: v2,
+    alt: "Participants completing seminar exercises at round tables beside a Van Heusen standee",
+  },
+  {
+    src: v3,
+    alt: "Presenter beside a projection screen at a Van Heusen corporate image consulting seminar",
+  },
+  {
+    src: v4,
+    alt: "Presenter guiding four participants demonstrating dress styles at a Van Heusen seminar",
+  },
   { src: c6, alt: "Colour wheel presentation at a corporate seminar" },
   { src: c7, alt: "Upma Shrian engaging participants at a corporate seminar" },
 ];
@@ -74,6 +86,13 @@ export function CorporateImageConsulting() {
             coaching, professionals learn to command respect, and own their presence in meetings,
             presentations and high stake conversations.
           </p>
+          <div
+            className={`flex items-center justify-center gap-4 transition-[opacity,transform] delay-300 duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] ${reveal}`}
+          >
+            <span aria-hidden="true" className="h-px w-8 bg-border md:w-12" />
+            <p className="label-xs text-foreground">Van Heusen</p>
+            <span aria-hidden="true" className="h-px w-8 bg-border md:w-12" />
+          </div>
         </div>
 
         <div
