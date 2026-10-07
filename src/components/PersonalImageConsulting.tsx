@@ -12,6 +12,7 @@ import s1 from "@/assets/pers-sq-1.jpg";
 import s2 from "@/assets/pers-sq-2.jpg";
 import s3 from "@/assets/pers-sq-3.jpg";
 import s4 from "@/assets/pers-sq-4.jpg";
+import diamond from "@/assets/balance-diamond.png";
 
 const squareImages: { src: string; alt: string }[] = [
   { src: s1, alt: "Presenter explaining warm and cool colours at a personal image consulting seminar" },
@@ -29,6 +30,13 @@ const landscapeImages: { src: string; alt: string; fit: "cover" | "contain" }[] 
   { src: p6, alt: "Four colour-blocking outfits in red, royal blue and bright yellow", fit: "contain" },
   { src: p7, alt: "Analogous colour outfits in purple, berry, deep red and coral with a colour palette", fit: "contain" },
   { src: p8, alt: "Three monochromatic outfits in yellow, green and blush pink", fit: "contain" },
+];
+
+const ribbonStatements = [
+  "Clarity for a lifetime: on what to pick up for one’s body type and skin tone. One picks up a wider range of products which one was reluctant to try earlier.",
+  "Get the exposure to new fits, colours, styles, patterns and silhouettes that most importantly work for you.",
+  "Get aware of which trends to pick up and which ones to drop.",
+  "Creating wardrobes that enhance our strength areas and diminish our problem areas.",
 ];
 
 export function PersonalImageConsulting() {
@@ -143,6 +151,37 @@ export function PersonalImageConsulting() {
               />
             ))}
           </div>
+        </div>
+      </div>
+
+      {/* Full-bleed editorial statement ribbon, directly connected to the slider above. */}
+      <div
+        className="-mx-6 mt-7 overflow-hidden border-y border-border/70 py-5 md:-mx-12 md:py-6"
+        role="marquee"
+      >
+        <div className="ribbon-track flex w-max items-center">
+          {[0, 1].map((copy) => (
+            <div
+              key={copy}
+              aria-hidden={copy === 1}
+              className="flex items-center"
+            >
+              {ribbonStatements.map((statement) => (
+                <span key={statement} className="flex items-center">
+                  <span className="whitespace-nowrap px-8 text-[0.95rem] leading-relaxed text-foreground md:px-10 md:text-lg">
+                    {statement}
+                  </span>
+                  <img
+                    src={diamond}
+                    alt=""
+                    aria-hidden="true"
+                    className="h-3 w-auto shrink-0 md:h-4"
+                    loading="lazy"
+                  />
+                </span>
+              ))}
+            </div>
+          ))}
         </div>
       </div>
     </section>
