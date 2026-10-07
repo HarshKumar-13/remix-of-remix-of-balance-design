@@ -14,6 +14,7 @@ import { Route as AboutRouteImport } from './routes/about'
 import { Route as BlogRouteImport } from './routes/blog'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as EventsRouteImport } from './routes/events'
+import { Route as FindYourServiceRouteImport } from './routes/find-your-service'
 import { Route as BlogIndexRouteImport } from './routes/blog.index'
 import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 import { Route as ServicesFashionApparelWorkshopsRouteImport } from './routes/services.fashion-apparel-workshops'
@@ -43,6 +44,11 @@ const EventsRoute = EventsRouteImport.update({
   path: '/events',
   getParentRoute: () => rootRouteImport,
 } as any)
+const FindYourServiceRoute = FindYourServiceRouteImport.update({
+  id: '/find-your-service',
+  path: '/find-your-service',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const BlogIndexRoute = BlogIndexRouteImport.update({
   id: '/',
   path: '/',
@@ -66,6 +72,7 @@ export interface FileRoutesByFullPath {
   '/blog': typeof BlogRouteWithChildren
   '/contact': typeof ContactRoute
   '/events': typeof EventsRoute
+  '/find-your-service': typeof FindYourServiceRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/services/fashion-apparel-workshops': typeof ServicesFashionApparelWorkshopsRoute
   '/blog/': typeof BlogIndexRoute
@@ -75,6 +82,7 @@ export interface FileRoutesByTo {
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
   '/events': typeof EventsRoute
+  '/find-your-service': typeof FindYourServiceRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/services/fashion-apparel-workshops': typeof ServicesFashionApparelWorkshopsRoute
   '/blog': typeof BlogIndexRoute
@@ -86,6 +94,7 @@ export interface FileRoutesById {
   '/blog': typeof BlogRouteWithChildren
   '/contact': typeof ContactRoute
   '/events': typeof EventsRoute
+  '/find-your-service': typeof FindYourServiceRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/services/fashion-apparel-workshops': typeof ServicesFashionApparelWorkshopsRoute
   '/blog/': typeof BlogIndexRoute
@@ -98,6 +107,7 @@ export interface FileRouteTypes {
     | '/blog'
     | '/contact'
     | '/events'
+    | '/find-your-service'
     | '/blog/$slug'
     | '/services/fashion-apparel-workshops'
     | '/blog/'
@@ -107,6 +117,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/contact'
     | '/events'
+    | '/find-your-service'
     | '/blog/$slug'
     | '/services/fashion-apparel-workshops'
     | '/blog'
@@ -117,6 +128,7 @@ export interface FileRouteTypes {
     | '/blog'
     | '/contact'
     | '/events'
+    | '/find-your-service'
     | '/blog/$slug'
     | '/services/fashion-apparel-workshops'
     | '/blog/'
@@ -128,6 +140,7 @@ export interface RootRouteChildren {
   BlogRoute: typeof BlogRouteWithChildren
   ContactRoute: typeof ContactRoute
   EventsRoute: typeof EventsRoute
+  FindYourServiceRoute: typeof FindYourServiceRoute
   ServicesFashionApparelWorkshopsRoute: typeof ServicesFashionApparelWorkshopsRoute
 }
 
@@ -166,6 +179,13 @@ declare module '@tanstack/react-router' {
       path: '/events'
       fullPath: '/events'
       preLoaderRoute: typeof EventsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/find-your-service': {
+      id: '/find-your-service'
+      path: '/find-your-service'
+      fullPath: '/find-your-service'
+      preLoaderRoute: typeof FindYourServiceRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/blog/': {
@@ -210,6 +230,7 @@ const rootRouteChildren: RootRouteChildren = {
   BlogRoute: BlogRouteWithChildren,
   ContactRoute: ContactRoute,
   EventsRoute: EventsRoute,
+  FindYourServiceRoute: FindYourServiceRoute,
   ServicesFashionApparelWorkshopsRoute: ServicesFashionApparelWorkshopsRoute,
 }
 export const routeTree = rootRouteImport
