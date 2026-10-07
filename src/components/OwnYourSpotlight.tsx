@@ -33,7 +33,7 @@ export function OwnYourSpotlight() {
             <Reveal delay={80}>
               <h2
                 id="own-your-spotlight-title"
-                className="display mt-6 text-[2.4rem] leading-[1.02] uppercase sm:text-6xl md:text-[4.6rem]"
+                className="display mt-6 text-[2.4rem] leading-[1.02] uppercase text-balance sm:text-6xl md:text-[4.6rem]"
               >
                 <span className="text-primary">Own</span> Your Spotlight Webinar
               </h2>
