@@ -408,7 +408,7 @@
   opacity: 0.66;
 }
 .hero-wing > div {
-  filter: blur(9px) saturate(0.9);
+  filter: blur(16px) saturate(0.9);
 }
 /* On a portrait screen the reflection runs above and below the picture, so it
    is softened much further — a tonal fold, not a mirror. */

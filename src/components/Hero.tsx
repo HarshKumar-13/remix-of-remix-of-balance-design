@@ -101,13 +101,19 @@ function HeroPhoto({
   // The reflection keeps the picture's own edge column where the two meet, so
   // the join lines up; everything beyond it is squashed and faded.
   const sideMask =
-    "linear-gradient(to left, rgba(0,0,0,0.42) 0%, rgba(0,0,0,0.9) 16%, transparent 74%)";
+    "linear-gradient(to left, #000 0%, rgba(0,0,0,0.85) 45%, transparent 80%)";
   const sideMaskFlip =
-    "linear-gradient(to right, rgba(0,0,0,0.42) 0%, rgba(0,0,0,0.9) 16%, transparent 74%)";
+    "linear-gradient(to right, #000 0%, rgba(0,0,0,0.85) 45%, transparent 80%)";
   const topMask =
-    "linear-gradient(to top, rgba(0,0,0,0.42) 0%, rgba(0,0,0,0.9) 16%, transparent 74%)";
+    "linear-gradient(to top, #000 0%, rgba(0,0,0,0.85) 45%, transparent 80%)";
   const bottomMask =
-    "linear-gradient(to bottom, rgba(0,0,0,0.42) 0%, rgba(0,0,0,0.9) 16%, transparent 74%)";
+    "linear-gradient(to bottom, #000 0%, rgba(0,0,0,0.85) 45%, transparent 80%)";
+  // The picture's own outer edge is feathered, so it crosses into its reflection
+  // instead of stopping on a hard line.
+  const featherX =
+    "linear-gradient(to right, transparent 0%, #000 8%, #000 92%, transparent 100%)";
+  const featherY =
+    "linear-gradient(to bottom, transparent 0%, #000 10%, #000 90%, transparent 100%)";
 
   return (
     <motion.div
@@ -149,7 +155,12 @@ function HeroPhoto({
             alt={image.alt}
             loading={eager ? "eager" : "lazy"}
             onLoad={onImgLoad}
-            style={{ width: fit.w, height: fit.h }}
+            style={{
+              width: fit.w,
+              height: fit.h,
+              maskImage: featherX,
+              WebkitMaskImage: featherX,
+            }}
             className="relative block flex-none"
           />
           <div
@@ -190,7 +201,12 @@ function HeroPhoto({
             alt={image.alt}
             loading={eager ? "eager" : "lazy"}
             onLoad={onImgLoad}
-            style={{ width: fit.w, height: fit.h }}
+            style={{
+              width: fit.w,
+              height: fit.h,
+              maskImage: featherY,
+              WebkitMaskImage: featherY,
+            }}
             className="relative block flex-none"
           />
           <div
