@@ -42,7 +42,7 @@ export function OwnYourSpotlight() {
           </div>
           <div>
             <Reveal delay={160}>
-              <p className="mx-auto max-w-2xl text-lg leading-relaxed text-muted-foreground md:text-xl">
+              <p className="mx-auto max-w-2xl text-[calc(1.294rem+2px)] leading-relaxed md:text-[calc(1.4375rem+2px)] text-muted-foreground">
                 We coach professionals to look sharp and stylish, build self confidence and have a
                 personality that is magnetic, as they meet and interact with world.
               </p>
