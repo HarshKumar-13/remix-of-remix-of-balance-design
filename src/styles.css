@@ -263,6 +263,12 @@
   animation: marquee-x 42s linear infinite;
   will-change: transform;
 }
+/* Editorial statement ribbon — one pass over all four statements, duplicated
+   internally for a seamless loop. */
+.ribbon-track {
+  animation: marquee-x 28s linear infinite;
+  will-change: transform;
+}
 
 /* Scroll storytelling keeps every section in normal flow while the visible
    layer responds continuously to the reader's scroll position. */
@@ -347,6 +353,7 @@
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .marquee-track { animation: none; }
+  .ribbon-track { animation: none; }
   .reveal { opacity: 1; transform: none; transition: none; }
   .hero-word { opacity: 1; transform: none; transition: none; }
   .story-scene-content,
