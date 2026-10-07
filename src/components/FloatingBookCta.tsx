@@ -37,9 +37,10 @@ export function FloatingBookCta() {
       setNearSectionCta(false);
       return;
     }
-    const io = new IntersectionObserver(([entry]) => setNearSectionCta(entry.isIntersecting), {
-      threshold: 0.01,
-    });
+    const io = new IntersectionObserver(
+      (entries) => setNearSectionCta(entries.some((entry) => entry.isIntersecting)),
+      { threshold: 0.01 },
+    );
     io.observe(section);
     return () => io.disconnect();
   }, [location.pathname]);
