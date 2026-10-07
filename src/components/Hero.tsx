@@ -1,18 +1,16 @@
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
-import h1 from "@/assets/hero-new-1.jpg";
-import h2 from "@/assets/hero-new-2.jpg";
-import h4 from "@/assets/hero-new-4.jpg";
-import h5 from "@/assets/hero-new-5.jpg";
-import h6 from "@/assets/hero-new-6.jpg";
+import h0560 from "@/assets/hero-0560.jpg";
+import h0541 from "@/assets/hero-0541.jpg";
+import h0545 from "@/assets/hero-0545.jpg";
+import h0556 from "@/assets/hero-0556.jpg";
 
 const PHOTOS = [
-  { src: h1, alt: "Workshop participants seated along long tables watching a presentation" },
-  { src: h2, alt: "Upma Shrian leading an interactive workshop discussion" },
-  { src: h4, alt: "Upma Shrian seated in a floral armchair" },
-  { src: h5, alt: "Upma Shrian seated on a blue velvet sofa" },
-  { src: h6, alt: "Workshop at IIM Bangalore" },
+  { src: h0560, alt: "Workshop audience watching a presentation on screen" },
+  { src: h0541, alt: "Seminar audience in an auditorium watching a presentation" },
+  { src: h0545, alt: "Audience viewing a colour and styling presentation in a hall" },
+  { src: h0556, alt: "Fashion and colour theory seminar in a school hall" },
 ];
 const PHRASES = [
   "Design & Styling Workshops",
