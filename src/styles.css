@@ -401,6 +401,24 @@
   }
 }
 
+/* Mirrored edge wings: each photo's own edge reflected outward so the frame
+   fills without cropping. Faded by a mask and softened so the seam reads as a
+   fold in the picture rather than a hard join. */
+.hero-wing {
+  opacity: 0.66;
+}
+.hero-wing > div {
+  filter: blur(16px) saturate(0.9);
+}
+/* On a portrait screen the reflection runs above and below the picture, so it
+   is softened much further — a tonal fold, not a mirror. */
+.hero-wing-soft {
+  opacity: 0.58;
+}
+.hero-wing-soft > div {
+  filter: blur(22px) saturate(0.88);
+}
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .marquee-track { animation: none; }
