@@ -108,7 +108,7 @@ const TREND_IMAGES = [
 
 const GRAPHIC_IMAGES = [
   { src: graphic1Asset, alt: "Infants/Toddlers A/W 09-10 theme board with cow illustration on red" },
-  { src: graphic2Asset, alt: "Infants/Toddlers boys mood board with animal illustrations and Pantone colour chips" },
+  { src: graphic2Asset, alt: "Infants/Toddlers boys mood board with giraffe, cow and dragonfly illustrations and Pantone colour chips" },
   { src: graphic3Asset, alt: "Infants/Toddlers girls mood board with bunny, birds, trees and fabric print tiles" },
   { src: graphic4Asset, alt: "Fabrics and Prints board with kidswear cargo pants, graphic tees and striped shorts" },
   { src: graphic5Asset, alt: "Abstract Prints board of circular kaleidoscopic textile prints" },
