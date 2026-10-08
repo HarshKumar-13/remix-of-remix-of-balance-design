@@ -223,10 +223,6 @@ export function Hero({ introComplete = true }: { introComplete?: boolean }) {
             )}
           </AnimatePresence>
         </div>
-        <div className="mt-4 flex flex-wrap items-center gap-4">
-          <a href="#services" className="btn-red label-xs">Explore services</a>
-          <a href="#contact" className="btn-ghost label-xs bg-charcoal/50 backdrop-blur-[3px] hover:bg-ivory hover:text-charcoal">Book an appointment</a>
-        </div>
         </div>
       </motion.div>
     </motion.section>
