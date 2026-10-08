@@ -54,9 +54,9 @@ export function StylingWorkshops() {
               look more attractive to shop &amp; experience.
               <br className="hidden md:inline" />{" "}
               For <span className="font-medium">Sales team</span> such that they become stylists
-              <br className="hidden md:inline" />
-              <br className="md:hidden" />{" "}
-              for the customers and guide them as they shop.
+              <br className="hidden md:inline" />{" "}
+              for the customers{" "}
+              <span className="whitespace-nowrap">and guide them as they shop.</span>
             </p>
           </Reveal>
         </div>
