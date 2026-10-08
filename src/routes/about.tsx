@@ -213,10 +213,49 @@ function FadeFrame({ offset, className }: { offset: number; className: string })
   );
 }
 
+const ABOUT_INTRO =
+  "Balance Design and Fashion Consultancy is a Fashion and Apparel Design firm. We partner with fashion, apparel and lifestyle businesses to build consumer-centric brands, strengthen design direction and create products and experiences that foster commercial success. We also Train and Coach apparel teams and individuals in Design Aesthetics and Fashion Styling.";
+
+const EXPERTISE: { title: string; note?: string; items: string[] }[] = [
+  {
+    title: "Design & Creative Direction",
+    items: [
+      "Design strategy and creative direction for fashion and lifestyle brands",
+      "Seasonal collections and apparel line presentation across Menswear, Womenswear, Children’s Wear.",
+      "Fashion styling for apparel and luxury brands",
+      "Styling and creative direction for fashion shows and brand presentations",
+    ],
+  },
+  {
+    title: "Trend Forecasting & Market Intelligence",
+    items: [
+      "Trend forecasting and trend analysis - Colour, fabric, silhouette and styling directions",
+      "Converting emerging trends into commercially relevant product opportunities",
+    ],
+  },
+  {
+    title: "Styling & Image Consulting Workshops for Individuals",
+    items: [
+      "Corporate and Personal Styling Seminars",
+      "Fashion Styling and mindset coaching workshops",
+    ],
+  },
+  {
+    title: "Design Workshops",
+    note: "We conduct customised workshops and seminars for fashion, apparel, retail and brand professionals, helping teams bridge the gap between creativity and commerce.",
+    items: [
+      "Design Aesthetics & Styling for Brand Teams",
+      "Forecasting, Trend Analysis & Consumer Mindsets",
+      "Fashion Cycle & Its Business Implications",
+      "Design, Brand and Consumer Thinking",
+    ],
+  },
+];
+
 function AboutBalancePanel() {
   return (
     <div>
-      <div className="grid grid-cols-1 items-center gap-12 md:grid-cols-12 md:gap-16">
+      <div className="grid grid-cols-1 items-start gap-12 md:grid-cols-12 md:gap-16">
         <div className="md:col-span-5">
           <Reveal>
             <LogoMark className="mb-8 md:mx-0" />
@@ -226,36 +265,60 @@ function AboutBalancePanel() {
           </Reveal>
           <Reveal delay={140}>
             <h2 className="display text-accent mt-6 text-[2.5rem] leading-[0.95] sm:text-[3.5rem] md:text-[4rem]">
-              Fashion is more than what you wear. It is how you are seen.
+              Our Expertise
+              <br />
+              &amp; Deliverables
             </h2>
           </Reveal>
         </div>
         <div className="md:col-span-7">
           <Reveal delay={100}>
-            <p className="max-w-xl text-lg leading-relaxed text-foreground md:text-xl">
-              Balance Design &amp; Fashion Consultancy works across fashion, image and design to
-              help individuals, brands and organisations create a stronger, more meaningful visual
-              expression.
-            </p>
-          </Reveal>
-          <Reveal delay={180}>
-            <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground md:text-xl">
-              Balance Design &amp; Fashion Consultancy is the venture of its Founder and Creative
-              Head Upma Shrian and was set up in January 2008. It operates with an ever growing
-              network of Design and Fashion consultants who works on projects provided by the
-              Consultancy. Balance bridges the gap in the fashion industry when it comes to
-              providing long term and Short term trends, in the various apparel and design market
-              segments and developing profitable product mix that matches with the target
-              customer's expectations.
-            </p>
-          </Reveal>
-          <Reveal delay={240}>
-            <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground md:text-xl">
-              It also passionately conducts training and workshops on Dressing up for corporates
-              and individuals as means of non-verbal communication and impact.
+            <p className="max-w-2xl text-lg leading-relaxed text-foreground md:text-xl">
+              {ABOUT_INTRO}
             </p>
           </Reveal>
         </div>
+      </div>
+
+      <div className="mt-14 border-t border-border md:mt-20">
+        {EXPERTISE.map((group, gi) => (
+          <Reveal key={group.title} delay={gi * 60}>
+            <div className="grid grid-cols-1 gap-6 border-b border-border py-10 md:grid-cols-12 md:gap-16 md:py-14">
+              <div className="flex items-start gap-5 md:col-span-4">
+                <span
+                  aria-hidden="true"
+                  className="font-display text-[1.75rem] leading-none text-red md:text-[2.25rem]"
+                >
+                  {gi + 1}
+                </span>
+                <h3 className="font-display text-2xl leading-tight tracking-wide md:text-[1.9rem]">
+                  {group.title}
+                </h3>
+              </div>
+              <div className="md:col-span-8">
+                {group.note && (
+                  <p className="max-w-2xl text-lg leading-relaxed text-foreground md:text-xl">
+                    {group.note}
+                  </p>
+                )}
+                <ul className="mt-4 max-w-2xl space-y-3">
+                  {group.items.map((li) => (
+                    <li
+                      key={li}
+                      className="flex gap-4 text-lg leading-relaxed text-muted-foreground md:text-xl"
+                    >
+                      <span
+                        aria-hidden="true"
+                        className="mt-[0.7em] h-px w-5 shrink-0 bg-primary"
+                      />
+                      <span>{li}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </Reveal>
+        ))}
       </div>
 
       <div className="mt-16 grid grid-cols-1 gap-6 sm:grid-cols-12 md:mt-24 md:gap-8">
