@@ -4,6 +4,7 @@ import s1 from "@/assets/pers-sq-1.jpg";
 import s2 from "@/assets/pers-sq-2.jpg";
 import s3 from "@/assets/pers-sq-3.jpg";
 import s4 from "@/assets/pers-sq-4.jpg";
+import s5 from "@/assets/pers-sq-5.jpg";
 import slide2 from "@/assets/pers-slide-2.jpg";
 import slide3 from "@/assets/pers-slide-3.jpg";
 import slide4 from "@/assets/pers-slide-4.jpg";
@@ -13,11 +14,12 @@ import slideEp9 from "@/assets/pers-slide-ep9.jpg";
 import diamond from "@/assets/balance-diamond.png";
 import { BookWorkshopCta } from "@/components/BookWorkshopCta";
 
-const squareImages: { src: string; alt: string }[] = [
-  { src: s1, alt: "Presenter explaining warm and cool colours at a personal image consulting seminar" },
-  { src: s2, alt: "Presenter at a Balance Design seminar with colour palette handouts on the tables" },
-  { src: s3, alt: "Presenter addressing a personal image consulting seminar in a conference hall" },
-  { src: s4, alt: "Participants taking notes during a Balance Design workshop" },
+const squareImages: { src: string; alt: string; fit: "cover" | "contain" }[] = [
+  { src: s1, alt: "Colour combinations with outfit examples - contrast of dark with light, light with light, and dark with dark", fit: "contain" },
+  { src: s2, alt: "Five styled looks under the heading Dressing in Colour, showing colour combinations with outfits", fit: "contain" },
+  { src: s3, alt: "Three outfit examples under the heading Dressing in Colour, combining blue, yellow, red, green and pink", fit: "contain" },
+  { src: s4, alt: "Three outfit examples under the heading Dressing in Colour, with striped, white, mustard and floral styling", fit: "contain" },
+  { src: s5, alt: "Colour wheel with outfit examples showing colour combinations used in dressing", fit: "contain" },
 ];
 
 const landscapeImages: { src: string; alt: string; fit: "cover" | "contain" }[] = [
@@ -133,7 +135,7 @@ export function PersonalImageConsulting() {
           </div>
 
           <div
-            className={`relative aspect-[4/5] overflow-hidden transition-[clip-path,opacity,transform] delay-500 duration-[1400ms] ease-[cubic-bezier(0.16,1,0.3,1)] md:col-span-5 md:aspect-auto ${imageReveal}`}
+            className={`relative aspect-[7/5] overflow-hidden bg-white transition-[clip-path,opacity,transform] delay-500 duration-[1400ms] ease-[cubic-bezier(0.16,1,0.3,1)] md:col-span-5 md:aspect-auto ${imageReveal}`}
           >
             {squareImages.map((image, index) => (
               <img
@@ -142,7 +144,8 @@ export function PersonalImageConsulting() {
                 alt={image.alt}
                 loading="lazy"
                 decoding="async"
-                className={`absolute inset-0 h-full w-full object-cover transition-[opacity,transform] duration-[1800ms] ease-[cubic-bezier(0.16,1,0.3,1)] motion-reduce:transition-none ${
+                style={{ objectFit: image.fit, objectPosition: "center" }}
+                className={`absolute inset-0 h-full w-full transition-[opacity,transform] duration-[1800ms] ease-[cubic-bezier(0.16,1,0.3,1)] motion-reduce:transition-none ${
                   activeImage % squareImages.length === index
                     ? "scale-100 opacity-100"
                     : "scale-[1.025] opacity-0"
