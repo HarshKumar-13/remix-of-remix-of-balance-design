@@ -53,9 +53,9 @@ export function StylingWorkshops() {
               <br />
               look more attractive to shop &amp; experience.
               <br />
-              For <span className="font-medium">Sales team</span> such that they become stylists for the customers
+              For <span className="font-medium">Sales team</span> such that they become stylists
               <br />
-              and guide them as they shop.
+              for the customers and guide them as they shop.
             </p>
           </Reveal>
         </div>
