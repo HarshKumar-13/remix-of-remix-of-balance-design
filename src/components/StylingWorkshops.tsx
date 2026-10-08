@@ -55,6 +55,7 @@ export function StylingWorkshops() {
               <br className="hidden md:inline" />{" "}
               For <span className="font-medium">Sales team</span> such that they become stylists
               <br className="hidden md:inline" />{" "}
+              <br className="sm:hidden" />{" "}
               for the customers{" "}
               <span className="whitespace-nowrap">and guide them as they shop.</span>
             </p>
