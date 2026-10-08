@@ -46,16 +46,18 @@ export function StylingWorkshops() {
           </Reveal>
           <RotatingPoints />
           <Reveal delay={160}>
-            <p className="mx-auto mt-8 max-w-5xl text-center text-[calc(1.294rem+2px)] font-medium leading-relaxed text-red md:text-[calc(1.4375rem+2px)]">
+            <p className="mx-auto mt-8 max-w-5xl text-pretty text-center text-[calc(1.294rem+2px)] font-medium leading-relaxed text-red md:text-balance md:text-[calc(1.4375rem+2px)]">
               For <span className="font-medium">TEAMS</span> of fashion and retail brands.
-              <br />
-              For <span className="font-medium">Visual Merchandising teams</span>,
-              <br />
-              such that the retail space look more attractive to shop &amp; experience.
-              <br />
-              For <span className="font-medium">Sales team</span> such that they become stylists for the customers
-              <br />
-              and guide them as they shop.
+              <br className="hidden md:inline" />{" "}
+              For <span className="font-medium">Visual Merchandising teams</span>, such that the retail space
+              <br className="hidden md:inline" />{" "}
+              look more attractive to shop &amp; experience.
+              <br className="hidden md:inline" />{" "}
+              For <span className="font-medium">Sales team</span> such that they become stylists
+              <br className="hidden md:inline" />{" "}
+              <br className="sm:hidden" />{" "}
+              for the customers{" "}
+              <span className="whitespace-nowrap">and guide them as they shop.</span>
             </p>
           </Reveal>
         </div>
