@@ -135,7 +135,7 @@ export function PersonalImageConsulting() {
           </div>
 
           <div
-            className={`relative aspect-[4/5] overflow-hidden transition-[clip-path,opacity,transform] delay-500 duration-[1400ms] ease-[cubic-bezier(0.16,1,0.3,1)] md:col-span-5 md:aspect-auto ${imageReveal}`}
+            className={`relative aspect-[4/5] overflow-hidden bg-white transition-[clip-path,opacity,transform] delay-500 duration-[1400ms] ease-[cubic-bezier(0.16,1,0.3,1)] md:col-span-5 md:aspect-auto ${imageReveal}`}
           >
             {squareImages.map((image, index) => (
               <img
@@ -144,7 +144,8 @@ export function PersonalImageConsulting() {
                 alt={image.alt}
                 loading="lazy"
                 decoding="async"
-                className={`absolute inset-0 h-full w-full object-cover transition-[opacity,transform] duration-[1800ms] ease-[cubic-bezier(0.16,1,0.3,1)] motion-reduce:transition-none ${
+                style={{ objectFit: image.fit, objectPosition: "center" }}
+                className={`absolute inset-0 h-full w-full transition-[opacity,transform] duration-[1800ms] ease-[cubic-bezier(0.16,1,0.3,1)] motion-reduce:transition-none ${
                   activeImage % squareImages.length === index
                     ? "scale-100 opacity-100"
                     : "scale-[1.025] opacity-0"
