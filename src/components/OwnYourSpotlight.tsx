@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 
 import { Reveal } from "@/components/Reveal";
+import { BookWorkshopCta } from "@/components/BookWorkshopCta";
 
 import s1 from "@/assets/oys-home-1.jpeg";
 import s2 from "@/assets/oys-home-2.jpeg";
@@ -62,6 +63,7 @@ export function OwnYourSpotlight() {
             ))}
           </div>
         </Reveal>
+        <BookWorkshopCta />
       </div>
     </section>
   );

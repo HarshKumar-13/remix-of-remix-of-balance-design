@@ -3,6 +3,7 @@ import { ArrowLeft, ArrowRight } from "lucide-react";
 
 import logoMark from "@/assets/balance-logo-mark.png";
 import { Button } from "@/components/ui/button";
+import { BookWorkshopCta } from "@/components/BookWorkshopCta";
 import { Reveal } from "./Reveal";
 import { CurvedSlider } from "./CurvedSlider";
 
@@ -205,6 +206,7 @@ export function RedEditorialService({
       <Reveal delay={390} className="mt-10 md:mt-14">
         <CurvedSlider images={padImages(images)} imageFit={imageFit} />
       </Reveal>
+      <BookWorkshopCta className="mt-4 md:mt-6" />
     </section>
   );
 }
