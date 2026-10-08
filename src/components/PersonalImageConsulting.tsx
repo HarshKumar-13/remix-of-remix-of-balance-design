@@ -158,7 +158,7 @@ export function PersonalImageConsulting() {
 
       {/* Full-bleed editorial statement ribbon, directly connected to the slider above. */}
       <div
-        className="-mx-6 mt-7 overflow-hidden border-y border-border/70 py-5 md:-mx-12 md:py-6"
+        className="-mx-6 mt-7 overflow-hidden border-y border-border/70 bg-charcoal py-5 md:-mx-12 md:py-6"
         role="marquee"
       >
         <div className="ribbon-track flex w-max items-center">
@@ -170,7 +170,7 @@ export function PersonalImageConsulting() {
             >
               {ribbonStatements.map((statement) => (
                 <span key={statement} className="flex items-center">
-                  <span className="whitespace-nowrap px-8 text-[calc(0.95rem+2px)] leading-relaxed text-foreground md:px-10 md:text-[calc(1.125rem+2px)]">
+                  <span className="whitespace-nowrap px-8 text-[calc(0.95rem+2px)] leading-relaxed text-background md:px-10 md:text-[calc(1.125rem+2px)]">
                     {statement}
                   </span>
                   <img
