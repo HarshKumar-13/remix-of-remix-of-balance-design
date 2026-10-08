@@ -46,7 +46,7 @@ export function StylingWorkshops() {
           </Reveal>
           <RotatingPoints />
           <Reveal delay={160}>
-            <p className="mx-auto mt-8 max-w-5xl text-center text-[calc(1.294rem+2px)] font-medium leading-relaxed text-red md:text-[calc(1.4375rem+2px)]">
+            <p className="mx-auto mt-8 max-w-5xl text-balance text-center text-[calc(1.294rem+2px)] font-medium leading-relaxed text-red md:text-[calc(1.4375rem+2px)]">
               For <span className="font-medium">TEAMS</span> of fashion and retail brands.
               <br className="hidden md:inline" />
               For <span className="font-medium">Visual Merchandising teams</span>, such that the retail space
