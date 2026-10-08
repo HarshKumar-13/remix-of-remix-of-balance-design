@@ -55,7 +55,7 @@ export function AboutMe() {
             <h2 id="about-me-title" className="display text-[2.5rem] leading-[1.03] uppercase sm:text-5xl md:text-[2.25rem] lg:text-[2.8rem]">
               About Me:
             </h2>
-            <p className="mt-8 text-base leading-[1.75] text-muted-foreground lg:text-lg">
+            <p className="mt-8 font-normal text-[calc(1rem+2px)] leading-[1.75] text-muted-foreground lg:text-[calc(1.125rem+2px)]">
               With over twenty-eight years of experience in the fashion and apparel industry, I
               have specialized in defining design direction that aligns with business strategy and
               evolving consumer trends. I also impart training to enhance team performance in the
@@ -116,7 +116,7 @@ export function AboutMe() {
               <span className="h-px w-10 -rotate-6 bg-border" />
               <span className="h-8 w-px -rotate-12 bg-border" />
             </div>
-            <p className="text-base leading-[1.75] text-muted-foreground lg:text-lg">
+            <p className="font-normal text-[calc(1rem+2px)] leading-[1.75] text-muted-foreground lg:text-[calc(1.125rem+2px)]">
               My mission is to transform creativity into measurable business impact. Whether it’s
               launching a new label, crafting consumer-centric brand stories, scaling design
               processes for growth, through directing design teams, or mentoring the next
