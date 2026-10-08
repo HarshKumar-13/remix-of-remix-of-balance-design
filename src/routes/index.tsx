@@ -175,7 +175,13 @@ function Index() {
 
           <section id="services-story" className="relative bg-background">
             <RedEditorialService
-              headline={<>Trend Forecasting &amp;<br />Line Presentation</>}
+              headline={
+                <>
+                  <span className="text-red">Trend Forecasting</span> &amp;
+                  <br />
+                  Line Presentation
+                </>
+              }
               description="Filtering the global fashion picture and anticipating what customers will be ready to embrace in upcoming seasons. Tracking trends and interpreting those trends for the company's target market. Balancing a product line by including a range of seasonal & staple styles, fashions & basic styles and setting the width & depth of the collection with reference to the brand image, price points, size range, style, colous and previous season sales record."
               images={TREND_IMAGES}
               imageFit="contain"
@@ -183,8 +189,14 @@ function Index() {
             />
             <RedEditorialService
               sectionLabel="Graphic & Print Design"
-              headline={<>Graphic &amp;<br />Print Design</>}
-              description="We do CAD'S for shirts, graphic design for T-shirts and textile print design — expressive directions that bring concepts, culture and visual identity into apparel"
+              headline={
+                <>
+                  <span className="text-red">Graphic &amp;</span>
+                  <br />
+                  Print Design
+                </>
+              }
+              description="We do CAD'S for shirts, graphic design for T-shirts and textile print design"
               images={GRAPHIC_IMAGES}
               imageFit="contain"
             />
