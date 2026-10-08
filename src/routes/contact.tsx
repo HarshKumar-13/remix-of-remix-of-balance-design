@@ -158,7 +158,7 @@ function ContactPage() {
                   {errors.message && <span className="mt-2 block text-sm text-red">{errors.message}</span>}
                 </label>
                 <button type="submit" className="btn-red label-xs mt-2 self-start">
-                  {tab === "appointment" ? "Pay for the appointment" : "Send your message"}
+                  {tab === "appointment" ? "Confirm & Pay" : "Send your message"}
                 </button>
               </form>
               </>
