@@ -377,29 +377,6 @@
   box-shadow: none;
 }
 
-/* Floating workshop CTA: emerges once the reader is past the opening screen
-   and withdraws before the closing contact panel. */
-.floating-cta {
-  opacity: 0;
-  transform: translateY(18px);
-  pointer-events: none;
-  transition:
-    opacity 0.7s var(--ease-editorial),
-    transform 0.7s var(--ease-editorial);
-  will-change: opacity, transform;
-}
-.floating-cta[data-visible="true"] {
-  opacity: 1;
-  transform: none;
-  pointer-events: auto;
-}
-@media (max-width: 479px) {
-  .floating-cta .btn-red {
-    font-size: 0.75rem;
-    letter-spacing: 0.2em;
-    padding: 0.8rem 1.4rem;
-  }
-}
 
 
 @media (prefers-reduced-motion: reduce) {
