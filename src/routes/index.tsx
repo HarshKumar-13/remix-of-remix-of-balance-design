@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 import { useCallback, useState } from "react";
 
 import { SiteHeader } from "@/components/SiteHeader";
@@ -14,6 +14,7 @@ import { SiteFooter } from "@/components/SiteFooter";
 import { ScrollStory, StoryScene } from "@/components/ScrollStory";
 import { SlideStack, SlidePanel } from "@/components/SlideStack";
 import { StylingWorkshops } from "@/components/StylingWorkshops";
+import { BookWorkshopCta } from "@/components/BookWorkshopCta";
 import { CorporateImageConsulting } from "@/components/CorporateImageConsulting";
 import { PersonalImageConsulting } from "@/components/PersonalImageConsulting";
 import { OwnYourSpotlight } from "@/components/OwnYourSpotlight";
@@ -161,11 +162,7 @@ function Index() {
                 </div>
               </Reveal>
               <Reveal delay={260}>
-                <div className="mt-8 flex justify-center md:mt-10">
-                  <Link to="/contact" className="btn-red label-xs">
-                    Book your workshop
-                  </Link>
-                </div>
+                <BookWorkshopCta className="mt-4 md:mt-6" />
               </Reveal>
             </section>
           </SlidePanel>
