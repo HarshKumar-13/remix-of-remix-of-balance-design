@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { z } from "zod";
-import { Facebook, Instagram, Linkedin, Mail } from "lucide-react";
+import { Facebook, Instagram, Linkedin, Mail, Twitter, Youtube } from "lucide-react";
 
 import { Reveal } from "@/components/Reveal";
 import { SiteFooter } from "@/components/SiteFooter";
@@ -43,11 +43,14 @@ const SOCIALS = [
   { label: "Facebook", href: "https://www.facebook.com", Icon: Facebook },
   { label: "LinkedIn", href: "https://www.linkedin.com", Icon: Linkedin },
   { label: "Instagram", href: "https://www.instagram.com", Icon: Instagram },
+  { label: "Twitter", href: "https://twitter.com", Icon: Twitter },
+  { label: "YouTube", href: "https://www.youtube.com", Icon: Youtube },
 ];
 
 function ContactPage() {
   const [errors, setErrors] = useState<Errors>({});
   const [sent, setSent] = useState(false);
+  const [tab, setTab] = useState<"enquiry" | "appointment">("enquiry");
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -63,7 +66,7 @@ function ContactPage() {
     const { name, phone, email, message } = res.data;
     const body = `Name: ${name}\nNumber: ${phone}\nEmail: ${email}\n\n${message}`;
     window.location.href = `mailto:info@balancedesign.in?subject=${encodeURIComponent(
-      `Enquiry from ${name}`,
+      `${tab === "appointment" ? "Appointment request" : "Enquiry"} from ${name}`,
     )}&body=${encodeURIComponent(body)}`;
     setSent(true);
     e.currentTarget.reset();
@@ -72,7 +75,7 @@ function ContactPage() {
   return (
     <>
       <SiteHeader forceSolid />
-      <main className="bg-background pb-24 pt-36 md:pb-32 md:pt-44">
+      <main className="bg-background pb-24 pt-44 md:pb-32 md:pt-56">
         <div className="mx-auto grid max-w-7xl grid-cols-1 gap-16 px-6 md:grid-cols-[40%_1fr] md:gap-24 md:px-12">
           <div>
             <Reveal>
@@ -123,6 +126,21 @@ function ContactPage() {
                 </button>
               </div>
             ) : (
+              <>
+              <div role="tablist" className="mb-10 flex gap-8 border-b border-border">
+                {([["enquiry", "Enquiry"], ["appointment", "Book an Appointment"]] as const).map(([k, l]) => (
+                  <button
+                    key={k}
+                    type="button"
+                    role="tab"
+                    aria-selected={tab === k}
+                    onClick={() => setTab(k)}
+                    className={`label-xs -mb-px border-b-2 pb-3 transition-colors ${tab === k ? "border-red text-red" : "border-transparent text-muted-foreground hover:text-foreground"}`}
+                  >
+                    {l}
+                  </button>
+                ))}
+              </div>
               <form noValidate onSubmit={onSubmit} className="flex flex-col gap-8">
                 <div className="grid grid-cols-1 gap-8 sm:grid-cols-2">
                   <Field label="Name" name="name" type="text" error={errors.name} />
@@ -140,9 +158,10 @@ function ContactPage() {
                   {errors.message && <span className="mt-2 block text-sm text-red">{errors.message}</span>}
                 </label>
                 <button type="submit" className="btn-red label-xs mt-2 self-start">
-                  Send your message
+                  {tab === "appointment" ? "Pay for the appointment" : "Send your message"}
                 </button>
               </form>
+              </>
             )}
           </Reveal>
         </div>
