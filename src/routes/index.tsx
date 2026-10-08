@@ -39,12 +39,15 @@ import trend1616 from "@/assets/trend-1616.jpg";
 import trend1629 from "@/assets/hero-1629.jpg";
 import trend1630 from "@/assets/hero-1630.jpg";
 import trend1631 from "@/assets/hero-1631.jpg";
-import graphic1Asset from "@/assets/graphic-1.jpeg";
-import graphic2Asset from "@/assets/graphic-2.jpeg";
+import graphic1Asset from "@/assets/graphic-1.jpg";
+import graphic2Asset from "@/assets/graphic-2.jpg";
 import graphic3Asset from "@/assets/graphic-3.jpg";
 import graphic4Asset from "@/assets/graphic-4.jpg";
 import graphic5Asset from "@/assets/graphic-5.jpg";
 import graphic6Asset from "@/assets/graphic-6.jpg";
+import graphic7Asset from "@/assets/graphic-7.jpg";
+import graphic8Asset from "@/assets/graphic-8.jpg";
+import graphic9Asset from "@/assets/graphic-9.jpg";
 import { CurvedSlider } from "@/components/CurvedSlider";
 import dws1 from "@/assets/dws-1.jpg";
 import dws2 from "@/assets/dws-2.jpg";
@@ -104,12 +107,15 @@ const TREND_IMAGES = [
 ];
 
 const GRAPHIC_IMAGES = [
-  { src: graphic1Asset, alt: "Boys' garment CAD flats range board" },
-  { src: graphic2Asset, alt: "Super heroes boys 2-8 yrs theme board with Pantone colours" },
-  { src: graphic3Asset, alt: "The Remixing — Make Do and Mend mood board with vintage red prints" },
-  { src: graphic4Asset, alt: "The Remixing — Exploring new aesthetics board with Klimt gown and colour chips" },
-  { src: graphic5Asset, alt: "Waist Coat Combo 1 uniform design with pink blazer, chevron shirt and floral chevron print" },
-  { src: graphic6Asset, alt: "Chevron floral print board with striped kitten heels and bow brooch" },
+  { src: graphic1Asset, alt: "Infants/Toddlers A/W 09-10 theme board with cow illustration on red" },
+  { src: graphic2Asset, alt: "Infants/Toddlers boys mood board with animal illustrations and Pantone colour chips" },
+  { src: graphic3Asset, alt: "Infants/Toddlers girls mood board with bunny, birds, trees and fabric print tiles" },
+  { src: graphic4Asset, alt: "Fabrics and Prints board with kidswear cargo pants, graphic tees and striped shorts" },
+  { src: graphic5Asset, alt: "Abstract Prints board of circular kaleidoscopic textile prints" },
+  { src: graphic6Asset, alt: "Child-inspired psychedelic pattern board with mosaic florals and overlapping circles" },
+  { src: graphic7Asset, alt: "Geometric print board beside pink embroidered slip-on shoes" },
+  { src: graphic8Asset, alt: "Prints board with repeating black-and-white geometric mandala pattern" },
+  { src: graphic9Asset, alt: "Prints board with four fashion figures in patterned maxi dresses" },
 ];
 
 
