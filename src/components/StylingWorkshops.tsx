@@ -1,5 +1,6 @@
 import { Reveal } from "@/components/Reveal";
 import { CurvedSlider } from "@/components/CurvedSlider";
+import { BookWorkshopCta } from "@/components/BookWorkshopCta";
 import { RotatingPoints } from "@/components/RotatingPoints";
 
 import daw1 from "@/assets/daw-1.jpeg";
@@ -63,6 +64,10 @@ export function StylingWorkshops() {
           <div className="relative left-1/2 mt-10 w-screen -translate-x-1/2 md:mt-14">
             <CurvedSlider images={FILM} />
           </div>
+        </Reveal>
+
+        <Reveal delay={260}>
+          <BookWorkshopCta />
         </Reveal>
       </div>
     </section>

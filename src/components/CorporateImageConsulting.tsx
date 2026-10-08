@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { CurvedSlider } from "@/components/CurvedSlider";
+import { BookWorkshopCta } from "@/components/BookWorkshopCta";
 
 import c1 from "@/assets/corp-new-1.jpg";
 import v1 from "@/assets/corp-vh-1.jpg";
@@ -100,6 +101,7 @@ export function CorporateImageConsulting() {
         >
           <CurvedSlider images={IMAGES} contain />
         </div>
+        <BookWorkshopCta />
       </div>
     </section>
   );

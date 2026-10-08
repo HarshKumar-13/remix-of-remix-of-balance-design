@@ -13,6 +13,7 @@ import s2 from "@/assets/pers-sq-2.jpg";
 import s3 from "@/assets/pers-sq-3.jpg";
 import s4 from "@/assets/pers-sq-4.jpg";
 import diamond from "@/assets/balance-diamond.png";
+import { BookWorkshopCta } from "@/components/BookWorkshopCta";
 
 const squareImages: { src: string; alt: string }[] = [
   { src: s1, alt: "Presenter explaining warm and cool colours at a personal image consulting seminar" },
@@ -186,6 +187,7 @@ export function PersonalImageConsulting() {
           ))}
         </div>
       </div>
+      <BookWorkshopCta />
     </section>
   );
 }
