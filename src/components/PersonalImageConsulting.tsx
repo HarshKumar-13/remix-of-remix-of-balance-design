@@ -135,7 +135,7 @@ export function PersonalImageConsulting() {
           </div>
 
           <div
-            className={`relative aspect-[4/5] overflow-hidden bg-white transition-[clip-path,opacity,transform] delay-500 duration-[1400ms] ease-[cubic-bezier(0.16,1,0.3,1)] md:col-span-5 md:aspect-auto ${imageReveal}`}
+            className={`relative aspect-[7/5] overflow-hidden bg-white transition-[clip-path,opacity,transform] delay-500 duration-[1400ms] ease-[cubic-bezier(0.16,1,0.3,1)] md:col-span-5 md:aspect-auto ${imageReveal}`}
           >
             {squareImages.map((image, index) => (
               <img
