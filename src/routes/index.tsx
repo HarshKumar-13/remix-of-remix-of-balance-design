@@ -6,7 +6,7 @@ import { Hero } from "@/components/Hero";
 import { LogoIntro } from "@/components/LogoIntro";
 import { Reveal } from "@/components/Reveal";
 import { LogoMark } from "@/components/LogoMark";
-import { AboutSection } from "@/components/AboutSection";
+// import { AboutSection } from "@/components/AboutSection"; // section hidden on request — component kept
 import { DressCode } from "@/components/DressCode";
 import { Testimonials } from "@/components/Testimonials";
 import { CtaSection } from "@/components/CtaSection";
@@ -205,9 +205,12 @@ function Index() {
             />
           </section>
 
+          {/* About Balance Design section hidden on request — component kept in src/components/AboutSection.tsx
           <StoryScene>
             <AboutSection />
           </StoryScene>
+          */}
+
           <StoryScene>
             <DressCode />
           </StoryScene>
