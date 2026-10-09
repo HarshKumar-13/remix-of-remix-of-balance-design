@@ -23,6 +23,10 @@ import brandVanHeusen from "@/assets/brand-vanheusen.png";
 import brandIimb from "@/assets/brand-iimb.png";
 import brandRaymond from "@/assets/brand-raymond.png";
 import brandReliance from "@/assets/brand-reliance.png";
+import brandNift from "@/assets/brand-nift.png";
+import brandLifestyle from "@/assets/brand-lifestyle.png";
+import brandLeela from "@/assets/brand-leela.png";
+import brandGap from "@/assets/brand-gap.png";
 import founder1 from "@/assets/founder-1.jpeg";
 import founder2 from "@/assets/founder-2.webp";
 import founder3 from "@/assets/founder-3.jpg";
@@ -439,13 +443,13 @@ const BRANDS: { name: string; logo?: string }[] = [
   { name: "MAX Fashion", logo: brandMax },
   { name: "Van Heusen", logo: brandVanHeusen },
   { name: "IIM Bangalore", logo: brandIimb },
+  { name: "Leela Palace Bangalore", logo: brandLeela },
+  { name: "Lifestyle", logo: brandLifestyle },
+  { name: "NIFT", logo: brandNift },
+  { name: "GAP", logo: brandGap },
   { name: "ISB" },
-  { name: "Leela Palace Bangalore" },
   { name: "Taj Palace, New Delhi" },
-  { name: "Lifestyle" },
   { name: "Weekender" },
-  { name: "NIFT" },
-  { name: "GAP" },
 ];
 
 function RecognitionPanel() {
@@ -469,7 +473,7 @@ function RecognitionPanel() {
                     src={brand.logo}
                     alt={brand.name}
                     loading="lazy"
-                    className="max-h-12 w-auto max-w-[78%] object-contain md:max-h-16"
+                    className="max-h-12 w-auto max-w-[78%] object-contain md:max-h-20"
                   />
                 ) : (
                   <span className="font-display text-center text-sm tracking-wide text-foreground md:text-lg">
