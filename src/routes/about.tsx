@@ -265,30 +265,30 @@ const EXPERTISE: { title: string; note?: string; items: string[] }[] = [
 function AboutBalancePanel() {
   return (
     <div>
-      <div className="grid grid-cols-1 items-start gap-12 md:grid-cols-12 md:gap-16">
-        <div className="md:col-span-5">
-          <Reveal>
-            <LogoMark className="mb-8 md:mx-0" />
-          </Reveal>
-          <Reveal delay={80}>
-            <p className="label-xs text-muted-foreground">Design &amp; Fashion Consultancy</p>
-          </Reveal>
-          <Reveal delay={140}>
-            <h2 className="display text-accent mt-6 text-[2.5rem] leading-[0.95] sm:text-[3.5rem] md:text-[4rem]">
-              Our Expertise
-              <br />
-              &amp; Deliverables
-            </h2>
-          </Reveal>
-        </div>
-        <div className="md:col-span-7">
-          <Reveal delay={100}>
-            <p className="max-w-2xl text-lg leading-relaxed text-foreground md:text-xl">
-              {ABOUT_INTRO}
-            </p>
-          </Reveal>
-        </div>
+      {/* Firm brief: full width, left aligned, sits first */}
+      <Reveal>
+        <p className="text-lg leading-relaxed text-foreground md:text-xl md:leading-[1.7] lg:text-[1.4rem]">
+          {ABOUT_INTRO}
+        </p>
+      </Reveal>
+
+      {/* Logo + expertise heading now sits below the brief */}
+      <div className="mt-24 md:mt-36">
+        <Reveal>
+          <LogoMark className="mb-8 md:mx-0" />
+        </Reveal>
+        <Reveal delay={80}>
+          <p className="label-xs text-muted-foreground">Design &amp; Fashion Consultancy</p>
+        </Reveal>
+        <Reveal delay={140}>
+          <h2 className="display text-accent mt-6 text-[2.5rem] leading-[0.95] sm:text-[3.5rem] md:text-[4rem]">
+            Our Expertise
+            <br />
+            &amp; Deliverables
+          </h2>
+        </Reveal>
       </div>
+
 
       <div className="mt-14 border-t border-border md:mt-20">
         {EXPERTISE.map((group, gi) => (
