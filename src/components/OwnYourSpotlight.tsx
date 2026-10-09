@@ -3,14 +3,13 @@ import { useEffect, useState } from "react";
 import { Reveal } from "@/components/Reveal";
 import { BookWorkshopCta } from "@/components/BookWorkshopCta";
 
-import s1 from "@/assets/oys-home-1.jpeg";
-import s2 from "@/assets/oys-home-2.jpeg";
-import s3 from "@/assets/oys-home-3.jpeg";
-import s4 from "@/assets/oys-home-4.jpeg";
-import s5 from "@/assets/oys-home-5.jpeg";
-import s6 from "@/assets/oys-home-6.jpeg";
+import s1 from "@/assets/oys-1.png";
+import s2 from "@/assets/oys-2.png";
+import s3 from "@/assets/oys-3.png";
+import s4 from "@/assets/oys-4.png";
+import s5 from "@/assets/oys-5.png";
 
-const SLIDES = [s1, s2, s3, s4, s5, s6];
+const SLIDES = [s1, s2, s3, s4, s5];
 
 export function OwnYourSpotlight() {
   const [idx, setIdx] = useState(0);
