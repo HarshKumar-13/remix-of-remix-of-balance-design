@@ -18,6 +18,11 @@ import aboutBal4 from "@/assets/about-balance-4.jpg";
 import aboutBal5 from "@/assets/about-balance-5.jpg";
 import aboutBal6 from "@/assets/about-balance-6.jpg";
 import aboutBal7 from "@/assets/about-balance-7.jpg";
+import brandMax from "@/assets/brand-max.png";
+import brandVanHeusen from "@/assets/brand-vanheusen.png";
+import brandIimb from "@/assets/brand-iimb.png";
+import brandRaymond from "@/assets/brand-raymond.png";
+import brandReliance from "@/assets/brand-reliance.png";
 import founder1 from "@/assets/founder-1.jpeg";
 import founder2 from "@/assets/founder-2.webp";
 import founder3 from "@/assets/founder-3.jpg";
@@ -428,19 +433,19 @@ function FounderPanel() {
   );
 }
 
-const BRANDS = [
-  "MAX Fashion",
-  "Van Heusen",
-  "IIM Bangalore",
-  "ISB",
-  "Leela Palace Bangalore",
-  "Taj Palace, New Delhi",
-  "Raymond",
-  "Lifestyle",
-  "Reliance Trends",
-  "Weekender",
-  "NIFT",
-  "GAP",
+const BRANDS: { name: string; logo?: string }[] = [
+  { name: "Raymond", logo: brandRaymond },
+  { name: "Reliance Trends", logo: brandReliance },
+  { name: "MAX Fashion", logo: brandMax },
+  { name: "Van Heusen", logo: brandVanHeusen },
+  { name: "IIM Bangalore", logo: brandIimb },
+  { name: "ISB" },
+  { name: "Leela Palace Bangalore" },
+  { name: "Taj Palace, New Delhi" },
+  { name: "Lifestyle" },
+  { name: "Weekender" },
+  { name: "NIFT" },
+  { name: "GAP" },
 ];
 
 function RecognitionPanel() {
@@ -456,12 +461,21 @@ function RecognitionPanel() {
           </h2>
         </Reveal>
         <div className="grid grid-cols-2 border-t border-l border-border sm:grid-cols-4">
-          {BRANDS.map((name) => (
-            <Reveal key={name}>
-              <div className="flex h-24 items-center justify-center border-b border-r border-border px-4 md:h-28">
-                <span className="font-display text-center text-sm tracking-wide text-foreground md:text-lg">
-                  {name}
-                </span>
+          {BRANDS.map((brand) => (
+            <Reveal key={brand.name}>
+              <div className="flex h-24 items-center justify-center border-b border-r border-border px-5 md:h-28">
+                {brand.logo ? (
+                  <img
+                    src={brand.logo}
+                    alt={brand.name}
+                    loading="lazy"
+                    className="max-h-12 w-auto max-w-[78%] object-contain md:max-h-16"
+                  />
+                ) : (
+                  <span className="font-display text-center text-sm tracking-wide text-foreground md:text-lg">
+                    {brand.name}
+                  </span>
+                )}
               </div>
             </Reveal>
           ))}
