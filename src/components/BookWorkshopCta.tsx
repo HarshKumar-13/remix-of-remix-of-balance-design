@@ -11,9 +11,17 @@ import {
 const inputClass =
   "w-full border border-foreground/20 bg-background px-4 py-3 text-sm text-foreground placeholder:text-foreground/40 focus:border-red focus:outline-none";
 
-/** Shared red "Book your workshop" call-to-action used at the end of every service section. Opens a booking popup. */
-export function BookWorkshopCta({ className = "mt-4 md:mt-6" }: { className?: string }) {
-  const [open, setOpen] = useState(false);
+/**
+ * The shared booking popup (the same "Book your workshop" form).
+ * Controlled by the caller so any custom trigger can open it.
+ */
+export function BookingDialog({
+  open,
+  onOpenChange,
+}: {
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
+}) {
   const [submitted, setSubmitted] = useState(false);
   const [sending, setSending] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -39,80 +47,89 @@ export function BookWorkshopCta({ className = "mt-4 md:mt-6" }: { className?: st
   }
 
   return (
+    <Dialog
+      open={open}
+      onOpenChange={(next) => {
+        onOpenChange(next);
+        if (!next) {
+          setSubmitted(false);
+          setError(null);
+        }
+      }}
+    >
+      <DialogContent className="max-w-md border-foreground/10 bg-background">
+        {submitted ? (
+          <div className="py-6 text-center">
+            <DialogHeader>
+              <DialogTitle className="font-display text-2xl tracking-wide text-red">
+                Thank you for reaching out
+              </DialogTitle>
+              <DialogDescription className="pt-3 text-base text-foreground/70">
+                Our team will contact you soon.
+              </DialogDescription>
+            </DialogHeader>
+            <button
+              type="button"
+              onClick={() => onOpenChange(false)}
+              className="btn-red label-xs mt-8"
+            >
+              Close
+            </button>
+          </div>
+        ) : (
+          <>
+            <DialogHeader>
+              <DialogTitle className="font-display text-2xl tracking-wide text-red">
+                Book your workshop
+              </DialogTitle>
+              <DialogDescription className="text-foreground/70">
+                Tell us a little about yourself and the workshop you're interested in.
+              </DialogDescription>
+            </DialogHeader>
+            <form onSubmit={handleSubmit} className="mt-4 flex flex-col gap-3">
+              <input name="name" required placeholder="Your name" className={inputClass} />
+              <input
+                name="email"
+                type="email"
+                required
+                placeholder="Email address"
+                className={inputClass}
+              />
+              <input name="phone" type="tel" placeholder="Phone (optional)" className={inputClass} />
+              <input
+                name="workshop"
+                placeholder="Which workshop are you interested in? (optional)"
+                className={inputClass}
+              />
+              <textarea
+                name="message"
+                rows={3}
+                placeholder="Anything you'd like us to know? (optional)"
+                className={`${inputClass} resize-none`}
+              />
+              {error && <p className="text-sm text-red">{error}</p>}
+              <button type="submit" disabled={sending} className="btn-red label-xs mt-2 self-center">
+                {sending ? "Sending…" : "Submit booking request"}
+              </button>
+            </form>
+          </>
+        )}
+      </DialogContent>
+    </Dialog>
+  );
+}
+
+/** Shared red "Book your workshop" call-to-action used at the end of every service section. Opens a booking popup. */
+export function BookWorkshopCta({ className = "mt-4 md:mt-6" }: { className?: string }) {
+  const [open, setOpen] = useState(false);
+
+  return (
     <div className={`flex justify-center ${className}`}>
       <button type="button" onClick={() => setOpen(true)} className="btn-red label-xs">
         Book your workshop
       </button>
 
-      <Dialog
-        open={open}
-        onOpenChange={(next) => {
-          setOpen(next);
-          if (!next) {
-            setSubmitted(false);
-            setError(null);
-          }
-        }}
-      >
-        <DialogContent className="max-w-md border-foreground/10 bg-background">
-          {submitted ? (
-            <div className="py-6 text-center">
-              <DialogHeader>
-                <DialogTitle className="font-display text-2xl tracking-wide text-red">
-                  Thank you for reaching out
-                </DialogTitle>
-                <DialogDescription className="pt-3 text-base text-foreground/70">
-                  Our team will contact you soon.
-                </DialogDescription>
-              </DialogHeader>
-              <button
-                type="button"
-                onClick={() => setOpen(false)}
-                className="btn-red label-xs mt-8"
-              >
-                Close
-              </button>
-            </div>
-          ) : (
-            <>
-              <DialogHeader>
-                <DialogTitle className="font-display text-2xl tracking-wide text-red">
-                  Book your workshop
-                </DialogTitle>
-                <DialogDescription className="text-foreground/70">
-                  Tell us a little about yourself and the workshop you're interested in.
-                </DialogDescription>
-              </DialogHeader>
-              <form onSubmit={handleSubmit} className="mt-4 flex flex-col gap-3">
-                <input name="name" required placeholder="Your name" className={inputClass} />
-                <input
-                  name="email"
-                  type="email"
-                  required
-                  placeholder="Email address"
-                  className={inputClass}
-                />
-                <input name="phone" type="tel" placeholder="Phone (optional)" className={inputClass} />
-                <input
-                  name="workshop"
-                  placeholder="Which workshop are you interested in? (optional)"
-                  className={inputClass}
-                />
-                <textarea
-                  name="message"
-                  rows={3}
-                  placeholder="Anything you'd like us to know? (optional)"
-                  className={`${inputClass} resize-none`}
-                />
-                {error && <p className="text-sm text-red">{error}</p>}
-                <button type="submit" disabled={sending} className="btn-red label-xs mt-2 self-center">
-                  {sending ? "Sending…" : "Submit booking request"}
-                </button>
-              </form>
-            </>
-          )}
-        </DialogContent>
-      </Dialog>
+      <BookingDialog open={open} onOpenChange={setOpen} />
     </div>
   );
 }
