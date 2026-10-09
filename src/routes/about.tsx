@@ -129,7 +129,7 @@ function AboutHero() {
             alt={image.alt}
             loading={index === 0 ? "eager" : "lazy"}
             decoding="async"
-            className="absolute inset-0 h-full w-full object-contain transition-opacity duration-[1600ms] ease-[cubic-bezier(0.16,1,0.3,1)] motion-reduce:transition-none"
+            className="absolute inset-0 h-full w-full object-cover transition-opacity duration-[1600ms] ease-[cubic-bezier(0.16,1,0.3,1)] motion-reduce:transition-none"
             style={{ opacity: frame === index ? 1 : 0 }}
           />
         ))}
