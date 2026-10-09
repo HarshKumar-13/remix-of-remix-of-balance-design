@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import h0560 from "@/assets/hero-0560.jpg";
@@ -37,96 +37,34 @@ const PHRASES = [
 const EASE = [0.65, 0, 0.35, 1] as const;
 
 /**
- * A photo, shown whole and uncropped, centred over a soft out-of-focus wash of
- * itself — the wash fills the frame, the picture is never cropped or stretched.
+ * A photo, scaled to fill the frame edge to edge — no blurred side wings.
  */
 function HeroPhoto({
   image,
   active,
-  hero,
   reduced,
   eager,
 }: {
   image: Photo;
   active: boolean;
-  hero: { w: number; h: number };
   reduced: boolean;
   eager: boolean;
 }) {
-  const [nat, setNat] = useState<{ w: number; h: number } | null>(null);
-  const baseRef = useRef<HTMLImageElement>(null);
-
-  // A cached photo can finish loading before React attaches its load handler, so
-  // the picture's own proportions are read from the element itself.
-  useEffect(() => {
-    const el = baseRef.current;
-    if (!el) return;
-    const read = () => {
-      if (el.naturalWidth && el.naturalHeight) {
-        setNat({ w: el.naturalWidth, h: el.naturalHeight });
-      }
-    };
-    if (el.complete) {
-      read();
-      return;
-    }
-    el.addEventListener("load", read);
-    return () => el.removeEventListener("load", read);
-  }, [image.src]);
-
-  // The picture is scaled up to the largest size that still fits the frame whole.
-  const fit = useMemo(() => {
-    if (!nat || !hero.w || !hero.h) return null;
-    const aspect = nat.w / nat.h;
-    if (aspect < hero.w / hero.h) {
-      return { w: Math.round(hero.h * aspect), h: hero.h };
-    }
-    return { w: hero.w, h: Math.round(hero.w / aspect) };
-  }, [nat, hero]);
-
-  const onImgLoad = (e: React.SyntheticEvent<HTMLImageElement>) => {
-    const el = e.currentTarget;
-    if (el.naturalWidth && el.naturalHeight) {
-      setNat({ w: el.naturalWidth, h: el.naturalHeight });
-    }
-  };
-
   return (
     <motion.div
       aria-hidden={!active}
       initial={false}
       animate={{ opacity: active ? 1 : 0, y: active ? 0 : 8 }}
       transition={{ duration: reduced ? 0 : 1.6, ease: EASE }}
-      className="absolute inset-0 flex h-full w-full items-center justify-center"
+      className="absolute inset-0 h-full w-full"
     >
-      {/* Out-of-focus wash of the same photo, filling the frame behind the picture. */}
       <img
-        ref={baseRef}
         src={image.src}
-        alt=""
-        aria-hidden="true"
+        alt={image.alt}
         loading={eager ? "eager" : "lazy"}
-        onLoad={onImgLoad}
-        className="absolute inset-0 h-full w-full scale-110 object-cover blur-2xl"
+        decoding="async"
+        className="block h-full w-full object-cover"
       />
-      {fit ? (
-        <img
-          src={image.src}
-          alt={image.alt}
-          loading={eager ? "eager" : "lazy"}
-          onLoad={onImgLoad}
-          style={{ width: fit.w, height: fit.h }}
-          className="relative block"
-        />
-      ) : (
-        <img
-          src={image.src}
-          alt={image.alt}
-          loading={eager ? "eager" : "lazy"}
-          onLoad={onImgLoad}
-          className="absolute inset-0 h-full w-full object-contain"
-        />
-      )}
     </motion.div>
   );
 }
@@ -135,7 +73,6 @@ export function Hero({ introComplete = true }: { introComplete?: boolean }) {
   const reducedMotion = useReducedMotion();
   const [phrase, setPhrase] = useState<number | null>(null);
   const [photo, setPhoto] = useState(0);
-  const [hero, setHero] = useState({ w: 0, h: 0 });
   const heroRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -162,18 +99,6 @@ export function Hero({ introComplete = true }: { introComplete?: boolean }) {
     return () => { clock.kill(); observer.disconnect(); };
   }, [introComplete, reducedMotion]);
 
-  // The reflection wings are sized from the live frame, so they follow the
-  // viewport instead of assuming a shape for the picture.
-  useEffect(() => {
-    const element = heroRef.current;
-    if (!element) return;
-    const measure = () => setHero({ w: element.clientWidth, h: element.clientHeight });
-    measure();
-    const ro = new ResizeObserver(measure);
-    ro.observe(element);
-    return () => ro.disconnect();
-  }, []);
-
   const currentPhrase = reducedMotion ? 0 : phrase;
 
   return (
@@ -190,7 +115,6 @@ export function Hero({ introComplete = true }: { introComplete?: boolean }) {
           key={image.src}
           image={image}
           active={photo === index}
-          hero={hero}
           reduced={!!reducedMotion}
           eager={index < 2}
         />
