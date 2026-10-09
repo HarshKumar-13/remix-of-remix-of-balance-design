@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/dialog";
 
 const inputClass =
-  "w-full border border-foreground/20 bg-background px-4 py-3 text-sm text-foreground placeholder:text-foreground/40 focus:border-red focus:outline-none";
+  "w-full border border-foreground/20 bg-background px-5 py-3.5 text-base text-foreground placeholder:text-foreground/40 focus:border-red focus:outline-none";
 
 /**
  * The shared booking popup (the same "Book your workshop" form).
@@ -57,14 +57,14 @@ export function BookingDialog({
         }
       }}
     >
-      <DialogContent className="max-w-md border-foreground/10 bg-background">
+      <DialogContent className="max-w-xl border-foreground/10 bg-background p-7 sm:p-9">
         {submitted ? (
           <div className="py-6 text-center">
             <DialogHeader>
-              <DialogTitle className="font-display text-2xl tracking-wide text-red">
+              <DialogTitle className="font-display text-3xl tracking-wide text-red">
                 Thank you for reaching out
               </DialogTitle>
-              <DialogDescription className="pt-3 text-base text-foreground/70">
+              <DialogDescription className="pt-3 text-lg text-foreground/70">
                 Our team will contact you soon.
               </DialogDescription>
             </DialogHeader>
@@ -79,14 +79,14 @@ export function BookingDialog({
         ) : (
           <>
             <DialogHeader>
-              <DialogTitle className="font-display text-2xl tracking-wide text-red">
+              <DialogTitle className="font-display text-3xl tracking-wide text-red">
                 Book your workshop
               </DialogTitle>
-              <DialogDescription className="text-foreground/70">
+              <DialogDescription className="text-base text-foreground/70">
                 Tell us a little about yourself and the workshop you're interested in.
               </DialogDescription>
             </DialogHeader>
-            <form onSubmit={handleSubmit} className="mt-4 flex flex-col gap-3">
+            <form onSubmit={handleSubmit} className="mt-6 flex flex-col gap-4">
               <input name="name" required placeholder="Your name" className={inputClass} />
               <input
                 name="email"
@@ -103,12 +103,12 @@ export function BookingDialog({
               />
               <textarea
                 name="message"
-                rows={3}
+                rows={4}
                 placeholder="Anything you'd like us to know? (optional)"
                 className={`${inputClass} resize-none`}
               />
               {error && <p className="text-sm text-red">{error}</p>}
-              <button type="submit" disabled={sending} className="btn-red label-xs mt-2 self-center">
+              <button type="submit" disabled={sending} className="btn-red label-xs mt-4 self-center">
                 {sending ? "Sending…" : "Submit booking request"}
               </button>
             </form>
