@@ -473,7 +473,7 @@ function RecognitionPanel() {
                     src={brand.logo}
                     alt={brand.name}
                     loading="lazy"
-                    className="max-h-12 w-auto max-w-[78%] object-contain md:max-h-20"
+                    className="max-h-14 w-auto max-w-[80%] object-contain md:max-h-24"
                   />
                 ) : (
                   <span className="font-display text-center text-sm tracking-wide text-foreground md:text-lg">
