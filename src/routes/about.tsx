@@ -223,8 +223,6 @@ function FadeFrame({ offset, className }: { offset: number; className: string })
   );
 }
 
-const ABOUT_INTRO =
-  "Balance Design and Fashion Consultancy is a Fashion and Apparel Design firm. We partner with fashion, apparel and lifestyle businesses to build consumer-centric brands, strengthen design direction and create products and experiences that foster commercial success. We also Train and Coach apparel teams and individuals in Design Aesthetics and Fashion Styling.";
 
 const EXPERTISE: { title: string; note?: string; items: string[] }[] = [
   {
@@ -268,8 +266,19 @@ function AboutBalancePanel() {
       {/* Firm brief: full width, left aligned, sits first */}
       <Reveal>
         <p className="text-lg leading-relaxed text-foreground md:text-xl md:leading-[1.7] lg:text-[1.4rem]">
-          {ABOUT_INTRO}
+          <span className="font-medium text-primary">
+            Balance Design &amp; Fashion Consultancy
+          </span>{" "}
+          is a <span className="font-medium text-primary">Fashion</span> and{" "}
+          <span className="font-medium text-primary">Apparel Design</span> firm. We
+          partner with fashion, apparel and lifestyle businesses to build
+          consumer-centric brands, strengthen design direction and create products and
+          experiences that foster commercial success. We also Train and Coach apparel
+          teams and individuals in{" "}
+          <span className="font-medium text-primary">Design Aesthetics</span> and{" "}
+          <span className="font-medium text-primary">Fashion Styling</span>.
         </p>
+
       </Reveal>
 
       {/* Logo + expertise heading now sits below the brief */}
