@@ -153,7 +153,7 @@ function Index() {
                 <p className="mx-auto mt-10 max-w-5xl text-[calc(1.294rem+2px)] font-medium leading-relaxed text-red md:text-[calc(1.4375rem+2px)]">
                   Are conducted For TEAMS of Apparel and Fashion Brands
                   <br />
-                  in areas of <span className="font-medium">Design Aesthetics, Fashion Styling, Trend Forecasting</span>.
+                  in areas of <span className="font-medium">Design Aesthetics, Fashion Styling and Trend Forecasting</span>.
                 </p>
               </Reveal>
               <Reveal delay={200}>
