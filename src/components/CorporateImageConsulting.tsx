@@ -154,6 +154,8 @@ export function CorporateImageConsulting() {
           ))}
         </div>
       </div>
+
+      <BookingDialog open={enquiryOpen} onOpenChange={setEnquiryOpen} />
     </section>
   );
 }
