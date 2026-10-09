@@ -123,10 +123,10 @@ export function SiteFooter() {
               <div className="mt-5 flex items-center gap-5">
                 {[
                   { label: "Facebook", href: "https://www.facebook.com", Icon: Facebook },
-                  { label: "LinkedIn", href: "https://www.linkedin.com", Icon: Linkedin },
+                  { label: "LinkedIn", href: "https://www.linkedin.com/in/upmashrian", Icon: Linkedin },
                   { label: "Instagram", href: "https://www.instagram.com", Icon: Instagram },
-                  { label: "Twitter", href: "https://twitter.com", Icon: Twitter },
-                  { label: "YouTube", href: "https://www.youtube.com", Icon: Youtube },
+                  { label: "Twitter", href: "https://x.com/upmashrian?s=11", Icon: Twitter },
+                  { label: "YouTube", href: "https://www.youtube.com/@upmashrianyourstylestateme8378", Icon: Youtube },
                 ].map(({ label, href, Icon }) => (
                   <a
                     key={label}
