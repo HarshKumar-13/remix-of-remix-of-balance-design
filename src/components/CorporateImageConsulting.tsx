@@ -52,6 +52,7 @@ const ribbonStatements = [
 export function CorporateImageConsulting() {
   const sectionRef = useRef<HTMLElement>(null);
   const [visible, setVisible] = useState(false);
+  const [enquiryOpen, setEnquiryOpen] = useState(false);
 
   useEffect(() => {
     const section = sectionRef.current;
