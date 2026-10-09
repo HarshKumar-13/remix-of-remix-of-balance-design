@@ -114,9 +114,9 @@ function AboutHero() {
   }, []);
 
   return (
-    <section className="relative flex h-[44svh] min-h-[340px] items-end overflow-hidden bg-charcoal md:h-[86svh] md:min-h-[620px]">
+    <section className="relative flex h-[52svh] min-h-[430px] items-end overflow-hidden bg-charcoal md:h-[86svh] md:min-h-[620px]">
       <div
-        className="absolute inset-x-0 top-[94px] bottom-0 md:top-[124px]"
+        className="absolute inset-x-0 top-[94px] bottom-[150px] md:top-[124px] md:bottom-0"
         style={{
           opacity: loaded ? 1 : 0,
           transition: "opacity 2.6s cubic-bezier(0.16,1,0.3,1)",
@@ -134,8 +134,8 @@ function AboutHero() {
           />
         ))}
       </div>
-      <div className="absolute inset-0 bg-charcoal/45" />
-      <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-charcoal/85 via-charcoal/25 to-transparent" />
+      <div className="absolute inset-0 bg-charcoal/25 md:bg-charcoal/45" />
+      <div className="absolute inset-x-0 bottom-0 h-[170px] bg-gradient-to-t from-charcoal via-charcoal/60 to-transparent md:h-2/3 md:from-charcoal/85 md:via-charcoal/25" />
 
       <div className="relative z-10 mx-auto w-full max-w-7xl px-6 pb-8 text-ivory md:px-12 md:pb-20">
         <p
