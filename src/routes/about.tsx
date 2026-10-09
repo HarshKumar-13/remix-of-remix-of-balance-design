@@ -8,7 +8,9 @@ import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
 import { ACHIEVEMENTS } from "@/data/achievements";
 import logoMark from "@/assets/balance-logo-mark.png";
-import heroImg from "@/assets/hero.jpg";
+import banner1 from "@/assets/about-banner-1.png";
+import banner2 from "@/assets/about-banner-2.png";
+import banner3 from "@/assets/about-banner-3.png";
 import aboutImg from "@/assets/about.jpg";
 import pers2 from "@/assets/pers-2.jpg";
 import aboutBal1 from "@/assets/about-balance-1.jpg";
@@ -78,31 +80,60 @@ const CLIENTS = [
 
 /* ---------- hero ---------- */
 
+const BANNER_IMAGES = [
+  {
+    src: banner1,
+    alt: "Global Shopper trend board — resort wear, checks, crafts and the colour stories of a globe-trotter wardrobe",
+  },
+  {
+    src: banner2,
+    alt: "Total Indigo trend board — denim, chambray, indigo prints, textures and styled menswear looks",
+  },
+  {
+    src: banner3,
+    alt: "A Balance seminar in session — presenter addressing participants at a corporate workshop",
+  },
+];
+
 function AboutHero() {
-  const [y, setY] = useState(0);
   const [loaded, setLoaded] = useState(false);
+  const [frame, setFrame] = useState(0);
 
   useEffect(() => {
     const t = setTimeout(() => setLoaded(true), 120);
-    const onScroll = () => setY(window.scrollY);
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => {
-      clearTimeout(t);
-      window.removeEventListener("scroll", onScroll);
-    };
+    return () => clearTimeout(t);
+  }, []);
+
+  useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const interval = window.setInterval(
+      () => setFrame((current) => (current + 1) % BANNER_IMAGES.length),
+      5200,
+    );
+    return () => window.clearInterval(interval);
   }, []);
 
   return (
     <section className="relative flex h-[72svh] min-h-[460px] items-end overflow-hidden bg-charcoal">
-      <img
-        src={heroImg}
-        alt="Editorial fashion imagery representing Balance Design & Fashion Consultancy"
-        className="absolute inset-0 h-[118%] w-full object-cover"
+      <div
+        className="absolute inset-0"
         style={{
-          transform: `translate3d(0, ${y * 0.16}px, 0) scale(${loaded ? 1.06 : 1.18})`,
-          transition: "transform 2.6s cubic-bezier(0.16,1,0.3,1)",
+          opacity: loaded ? 1 : 0,
+          transition: "opacity 2.6s cubic-bezier(0.16,1,0.3,1)",
         }}
-      />
+      >
+        {BANNER_IMAGES.map((image, index) => (
+          <img
+            key={image.src}
+            src={image.src}
+            alt={image.alt}
+            loading={index === 0 ? "eager" : "lazy"}
+            decoding="async"
+            className="absolute inset-0 h-full w-full object-contain transition-opacity duration-[1600ms] ease-[cubic-bezier(0.16,1,0.3,1)] motion-reduce:transition-none"
+            style={{ opacity: frame === index ? 1 : 0 }}
+          />
+        ))}
+      </div>
       <div className="absolute inset-0 bg-charcoal/45" />
       <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-charcoal/85 via-charcoal/25 to-transparent" />
 
