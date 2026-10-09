@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { CurvedSlider } from "@/components/CurvedSlider";
-import { Link } from "@tanstack/react-router";
+import { BookingDialog } from "@/components/BookWorkshopCta";
 import diamond from "@/assets/balance-diamond.png";
 
 import c1 from "@/assets/corp-new-1.jpg";
