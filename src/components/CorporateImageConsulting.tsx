@@ -111,8 +111,35 @@ export function CorporateImageConsulting() {
         >
           <CurvedSlider images={IMAGES} contain />
         </div>
-        <BookWorkshopCta />
       </div>
+
+      {/* Full-bleed editorial question ribbon, directly connected to the slider above. */}
+      <div
+        className="-mx-6 mt-7 overflow-hidden border-y border-border/70 bg-charcoal py-5 md:-mx-12 md:py-6"
+        role="marquee"
+      >
+        <div className="ribbon-track flex w-max items-center">
+          {[0, 1].map((copy) => (
+            <div key={copy} aria-hidden={copy === 1} className="flex items-center">
+              {ribbonStatements.map((statement) => (
+                <span key={statement} className="flex items-center">
+                  <span className="whitespace-nowrap px-8 text-[calc(0.95rem+2px)] leading-relaxed text-background md:px-10 md:text-[calc(1.125rem+2px)]">
+                    {statement}
+                  </span>
+                  <img
+                    src={diamond}
+                    alt=""
+                    aria-hidden="true"
+                    className="h-3 w-auto shrink-0 md:h-4"
+                    loading="lazy"
+                  />
+                </span>
+              ))}
+            </div>
+          ))}
+        </div>
+      </div>
+      <BookWorkshopCta />
     </section>
   );
 }
