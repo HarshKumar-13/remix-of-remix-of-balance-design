@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { Facebook, Instagram, Linkedin } from "lucide-react";
+import { Facebook, Instagram, Linkedin, Twitter, Youtube } from "lucide-react";
 import logoLight from "@/assets/balance-logo-on-black.png";
 
 export function SiteFooter() {
@@ -125,6 +125,8 @@ export function SiteFooter() {
                   { label: "Facebook", href: "https://www.facebook.com", Icon: Facebook },
                   { label: "LinkedIn", href: "https://www.linkedin.com", Icon: Linkedin },
                   { label: "Instagram", href: "https://www.instagram.com", Icon: Instagram },
+                  { label: "Twitter", href: "https://twitter.com", Icon: Twitter },
+                  { label: "YouTube", href: "https://www.youtube.com", Icon: Youtube },
                 ].map(({ label, href, Icon }) => (
                   <a
                     key={label}
