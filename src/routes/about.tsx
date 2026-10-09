@@ -137,7 +137,7 @@ function AboutHero() {
       <div className="absolute inset-0 bg-charcoal/45" />
       <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-charcoal/85 via-charcoal/25 to-transparent" />
 
-      <div className="relative z-10 mx-auto w-full max-w-7xl px-6 pb-14 text-ivory md:px-12 md:pb-20">
+      <div className="relative z-10 mx-auto w-full max-w-7xl px-6 pb-8 text-ivory md:px-12 md:pb-20">
         <p
           className="label-xs"
           style={{
