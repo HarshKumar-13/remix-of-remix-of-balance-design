@@ -98,7 +98,7 @@ export function BookingDialog({
               <input name="phone" type="tel" placeholder="Phone (optional)" className={inputClass} />
               <input
                 name="workshop"
-                placeholder="Which workshop are you interested in? (optional)"
+                placeholder="Which workshop? (optional)"
                 className={inputClass}
               />
               <textarea
