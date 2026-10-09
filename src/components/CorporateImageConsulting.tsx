@@ -106,17 +106,18 @@ export function CorporateImageConsulting() {
           </p>
 
           {/* Text-only enquiry link: the rule under it draws itself in from the left on hover. */}
-          <Link
-            to="/contact"
+          <button
+            type="button"
+            onClick={() => setEnquiryOpen(true)}
             className={`group inline-flex flex-col items-center gap-3 transition-[opacity,transform] delay-300 duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] ${reveal}`}
           >
-            <span className="label-xs font-semibold uppercase tracking-[0.22em] text-foreground transition-colors duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:text-red">
+            <span className="label-xs text-[calc(0.9375rem+2px)] font-normal uppercase tracking-[0.22em] text-foreground transition-colors duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:text-red">
               Enquire About Corporate Consulting
             </span>
             <span className="relative block h-px w-full bg-border/60">
               <span className="absolute inset-0 origin-left scale-x-0 bg-red transition-transform duration-[700ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-x-100" />
             </span>
-          </Link>
+          </button>
         </div>
 
         <div
