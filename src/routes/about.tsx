@@ -114,9 +114,9 @@ function AboutHero() {
   }, []);
 
   return (
-    <section className="relative flex h-[72svh] min-h-[460px] items-end overflow-hidden bg-charcoal">
+    <section className="relative flex h-[44svh] min-h-[340px] items-end overflow-hidden bg-charcoal md:h-[86svh] md:min-h-[620px]">
       <div
-        className="absolute inset-0"
+        className="absolute inset-x-0 top-[94px] bottom-0 md:top-[124px]"
         style={{
           opacity: loaded ? 1 : 0,
           transition: "opacity 2.6s cubic-bezier(0.16,1,0.3,1)",
