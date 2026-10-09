@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 
 import { LogoMark } from "@/components/LogoMark";
 import { Reveal } from "@/components/Reveal";
+import { Testimonials } from "@/components/Testimonials";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
 import { ACHIEVEMENTS } from "@/data/achievements";
@@ -427,10 +428,47 @@ function FounderPanel() {
   );
 }
 
+const BRANDS = [
+  "MAX Fashion",
+  "Van Heusen",
+  "IIM Bangalore",
+  "ISB",
+  "Leela Palace Bangalore",
+  "Taj Palace, New Delhi",
+  "Raymond",
+  "Lifestyle",
+  "Reliance Trends",
+  "Weekender",
+  "NIFT",
+  "GAP",
+];
+
 function RecognitionPanel() {
   return (
     <div>
-      <div className="max-w-3xl">
+      <Testimonials />
+
+      <div className="mt-16 md:mt-24">
+        <Reveal>
+          <p className="label-xs text-center text-red">Brands We Worked With</p>
+          <h2 className="display mt-4 mb-10 text-center text-3xl leading-[1.05] md:mb-14 md:text-5xl">
+            Brands We Worked With
+          </h2>
+        </Reveal>
+        <div className="grid grid-cols-2 border-t border-l border-border sm:grid-cols-4">
+          {BRANDS.map((name) => (
+            <Reveal key={name}>
+              <div className="flex h-24 items-center justify-center border-b border-r border-border px-4 md:h-28">
+                <span className="font-display text-center text-sm tracking-wide text-foreground md:text-lg">
+                  {name}
+                </span>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+      </div>
+
+      <div className="mt-16 max-w-3xl md:mt-24">
         <Reveal>
           <p className="text-lg leading-relaxed text-foreground md:text-xl">Sharing some examples of Balance Design achievements with various BRANDS.</p>
         </Reveal>
