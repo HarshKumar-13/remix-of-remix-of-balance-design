@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { CurvedSlider } from "@/components/CurvedSlider";
-import { BookWorkshopCta } from "@/components/BookWorkshopCta";
+import { Link } from "@tanstack/react-router";
 import diamond from "@/assets/balance-diamond.png";
 
 import c1 from "@/assets/corp-new-1.jpg";
@@ -104,6 +104,19 @@ export function CorporateImageConsulting() {
             coaching, professionals learn to command respect, and own their presence in meetings,
             presentations and high stake conversations.
           </p>
+
+          {/* Text-only enquiry link: the rule under it draws itself in from the left on hover. */}
+          <Link
+            to="/contact"
+            className={`group inline-flex flex-col items-center gap-3 transition-[opacity,transform] delay-300 duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] ${reveal}`}
+          >
+            <span className="label-xs font-semibold uppercase tracking-[0.22em] text-foreground transition-colors duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:text-red">
+              Enquire About Corporate Consulting
+            </span>
+            <span className="relative block h-px w-full bg-border/60">
+              <span className="absolute inset-0 origin-left scale-x-0 bg-red transition-transform duration-[700ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-x-100" />
+            </span>
+          </Link>
         </div>
 
         <div
@@ -139,7 +152,6 @@ export function CorporateImageConsulting() {
           ))}
         </div>
       </div>
-      <BookWorkshopCta />
     </section>
   );
 }
