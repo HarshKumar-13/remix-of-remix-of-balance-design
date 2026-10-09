@@ -41,10 +41,10 @@ type Errors = Partial<Record<keyof z.infer<typeof schema>, string>>;
 
 const SOCIALS = [
   { label: "Facebook", href: "https://www.facebook.com", Icon: Facebook },
-  { label: "LinkedIn", href: "https://www.linkedin.com", Icon: Linkedin },
+  { label: "LinkedIn", href: "https://www.linkedin.com/in/upmashrian", Icon: Linkedin },
   { label: "Instagram", href: "https://www.instagram.com", Icon: Instagram },
-  { label: "Twitter", href: "https://twitter.com", Icon: Twitter },
-  { label: "YouTube", href: "https://www.youtube.com", Icon: Youtube },
+  { label: "Twitter", href: "https://x.com/upmashrian?s=11", Icon: Twitter },
+  { label: "YouTube", href: "https://www.youtube.com/@upmashrianyourstylestateme8378", Icon: Youtube },
 ];
 
 function ContactPage() {
