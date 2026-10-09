@@ -150,7 +150,7 @@ function AboutHero() {
           About Balance
         </p>
         <h1
-          className="display mt-6 text-[3.5rem] leading-[0.9] sm:text-[6rem] md:text-[8.5rem]"
+          className="display mt-4 text-[2rem] leading-[0.9] sm:mt-6 sm:text-[6rem] md:text-[8.5rem]"
           style={{
             opacity: loaded ? 1 : 0,
             transform: loaded ? "none" : "translateY(48px)",
