@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { CurvedSlider } from "@/components/CurvedSlider";
 import { BookWorkshopCta } from "@/components/BookWorkshopCta";
+import diamond from "@/assets/balance-diamond.png";
 
 import c1 from "@/assets/corp-new-1.jpg";
 import v1 from "@/assets/corp-vh-1.jpg";
@@ -37,6 +38,15 @@ const IMAGES = [
   },
   { src: c6, alt: "Colour wheel presentation at a corporate seminar" },
   { src: c7, alt: "Upma Shrian engaging participants at a corporate seminar" },
+];
+
+// The five questions the seminar puts to a working professional.
+const ribbonStatements = [
+  "Do you represent yourself or your brand and come out as a confident personality by way of your dressing up?",
+  "Are you comfortable in being yourself, as you represent your company?",
+  "Do you feel powerful in your attire, as you rub shoulders with the top brass of various segments of your industry?",
+  "Are you aware of Fashion's do's and don'ts as you meet your clients and alliances worldwide?",
+  "Do you feel your wardrobe represents your professional success and stature?",
 ];
 
 export function CorporateImageConsulting() {
@@ -101,8 +111,35 @@ export function CorporateImageConsulting() {
         >
           <CurvedSlider images={IMAGES} contain />
         </div>
-        <BookWorkshopCta />
       </div>
+
+      {/* Full-bleed editorial question ribbon, directly connected to the slider above. */}
+      <div
+        className="-mx-6 mt-7 overflow-hidden border-y border-border/70 bg-charcoal py-5 md:-mx-12 md:py-6"
+        role="marquee"
+      >
+        <div className="ribbon-track flex w-max items-center">
+          {[0, 1].map((copy) => (
+            <div key={copy} aria-hidden={copy === 1} className="flex items-center">
+              {ribbonStatements.map((statement) => (
+                <span key={statement} className="flex items-center">
+                  <span className="whitespace-nowrap px-8 text-[calc(0.95rem+2px)] leading-relaxed text-background md:px-10 md:text-[calc(1.125rem+2px)]">
+                    {statement}
+                  </span>
+                  <img
+                    src={diamond}
+                    alt=""
+                    aria-hidden="true"
+                    className="h-3 w-auto shrink-0 md:h-4"
+                    loading="lazy"
+                  />
+                </span>
+              ))}
+            </div>
+          ))}
+        </div>
+      </div>
+      <BookWorkshopCta />
     </section>
   );
 }
