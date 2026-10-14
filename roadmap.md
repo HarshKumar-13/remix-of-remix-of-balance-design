@@ -52,3 +52,8 @@
 
 - [x] Rewrite the homepage "About Me" section in the third person (she/her), naming Upma Shrian, and drop the "twenty-eight years" phrasing.
 - [x] Verify the section reads correctly on the live page and the build stays clean.
+
+# Founder tab photo removal
+
+- [x] Take the teal-bench, plum-top/beige-trousers and red-blouse/tartan-trousers photos out of the Our Founder tab.
+- [x] Verify the tab now cycles only the four remaining photos and the build stays clean.
