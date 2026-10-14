@@ -79,3 +79,9 @@
 - [x] Take the "Abstract Prints" board out of the Graphic & Print Design rotation.
 - [x] Take the two "Prints" boards on the right (black-and-white mandala repeat, four fashion figures in patterned dresses) out too.
 - [x] Verify the section cycles the remaining six boards with no gaps on the live page.
+
+# Enquiry form fields and labels
+
+- [x] Add a required Age group dropdown (18-25, 25-35, 35-45, Above 45) and a Profession / Industry field to the enquiry popup.
+- [x] Rename the workshop field to "Name of the workshop/seminar" and the message field to "Kindly share your requirement/queries".
+- [x] Verify the labels on the live page, a submitted enquiry stored with the new fields, and the build stays clean.
