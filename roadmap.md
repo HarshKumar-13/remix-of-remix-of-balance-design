@@ -27,3 +27,9 @@
 - [x] Preserve the loader and grid geometry; add position-preserving pause/resume and controlled manual movement.
 - [x] Expand clicked images with accessible close/focus handling and background scroll locking.
 - [x] Verify repeated opening, exact position restoration, input controls and desktop/mobile behavior.
+
+# Grid as the main hero
+
+- [ ] Keep the loader and grid appearance; remove the separate text/banner hero and automatic image transfer.
+- [ ] Release wheel/touch navigation and add a Services scroll cue with position-preserving image closing.
+- [ ] Verify immediate Services access, image controls, desktop/mobile scrolling and reduced motion.
