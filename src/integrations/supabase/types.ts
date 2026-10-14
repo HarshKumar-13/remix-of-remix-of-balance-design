@@ -16,30 +16,36 @@ export type Database = {
     Tables: {
       booking_requests: {
         Row: {
+          age_group: string | null
           created_at: string
           email: string
           id: string
           message: string | null
           name: string
           phone: string | null
+          profession: string | null
           workshop: string | null
         }
         Insert: {
+          age_group?: string | null
           created_at?: string
           email: string
           id?: string
           message?: string | null
           name: string
           phone?: string | null
+          profession?: string | null
           workshop?: string | null
         }
         Update: {
+          age_group?: string | null
           created_at?: string
           email?: string
           id?: string
           message?: string | null
           name?: string
           phone?: string | null
+          profession?: string | null
           workshop?: string | null
         }
         Relationships: []
