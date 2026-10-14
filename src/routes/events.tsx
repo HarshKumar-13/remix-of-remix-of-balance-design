@@ -378,7 +378,13 @@ function PastCard({ event, index }: { event: (typeof PAST_EVENTS)[number]; index
       </div>
       <div className="p-6 md:p-8">
         {event.type && <p className="label-xs mb-4 text-red">{event.type}</p>}
-        <h3 className="display text-2xl leading-[1.02] transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:-translate-y-1 md:text-[1.9rem]">
+        <h3
+          className={`display transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:-translate-y-1 ${
+            event.smallTitle
+              ? "text-base leading-[1.3] md:text-[1.05rem]"
+              : "text-2xl leading-[1.02] md:text-[1.9rem]"
+          }`}
+        >
           {event.title}
         </h3>
         {event.date && <p className="label-xs mt-4 text-muted-foreground">{event.date}</p>}
