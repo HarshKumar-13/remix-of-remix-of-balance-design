@@ -122,19 +122,18 @@ const GRAPHIC_IMAGES = [
 function Index() {
   const [introComplete, setIntroComplete] = useState(false);
   const [introDone, setIntroDone] = useState(false);
+  const revealHero = useCallback(() => {}, []);
   const finishIntro = useCallback(() => setIntroComplete(true), []);
   const doneIntro = useCallback(() => setIntroDone(true), []);
 
   return (
     <main>
+      {!introDone && <LogoIntro onReveal={revealHero} onComplete={finishIntro} onFinish={doneIntro} />}
       <div className="relative z-10 bg-background">
-        {!introDone && <LogoIntro onComplete={finishIntro} onFinish={doneIntro} />}
-        <SiteHeader introComplete={introComplete} />
+        <SiteHeader introComplete={introComplete} logoVisible={introDone} />
+        <Hero introComplete={introDone} />
         <ScrollStory>
           <SlideStack>
-            <SlidePanel>
-              <Hero introComplete={introComplete} />
-            </SlidePanel>
             <SlidePanel>
             <section
               id="services"

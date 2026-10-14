@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
-import { AnimatePresence, motion, useReducedMotion } from "motion/react";
+import { motion, useReducedMotion } from "motion/react";
+import { useHeroScroll } from "@/hooks/use-hero-scroll";
 import h0560 from "@/assets/hero-0560.jpg";
 import h0541 from "@/assets/hero-0541.jpg";
 import h0545 from "@/assets/hero-0545.jpg";
@@ -12,143 +13,79 @@ import h1629 from "@/assets/hero-1629.jpg";
 import h1630 from "@/assets/hero-1630.jpg";
 import h1631 from "@/assets/hero-1631.jpg";
 
-type Photo = { src: string; alt: string };
-
-const PHOTOS: Photo[] = [
-  { src: h0560, alt: "Workshop audience watching a presentation on screen" },
-  { src: h0541, alt: "Seminar audience in an auditorium watching a presentation" },
-  { src: h0545, alt: "Audience viewing a colour and styling presentation in a hall" },
-  { src: h0556, alt: "Fashion and colour theory seminar in a school hall" },
-  { src: h1616, alt: "Fashion design board with garment sketches, photographs and a colour palette" },
-  { src: h1627, alt: "Artistic portrait collage with paint streaks and printed text on a dark background" },
-  { src: h1628, alt: "Design panel of colourful geometric patterns beside embroidered pink slip-on shoes" },
-  { src: h1629, alt: "Studio portrait in black lace with printed text on a white background" },
-  { src: h1630, alt: "Black and white repeating floral pattern panel" },
-  { src: h1631, alt: "Fashion illustration of four figures in printed outfits and headpieces" },
+export const HERO_COLUMNS = [
+  [{ src: h0560, alt: "Design workshop audience" }, { src: h1616, alt: "Garment sketches and colour palette" }, { src: h0541, alt: "Fashion seminar audience" }],
+  [{ src: h1627, alt: "Artistic fashion portrait collage" }, { src: h1628, alt: "Geometric textile designs and embroidered shoes" }, { src: h0545, alt: "Colour and styling workshop" }],
+  [{ src: h1629, alt: "Fashion portrait design board" }, { src: h1631, alt: "Fashion illustrations in printed garments" }, { src: h1630, alt: "Floral textile pattern" }, { src: h0556, alt: "Fashion and colour theory seminar" }],
 ];
-const PHRASES = [
-  "Design & Styling Workshops",
-  "Creating Looks",
-  "Personal Image Consulting",
-  "Fashion Forecasting",
-  "Creating Fashion Collections",
-  "Design Aesthetics Workshops",
-];
-const EASE = [0.65, 0, 0.35, 1] as const;
+export const PHRASES = ["Design & Styling Workshops", "Creating Looks", "Personal Image Consulting", "Fashion Forecasting", "Creating Fashion Collections", "Design Aesthetics Workshops"];
 
-/**
- * A photo, scaled to fill the frame edge to edge — no blurred side wings.
- */
-function HeroPhoto({
-  image,
-  active,
-  reduced,
-  eager,
-}: {
-  image: Photo;
-  active: boolean;
-  reduced: boolean;
-  eager: boolean;
-}) {
-  return (
-    <motion.div
-      aria-hidden={!active}
-      initial={false}
-      animate={{ opacity: active ? 1 : 0, y: active ? 0 : 8 }}
-      transition={{ duration: reduced ? 0 : 1.6, ease: EASE }}
-      className="absolute inset-0 h-full w-full"
-    >
-      <img
-        src={image.src}
-        alt={image.alt}
-        loading={eager ? "eager" : "lazy"}
-        decoding="async"
-        className="block h-full w-full object-cover"
-      />
-    </motion.div>
-  );
-}
+const BANNER_IMAGES = [h0560, h0541, h0545, h1616, h1627, h0556];
 
 export function Hero({ introComplete = true }: { introComplete?: boolean }) {
-  const reducedMotion = useReducedMotion();
-  const [phrase, setPhrase] = useState<number | null>(null);
-  const [photo, setPhoto] = useState(0);
+  const reduced = useReducedMotion();
+  const [active, setActive] = useState(0);
+  const [phraseVisible, setPhraseVisible] = useState(true);
   const heroRef = useRef<HTMLElement>(null);
+  const stageRef = useRef<HTMLDivElement>(null);
+  const [scrollPinned, setScrollPinned] = useState(false);
+  const rotationRef = useRef<gsap.core.Timeline | null>(null);
+  useHeroScroll(stageRef, introComplete, setScrollPinned);
 
   useEffect(() => {
-    if (!introComplete || reducedMotion) return;
-    // One repeating clock: ten photos every 3.9s, phrases every 2.6s.
-    // The shared 39s cycle wraps both sequences without restarting the intro.
-    const CYCLE = 39;
-    const PHOTO_STEP = CYCLE / PHOTOS.length;
-    const clock = gsap.timeline({ repeat: -1, delay: 0.7 });
-    for (let step = 0; step < 15; step += 1) {
-      clock.call(() => setPhrase(step % PHRASES.length), [], step * 2.6);
-      clock.call(() => setPhrase(null), [], step * 2.6 + 2);
-    }
-    for (let step = 0; step < PHOTOS.length; step += 1) {
-      clock.call(() => setPhoto(step), [], step * PHOTO_STEP);
-    }
-    clock.to({}, { duration: 0.6 }, CYCLE - 0.6);
-    const element = heroRef.current;
+    if (!introComplete || reduced) return;
+    // A single index owns both the picture and its service phrase.
+    const clock = gsap.timeline({ repeat: -1 });
+    rotationRef.current = clock;
+    PHRASES.forEach((_, i) => {
+      clock.call(() => setPhraseVisible(false), [], (i + 1) * 2 - 0.3);
+      clock.call(() => { setActive((i + 1) % PHRASES.length); setPhraseVisible(true); }, [], (i + 1) * 2);
+    });
+    clock.to({}, { duration: 0.01 }, PHRASES.length * 2);
     const observer = new IntersectionObserver(([entry]) => {
       if (entry?.isIntersecting) clock.resume();
       else clock.pause();
-    }, { threshold: 0 });
-    if (element) observer.observe(element);
-    return () => { clock.kill(); observer.disconnect(); };
-  }, [introComplete, reducedMotion]);
-
-  const currentPhrase = reducedMotion ? 0 : phrase;
+    });
+    if (heroRef.current) observer.observe(heroRef.current);
+    return () => { clock.kill(); rotationRef.current = null; observer.disconnect(); };
+  }, [introComplete, reduced]);
 
   return (
-    <motion.section
-      ref={heroRef}
-      id="top"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: introComplete ? 1 : 0 }}
-      transition={{ duration: reducedMotion ? 0 : 0.7, ease: EASE }}
-      className="relative h-[100svh] min-h-[600px] w-full overflow-hidden bg-charcoal"
-    >
-      {PHOTOS.map((image, index) => (
-        <HeroPhoto
-          key={image.src}
-          image={image}
-          active={photo === index}
-          reduced={!!reducedMotion}
-          eager={index < 2}
-        />
-      ))}
-      <div aria-hidden="true" className="hero-overlay pointer-events-none absolute inset-0" />
-      <motion.div
-        initial={{ opacity: 0, y: 8 }}
-        animate={{ opacity: introComplete ? 1 : 0, y: introComplete ? 0 : 8 }}
-        transition={{ duration: reducedMotion ? 0 : 0.9, ease: EASE, delay: reducedMotion ? 0 : 0.15 }}
-        className="hero-copy relative z-10 flex h-full flex-col justify-end text-ivory"
-      >
-        <div className="w-full px-6 pb-10 pt-16 md:px-12 md:pb-20 md:pt-40">
-        <h1 className="hero-title display whitespace-nowrap text-[calc(9.45vw_-_12px)] leading-[0.98] md:text-[calc(min(9vw_-_13.5px,11.25rem_-_4.5px))]">
-          Balance Design
-        </h1>
-        <p className="hero-label hero-ink label-xs mt-5 inline-block">&amp; Fashion Consultancy</p>
-        <div className="relative mt-7 h-14 max-w-3xl sm:h-16" aria-label="Consultancy specialisms">
-          <AnimatePresence mode="wait">
-            {currentPhrase !== null && (
-              <motion.p
-                key={currentPhrase}
-                initial={reducedMotion ? false : { opacity: 0, scale: 0.96, y: 5 }}
-                animate={{ opacity: 1, scale: 1, y: 0 }}
-                exit={{ opacity: 0, scale: 1.02, y: -3, transition: { duration: 0.5, ease: EASE } }}
-                transition={{ duration: reducedMotion ? 0 : 0.6, ease: EASE }}
-                className="hero-ink absolute inset-x-0 top-0 origin-left font-sans text-2xl font-medium leading-tight sm:text-3xl md:text-4xl"
-              >
-                {PHRASES[currentPhrase]}
-              </motion.p>
-            )}
-          </AnimatePresence>
+    <section ref={heroRef} id="top" className={`cinematic-hero bg-background${introComplete ? " hero-settled" : ""}`}>
+      <div data-hero-copy className="cinematic-copy">
+        <h1 className="display cinematic-title text-brand-red"><span>BALANCE DESIGN</span></h1>
+        <p className="display cinematic-descriptor"><span>&amp; FASHION CONSULTANCY</span></p>
+      </div>
+      <div ref={stageRef} className="hero-scroll-stage">
+      <div className="hero-scroll-viewport">
+      <div data-banner-destination className="editorial-banner-destination">
+        <div data-featured-banner className="editorial-banner">
+          {BANNER_IMAGES.map((src, i) => (
+            <motion.img key={src} src={src} alt={PHRASES[i]} data-banner-image={i} data-intro-image="true"
+              initial={false} animate={{ opacity: active === i ? 1 : 0 }} transition={{ duration: reduced ? 0 : 0.65 }}
+              aria-hidden={active !== i} className="editorial-banner-image" decoding="async" loading="eager" />
+          ))}
+          <div data-banner-phrase className="editorial-banner-caption" aria-label="Consultancy specialisms">
+            <motion.p initial={false} animate={{ opacity: phraseVisible ? 1 : 0 }}
+              transition={{ duration: reduced ? 0 : 0.3 }} className="editorial-banner-phrase">{PHRASES[active]}</motion.p>
+          </div>
         </div>
-        </div>
-      </motion.div>
-    </motion.section>
+      </div>
+      </div>
+      </div>
+      <div data-hero-gallery className="cinematic-gallery" aria-hidden="true">
+        {HERO_COLUMNS.map((photos, column) => (
+          <div key={column} data-hero-column className="cinematic-column">
+            <div data-column-track className="cinematic-track">
+              {Array.from({ length: 16 }, (_, repetition) => photos.map((photo, photoIndex) => (
+                <div key={`${repetition}-${photo.src}`} data-column-image data-cycle-start={photoIndex === 0 ? "true" : undefined} className="cinematic-image">
+                  <img src={photo.src} alt="" data-intro-image={repetition === 0 ? "true" : undefined} loading="eager" decoding="async" />
+                </div>
+              )))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
   );
 }

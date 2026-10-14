@@ -12,3 +12,5 @@
 - Keep user-supplied site media as source-controlled files under `src/assets` when portability to GitHub, local downloads, and Vercel is required; this avoids host-specific asset URLs.
 - AI features call Lovable AI Gateway from server-only *.server.ts modules (Responses API, streamed) behind createServerFn in *.functions.ts; keeps the API key off the client.
 - Use a GSAP timeline for the opening sequence and coordinated hero loop, with Motion AnimatePresence for phrase exits; one clock keeps imagery and typography choreographed without unrelated timers.
+
+- Keep the homepage opening outside ScrollStory/SlideStack: LogoIntro transfers the actual grid image into Hero, and useHeroScroll owns native sticky banner expansion without competing parent transforms.

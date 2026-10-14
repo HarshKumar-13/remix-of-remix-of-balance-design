@@ -13,9 +13,11 @@ const NAV = [
 export function SiteHeader({
   introComplete = true,
   forceSolid = false,
+  logoVisible = true,
 }: {
   introComplete?: boolean;
   forceSolid?: boolean;
+  logoVisible?: boolean;
 }) {
   const [solid, setSolid] = useState(false);
   const [open, setOpen] = useState(false);
@@ -48,16 +50,18 @@ export function SiteHeader({
   return (
     <>
       <header
-        className={`fixed inset-x-0 top-0 z-[60] transition-all duration-700 ease-in-out ${introComplete ? "opacity-100" : "pointer-events-none opacity-0"} ${
+        className={`fixed inset-x-0 top-0 z-[60] transition-[background-color,border-color,backdrop-filter] duration-700 ease-in-out ${introComplete ? "" : "pointer-events-none"} ${
           open
             ? "bg-transparent"
             : showSolid
               ? "border-b border-border bg-background/95 backdrop-blur-sm"
-              : "bg-background/70 backdrop-blur-md"
+              : introComplete
+                ? "bg-background/70 backdrop-blur-md"
+                : "bg-transparent"
         }`}
       >
         <div
-          className={`flex items-center justify-between px-6 py-3 transition-opacity duration-700 md:px-12 ${tone} ${introComplete ? "opacity-100" : "opacity-0"}`}
+          className={`flex items-center justify-between px-6 py-3 md:px-12 ${tone}`}
         >
           <a
             href="/#top"
@@ -68,11 +72,15 @@ export function SiteHeader({
             <img
               src={logoDark}
               alt="Balance Design & Fashion Consultancy"
-              className="h-[4.375rem] w-auto md:h-[6.25rem]"
+              width={800}
+              height={648}
+              className={`h-[4.375rem] w-auto md:h-[6.25rem] ${logoVisible ? "opacity-100" : "opacity-0"}`}
             />
           </a>
 
-          <div className="flex items-center gap-8 md:gap-12">
+          <div
+            className={`flex items-center gap-8 transition-opacity duration-500 ease-in-out md:gap-12 ${introComplete ? "opacity-100" : "opacity-0"}`}
+          >
             <a href="/contact" className="label-xs link-underline hidden sm:inline-block">
               Contact
             </a>
