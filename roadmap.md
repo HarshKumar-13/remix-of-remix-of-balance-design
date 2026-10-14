@@ -68,3 +68,13 @@
 
 - [x] Add "Corporate Image Consulting" with "The Raymond Shop" beneath it to the two corporate photos that carried no name.
 - [x] Verify the caption renders in the same style as the Van Heusen one on the live page.
+
+# Question ribbon speed
+
+- [x] Halve the travel speed of both editorial question ribbons (Personal Image Consulting and Corporate Image Consulting).
+- [x] Verify the measured drift is half the previous rate and the build stays clean.
+
+# Graphic & Print Design board removal
+
+- [x] Take the "Abstract Prints" board out of the Graphic & Print Design rotation.
+- [x] Verify the section cycles the remaining eight boards with no gaps on the live page.

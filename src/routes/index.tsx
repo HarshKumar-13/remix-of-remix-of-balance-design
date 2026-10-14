@@ -43,7 +43,6 @@ import graphic1Asset from "@/assets/graphic-1.jpg";
 import graphic2Asset from "@/assets/graphic-2.jpg";
 import graphic3Asset from "@/assets/graphic-3.jpg";
 import graphic4Asset from "@/assets/graphic-4.jpg";
-import graphic5Asset from "@/assets/graphic-5.jpg";
 import graphic6Asset from "@/assets/graphic-6.jpg";
 import graphic7Asset from "@/assets/graphic-7.jpg";
 import graphic8Asset from "@/assets/graphic-8.jpg";
@@ -111,7 +110,6 @@ const GRAPHIC_IMAGES = [
   { src: graphic2Asset, alt: "Infants/Toddlers boys mood board with giraffe, cow and dragonfly illustrations and Pantone colour chips" },
   { src: graphic3Asset, alt: "Infants/Toddlers girls mood board with bunny, birds, trees and fabric print tiles" },
   { src: graphic4Asset, alt: "Fabrics and Prints board with kidswear cargo pants, graphic tees and striped shorts" },
-  { src: graphic5Asset, alt: "Abstract Prints board of circular kaleidoscopic textile prints" },
   { src: graphic6Asset, alt: "Child-inspired psychedelic pattern board with mosaic florals and overlapping circles" },
   { src: graphic7Asset, alt: "Geometric print board beside pink embroidered slip-on shoes" },
   { src: graphic8Asset, alt: "Prints board with repeating black-and-white geometric mandala pattern" },
