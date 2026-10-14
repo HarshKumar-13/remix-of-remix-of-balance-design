@@ -77,4 +77,5 @@
 # Graphic & Print Design board removal
 
 - [x] Take the "Abstract Prints" board out of the Graphic & Print Design rotation.
-- [x] Verify the section cycles the remaining eight boards with no gaps on the live page.
+- [x] Take the two "Prints" boards on the right (black-and-white mandala repeat, four fashion figures in patterned dresses) out too.
+- [x] Verify the section cycles the remaining six boards with no gaps on the live page.
