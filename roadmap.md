@@ -97,3 +97,9 @@
 - [x] Rename "Our Expertise & Deliverables" to "Our Deliverables".
 - [x] Make the four left-side group headings (Design & Creative Direction, Trend Forecasting & Market Intelligence, Styling & Image Consulting Workshops for Individuals, Design Workshops) red.
 - [x] Verify the heading and all four group titles on the live About page.
+
+# Our Founder photo and heading
+
+- [x] Remove the wicker-armchair photo (chevron halter dress) from the Our Founder rotation.
+- [x] Change the Our Founder heading to "A journey of design craft and innovation."
+- [x] Verify only the three kept photos load and the new heading renders on the live About page.
