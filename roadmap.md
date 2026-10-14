@@ -109,5 +109,7 @@
 
 - [x] Confirm the testimonial heading reads "What People Say About Us" on the homepage and the About page Achievements tab; no wording change was needed.
 - [x] Change the heading to "What Brand and Customers Say About Us"; verify on the homepage and the About page Achievements tab.
+- [x] Pluralise to "What Brands and Customers Say About Us" to match "Customers"; verify on the homepage and the About page Achievements tab.
+
 
 

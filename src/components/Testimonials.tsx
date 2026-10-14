@@ -150,7 +150,7 @@ export function Testimonials() {
         <Reveal delay={80}>
           <p className="label-xs text-center text-red">Testimonials</p>
           <h2 className="display mt-4 mb-12 text-center text-4xl leading-[1.05] md:mb-16 md:text-6xl">
-            What Brand and Customers Say About Us
+            What Brands and Customers Say About Us
           </h2>
         </Reveal>
       </div>
