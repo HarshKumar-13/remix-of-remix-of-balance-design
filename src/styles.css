@@ -561,6 +561,7 @@
 @media (max-width: 767px) {
   .grid-motion-toggle { top: 110px; }
   #services { scroll-margin-top: 94px; }
+  #find-your-service { scroll-margin-top: 94px; }
 }
 @media (prefers-reduced-motion: reduce) {
   .hero-settled .hero-scroll-stage { height: auto; margin-bottom: 32px; }
