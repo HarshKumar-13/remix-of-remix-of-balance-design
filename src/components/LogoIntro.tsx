@@ -151,7 +151,8 @@ export function LogoIntro({ onReveal, onComplete, onFinish }: { onReveal: () => 
     };
     const touchEnd = () => { touchY = undefined; resumeLater(); };
     const click = (event: MouseEvent) => {
-      if (dragged) { event.preventDefault(); event.stopImmediatePropagation(); dragged = false; return; }
+      if (dragged && event.detail > 0) { event.preventDefault(); event.stopImmediatePropagation(); dragged = false; return; }
+      dragged = false;
       if (!interactive() || !(event.target instanceof Element) || !event.target.closest("[data-grid-toggle]")) return;
       userPaused = !userPaused;
       if (userPaused) pause(); else resume();
