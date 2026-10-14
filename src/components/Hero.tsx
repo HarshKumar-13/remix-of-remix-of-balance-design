@@ -1,10 +1,8 @@
 import { useEffect, useRef, useState } from "react";
-import gsap from "gsap";
-import { motion, useReducedMotion } from "motion/react";
-import { Pause, Play } from "lucide-react";
+import { useReducedMotion } from "motion/react";
+import { ArrowDown, Pause, Play } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { HeroImageLightbox, type ExpandedHeroImage } from "@/components/HeroImageLightbox";
-import { useHeroScroll } from "@/hooks/use-hero-scroll";
 import h0560 from "@/assets/hero-0560.jpg";
 import h0541 from "@/assets/hero-0541.jpg";
 import h0545 from "@/assets/hero-0545.jpg";
@@ -23,20 +21,12 @@ export const HERO_COLUMNS = [
 ];
 export const PHRASES = ["Design & Styling Workshops", "Creating Looks", "Personal Image Consulting", "Fashion Forecasting", "Creating Fashion Collections", "Design Aesthetics Workshops"];
 
-const BANNER_IMAGES = [h0560, h0541, h0545, h1616, h1627, h0556];
-
-export function Hero({ introComplete = true }: { introComplete?: boolean }) {
+export function Hero() {
   const reduced = useReducedMotion();
-  const [active, setActive] = useState(0);
-  const [phraseVisible, setPhraseVisible] = useState(true);
   const [expandedImage, setExpandedImage] = useState<ExpandedHeroImage | null>(null);
   const [gridPaused, setGridPaused] = useState(false);
   const galleryRef = useRef<HTMLDivElement>(null);
-  const heroRef = useRef<HTMLElement>(null);
-  const stageRef = useRef<HTMLDivElement>(null);
-  const [scrollPinned, setScrollPinned] = useState(false);
-  const rotationRef = useRef<gsap.core.Timeline | null>(null);
-  useHeroScroll(stageRef, introComplete, setScrollPinned);
+  const continueAfterClose = useRef(false);
 
   useEffect(() => {
     const gallery = galleryRef.current;
@@ -64,47 +54,26 @@ export function Hero({ introComplete = true }: { introComplete?: boolean }) {
     galleryRef.current?.dispatchEvent(new CustomEvent("grid-lightbox", { detail: false }));
   };
 
-  useEffect(() => {
-    if (!introComplete || reduced) return;
-    // A single index owns both the picture and its service phrase.
-    const clock = gsap.timeline({ repeat: -1 });
-    rotationRef.current = clock;
-    PHRASES.forEach((_, i) => {
-      clock.call(() => setPhraseVisible(false), [], (i + 1) * 2 - 0.3);
-      clock.call(() => { setActive((i + 1) % PHRASES.length); setPhraseVisible(true); }, [], (i + 1) * 2);
-    });
-    clock.to({}, { duration: 0.01 }, PHRASES.length * 2);
-    const observer = new IntersectionObserver(([entry]) => {
-      if (entry?.isIntersecting) clock.resume();
-      else clock.pause();
-    });
-    if (heroRef.current) observer.observe(heroRef.current);
-    return () => { clock.kill(); rotationRef.current = null; observer.disconnect(); };
-  }, [introComplete, reduced]);
+  const navigateToServices = () => {
+    const services = document.getElementById("services");
+    if (!services) return;
+    services.focus({ preventScroll: true });
+    services.scrollIntoView({ behavior: reduced ? "instant" : "smooth", block: "start" });
+  };
+  const explore = () => {
+    galleryRef.current?.dispatchEvent(new CustomEvent("grid-explore"));
+    if (expandedImage) { continueAfterClose.current = true; closeImage(); }
+    else navigateToServices();
+  };
+  const afterClose = () => {
+    if (!continueAfterClose.current) return;
+    continueAfterClose.current = false;
+    requestAnimationFrame(navigateToServices);
+  };
 
   return (
-    <section ref={heroRef} id="top" className={`cinematic-hero bg-background${introComplete ? " hero-settled" : ""}`}>
-      <div data-hero-copy className="cinematic-copy">
-        <h1 className="display cinematic-title text-brand-red"><span>BALANCE DESIGN</span></h1>
-        <p className="display cinematic-descriptor"><span>&amp; FASHION CONSULTANCY</span></p>
-      </div>
-      <div ref={stageRef} className="hero-scroll-stage">
-      <div className="hero-scroll-viewport">
-      <div data-banner-destination className="editorial-banner-destination">
-        <div data-featured-banner className="editorial-banner">
-          {BANNER_IMAGES.map((src, i) => (
-            <motion.img key={src} src={src} alt={PHRASES[i]} data-banner-image={i} data-intro-image="true"
-              initial={false} animate={{ opacity: active === i ? 1 : 0 }} transition={{ duration: reduced ? 0 : 0.65 }}
-              aria-hidden={active !== i} className="editorial-banner-image" decoding="async" loading="eager" />
-          ))}
-          <div data-banner-phrase className="editorial-banner-caption" aria-label="Consultancy specialisms">
-            <motion.p initial={false} animate={{ opacity: phraseVisible ? 1 : 0 }}
-              transition={{ duration: reduced ? 0 : 0.3 }} className="editorial-banner-phrase">{PHRASES[active]}</motion.p>
-          </div>
-        </div>
-      </div>
-      </div>
-      </div>
+    <section id="top" className="cinematic-hero bg-background" aria-label="Balance Design & Fashion Consultancy">
+      <h1 className="sr-only">Balance Design &amp; Fashion Consultancy</h1>
       <div ref={galleryRef} data-hero-gallery className="cinematic-gallery" aria-label="Balance Design image gallery">
         {HERO_COLUMNS.map((photos, column) => (
           <div key={column} data-hero-column className="cinematic-column">
@@ -120,8 +89,11 @@ export function Hero({ introComplete = true }: { introComplete?: boolean }) {
         <Button variant="secondary" size="icon" data-grid-toggle className="grid-motion-toggle" aria-label={gridPaused ? "Resume grid animation" : "Pause grid animation"} title={gridPaused ? "Resume grid animation" : "Pause grid animation"} aria-pressed={gridPaused}>
           {gridPaused ? <Play aria-hidden="true" /> : <Pause aria-hidden="true" />}
         </Button>
+        <Button variant="ghost" data-grid-explore className="grid-explore-cue" onClick={explore}>
+          SCROLL TO EXPLORE <ArrowDown aria-hidden="true" />
+        </Button>
       </div>
-      <HeroImageLightbox image={expandedImage} onClose={closeImage} />
+      <HeroImageLightbox image={expandedImage} onClose={closeImage} onExplore={explore} onAfterClose={afterClose} />
     </section>
   );
 }
