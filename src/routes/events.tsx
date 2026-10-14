@@ -204,7 +204,7 @@ function EventsHero() {
               "opacity 1.1s cubic-bezier(0.16,1,0.3,1) 600ms, transform 1.1s cubic-bezier(0.16,1,0.3,1) 600ms",
           }}
         >
-          Fashion. Image. Experience.
+          Design Aesthetics. Fashion Styling.
         </p>
       </div>
     </section>

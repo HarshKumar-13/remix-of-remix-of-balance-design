@@ -26,7 +26,6 @@ import brandRaymond from "@/assets/brand-raymond.png";
 import brandReliance from "@/assets/brand-reliance.png";
 import brandNift from "@/assets/brand-nift.png";
 import brandLifestyle from "@/assets/brand-lifestyle.png";
-import brandLeela from "@/assets/brand-leela.png";
 import brandGap from "@/assets/brand-gap.png";
 import founder1 from "@/assets/founder-1.jpeg";
 import founder2 from "@/assets/founder-2.webp";
@@ -465,13 +464,15 @@ const BRANDS: { name: string; logo?: string }[] = [
   { name: "MAX Fashion", logo: brandMax },
   { name: "Van Heusen", logo: brandVanHeusen },
   { name: "IIM Bangalore", logo: brandIimb },
-  { name: "Leela Palace Bangalore", logo: brandLeela },
   { name: "Lifestyle", logo: brandLifestyle },
   { name: "NIFT", logo: brandNift },
   { name: "GAP", logo: brandGap },
   { name: "ISB" },
-  { name: "Taj Palace, New Delhi" },
   { name: "Weekender" },
+  { name: "Orra Fine Jewellery" },
+  { name: "Bal Bharti" },
+  { name: "Indian Wheelchair Tennis" },
+  { name: "Landmark Education Worldwide" },
 ];
 
 function RecognitionPanel() {
@@ -481,7 +482,6 @@ function RecognitionPanel() {
 
       <div className="mt-16 md:mt-24">
         <Reveal>
-          <p className="label-xs text-center text-red">Brands We Worked With</p>
           <h2 className="display mt-4 mb-10 text-center text-3xl leading-[1.05] md:mb-14 md:text-5xl">
             Brands We Worked With
           </h2>
