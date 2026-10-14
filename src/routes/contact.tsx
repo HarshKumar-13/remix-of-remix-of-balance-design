@@ -33,10 +33,7 @@ export const Route = createFileRoute("/contact")({
 
 const schema = z.object({
   name: z.string().trim().min(1, "Please enter your name").max(100),
-  phone:
-    .string()
-    .trim()
-    .regex(/^[+\d][\d\s-]{6,19}$/, "Please enter a valid number"),
+  phone: z.string().trim().regex(/^[+\d][\d\s-]{6,19}$/, "Please enter a valid number"),
   email: z.string().trim().email("Please enter a valid email").max(255),
   message: z.string().trim().min(1, "Please enter a message").max(1000),
 });
