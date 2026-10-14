@@ -40,7 +40,8 @@ export function LogoIntro({ onReveal, onComplete, onFinish }: { onReveal: () => 
     const announce = () => gallery.dispatchEvent(new CustomEvent("grid-pause-state", { detail: Boolean(entrance?.paused()) }));
     const pause = () => { clearTimeout(resumeTimer); entrance?.pause(); announce(); };
     const resume = () => {
-      if (disposed || userPaused || lightboxOpen || document.hidden || !interactive()) return;
+      if (disposed || userPaused || lightboxOpen || touchY !== undefined || document.hidden || !interactive()) return;
+      manualTween?.kill(); manualTarget = manual.offset;
       entrance?.resume(); announce();
     };
     const resumeLater = () => { clearTimeout(resumeTimer); resumeTimer = setTimeout(resume, 1600); };
@@ -213,10 +214,11 @@ export function LogoIntro({ onReveal, onComplete, onFinish }: { onReveal: () => 
           phase("expansion");
           // Choose a visible occurrence of the exact first banner photograph.
           const candidates = Array.from(columns[0]?.querySelectorAll<HTMLElement>("[data-cycle-start]") ?? []);
-          source = candidates.filter(image => {
+          const visible = candidates.filter(image => {
             const rect = image.getBoundingClientRect();
             return rect.bottom > 0 && rect.top < window.innerHeight;
-          }).sort((a, b) => Math.abs(a.getBoundingClientRect().top - window.innerHeight * 0.18) - Math.abs(b.getBoundingClientRect().top - window.innerHeight * 0.18))[0];
+          });
+          source = (visible.length ? visible : candidates).sort((a, b) => Math.abs(a.getBoundingClientRect().top - window.innerHeight * 0.18) - Math.abs(b.getBoundingClientRect().top - window.innerHeight * 0.18))[0];
           if (!source) return;
           const image = source.querySelector<HTMLImageElement>("img");
           if (!image) return;
