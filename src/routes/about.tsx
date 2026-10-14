@@ -456,7 +456,7 @@ function FounderPanel() {
   );
 }
 
-const BRANDS: { name: string; logo?: string; logoClassName?: string }[] = [
+const BRANDS: { name: string; logo?: string; logoClassName?: string; bold?: boolean }[] = [
   { name: "Raymond", logo: brandRaymond },
   { name: "Reliance Trends", logo: brandReliance },
   { name: "MAX Fashion", logo: brandMax },
@@ -465,7 +465,7 @@ const BRANDS: { name: string; logo?: string; logoClassName?: string }[] = [
   { name: "Lifestyle", logo: brandLifestyle, logoClassName: "max-h-20 w-auto max-w-full object-contain md:max-h-32" },
   { name: "NIFT", logo: brandNift },
   { name: "ISB", logo: brandIsb.url },
-  { name: "Weekender" },
+  { name: "Weekender", bold: true },
   { name: "Orra Fine Jewellery", logo: brandOrra },
   { name: "Bal Bharati Public School", logo: brandBalBharati },
   { name: "Indian Wheelchair Tennis Tour", logo: brandWheelchairTennis },
@@ -495,7 +495,7 @@ function RecognitionPanel() {
                     className={brand.logoClassName ?? "max-h-14 w-auto max-w-[80%] object-contain md:max-h-24"}
                   />
                 ) : (
-                  <span className="font-display text-center text-sm tracking-wide text-foreground md:text-lg">
+                  <span className={`font-display text-center text-sm tracking-wide text-foreground md:text-lg ${brand.bold ? "font-bold" : ""}`}>
                     {brand.name}
                   </span>
                 )}
