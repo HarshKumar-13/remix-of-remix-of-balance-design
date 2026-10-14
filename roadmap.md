@@ -19,5 +19,5 @@
 
 # Uploaded homepage opening
 
-- [ ] Copy the uploaded loading screen, three-column photo grid and hero, preserving the rest of the site.
-- [ ] Verify loading, grid-to-banner transition, scroll expansion and reduced-motion presentation.
+- [x] Copy the uploaded loading screen, three-column photo grid and hero, preserving the rest of the site.
+- [x] Verify loading, grid-to-banner transition, scroll expansion and reduced-motion presentation.
