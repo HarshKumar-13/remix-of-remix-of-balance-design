@@ -74,6 +74,7 @@
   --brand-red: oklch(0.502319 0.199103 28.4865);
   --hero-descriptor: oklch(0 0 0);
   --collage-background: oklch(0 0 0);
+  --lightbox-backdrop: oklch(0 0 0 / 0.6);
   --banner-caption-background: linear-gradient(to top, oklch(0 0 0 / 0.76), oklch(0 0 0 / 0));
 
   --background: oklch(1 0 0);
@@ -521,8 +522,23 @@
 .cinematic-gallery { --collage-gap: 8px; display: none; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--collage-gap); overflow: hidden; background: var(--collage-background); }
 .cinematic-column { overflow: hidden; height: 100%; min-width: 0; background: var(--collage-background); }
 .cinematic-track { display: flex; flex-direction: column; gap: var(--collage-gap); will-change: transform; }
-.cinematic-image { flex: none; width: 100%; }
+.cinematic-image { display: block; flex: none; width: 100%; height: auto; padding: 0; border: 0; border-radius: 0; background: transparent; white-space: normal; }
+.cinematic-image:hover { background: transparent; }
+.cinematic-image:focus-visible { outline: 2px solid var(--ring); outline-offset: -3px; }
 .cinematic-image img { display: block; width: 100%; height: auto; }
+.grid-motion-toggle { position: absolute; z-index: 2; right: max(16px, env(safe-area-inset-right)); top: max(16px, env(safe-area-inset-top)); width: 44px; height: 44px; visibility: hidden; }
+.cinematic-gallery[data-phase="hold"] .grid-motion-toggle,
+.cinematic-gallery[data-phase="movement"] .grid-motion-toggle { visibility: visible; }
+.hero-lightbox-backdrop { position: fixed; inset: 0; z-index: 100; background: var(--lightbox-backdrop); }
+.hero-lightbox { position: fixed; z-index: 101; left: 50%; top: 50%; transform: translate(-50%, -50%); width: max-content; max-width: calc(100vw - 32px); outline: none; }
+.hero-lightbox-image { display: block; width: auto; height: auto; max-width: calc(100vw - 32px); max-height: calc(100svh - 80px); object-fit: contain; }
+.hero-lightbox-close { position: absolute; right: 8px; top: 8px; width: 44px; height: 44px; }
+@keyframes hero-lightbox-in { from { opacity: 0; scale: 0.96; } to { opacity: 1; scale: 1; } }
+@keyframes hero-lightbox-fade { from { opacity: 0; } to { opacity: 1; } }
+.hero-lightbox[data-state="open"] { animation: hero-lightbox-in 260ms var(--ease-editorial); }
+.hero-lightbox[data-state="closed"] { animation: hero-lightbox-in 180ms ease reverse; }
+.hero-lightbox-backdrop[data-state="open"] { animation: hero-lightbox-fade 260ms ease; }
+.hero-lightbox-backdrop[data-state="closed"] { animation: hero-lightbox-fade 180ms ease reverse; }
 @media (min-width: 768px) {
   .cinematic-hero { gap: 36px; padding: 148px 48px 40px; }
   .cinematic-copy { --hero-heading-size: 46px; }
