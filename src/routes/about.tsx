@@ -6,7 +6,6 @@ import { Reveal } from "@/components/Reveal";
 import { Testimonials } from "@/components/Testimonials";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
-import { ACHIEVEMENTS } from "@/data/achievements";
 import logoMark from "@/assets/balance-logo-mark.png";
 import banner1 from "@/assets/about-banner-1.png";
 import banner2 from "@/assets/about-banner-2.png";
@@ -509,46 +508,6 @@ function RecognitionPanel() {
         </div>
       </div>
 
-      <div className="mt-16 max-w-3xl md:mt-24">
-        <Reveal>
-          <p className="text-lg leading-relaxed text-foreground md:text-xl">Sharing some examples of Balance Design achievements with various BRANDS.</p>
-        </Reveal>
-      </div>
-      <div className="mt-10 border-t border-border md:mt-14">
-        {ACHIEVEMENTS.map((g, gi) => (
-          <Reveal key={g.title} delay={gi * 60}>
-            <div className="grid grid-cols-1 gap-6 border-b border-border py-10 md:grid-cols-12 md:gap-16 md:py-14">
-              <h3 className="font-display text-2xl leading-tight tracking-wide md:col-span-4 md:text-3xl">
-                {g.title}
-              </h3>
-              <div className="space-y-8 md:col-span-8">
-                {g.items.map((item, ii) => (
-                  <div key={ii}>
-                    {item.heading && (
-                      <p className="label-xs text-[1.1875rem] leading-snug text-primary">{item.heading}</p>
-                    )}
-                    {item.text && (
-                      <p className={`${item.heading ? "mt-4 " : ""}max-w-2xl text-lg leading-relaxed text-muted-foreground md:text-xl`}>
-                        {item.text}
-                      </p>
-                    )}
-                    {item.list && (
-                      <ul className="mt-4 max-w-2xl space-y-3">
-                        {item.list.map((li) => (
-                          <li key={li} className="flex gap-4 text-lg leading-relaxed text-muted-foreground md:text-xl">
-                            <span aria-hidden="true" className="mt-[0.7em] h-px w-5 shrink-0 bg-primary" />
-                            <span>{li}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    )}
-                  </div>
-                ))}
-              </div>
-            </div>
-          </Reveal>
-        ))}
-      </div>
     </div>
   );
 }
