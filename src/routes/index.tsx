@@ -7,7 +7,6 @@ import { LogoIntro } from "@/components/LogoIntro";
 import { Reveal } from "@/components/Reveal";
 import { LogoMark } from "@/components/LogoMark";
 // import { AboutSection } from "@/components/AboutSection"; // section hidden on request — component kept
-import { DressCode } from "@/components/DressCode";
 import { Testimonials } from "@/components/Testimonials";
 import { CtaSection } from "@/components/CtaSection";
 import { SiteFooter } from "@/components/SiteFooter";
@@ -210,10 +209,6 @@ function Index() {
             <AboutSection />
           </StoryScene>
           */}
-
-          <StoryScene>
-            <DressCode />
-          </StoryScene>
 
           <AboutMe />
           <StoryScene className="story-scene-testimonials">

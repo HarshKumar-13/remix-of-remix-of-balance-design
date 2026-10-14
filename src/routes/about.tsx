@@ -158,7 +158,7 @@ function AboutHero() {
               "opacity 1.5s cubic-bezier(0.16,1,0.3,1) 150ms, transform 1.5s cubic-bezier(0.16,1,0.3,1) 150ms",
           }}
         >
-          The House of Balance
+          The House of Balance Design
         </h1>
       </div>
     </section>
@@ -453,20 +453,6 @@ function FounderPanel() {
                 <p className="mt-4 text-lg leading-relaxed text-muted-foreground md:text-xl">{r.body}</p>
               </div>
             ))}
-          </div>
-        </Reveal>
-      </div>
-      <div className="md:col-span-12">
-        <Reveal>
-          <div className="relative aspect-video w-full overflow-hidden">
-            <iframe
-              src="https://www.youtube.com/embed/fNXmuiE3k-M"
-              title="Upma Shrian — Balance Design & Fashion Consultancy"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              allowFullScreen
-              loading="lazy"
-              className="absolute inset-0 h-full w-full border-0"
-            />
           </div>
         </Reveal>
       </div>

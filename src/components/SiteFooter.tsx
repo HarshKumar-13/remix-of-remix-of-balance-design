@@ -154,19 +154,6 @@ export function SiteFooter() {
         </div>
       </div>
 
-      {/* Oversized wordmark that rises into view as the footer is revealed */}
-      <div className="pointer-events-none w-full select-none overflow-hidden px-2">
-        <h2
-          aria-hidden="true"
-          className="display w-full whitespace-nowrap text-center text-[17vw] leading-[0.78] text-ivory"
-          style={{
-            transform: `translateY(${((1 - progress) * 22).toFixed(2)}%)`,
-            opacity: Math.max(0, Math.min(1, 0.15 + progress * 0.85)),
-          }}
-        >
-          BALANCE
-        </h2>
-      </div>
     </footer>
   );
 }
