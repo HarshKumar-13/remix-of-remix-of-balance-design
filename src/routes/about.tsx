@@ -429,7 +429,7 @@ function FounderPanel() {
         </Reveal>
         <Reveal delay={100}>
           <h2 className="display mt-6 text-[2.75rem] leading-[0.95] sm:text-5xl md:text-[4.25rem]">
-            A lifelong study of image, craft and culture.
+            A journey of design craft and innovation.
           </h2>
         </Reveal>
         <Reveal delay={180}>
