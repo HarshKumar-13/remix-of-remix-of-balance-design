@@ -97,10 +97,10 @@ export function BookingDialog({
                 placeholder="Email address"
                 className={inputClass}
               />
-              <input name="phone" type="tel" placeholder="Phone (optional)" className={inputClass} />
+              <input name="phone" type="tel" placeholder="Phone" className={inputClass} />
               <input
                 name="workshop"
-                placeholder="Name of the workshop/seminar (optional)"
+                placeholder="Name of the workshop/seminar"
                 className={inputClass}
               />
               <select
