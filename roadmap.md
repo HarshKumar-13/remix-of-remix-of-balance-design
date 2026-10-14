@@ -47,3 +47,8 @@
 
 - [x] Drop "Find Your Service" from the site menu; keep the advisor working as a section on the Contact Us page.
 - [x] Verify the menu contents, the advisor recommendation, and adding a recommendation into the enquiry message.
+
+# Homepage About Me in she/her
+
+- [x] Rewrite the homepage "About Me" section in the third person (she/her), naming Upma Shrian, and drop the "twenty-eight years" phrasing.
+- [x] Verify the section reads correctly on the live page and the build stays clean.
