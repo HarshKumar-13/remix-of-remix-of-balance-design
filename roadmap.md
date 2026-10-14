@@ -91,3 +91,9 @@
 - [x] Add the uploaded uniform design board (chevron print, pink lotus motifs, shoes and bow tie) to the Graphic & Print Design rotation.
 - [x] Change the call-to-action text in the Line Presentation and Graphic & Print Design sections to "Send your request", leaving every other section's wording untouched.
 - [x] Verify the new board appears in the slider and only those two buttons changed on the live page.
+
+# About page deliverables heading
+
+- [x] Rename "Our Expertise & Deliverables" to "Our Deliverables".
+- [x] Make the four left-side group headings (Design & Creative Direction, Trend Forecasting & Market Intelligence, Styling & Image Consulting Workshops for Individuals, Design Workshops) red.
+- [x] Verify the heading and all four group titles on the live About page.
