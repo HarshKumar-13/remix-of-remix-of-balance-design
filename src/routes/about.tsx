@@ -467,6 +467,7 @@ const BRANDS: { name: string; logo?: string; logoClassName?: string; bold?: bool
   { name: "Bal Bharati Public School", logo: brandBalBharati },
   { name: "Indian Wheelchair Tennis Tour", logo: brandWheelchairTennis },
   { name: "Landmark", logo: brandLandmark },
+  { name: "Raymond", logo: brandRaymond },
 ];
 
 function RecognitionPanel() {
@@ -481,8 +482,8 @@ function RecognitionPanel() {
           </h2>
         </Reveal>
         <div className="grid grid-cols-2 border-t border-l border-border sm:grid-cols-4">
-          {BRANDS.map((brand) => (
-            <Reveal key={brand.name}>
+          {BRANDS.map((brand, i) => (
+            <Reveal key={`${brand.name}-${i}`}>
               <div className="flex h-24 items-center justify-center border-b border-r border-border px-5 md:h-28">
                 {brand.logo ? (
                   <img
