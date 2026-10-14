@@ -1,5 +1,7 @@
 # Current tasks
 
+- [x] Remix setup: cleared the copied Drizzle migrations and rescaffolded an empty migration set for the new database.
+
 - [x] About page: remove the founder video and update the banner title to “The House of Balance Design.”
 - [x] Homepage: hide the “Master the Right Dress Code” section.
 - [x] Footer: remove the oversized “BALANCE” wordmark.
