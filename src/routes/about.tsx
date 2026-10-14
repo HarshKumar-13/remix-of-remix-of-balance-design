@@ -463,7 +463,6 @@ const BRANDS: { name: string; logo?: string; logoClassName?: string; bold?: bool
   { name: "IIM Bangalore", logo: brandIimb },
   { name: "NIFT", logo: brandNift },
   { name: "ISB", logo: brandIsb },
-  { name: "Weekender", bold: true },
   { name: "Orra Fine Jewellery", logo: brandOrra },
   { name: "Bal Bharati Public School", logo: brandBalBharati },
   { name: "Indian Wheelchair Tennis Tour", logo: brandWheelchairTennis },
