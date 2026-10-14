@@ -14,3 +14,4 @@
 - Use a GSAP timeline for the opening sequence and coordinated hero loop, with Motion AnimatePresence for phrase exits; one clock keeps imagery and typography choreographed without unrelated timers.
 
 - Keep the homepage opening outside ScrollStory/SlideStack: LogoIntro transfers the actual grid image into Hero, and useHeroScroll owns native sticky banner expansion without competing parent transforms.
+- Keep grid interactions on the existing entrance timeline with native gallery listeners (the gallery is temporarily reparented); modal and manual input pause that clock and retain its transforms, avoiding competing motion owners.

@@ -1,6 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { motion, useReducedMotion } from "motion/react";
+import { Pause, Play } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { HeroImageLightbox, type ExpandedHeroImage } from "@/components/HeroImageLightbox";
 import { useHeroScroll } from "@/hooks/use-hero-scroll";
 import h0560 from "@/assets/hero-0560.jpg";
 import h0541 from "@/assets/hero-0541.jpg";
@@ -26,11 +29,40 @@ export function Hero({ introComplete = true }: { introComplete?: boolean }) {
   const reduced = useReducedMotion();
   const [active, setActive] = useState(0);
   const [phraseVisible, setPhraseVisible] = useState(true);
+  const [expandedImage, setExpandedImage] = useState<ExpandedHeroImage | null>(null);
+  const [gridPaused, setGridPaused] = useState(false);
+  const galleryRef = useRef<HTMLDivElement>(null);
   const heroRef = useRef<HTMLElement>(null);
   const stageRef = useRef<HTMLDivElement>(null);
   const [scrollPinned, setScrollPinned] = useState(false);
   const rotationRef = useRef<gsap.core.Timeline | null>(null);
   useHeroScroll(stageRef, introComplete, setScrollPinned);
+
+  useEffect(() => {
+    const gallery = galleryRef.current;
+    if (!gallery) return;
+    // Native delegation survives LogoIntro temporarily moving this node to body.
+    const click = (event: MouseEvent) => {
+      if (gallery.dataset['phase'] !== "hold" && gallery.dataset['phase'] !== "movement") return;
+      const target = event.target;
+      if (!(target instanceof Element)) return;
+      const cell = target.closest<HTMLElement>("[data-column-image]");
+      const image = cell?.querySelector<HTMLImageElement>("img");
+      if (!cell || !image) return;
+      gallery.dispatchEvent(new CustomEvent("grid-lightbox", { detail: true }));
+      setExpandedImage({ src: image.currentSrc || image.src, alt: image.alt, trigger: cell });
+    };
+    const state = (event: Event) => setGridPaused(Boolean((event as CustomEvent<boolean>).detail));
+    gallery.addEventListener("click", click);
+    gallery.addEventListener("grid-pause-state", state);
+    return () => { gallery.removeEventListener("click", click); gallery.removeEventListener("grid-pause-state", state); };
+  }, []);
+
+  const closeImage = () => {
+    setExpandedImage(null);
+    // Wait for the dialog's exit and scroll-lock release before restarting.
+    galleryRef.current?.dispatchEvent(new CustomEvent("grid-lightbox", { detail: false }));
+  };
 
   useEffect(() => {
     if (!introComplete || reduced) return;
@@ -73,19 +105,23 @@ export function Hero({ introComplete = true }: { introComplete?: boolean }) {
       </div>
       </div>
       </div>
-      <div data-hero-gallery className="cinematic-gallery" aria-hidden="true">
+      <div ref={galleryRef} data-hero-gallery className="cinematic-gallery" aria-label="Balance Design image gallery">
         {HERO_COLUMNS.map((photos, column) => (
           <div key={column} data-hero-column className="cinematic-column">
             <div data-column-track className="cinematic-track">
               {Array.from({ length: 16 }, (_, repetition) => photos.map((photo, photoIndex) => (
-                <div key={`${repetition}-${photo.src}`} data-column-image data-cycle-start={photoIndex === 0 ? "true" : undefined} className="cinematic-image">
-                  <img src={photo.src} alt="" data-intro-image={repetition === 0 ? "true" : undefined} loading="eager" decoding="async" />
-                </div>
+                <Button key={`${repetition}-${photo.src}`} variant="ghost" tabIndex={-1} aria-label={`Expand ${photo.alt}`} data-column-image data-cycle-start={photoIndex === 0 ? "true" : undefined} className="cinematic-image">
+                  <img src={photo.src} alt={photo.alt} data-intro-image={repetition === 0 ? "true" : undefined} loading="eager" decoding="async" />
+                </Button>
               )))}
             </div>
           </div>
         ))}
+        <Button variant="secondary" size="icon" data-grid-toggle className="grid-motion-toggle" aria-label={gridPaused ? "Resume grid animation" : "Pause grid animation"} title={gridPaused ? "Resume grid animation" : "Pause grid animation"} aria-pressed={gridPaused}>
+          {gridPaused ? <Play aria-hidden="true" /> : <Pause aria-hidden="true" />}
+        </Button>
       </div>
+      <HeroImageLightbox image={expandedImage} onClose={closeImage} />
     </section>
   );
 }

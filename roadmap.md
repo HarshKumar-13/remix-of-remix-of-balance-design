@@ -21,3 +21,9 @@
 
 - [x] Copy the uploaded loading screen, three-column photo grid and hero, preserving the rest of the site.
 - [x] Verify loading, grid-to-banner transition, scroll expansion and reduced-motion presentation.
+
+# Existing grid interactions
+
+- [x] Preserve the loader and grid geometry; add position-preserving pause/resume and controlled manual movement.
+- [x] Expand clicked images with accessible close/focus handling and background scroll locking.
+- [x] Verify repeated opening, exact position restoration, input controls and desktop/mobile behavior.
