@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { CurvedSlider } from "@/components/CurvedSlider";
-import { BookingDialog } from "@/components/BookWorkshopCta";
+import { BookWorkshopCta } from "@/components/BookWorkshopCta";
 import diamond from "@/assets/balance-diamond.png";
 
 import c1 from "@/assets/corp-new-1.jpg";
@@ -52,7 +52,6 @@ const ribbonStatements = [
 export function CorporateImageConsulting() {
   const sectionRef = useRef<HTMLElement>(null);
   const [visible, setVisible] = useState(false);
-  const [enquiryOpen, setEnquiryOpen] = useState(false);
 
   useEffect(() => {
     const section = sectionRef.current;
@@ -106,19 +105,12 @@ export function CorporateImageConsulting() {
             presentations and high stake conversations.
           </p>
 
-          {/* Text-only enquiry link: the rule under it draws itself in from the left on hover. */}
-          <button
-            type="button"
-            onClick={() => setEnquiryOpen(true)}
-            className={`group inline-flex flex-col items-center gap-3 transition-[opacity,transform] delay-300 duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] ${reveal}`}
+          {/* The shared red enquiry button, the same one that closes every other service section. */}
+          <div
+            className={`transition-[opacity,transform] delay-300 duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] ${reveal}`}
           >
-            <span className="label-xs text-[calc(0.9375rem+2px)] font-normal uppercase tracking-[0.22em] text-foreground transition-colors duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:text-red">
-              Enquire About Corporate Consulting
-            </span>
-            <span className="relative block h-px w-full bg-border/60">
-              <span className="absolute inset-0 origin-left scale-x-0 bg-red transition-transform duration-[700ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-x-100" />
-            </span>
-          </button>
+            <BookWorkshopCta className="" />
+          </div>
         </div>
 
         <div
@@ -154,8 +146,6 @@ export function CorporateImageConsulting() {
           ))}
         </div>
       </div>
-
-      <BookingDialog open={enquiryOpen} onOpenChange={setEnquiryOpen} />
     </section>
   );
 }
