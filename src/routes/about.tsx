@@ -456,7 +456,7 @@ function FounderPanel() {
   );
 }
 
-const BRANDS: { name: string; logo?: string }[] = [
+const BRANDS: { name: string; logo?: string; logoClassName?: string }[] = [
   { name: "Raymond", logo: brandRaymond },
   { name: "Reliance Trends", logo: brandReliance },
   { name: "MAX Fashion", logo: brandMax },
@@ -492,7 +492,7 @@ function RecognitionPanel() {
                     src={brand.logo}
                     alt={brand.name}
                     loading="lazy"
-                    className="max-h-14 w-auto max-w-[80%] object-contain md:max-h-24"
+                    className={brand.logoClassName ?? "max-h-14 w-auto max-w-[80%] object-contain md:max-h-24"}
                   />
                 ) : (
                   <span className="font-display text-center text-sm tracking-wide text-foreground md:text-lg">
