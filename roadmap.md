@@ -30,6 +30,6 @@
 
 # Grid as the main hero
 
-- [ ] Keep the loader and grid appearance; remove the separate text/banner hero and automatic image transfer.
-- [ ] Release wheel/touch navigation and add a Services scroll cue with position-preserving image closing.
-- [ ] Verify immediate Services access, image controls, desktop/mobile scrolling and reduced motion.
+- [x] Keep the loader and grid appearance; remove the separate text/banner hero and automatic image transfer.
+- [x] Release wheel/touch navigation and add a Services scroll cue with position-preserving image closing.
+- [x] Verify immediate Services access, image controls, desktop/mobile scrolling and reduced motion.
