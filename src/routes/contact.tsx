@@ -1,11 +1,14 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
+import { useServerFn } from "@tanstack/react-start";
+import { useEffect, useRef, useState } from "react";
 import { z } from "zod";
 import { Facebook, Instagram, Linkedin, Mail, Twitter, Youtube } from "lucide-react";
 
 import { Reveal } from "@/components/Reveal";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
+import { getServiceRecommendation } from "@/lib/service-advisor.functions";
+import { SERVICES } from "@/lib/services";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
@@ -13,12 +16,13 @@ export const Route = createFileRoute("/contact")({
       { title: "Contact Us — Balance Design & Fashion Consultancy" },
       {
         name: "description",
-        content: "Get in touch with Balance Design & Fashion Consultancy for workshops, image consulting and design enquiries.",
+        content:
+          "Get in touch with Balance Design & Fashion Consultancy for workshops, image consulting and design enquiries, or describe your goals and let our advisor suggest the right service.",
       },
       { property: "og:title", content: "Contact Us — Balance Design & Fashion Consultancy" },
       {
         property: "og:description",
-        content: "Send us a message about workshops, image consulting or design projects.",
+        content: "Send us a message about workshops, image consulting or design projects, or find the service that fits you.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -29,7 +33,7 @@ export const Route = createFileRoute("/contact")({
 
 const schema = z.object({
   name: z.string().trim().min(1, "Please enter your name").max(100),
-  phone: z
+  phone:
     .string()
     .trim()
     .regex(/^[+\d][\d\s-]{6,19}$/, "Please enter a valid number"),
@@ -51,6 +55,19 @@ function ContactPage() {
   const [errors, setErrors] = useState<Errors>({});
   const [sent, setSent] = useState(false);
   const [tab, setTab] = useState<"enquiry" | "appointment">("enquiry");
+  const [prefill, setPrefill] = useState<string | null>(null);
+  const messageRef = useRef<HTMLTextAreaElement | null>(null);
+
+  useEffect(() => {
+    if (prefill === null) return;
+    const field = messageRef.current;
+    if (field) {
+      field.value = prefill;
+      field.focus({ preventScroll: true });
+      field.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+    setPrefill(null);
+  }, [prefill]);
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -151,6 +168,7 @@ function ContactPage() {
                   <span className="label-xs text-muted-foreground">Message</span>
                   <textarea
                     name="message"
+                    ref={messageRef}
                     rows={5}
                     maxLength={1000}
                     className="mt-3 w-full resize-none border-b border-border bg-transparent pb-2 text-base outline-none transition-colors focus:border-red"
@@ -165,9 +183,108 @@ function ContactPage() {
             )}
           </Reveal>
         </div>
+
+        <ServiceAdvisor onUse={(text) => { setSent(false); setPrefill(text); }} />
       </main>
       <SiteFooter />
     </>
+  );
+}
+
+type Result = { serviceId: string; reason: string; alternativeId: string | null };
+
+function ServiceAdvisor({ onUse }: { onUse: (text: string) => void }) {
+  const recommend = useServerFn(getServiceRecommendation);
+  const [goals, setGoals] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [result, setResult] = useState<Result | null>(null);
+
+  const submit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (goals.trim().length < 10) {
+      setError("Please tell us a little more about your goals.");
+      return;
+    }
+    setLoading(true);
+    setError(null);
+    setResult(null);
+    try {
+      const res = await recommend({ data: { goals } });
+      if (res.ok) setResult(res.result);
+      else setError(res.error);
+    } catch {
+      setError("We couldn't generate a recommendation. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const main = result && SERVICES.find((s) => s.id === result.serviceId);
+  const alt = result?.alternativeId && SERVICES.find((s) => s.id === result.alternativeId);
+
+  return (
+    <section
+      id="find-your-service"
+      className="mx-auto mt-28 max-w-7xl border-t border-border px-6 pt-20 md:mt-36 md:px-12 md:pt-28"
+      aria-labelledby="find-your-service-title"
+    >
+      <Reveal>
+        <p className="label-xs text-red">Find Your Service</p>
+        <h2 id="find-your-service-title" className="display mt-6 max-w-3xl text-4xl leading-[0.95] md:text-6xl">
+          Not sure where to begin?
+        </h2>
+        <p className="mt-8 max-w-2xl text-lg leading-relaxed text-muted-foreground">
+          Tell us about your image or brand goals and we&rsquo;ll suggest the service that fits you best.
+        </p>
+      </Reveal>
+
+      <Reveal delay={100}>
+        <form onSubmit={submit} className="mt-12 max-w-3xl">
+          <label htmlFor="goals" className="label-xs text-muted-foreground">
+            Your goals
+          </label>
+          <textarea
+            id="goals"
+            value={goals}
+            onChange={(e) => setGoals(e.target.value)}
+            maxLength={1500}
+            rows={5}
+            placeholder="e.g. I'm a senior manager presenting to the board and want to look more polished and confident…"
+            className="mt-3 w-full resize-none border-b border-border bg-transparent pb-3 text-lg leading-relaxed text-foreground outline-none transition-colors focus:border-red"
+          />
+          <button type="submit" disabled={loading} className="btn-red label-xs mt-8 disabled:opacity-60">
+            {loading ? "Finding your service…" : "Recommend a service"}
+          </button>
+        </form>
+
+        {error && (
+          <p role="alert" className="mt-8 max-w-3xl text-red">
+            {error}
+          </p>
+        )}
+
+        {main && result && (
+          <div aria-live="polite" className="mt-12 max-w-3xl border-l-2 border-red pl-6 md:pl-8">
+            <p className="label-xs text-muted-foreground">We recommend</p>
+            <h3 className="display mt-4 text-2xl uppercase text-primary md:text-4xl">{main.title}</h3>
+            <p className="mt-6 text-lg leading-relaxed text-foreground">{result.reason}</p>
+            {alt && (
+              <p className="mt-5 text-muted-foreground">
+                You may also like: <span className="font-medium text-foreground">{alt.title}</span>
+              </p>
+            )}
+            <button
+              type="button"
+              onClick={() => onUse(`I'm interested in ${main.title}. ${result.reason}`)}
+              className="label-xs link-underline mt-8"
+            >
+              Add this to my message
+            </button>
+          </div>
+        )}
+      </Reveal>
+    </section>
   );
 }
 
