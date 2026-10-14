@@ -16,3 +16,8 @@
 - [x] Sequence the clean screen, centered logo hold, and smooth dissolve.
 - [x] Coordinate six editorial phrases with five existing hero photos.
 - [x] Verify desktop/mobile presentation and reduced-motion behavior.
+
+# Uploaded homepage opening
+
+- [x] Copy the uploaded loading screen, three-column photo grid and hero, preserving the rest of the site.
+- [x] Verify loading, grid-to-banner transition, scroll expansion and reduced-motion presentation.
