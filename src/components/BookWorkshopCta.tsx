@@ -142,13 +142,19 @@ export function BookingDialog({
 }
 
 /** Shared red "Enquire about this workshop" call-to-action used at the end of every service section. Opens the enquiry popup. */
-export function BookWorkshopCta({ className = "mt-4 md:mt-6" }: { className?: string }) {
+export function BookWorkshopCta({
+  className = "mt-4 md:mt-6",
+  label = "Enquire about this workshop",
+}: {
+  className?: string;
+  label?: string;
+}) {
   const [open, setOpen] = useState(false);
 
   return (
     <div className={`flex justify-center ${className}`}>
       <button type="button" onClick={() => setOpen(true)} className="btn-red label-xs">
-        Enquire about this workshop
+        {label}
       </button>
 
       <BookingDialog open={open} onOpenChange={setOpen} />

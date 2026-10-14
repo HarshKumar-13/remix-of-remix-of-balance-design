@@ -26,6 +26,7 @@ type RedEditorialServiceProps = {
   single?: boolean;
   imageFit?: "cover" | "contain";
   wideDescription?: boolean;
+  ctaLabel?: string;
 };
 
 function SingleImageSlideshow({ images, label }: { images: ServiceImage[]; label: string }) {
@@ -164,6 +165,7 @@ export function RedEditorialService({
   single = false,
   imageFit = "cover",
   wideDescription = false,
+  ctaLabel = "Enquire about this workshop",
 }: RedEditorialServiceProps) {
   return (
     <section className="overflow-hidden bg-background py-16 text-foreground sm:py-20 md:py-24" aria-label={sectionLabel ?? (typeof eyebrow === "string" && eyebrow ? eyebrow : "Service")}>
@@ -206,7 +208,7 @@ export function RedEditorialService({
       <Reveal delay={390} className="mt-10 md:mt-14">
         <CurvedSlider images={padImages(images)} imageFit={imageFit} />
       </Reveal>
-      <BookWorkshopCta className="mt-4 md:mt-6" />
+      <BookWorkshopCta className="mt-4 md:mt-6" label={ctaLabel} />
     </section>
   );
 }
