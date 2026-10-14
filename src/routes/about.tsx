@@ -25,8 +25,7 @@ import brandIimb from "@/assets/brand-iimb.png";
 import brandRaymond from "@/assets/brand-raymond.png";
 import brandReliance from "@/assets/brand-reliance.png";
 import brandNift from "@/assets/brand-nift.png";
-import brandLifestyle from "@/assets/brand-lifestyle.png";
-import brandIsb from "@/assets/brand-isb.png.asset.json";
+import brandIsb from "@/assets/brand-isb.png";
 import brandOrra from "@/assets/brand-orra.png";
 import brandBalBharati from "@/assets/brand-balbharati.png";
 import brandWheelchairTennis from "@/assets/brand-wheelchair-tennis.png";
@@ -462,9 +461,8 @@ const BRANDS: { name: string; logo?: string; logoClassName?: string; bold?: bool
   { name: "MAX Fashion", logo: brandMax },
   { name: "Van Heusen", logo: brandVanHeusen },
   { name: "IIM Bangalore", logo: brandIimb },
-  { name: "Lifestyle", logo: brandLifestyle, logoClassName: "max-h-20 w-auto max-w-full object-contain md:max-h-32" },
   { name: "NIFT", logo: brandNift },
-  { name: "ISB", logo: brandIsb.url },
+  { name: "ISB", logo: brandIsb },
   { name: "Weekender", bold: true },
   { name: "Orra Fine Jewellery", logo: brandOrra },
   { name: "Bal Bharati Public School", logo: brandBalBharati },
