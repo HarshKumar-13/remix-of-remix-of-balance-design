@@ -530,6 +530,7 @@
 .cinematic-gallery[data-phase="hold"] .grid-explore-cue,
 .cinematic-gallery[data-phase="movement"] .grid-explore-cue { visibility: visible; }
 #services { scroll-margin-top: 124px; outline: none; }
+#find-your-service { scroll-margin-top: 124px; }
 .cinematic-gallery[data-phase="hold"] .grid-motion-toggle,
 .cinematic-gallery[data-phase="movement"] .grid-motion-toggle { visibility: visible; }
 .hero-lightbox-backdrop { position: fixed; inset: 0; z-index: 100; background: var(--lightbox-backdrop); }
@@ -560,6 +561,7 @@
 @media (max-width: 767px) {
   .grid-motion-toggle { top: 110px; }
   #services { scroll-margin-top: 94px; }
+  #find-your-service { scroll-margin-top: 94px; }
 }
 @media (prefers-reduced-motion: reduce) {
   .hero-settled .hero-scroll-stage { height: auto; margin-bottom: 32px; }
