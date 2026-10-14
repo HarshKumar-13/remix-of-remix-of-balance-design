@@ -10,7 +10,6 @@ import slide3 from "@/assets/pers-slide-3.jpg";
 import slide4 from "@/assets/pers-slide-4.jpg";
 import slide4_1 from "@/assets/pers-slide-4-1.jpg";
 import slide5 from "@/assets/pers-slide-5.jpg";
-import slideEp9 from "@/assets/pers-slide-ep9.jpg";
 import diamond from "@/assets/balance-diamond.png";
 import { BookWorkshopCta } from "@/components/BookWorkshopCta";
 
@@ -28,7 +27,6 @@ const landscapeImages: { src: string; alt: string; fit: "cover" | "contain" }[] 
   { src: slide4, alt: "Analogous colour outfits in purple, berry, deep red and coral with a colour palette", fit: "contain" },
   { src: slide4_1, alt: "Contrast of plain with pattern and print outfits in black and white", fit: "contain" },
   { src: slide5, alt: "Three monochromatic outfits in yellow, green and blush pink", fit: "contain" },
-  { src: slideEp9, alt: "What colours look good on you - women, ivory to deep bronze", fit: "contain" },
 ];
 
 const ribbonStatements = [
