@@ -45,8 +45,6 @@ import graphic3Asset from "@/assets/graphic-3.jpg";
 import graphic4Asset from "@/assets/graphic-4.jpg";
 import graphic6Asset from "@/assets/graphic-6.jpg";
 import graphic7Asset from "@/assets/graphic-7.jpg";
-import graphic8Asset from "@/assets/graphic-8.jpg";
-import graphic9Asset from "@/assets/graphic-9.jpg";
 import { CurvedSlider } from "@/components/CurvedSlider";
 import dws1 from "@/assets/dws-1.jpg";
 import dws2 from "@/assets/dws-2.jpg";
@@ -112,8 +110,6 @@ const GRAPHIC_IMAGES = [
   { src: graphic4Asset, alt: "Fabrics and Prints board with kidswear cargo pants, graphic tees and striped shorts" },
   { src: graphic6Asset, alt: "Child-inspired psychedelic pattern board with mosaic florals and overlapping circles" },
   { src: graphic7Asset, alt: "Geometric print board beside pink embroidered slip-on shoes" },
-  { src: graphic8Asset, alt: "Prints board with repeating black-and-white geometric mandala pattern" },
-  { src: graphic9Asset, alt: "Prints board with four fashion figures in patterned maxi dresses" },
 ];
 
 
