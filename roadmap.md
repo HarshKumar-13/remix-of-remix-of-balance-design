@@ -42,3 +42,8 @@
 # Hero grid photo removal
 
 - [x] Remove the seminar-room photo (the one shown expanded in the user's screenshot) from the hero grid and verify the grid stays full.
+
+# Find Your Service out of the menu
+
+- [x] Drop "Find Your Service" from the site menu; keep the advisor working as a section on the Contact Us page.
+- [x] Verify the menu contents, the advisor recommendation, and adding a recommendation into the enquiry message.
