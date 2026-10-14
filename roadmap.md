@@ -104,3 +104,8 @@
 - [x] Change the Our Founder heading to "A journey of design craft and innovation."
 - [x] Verify only the three kept photos load and the new heading renders on the live About page.
 - [x] Brand grid: use the uploaded real ISB logo, enlarge the Lifestyle logo, remove GAP, make Weekender bold; grid now 12 tiles (4x3), verified live.
+
+# Testimonial heading
+
+- [x] Confirm the testimonial heading reads "What People Say About Us" on the homepage and the About page Achievements tab; no wording change was needed.
+
