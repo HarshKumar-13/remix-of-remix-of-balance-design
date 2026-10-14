@@ -53,13 +53,13 @@ export function AboutMe() {
         <Reveal className="md:pr-2">
           <div className="mx-auto max-w-sm md:mx-0">
             <h2 id="about-me-title" className="display text-[2.5rem] leading-[1.03] uppercase sm:text-5xl md:text-[2.25rem] lg:text-[2.8rem]">
-              About Me:
+              About the Founder:
             </h2>
             <p className="mt-8 font-normal text-[calc(1rem+2px)] leading-[1.75] text-muted-foreground lg:text-[calc(1.125rem+2px)]">
-              With over twenty-eight years of experience in the fashion and apparel industry, I
-              have specialized in defining design direction that aligns with business strategy and
-              evolving consumer trends. I also impart training to enhance team performance in the
-              Apparel and Fashion Industry.
+              With close to three decades of experience in the fashion and apparel industry, Upma
+              Shrian has specialized in defining design direction that aligns with business strategy
+              and evolving consumer trends. She also imparts training to enhance team performance in
+              the Apparel and Fashion Industry.
             </p>
           </div>
         </Reveal>
@@ -117,10 +117,10 @@ export function AboutMe() {
               <span className="h-8 w-px -rotate-12 bg-border" />
             </div>
             <p className="font-normal text-[calc(1rem+2px)] leading-[1.75] text-muted-foreground lg:text-[calc(1.125rem+2px)]">
-              My mission is to transform creativity into measurable business impact. Whether it’s
+              Her mission is to transform creativity into measurable business impact. Whether it’s
               launching a new label, crafting consumer-centric brand stories, scaling design
-              processes for growth, through directing design teams, or mentoring the next
-              generation of fashion leaders.
+              processes for growth, directing design teams, or mentoring the next generation of
+              fashion leaders.
             </p>
             <p
               aria-hidden="true"
