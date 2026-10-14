@@ -226,8 +226,8 @@ function Introduction() {
           </SlideIn>
           <SlideIn delay={200}>
             <p className="mt-10 max-w-xl text-lg leading-relaxed text-muted-foreground md:text-xl">
-              From fashion shows and styling sessions to seminars and professional image
-              workshops, Balance creates experiences that bring image, identity and impact into
+              From curating fashion shows and styling sessions to seminars and professional
+              image workshops, Balance creates experiences that bring image, identity and impact into
               focus.
             </p>
           </SlideIn>
@@ -369,6 +369,11 @@ function PastCard({ event, index }: { event: (typeof PAST_EVENTS)[number]; index
             loading="lazy"
             className="h-full w-full object-cover transition-transform duration-[1600ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.06]"
           />
+        )}
+        {event.badge && (
+          <span className="label-xs absolute right-5 top-5 bg-background/90 px-3 py-2 text-red backdrop-blur-sm">
+            {event.badge}
+          </span>
         )}
       </div>
       <div className="p-6 md:p-8">
