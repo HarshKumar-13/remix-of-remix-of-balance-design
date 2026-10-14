@@ -32,13 +32,10 @@ import brandBalBharati from "@/assets/brand-balbharati.png";
 import brandWheelchairTennis from "@/assets/brand-wheelchair-tennis.png";
 import brandLandmark from "@/assets/brand-landmark.png";
 import founder1 from "@/assets/founder-1.jpeg";
-import founder2 from "@/assets/founder-2.webp";
 import founder3 from "@/assets/founder-3.jpg";
-import founder4 from "@/assets/founder-4.jpg";
-import founder5 from "@/assets/founder-5.jpg";
 import founder6 from "@/assets/founder-6.jpg";
 import founder7 from "@/assets/founder-7.jpg";
-const FOUNDER_IMAGES = [founder1, founder2, founder3, founder4, founder5, founder6, founder7];
+const FOUNDER_IMAGES = [founder1, founder3, founder6, founder7];
 
 export const Route = createFileRoute("/about")({
   head: () => ({
