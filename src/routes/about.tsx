@@ -277,7 +277,7 @@ const EXPERTISE: { title: string; note?: string; items: string[] }[] = [
   },
   {
     title: "Design Workshops",
-    note: "We conduct customised workshops and seminars for fashion, apparel, retail and brand professionals, helping teams bridge the gap between creativity and commerce.",
+    note: "I conduct customised workshops and seminars for fashion, apparel, retail and brand professionals, helping teams bridge the gap between creativity and commerce.",
     items: [
       "Design Aesthetics & Styling for Brand Teams",
       "Forecasting, Trend Analysis & Consumer Mindsets",
@@ -296,11 +296,11 @@ function AboutBalancePanel() {
           <span className="font-medium text-primary">
             Balance Design &amp; Fashion Consultancy
           </span>{" "}
-          is a <span className="font-medium text-primary">Fashion</span> and{" "}
-          <span className="font-medium text-primary">Apparel Design</span> firm. We
-          partner with fashion, apparel and lifestyle businesses to build
+          is the <span className="font-medium text-primary">Fashion</span> and{" "}
+          <span className="font-medium text-primary">Apparel Design</span> firm I
+          started. I partner with fashion, apparel and lifestyle businesses to build
           consumer-centric brands, strengthen design direction and create products and
-          experiences that foster commercial success. We also Train and Coach apparel
+          experiences that foster commercial success. I also train and coach apparel
           teams and individuals in{" "}
           <span className="font-medium text-primary">Design Aesthetics</span> and{" "}
           <span className="font-medium text-primary">Fashion Styling</span>.
@@ -386,15 +386,15 @@ function AboutBalancePanel() {
 const FOUNDER_ROLES = [
   {
     title: "As a Design Head:",
-    body: "My experience includes managing design, research, product development, and trend forecasting for multiple international brands such as Kappa, UCLA, Smiley, Disney, Warner Brothers,Rene Derhy USA/ France, GAP, Yonex,Wall-Mart,K Mart & Petrie.",
+    body: "I have managed design, research, product development and trend forecasting for multiple international brands such as Kappa, UCLA, Smiley, Disney, Warner Brothers, Rene Derhy USA/France, GAP, Yonex, Wall-Mart, K Mart and Petrie.",
   },
   {
     title: "As a Strategist & Creative Head:",
-    body: "I have also led design teams, fostering innovation while ensuring commercial success for Indian retail brands such as Lifestyle Stores, Reliance Trends & Weekender, identified gaps and worked on brand positioning.Introduced structured trend research frameworks, revised process calendars, and competitive bench marking, ensuring alignment between creative direction and commercial outcomes.",
+    body: "I have led design teams, fostering innovation while ensuring commercial success for Indian retail brands such as Lifestyle Stores, Reliance Trends and Weekender. I identified gaps and worked on brand positioning, introduced structured trend research frameworks, revised process calendars and competitive benchmarking, keeping creative direction aligned with commercial outcomes.",
   },
   {
     title: "As Associate Professor :",
-    body: "at NIFT, besides guiding and nurturing young designers, I have bridged academia and industry by leading international-facing initiatives such as buyer meets, Hong Kong fair collections, and also taking on Indian crafts initiative as Hampi cluster project - Promoting the crafts like Lambani embroidery, stone carving, banana fibre from concept to product and market positioning for better sales.",
+    body: "I have taught at NIFT, where besides guiding and nurturing young designers, I have bridged academia and industry — leading international-facing initiatives such as buyer meets and Hong Kong fair collections, and taking on Indian crafts initiatives like the Hampi cluster project, promoting crafts such as Lambani embroidery, stone carving and banana fibre from concept to product and market positioning for better sales.",
   },
 ];
 
@@ -437,7 +437,7 @@ function FounderPanel() {
         </Reveal>
         <Reveal delay={180}>
           <p className="mt-10 max-w-xl text-lg leading-relaxed text-foreground md:text-xl">
-            With over twenty-eight years of experience in the fashion and apparel industry, I have specialized in defining design direction that aligns with business strategy and evolving consumer trends.I also impart training to enhance team performance in the Apparel and Fashion Industry.
+            With close to three decades of experience in the fashion and apparel industry, I have specialized in defining design direction that aligns with business strategy and evolving consumer trends. I also train and coach teams to strengthen performance in the apparel and fashion industry.
           </p>
         </Reveal>
         <Reveal delay={240}>
