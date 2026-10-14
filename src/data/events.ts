@@ -70,10 +70,11 @@ export type PastEvent = {
   image: string;
   images?: string[];
   badge?: string;
+  smallTitle?: boolean;
 };
 
 const RAW_PAST_EVENTS: PastEvent[] = [
-  { id: "past-01", title: "IIM Bangalore", type: "MASTER THE RIGHT DRESSS CODE - for the Alumni", date: "3rd Feb 2015", image: iim1, images: [iim1, iim2, iim3] },
+  { id: "past-01", title: "IIM Bangalore", type: "MASTER THE RIGHT DRESSS CODE - for Graduates & Alumni of Business Schools", date: "3rd Feb 2015", image: iim1, images: [iim1, iim2, iim3] },
   { id: "past-02", title: "ISB Mohali", type: "MASTER THE RIGHT DRESSS CODE - for the Alumni", date: "21st Sep 2018", image: isb1, images: [isb1, isb2] },
   { id: "past-03", title: "Van Heusen Customers", type: "MASTER THE RIGHT DRESSS CODE - Corporate Dressing up", date: "18th May 2013", image: vh1, images: [vh1, vh2, vh3], badge: "Customers" },
   { id: "past-04", title: "Max Fashion Customers", type: "MASTER THE RIGHT DRESSS CODE - Corporate Dressing up", date: "26th April 2014", image: max1, images: [max1, max2, max3] },
@@ -86,8 +87,8 @@ const RAW_PAST_EVENTS: PastEvent[] = [
 
 /* Pinned to the end of the list. Type and photos are stand-ins until the real details are supplied. */
 const PINNED_LAST_EVENTS: PastEvent[] = [
-  { id: "past-leela", title: "Leela Palace", type: "Corporate Image Consulting", date: "7th April 2013", image: leela1, images: [leela1, leela2] },
-  { id: "past-taj", title: "Taj Mahal Delhi", type: "Corporate Image Consulting", date: "Feb 2013", image: taj1, images: [taj1, taj2, taj3] },
+  { id: "past-leela", title: "Leela Palace Bangalore", type: "Corporate Image Consulting", date: "7th April 2013", image: leela1, images: [leela1, leela2], smallTitle: true },
+  { id: "past-taj", title: "Taj Palace Delhi", type: "Corporate Image Consulting", date: "Feb 2013", image: taj1, images: [taj1, taj2, taj3], smallTitle: true },
 ];
 
 /* PLACEHOLDER — upcoming events */
