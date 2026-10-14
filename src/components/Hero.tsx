@@ -3,7 +3,6 @@ import { useReducedMotion } from "motion/react";
 import { ArrowDown, Pause, Play } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { HeroImageLightbox, type ExpandedHeroImage } from "@/components/HeroImageLightbox";
-import h0560 from "@/assets/hero-0560.jpg";
 import h0541 from "@/assets/hero-0541.jpg";
 import h0545 from "@/assets/hero-0545.jpg";
 import h0556 from "@/assets/hero-0556.jpg";
@@ -15,7 +14,7 @@ import h1630 from "@/assets/hero-1630.jpg";
 import h1631 from "@/assets/hero-1631.jpg";
 
 export const HERO_COLUMNS = [
-  [{ src: h0560, alt: "Design workshop audience" }, { src: h1616, alt: "Garment sketches and colour palette" }, { src: h0541, alt: "Fashion seminar audience" }],
+  [{ src: h1616, alt: "Garment sketches and colour palette" }, { src: h0541, alt: "Fashion seminar audience" }],
   [{ src: h1627, alt: "Artistic fashion portrait collage" }, { src: h1628, alt: "Geometric textile designs and embroidered shoes" }, { src: h0545, alt: "Colour and styling workshop" }],
   [{ src: h1629, alt: "Fashion portrait design board" }, { src: h1631, alt: "Fashion illustrations in printed garments" }, { src: h1630, alt: "Floral textile pattern" }, { src: h0556, alt: "Fashion and colour theory seminar" }],
 ];
