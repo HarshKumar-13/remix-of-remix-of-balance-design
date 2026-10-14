@@ -13,6 +13,7 @@ import c7 from "@/assets/corp-new-7.jpg";
 
 // Written on the slides themselves: the service, then the client beneath it.
 const VH = { title: "Corporate Image Consulting", sub: "VAN HEUSEN" };
+const RAYMOND = { title: "Corporate Image Consulting", sub: "The Raymond Shop" };
 
 const IMAGES = [
   { src: c1, alt: "Van Heusen Master the Right Dress Code seminar audience", caption: VH },
@@ -36,8 +37,16 @@ const IMAGES = [
     alt: "Presenter guiding four participants demonstrating dress styles at a Van Heusen seminar",
     caption: VH,
   },
-  { src: c6, alt: "Colour wheel presentation at a corporate seminar" },
-  { src: c7, alt: "Upma Shrian engaging participants at a corporate seminar" },
+  {
+    src: c6,
+    alt: "Colour wheel presentation at a corporate seminar",
+    caption: RAYMOND,
+  },
+  {
+    src: c7,
+    alt: "Upma Shrian engaging participants at a corporate seminar",
+    caption: RAYMOND,
+  },
 ];
 
 // The five questions the seminar puts to a working professional.

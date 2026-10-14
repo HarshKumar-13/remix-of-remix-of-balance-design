@@ -63,3 +63,8 @@
 - [x] Rename every "Book your workshop" call-to-action, popup heading and submit label to the enquiry wording, including the mailto button on the workshops page.
 - [x] Replace the text-only "Enquire About Corporate Consulting" link under the Corporate subtext with the shared red enquiry button used elsewhere.
 - [x] Verify the button, popup wording, Escape close and the absence of the old link on the live page.
+
+# Corporate slider photo captions
+
+- [x] Add "Corporate Image Consulting" with "The Raymond Shop" beneath it to the two corporate photos that carried no name.
+- [x] Verify the caption renders in the same style as the Van Heusen one on the live page.
