@@ -33,7 +33,7 @@ export function LogoIntro({ onReveal, onComplete, onFinish }: { onReveal: () => 
     let touchY: number | undefined;
     let dragged = false;
     const interactive = () => gallery.dataset['phase'] === "hold" || gallery.dataset['phase'] === "movement";
-    const announce = () => gallery.dispatchEvent(new CustomEvent("grid-pause-state", { detail: Boolean(entrance?.paused()) }));
+    const announce = () => gallery.dispatchEvent(new CustomEvent("grid-pause-state", { detail: userPaused || reduced || Boolean(entrance?.paused()) }));
     const pause = () => { clearTimeout(resumeTimer); entrance?.pause(); announce(); };
     const resume = () => {
       if (disposed || userPaused || lightboxOpen || touchY !== undefined || document.hidden || offscreen || reduced || !interactive()) return;
@@ -45,7 +45,6 @@ export function LogoIntro({ onReveal, onComplete, onFinish }: { onReveal: () => 
       layer.dataset['phase'] = value;
       gallery.dataset['phase'] = value;
       if (value === "movement") entrance?.timeScale(0.55);
-      if (value === "expansion") entrance?.timeScale(1);
       place();
     };
     const previousOverflow = document.documentElement.style.overflow;
@@ -63,6 +62,7 @@ export function LogoIntro({ onReveal, onComplete, onFinish }: { onReveal: () => 
         const next = cycles[1];
         if (!first || !next) return;
         const cycleHeight = next.offsetTop - first.offsetTop;
+        if (cycleHeight <= 0) return;
         const distance = height * (i === 0 ? 0.7 : i === 1 ? 0.6 : 0.85);
         // Measure natural photo stacks, never impose a uniform cell height.
         // Leave several complete cycles above and below every viewport.
@@ -159,7 +159,7 @@ export function LogoIntro({ onReveal, onComplete, onFinish }: { onReveal: () => 
         }, [], 1.26)
         .call(() => { phase("movement"); }, [], 3.01)
         .to(geometry, { travel: 1, duration: 3.4, ease: "power2.inOut", onUpdate: place }, 3.01)
-        .to(geometry, { travel: "+=1", duration: 12, repeat: -1, ease: "none", onUpdate: place });
+        .to(geometry, { travel: "+=1", duration: 12, repeat: -1, repeatRefresh: true, ease: "none", onUpdate: place });
     };
     const progress = { value: 0 };
     const loading = gsap.timeline();
