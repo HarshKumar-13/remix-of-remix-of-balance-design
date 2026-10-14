@@ -33,9 +33,8 @@ import brandWheelchairTennis from "@/assets/brand-wheelchair-tennis.png";
 import brandLandmark from "@/assets/brand-landmark.png";
 import founder1 from "@/assets/founder-1.jpeg";
 import founder3 from "@/assets/founder-3.jpg";
-import founder6 from "@/assets/founder-6.jpg";
 import founder7 from "@/assets/founder-7.jpg";
-const FOUNDER_IMAGES = [founder1, founder3, founder6, founder7];
+const FOUNDER_IMAGES = [founder1, founder3, founder7];
 
 export const Route = createFileRoute("/about")({
   head: () => ({
@@ -430,7 +429,7 @@ function FounderPanel() {
         </Reveal>
         <Reveal delay={100}>
           <h2 className="display mt-6 text-[2.75rem] leading-[0.95] sm:text-5xl md:text-[4.25rem]">
-            A lifelong study of image, craft and culture.
+            A journey of design craft and innovation.
           </h2>
         </Reveal>
         <Reveal delay={180}>
