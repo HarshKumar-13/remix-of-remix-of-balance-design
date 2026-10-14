@@ -75,7 +75,7 @@ export type PastEvent = {
 const RAW_PAST_EVENTS: PastEvent[] = [
   { id: "past-01", title: "IIM Bangalore", type: "MASTER THE RIGHT DRESSS CODE - for the Alumni", date: "3rd Feb 2015", image: iim1, images: [iim1, iim2, iim3] },
   { id: "past-02", title: "ISB Mohali", type: "MASTER THE RIGHT DRESSS CODE - for the Alumni", date: "21st Sep 2018", image: isb1, images: [isb1, isb2] },
-  { id: "past-03", title: "Van Husen Customers", type: "MASTER THE RIGHT DRESSS CODE - Corporate Dressing up", date: "18th May 2013", image: vh1, images: [vh1, vh2, vh3], badge: "Customers" },
+  { id: "past-03", title: "Van Heusen Customers", type: "MASTER THE RIGHT DRESSS CODE - Corporate Dressing up", date: "18th May 2013", image: vh1, images: [vh1, vh2, vh3], badge: "Customers" },
   { id: "past-04", title: "Max Fashion Customers", type: "MASTER THE RIGHT DRESSS CODE - Corporate Dressing up", date: "26th April 2014", image: max1, images: [max1, max2, max3] },
   { id: "past-05", title: "The Raymond Shop Customers", type: "MASTER THE RIGHT DRESSS CODE - Corporate Dressing up", date: "15 July 2018", image: rt1, images: [rt1, rt2, rt3, rt4], badge: "Customers" },
   { id: "past-06", title: "Orra Fine Jewellery", type: "MASTER THE RIGHT DRESSS CODE - Styling session", date: "29th October 2023", image: orra1, images: [orra1, orra2, orra3], badge: "Customers" },
