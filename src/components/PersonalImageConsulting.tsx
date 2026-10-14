@@ -109,7 +109,7 @@ export function PersonalImageConsulting() {
             design tools, such that the individual can make decisions for themselves, about which
             colour, fit and style shall suit their skin tone, height and body type.
             <span className="mt-5 block">
-              Our styling seminars transform the way YOU dress up, such that our visual impact is
+              Our styling seminars transform the way YOU dress up, such that your visual impact is
               more powerful and confident for your lifetime.
             </span>
           </p>
