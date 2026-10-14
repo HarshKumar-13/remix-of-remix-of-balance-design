@@ -38,3 +38,7 @@
 
 - [x] Move the service advisor into the Contact Us page as a section and retire the standalone page.
 - [x] Keep old links working, point the menu entry at the new section, and verify desktop/mobile presentation.
+
+# Hero grid photo removal
+
+- [x] Remove the seminar-room photo (the one shown expanded in the user's screenshot) from the hero grid and verify the grid stays full.
