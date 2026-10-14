@@ -226,9 +226,9 @@ function Introduction() {
           </SlideIn>
           <SlideIn delay={200}>
             <p className="mt-10 max-w-xl text-lg leading-relaxed text-muted-foreground md:text-xl">
-              From curating fashion shows and styling sessions to seminars and professional
-              image workshops, Balance creates experiences that bring image, identity and impact into
-              focus.
+              From fashion shows and styling sessions to seminars and corporate image workshops,
+              Balance Design creates experiences that transform your style statement and your
+              awareness in design aesthetics.
             </p>
           </SlideIn>
         </div>
