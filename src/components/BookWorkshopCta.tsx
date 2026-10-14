@@ -100,7 +100,7 @@ export function BookingDialog({
               <input name="phone" type="tel" placeholder="Phone (optional)" className={inputClass} />
               <input
                 name="workshop"
-                placeholder="Which workshop? (optional)"
+                placeholder="Name of the workshop/seminar (optional)"
                 className={inputClass}
               />
               <select
@@ -126,7 +126,7 @@ export function BookingDialog({
               <textarea
                 name="message"
                 rows={4}
-                placeholder="Anything you'd like us to know? (optional)"
+                placeholder="Kindly share your requirement/queries (optional)"
                 className={`${inputClass} resize-none`}
               />
               {error && <p className="text-sm text-red">{error}</p>}
