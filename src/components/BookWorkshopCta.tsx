@@ -12,7 +12,7 @@ const inputClass =
   "w-full border border-foreground/20 bg-background px-5 py-3.5 text-base text-foreground placeholder:text-foreground/40 focus:border-red focus:outline-none";
 
 /**
- * The shared booking popup (the same "Book your workshop" form).
+ * The shared enquiry popup (the same "Enquire about workshop" form).
  * Controlled by the caller so any custom trigger can open it.
  */
 export function BookingDialog({
@@ -80,7 +80,7 @@ export function BookingDialog({
           <>
             <DialogHeader>
               <DialogTitle className="font-display text-3xl tracking-wide text-red">
-                Book your workshop
+                Enquire about workshop
               </DialogTitle>
               <DialogDescription className="text-base text-foreground/70">
                 Tell us a little about yourself and the workshop you're interested in.
@@ -109,7 +109,7 @@ export function BookingDialog({
               />
               {error && <p className="text-sm text-red">{error}</p>}
               <button type="submit" disabled={sending} className="btn-red label-xs mt-4 self-center">
-                {sending ? "Sending…" : "Submit booking request"}
+                {sending ? "Sending…" : "Send your enquiry"}
               </button>
             </form>
           </>
@@ -119,14 +119,14 @@ export function BookingDialog({
   );
 }
 
-/** Shared red "Book your workshop" call-to-action used at the end of every service section. Opens a booking popup. */
+/** Shared red "Enquire about workshop" call-to-action used at the end of every service section. Opens the enquiry popup. */
 export function BookWorkshopCta({ className = "mt-4 md:mt-6" }: { className?: string }) {
   const [open, setOpen] = useState(false);
 
   return (
     <div className={`flex justify-center ${className}`}>
       <button type="button" onClick={() => setOpen(true)} className="btn-red label-xs">
-        Book your workshop
+        Enquire about workshop
       </button>
 
       <BookingDialog open={open} onOpenChange={setOpen} />

@@ -57,3 +57,9 @@
 
 - [x] Take the teal-bench, plum-top/beige-trousers and red-blouse/tartan-trousers photos out of the Our Founder tab.
 - [x] Verify the tab now cycles only the four remaining photos and the build stays clean.
+
+# Workshop calls-to-action renamed
+
+- [x] Rename every "Book your workshop" call-to-action, popup heading and submit label to the enquiry wording, including the mailto button on the workshops page.
+- [x] Replace the text-only "Enquire About Corporate Consulting" link under the Corporate subtext with the shared red enquiry button used elsewhere.
+- [x] Verify the button, popup wording, Escape close and the absence of the old link on the live page.

@@ -414,7 +414,7 @@ function ClosingCta() {
           </p>
           <div className="mt-12 flex flex-col items-start gap-5 sm:flex-row sm:items-center">
             <a href="mailto:info@balancedesign.in" className="btn-ghost label-xs hover:bg-background hover:text-red">
-              Book a workshop
+              Enquire about workshop
             </a>
             <Link
               to="/"
