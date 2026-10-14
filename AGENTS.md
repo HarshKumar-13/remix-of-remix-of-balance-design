@@ -11,7 +11,9 @@
 
 - Keep user-supplied site media as source-controlled files under `src/assets` when portability to GitHub, local downloads, and Vercel is required; this avoids host-specific asset URLs.
 - AI features call Lovable AI Gateway from server-only *.server.ts modules (Responses API, streamed) behind createServerFn in *.functions.ts; keeps the API key off the client.
-- Use a GSAP timeline for the opening sequence and coordinated hero loop, with Motion AnimatePresence for phrase exits; one clock keeps imagery and typography choreographed without unrelated timers.
+- Use the existing GSAP entrance timeline for the loader, grid reveal and continuous grid travel; one clock prevents competing transform owners.
 
-- Keep the homepage opening outside ScrollStory/SlideStack: LogoIntro transfers the actual grid image into Hero, and useHeroScroll owns native sticky banner expansion without competing parent transforms.
-- Keep grid interactions on the existing entrance timeline with native gallery listeners (the gallery is temporarily reparented); modal and manual input pause that clock and retain its transforms, avoiding competing motion owners.
+- Keep the homepage grid hero outside ScrollStory/SlideStack in normal page flow, followed immediately by Services; only the loader locks page scroll, and no default grid image transfers into a separate banner.
+- Keep grid interactions on the existing entrance timeline with native passive gallery listeners; manual input, offscreen visibility and image dialogs pause that clock without intercepting page scroll or resetting transforms.
+- Keep LogoIntro mounted after loading to own the persistent grid clock; hide its completed loader layer instead of unmounting the animation owner.
+- The grid and image dialog share a Services cue; close the dialog and release its scroll lock before navigating, with focus restoration using preventScroll to retain the grid position.

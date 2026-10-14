@@ -128,15 +128,16 @@ function Index() {
 
   return (
     <main>
-      {!introDone && <LogoIntro onReveal={revealHero} onComplete={finishIntro} onFinish={doneIntro} />}
+      <LogoIntro onReveal={revealHero} onComplete={finishIntro} onFinish={doneIntro} />
       <div className="relative z-10 bg-background">
         <SiteHeader introComplete={introComplete} logoVisible={introDone} />
-        <Hero introComplete={introDone} />
+        <Hero />
         <ScrollStory>
           <SlideStack>
             <SlidePanel>
             <section
               id="services"
+              tabIndex={-1}
               className="px-6 pt-20 pb-14 text-center sm:pt-24 sm:pb-12 md:px-12 md:pt-32 md:pb-16"
             >
               <Reveal>
