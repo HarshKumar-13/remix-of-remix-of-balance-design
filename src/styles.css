@@ -278,7 +278,7 @@
 /* Editorial statement ribbon — one pass over all four statements, duplicated
    internally for a seamless loop. */
 .ribbon-track {
-  animation: marquee-x 28s linear infinite;
+  animation: marquee-x 56s linear infinite;
   will-change: transform;
 }
 
