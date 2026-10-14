@@ -318,9 +318,7 @@ function AboutBalancePanel() {
         </Reveal>
         <Reveal delay={140}>
           <h2 className="display text-accent mt-6 text-[2.5rem] leading-[0.95] sm:text-[3.5rem] md:text-[4rem]">
-            Our Expertise
-            <br />
-            &amp; Deliverables
+            Our Deliverables
           </h2>
         </Reveal>
       </div>
@@ -337,7 +335,7 @@ function AboutBalancePanel() {
                 >
                   {gi + 1}
                 </span>
-                <h3 className="font-display text-2xl leading-tight tracking-wide md:text-[1.9rem]">
+                <h3 className="font-display text-2xl leading-tight tracking-wide text-red md:text-[1.9rem]">
                   {group.title}
                 </h3>
               </div>
