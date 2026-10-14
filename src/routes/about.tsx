@@ -27,6 +27,10 @@ import brandReliance from "@/assets/brand-reliance.png";
 import brandNift from "@/assets/brand-nift.png";
 import brandLifestyle from "@/assets/brand-lifestyle.png";
 import brandGap from "@/assets/brand-gap.png";
+import brandOrra from "@/assets/brand-orra.png";
+import brandBalBharati from "@/assets/brand-balbharati.png";
+import brandWheelchairTennis from "@/assets/brand-wheelchair-tennis.png";
+import brandLandmark from "@/assets/brand-landmark.png";
 import founder1 from "@/assets/founder-1.jpeg";
 import founder2 from "@/assets/founder-2.webp";
 import founder3 from "@/assets/founder-3.jpg";
@@ -469,10 +473,10 @@ const BRANDS: { name: string; logo?: string }[] = [
   { name: "GAP", logo: brandGap },
   { name: "ISB" },
   { name: "Weekender" },
-  { name: "Orra Fine Jewellery" },
-  { name: "Bal Bharti" },
-  { name: "Indian Wheelchair Tennis" },
-  { name: "Landmark Education Worldwide" },
+  { name: "Orra Fine Jewellery", logo: brandOrra },
+  { name: "Bal Bharati Public School", logo: brandBalBharati },
+  { name: "Indian Wheelchair Tennis Tour", logo: brandWheelchairTennis },
+  { name: "Landmark", logo: brandLandmark },
 ];
 
 function RecognitionPanel() {
