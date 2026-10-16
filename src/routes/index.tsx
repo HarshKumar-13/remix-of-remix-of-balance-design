@@ -1,13 +1,36 @@
 /**
  * Balance Design — complete homepage in one file.
  * Includes the loader, photo grid, scroll animations, sliders, enquiry popup, header and footer.
- * Requires the project's npm packages, src/styles.css and the images in src/assets.
+ * Replace src/routes/index.tsx with this file in the existing Balance Design project.
+ * Requires its npm packages, shared src/styles.css, src/assets media and configured enquiry connection.
+ * File-local namespaces preserve each section's original variables and types.
  */
 import { createFileRoute } from "@tanstack/react-router";
 import * as React from "react";
-import { useCallback, useState, useEffect, useRef, type ReactNode, type CSSProperties } from "react";
+import {
+  useCallback,
+  useState,
+  useEffect,
+  useRef,
+  type ReactNode,
+  type CSSProperties,
+} from "react";
 import { useReducedMotion } from "motion/react";
-import { ArrowDown, Pause, Play, X, Volume2, VolumeX, Facebook, Instagram, Linkedin, Twitter, Youtube, ArrowLeft, ArrowRight } from "lucide-react";
+import {
+  ArrowDown,
+  Pause,
+  Play,
+  X,
+  Volume2,
+  VolumeX,
+  Facebook,
+  Instagram,
+  Linkedin,
+  Twitter,
+  Youtube,
+  ArrowLeft,
+  ArrowRight,
+} from "lucide-react";
 import { Slot } from "@radix-ui/react-slot";
 import { cva, type VariantProps } from "class-variance-authority";
 import { clsx, type ClassValue } from "clsx";
@@ -15,7 +38,7 @@ import { twMerge } from "tailwind-merge";
 import * as DialogPrimitive from "@radix-ui/react-dialog";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { createClient } from "@supabase/supabase-js";
+import { supabase } from "@/integrations/supabase/client";
 import asset_assets_balance_logo_navbar_png from "@/assets/balance-logo-navbar.png";
 import asset_assets_hero_0541_jpg from "@/assets/hero-0541.jpg";
 import asset_assets_hero_0545_jpg from "@/assets/hero-0545.jpg";
@@ -122,2900 +145,2871 @@ import asset_assets_dws_9_jpg from "@/assets/dws-9.jpg";
 
 // ===== components/SiteHeader.tsx =====
 namespace Module_components_SiteHeader {
-const logoDark = asset_assets_balance_logo_navbar_png;
+  const logoDark = asset_assets_balance_logo_navbar_png;
 
-const NAV = [
-  { label: "Home", href: "/#top" },
-  { label: "About Us", href: "/about" },
-  { label: "Events", href: "/events" },
-  { label: "Contact Us", href: "/contact" },
-];
+  const NAV = [
+    { label: "Home", href: "/#top" },
+    { label: "About Us", href: "/about" },
+    { label: "Events", href: "/events" },
+    { label: "Contact Us", href: "/contact" },
+  ];
 
-export function SiteHeader({
-  introComplete = true,
-  forceSolid = false,
-  logoVisible = true,
-}: {
-  introComplete?: boolean;
-  forceSolid?: boolean;
-  logoVisible?: boolean;
-}) {
-  const [solid, setSolid] = useState(false);
-  const [open, setOpen] = useState(false);
+  export function SiteHeader({
+    introComplete = true,
+    forceSolid = false,
+    logoVisible = true,
+  }: {
+    introComplete?: boolean;
+    forceSolid?: boolean;
+    logoVisible?: boolean;
+  }) {
+    const [solid, setSolid] = useState(false);
+    const [open, setOpen] = useState(false);
 
-  useEffect(() => {
-    const onScroll = () => setSolid(window.scrollY > window.innerHeight * 0.85);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+    useEffect(() => {
+      const onScroll = () => setSolid(window.scrollY > window.innerHeight * 0.85);
+      onScroll();
+      window.addEventListener("scroll", onScroll, { passive: true });
+      return () => window.removeEventListener("scroll", onScroll);
+    }, []);
 
-  useEffect(() => {
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setOpen(false);
-    };
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, []);
+    useEffect(() => {
+      const onKey = (e: KeyboardEvent) => {
+        if (e.key === "Escape") setOpen(false);
+      };
+      window.addEventListener("keydown", onKey);
+      return () => window.removeEventListener("keydown", onKey);
+    }, []);
 
-  useEffect(() => {
-    document.body.style.overflow = open ? "hidden" : "";
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, [open]);
+    useEffect(() => {
+      document.body.style.overflow = open ? "hidden" : "";
+      return () => {
+        document.body.style.overflow = "";
+      };
+    }, [open]);
 
-  const showSolid = solid || forceSolid;
-  const tone = open ? "text-ivory" : "text-foreground";
+    const showSolid = solid || forceSolid;
+    const tone = open ? "text-ivory" : "text-foreground";
 
-  return (
-    <>
-      <header
-        className={`fixed inset-x-0 top-0 z-[60] transition-[background-color,border-color,backdrop-filter] duration-700 ease-in-out ${introComplete ? "" : "pointer-events-none"} ${
-          open
-            ? "bg-transparent"
-            : showSolid
-              ? "border-b border-border bg-background/95 backdrop-blur-sm"
-              : introComplete
-                ? "bg-background/70 backdrop-blur-md"
-                : "bg-transparent"
-        }`}
-      >
-        <div
-          className={`flex items-center justify-between px-6 py-3 md:px-12 ${tone}`}
+    return (
+      <>
+        <header
+          className={`fixed inset-x-0 top-0 z-[60] transition-[background-color,border-color,backdrop-filter] duration-700 ease-in-out ${introComplete ? "" : "pointer-events-none"} ${
+            open
+              ? "bg-transparent"
+              : showSolid
+                ? "border-b border-border bg-background/95 backdrop-blur-sm"
+                : introComplete
+                  ? "bg-background/70 backdrop-blur-md"
+                  : "bg-transparent"
+          }`}
         >
-          <a
-            href="/#top"
-            aria-label="Balance Design & Fashion Consultancy"
-            className="block"
-            data-navbar-logo
-          >
-            <img
-              src={logoDark}
-              alt="Balance Design & Fashion Consultancy"
-              width={800}
-              height={648}
-              className={`h-[4.375rem] w-auto md:h-[6.25rem] ${logoVisible ? "opacity-100" : "opacity-0"}`}
-            />
-          </a>
-
-          <div
-            className={`flex items-center gap-8 transition-opacity duration-500 ease-in-out md:gap-12 ${introComplete ? "opacity-100" : "opacity-0"}`}
-          >
-            <a href="/contact" className="label-xs link-underline hidden sm:inline-block">
-              Contact
-            </a>
-            <button
-              aria-label={open ? "Close menu" : "Open menu"}
-              aria-expanded={open}
-              onClick={() => setOpen((v) => !v)}
-              className="label-xs flex items-center gap-3 focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-4"
-            >
-              <span className="hidden md:inline">{open ? "Close" : "Menu"}</span>
-              <span className="flex h-4 w-6 flex-col justify-center gap-[5px]">
-                <span
-                  className={`block h-px w-full bg-current transition-transform duration-500 ${open ? "translate-y-[3px] rotate-45" : ""}`}
-                />
-                <span
-                  className={`block h-px w-full bg-current transition-transform duration-500 ${open ? "-translate-y-[3px] -rotate-45" : ""}`}
-                />
-              </span>
-            </button>
-          </div>
-        </div>
-      </header>
-
-      <div
-        aria-hidden={!open}
-        className={`fixed inset-0 z-50 bg-charcoal text-ivory transition-opacity duration-700 ${
-          open ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"
-        }`}
-      >
-        <nav className="flex h-full flex-col justify-center gap-2 px-6 pt-24 md:px-12 md:pt-28">
-          {NAV.map((n, i) => (
+          <div className={`flex items-center justify-between px-6 py-3 md:px-12 ${tone}`}>
             <a
-              key={n.label}
-              href={n.href}
-              onClick={() => setOpen(false)}
-              tabIndex={open ? 0 : -1}
-              className="display w-fit text-[2.5rem] leading-[1.15] transition-[opacity,transform,color] duration-700 hover:text-red md:text-[5rem]"
-              style={{
-                opacity: open ? 1 : 0,
-                transform: open ? "none" : "translateY(28px)",
-                transitionDelay: `${open ? 120 + i * 70 : 0}ms`,
-              }}
+              href="/#top"
+              aria-label="Balance Design & Fashion Consultancy"
+              className="block"
+              data-navbar-logo
             >
-              {n.label}
+              <img
+                src={logoDark}
+                alt="Balance Design & Fashion Consultancy"
+                width={800}
+                height={648}
+                className={`h-[4.375rem] w-auto md:h-[6.25rem] ${logoVisible ? "opacity-100" : "opacity-0"}`}
+              />
             </a>
-          ))}
-        </nav>
-      </div>
-    </>
-  );
-}
+
+            <div
+              className={`flex items-center gap-8 transition-opacity duration-500 ease-in-out md:gap-12 ${introComplete ? "opacity-100" : "opacity-0"}`}
+            >
+              <a href="/contact" className="label-xs link-underline hidden sm:inline-block">
+                Contact
+              </a>
+              <button
+                aria-label={open ? "Close menu" : "Open menu"}
+                aria-expanded={open}
+                onClick={() => setOpen((v) => !v)}
+                className="label-xs flex items-center gap-3 focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-4"
+              >
+                <span className="hidden md:inline">{open ? "Close" : "Menu"}</span>
+                <span className="flex h-4 w-6 flex-col justify-center gap-[5px]">
+                  <span
+                    className={`block h-px w-full bg-current transition-transform duration-500 ${open ? "translate-y-[3px] rotate-45" : ""}`}
+                  />
+                  <span
+                    className={`block h-px w-full bg-current transition-transform duration-500 ${open ? "-translate-y-[3px] -rotate-45" : ""}`}
+                  />
+                </span>
+              </button>
+            </div>
+          </div>
+        </header>
+
+        <div
+          aria-hidden={!open}
+          className={`fixed inset-0 z-50 bg-charcoal text-ivory transition-opacity duration-700 ${
+            open ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"
+          }`}
+        >
+          <nav className="flex h-full flex-col justify-center gap-2 px-6 pt-24 md:px-12 md:pt-28">
+            {NAV.map((n, i) => (
+              <a
+                key={n.label}
+                href={n.href}
+                onClick={() => setOpen(false)}
+                tabIndex={open ? 0 : -1}
+                className="display w-fit text-[2.5rem] leading-[1.15] transition-[opacity,transform,color] duration-700 hover:text-red md:text-[5rem]"
+                style={{
+                  opacity: open ? 1 : 0,
+                  transform: open ? "none" : "translateY(28px)",
+                  transitionDelay: `${open ? 120 + i * 70 : 0}ms`,
+                }}
+              >
+                {n.label}
+              </a>
+            ))}
+          </nav>
+        </div>
+      </>
+    );
+  }
 }
 
 // ===== lib/utils.ts =====
 namespace Module_lib_utils {
-export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs));
-}
+  export function cn(...inputs: ClassValue[]) {
+    return twMerge(clsx(inputs));
+  }
 }
 
 // ===== components/ui/button.tsx =====
 namespace Module_components_ui_button {
-import cn = Module_lib_utils.cn;
+  import cn = Module_lib_utils.cn;
 
-
-export const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium cursor-pointer transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 disabled:cursor-not-allowed [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
-  {
-    variants: {
-      variant: {
-        default: "bg-primary text-primary-foreground shadow hover:bg-primary/90",
-        destructive: "bg-destructive text-destructive-foreground shadow-sm hover:bg-destructive/90",
-        outline:
-          "border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground",
-        secondary: "bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80",
-        ghost: "hover:bg-accent hover:text-accent-foreground",
-        link: "text-primary underline-offset-4 hover:underline",
+  export const buttonVariants = cva(
+    "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium cursor-pointer transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 disabled:cursor-not-allowed [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
+    {
+      variants: {
+        variant: {
+          default: "bg-primary text-primary-foreground shadow hover:bg-primary/90",
+          destructive:
+            "bg-destructive text-destructive-foreground shadow-sm hover:bg-destructive/90",
+          outline:
+            "border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground",
+          secondary: "bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80",
+          ghost: "hover:bg-accent hover:text-accent-foreground",
+          link: "text-primary underline-offset-4 hover:underline",
+        },
+        size: {
+          default: "h-9 px-4 py-2",
+          sm: "h-8 rounded-md px-3 text-xs",
+          lg: "h-10 rounded-md px-8",
+          icon: "h-9 w-9",
+        },
       },
-      size: {
-        default: "h-9 px-4 py-2",
-        sm: "h-8 rounded-md px-3 text-xs",
-        lg: "h-10 rounded-md px-8",
-        icon: "h-9 w-9",
+      defaultVariants: {
+        variant: "default",
+        size: "default",
       },
     },
-    defaultVariants: {
-      variant: "default",
-      size: "default",
+  );
+
+  export interface ButtonProps
+    extends React.ButtonHTMLAttributes<HTMLButtonElement>, VariantProps<typeof buttonVariants> {
+    asChild?: boolean;
+  }
+
+  export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
+    ({ className, variant, size, asChild = false, ...props }, ref) => {
+      const Comp = asChild ? Slot : "button";
+      return (
+        <Comp className={cn(buttonVariants({ variant, size, className }))} ref={ref} {...props} />
+      );
     },
-  },
-);
-
-export interface ButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement>, VariantProps<typeof buttonVariants> {
-  asChild?: boolean;
-}
-
-export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant, size, asChild = false, ...props }, ref) => {
-    const Comp = asChild ? Slot : "button";
-    return (
-      <Comp className={cn(buttonVariants({ variant, size, className }))} ref={ref} {...props} />
-    );
-  },
-);
-Button.displayName = "Button";
+  );
+  Button.displayName = "Button";
 }
 
 // ===== components/ui/dialog.tsx =====
 namespace Module_components_ui_dialog {
-import cn = Module_lib_utils.cn;
+  import cn = Module_lib_utils.cn;
 
+  export const Dialog = DialogPrimitive.Root;
 
-export const Dialog = DialogPrimitive.Root;
+  export const DialogTrigger = DialogPrimitive.Trigger;
 
-export const DialogTrigger = DialogPrimitive.Trigger;
+  export const DialogPortal = DialogPrimitive.Portal;
 
-export const DialogPortal = DialogPrimitive.Portal;
+  export const DialogClose = DialogPrimitive.Close;
 
-export const DialogClose = DialogPrimitive.Close;
-
-export const DialogOverlay = React.forwardRef<
-  React.ElementRef<typeof DialogPrimitive.Overlay>,
-  React.ComponentPropsWithoutRef<typeof DialogPrimitive.Overlay>
->(({ className, ...props }, ref) => (
-  <DialogPrimitive.Overlay
-    ref={ref}
-    className={cn(
-      "fixed inset-0 z-50 bg-black/80  data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0",
-      className,
-    )}
-    {...props}
-  />
-));
-DialogOverlay.displayName = DialogPrimitive.Overlay.displayName;
-
-export const DialogContent = React.forwardRef<
-  React.ElementRef<typeof DialogPrimitive.Content>,
-  React.ComponentPropsWithoutRef<typeof DialogPrimitive.Content>
->(({ className, children, ...props }, ref) => (
-  <DialogPortal>
-    <DialogOverlay />
-    <DialogPrimitive.Content
+  export const DialogOverlay = React.forwardRef<
+    React.ElementRef<typeof DialogPrimitive.Overlay>,
+    React.ComponentPropsWithoutRef<typeof DialogPrimitive.Overlay>
+  >(({ className, ...props }, ref) => (
+    <DialogPrimitive.Overlay
       ref={ref}
       className={cn(
-        "fixed left-[50%] top-[50%] z-50 grid w-full max-w-lg translate-x-[-50%] translate-y-[-50%] gap-4 border bg-background p-6 shadow-lg duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 sm:rounded-lg",
+        "fixed inset-0 z-50 bg-black/80  data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0",
         className,
       )}
       {...props}
-    >
-      {children}
-      <DialogPrimitive.Close className="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background cursor-pointer transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground">
-        <X className="h-4 w-4" />
-        <span className="sr-only">Close</span>
-      </DialogPrimitive.Close>
-    </DialogPrimitive.Content>
-  </DialogPortal>
-));
-DialogContent.displayName = DialogPrimitive.Content.displayName;
+    />
+  ));
+  DialogOverlay.displayName = DialogPrimitive.Overlay.displayName;
 
-export const DialogHeader = ({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) => (
-  <div className={cn("flex flex-col space-y-1.5 text-center sm:text-left", className)} {...props} />
-);
-DialogHeader.displayName = "DialogHeader";
+  export const DialogContent = React.forwardRef<
+    React.ElementRef<typeof DialogPrimitive.Content>,
+    React.ComponentPropsWithoutRef<typeof DialogPrimitive.Content>
+  >(({ className, children, ...props }, ref) => (
+    <DialogPortal>
+      <DialogOverlay />
+      <DialogPrimitive.Content
+        ref={ref}
+        className={cn(
+          "fixed left-[50%] top-[50%] z-50 grid w-full max-w-lg translate-x-[-50%] translate-y-[-50%] gap-4 border bg-background p-6 shadow-lg duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 sm:rounded-lg",
+          className,
+        )}
+        {...props}
+      >
+        {children}
+        <DialogPrimitive.Close className="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background cursor-pointer transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground">
+          <X className="h-4 w-4" />
+          <span className="sr-only">Close</span>
+        </DialogPrimitive.Close>
+      </DialogPrimitive.Content>
+    </DialogPortal>
+  ));
+  DialogContent.displayName = DialogPrimitive.Content.displayName;
 
-export const DialogFooter = ({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) => (
-  <div
-    className={cn("flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2", className)}
-    {...props}
-  />
-);
-DialogFooter.displayName = "DialogFooter";
+  export const DialogHeader = ({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) => (
+    <div
+      className={cn("flex flex-col space-y-1.5 text-center sm:text-left", className)}
+      {...props}
+    />
+  );
+  DialogHeader.displayName = "DialogHeader";
 
-export const DialogTitle = React.forwardRef<
-  React.ElementRef<typeof DialogPrimitive.Title>,
-  React.ComponentPropsWithoutRef<typeof DialogPrimitive.Title>
->(({ className, ...props }, ref) => (
-  <DialogPrimitive.Title
-    ref={ref}
-    className={cn("text-lg font-semibold leading-none tracking-tight", className)}
-    {...props}
-  />
-));
-DialogTitle.displayName = DialogPrimitive.Title.displayName;
+  export const DialogFooter = ({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) => (
+    <div
+      className={cn("flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2", className)}
+      {...props}
+    />
+  );
+  DialogFooter.displayName = "DialogFooter";
 
-export const DialogDescription = React.forwardRef<
-  React.ElementRef<typeof DialogPrimitive.Description>,
-  React.ComponentPropsWithoutRef<typeof DialogPrimitive.Description>
->(({ className, ...props }, ref) => (
-  <DialogPrimitive.Description
-    ref={ref}
-    className={cn("text-sm text-muted-foreground", className)}
-    {...props}
-  />
-));
-DialogDescription.displayName = DialogPrimitive.Description.displayName;
+  export const DialogTitle = React.forwardRef<
+    React.ElementRef<typeof DialogPrimitive.Title>,
+    React.ComponentPropsWithoutRef<typeof DialogPrimitive.Title>
+  >(({ className, ...props }, ref) => (
+    <DialogPrimitive.Title
+      ref={ref}
+      className={cn("text-lg font-semibold leading-none tracking-tight", className)}
+      {...props}
+    />
+  ));
+  DialogTitle.displayName = DialogPrimitive.Title.displayName;
+
+  export const DialogDescription = React.forwardRef<
+    React.ElementRef<typeof DialogPrimitive.Description>,
+    React.ComponentPropsWithoutRef<typeof DialogPrimitive.Description>
+  >(({ className, ...props }, ref) => (
+    <DialogPrimitive.Description
+      ref={ref}
+      className={cn("text-sm text-muted-foreground", className)}
+      {...props}
+    />
+  ));
+  DialogDescription.displayName = DialogPrimitive.Description.displayName;
 }
 
 // ===== components/HeroImageLightbox.tsx =====
 namespace Module_components_HeroImageLightbox {
-import Dialog = Module_components_ui_dialog.Dialog;
-import DialogPortal = Module_components_ui_dialog.DialogPortal;
-import DialogTitle = Module_components_ui_dialog.DialogTitle;
-import DialogClose = Module_components_ui_dialog.DialogClose;
+  import Dialog = Module_components_ui_dialog.Dialog;
+  import DialogPortal = Module_components_ui_dialog.DialogPortal;
+  import DialogTitle = Module_components_ui_dialog.DialogTitle;
+  import DialogClose = Module_components_ui_dialog.DialogClose;
 
-import Button = Module_components_ui_button.Button;
+  import Button = Module_components_ui_button.Button;
 
+  export type ExpandedHeroImage = { src: string; alt: string; trigger: HTMLElement };
 
-export type ExpandedHeroImage = { src: string; alt: string; trigger: HTMLElement };
-
-export function HeroImageLightbox({ image, onClose, onExplore, onAfterClose }: { image: ExpandedHeroImage | null; onClose: () => void; onExplore?: () => void; onAfterClose?: () => void }) {
-  const trigger = useRef<HTMLElement | null>(null);
-  if (image) trigger.current = image.trigger;
-  return (
-    <Dialog open={image !== null} onOpenChange={open => { if (!open) onClose(); }}>
-      <DialogPortal>
-        <DialogPrimitive.Overlay className="hero-lightbox-backdrop" />
-        <DialogPrimitive.Content className="hero-lightbox" aria-describedby={undefined}
-          onCloseAutoFocus={event => { event.preventDefault(); trigger.current?.focus({ preventScroll: true }); onAfterClose?.(); }}>
-          <DialogTitle className="sr-only">{image?.alt}</DialogTitle>
-          {image && <img src={image.src} alt={image.alt} className="hero-lightbox-image" />}
-          <DialogClose asChild>
-            <Button variant="secondary" size="icon" className="hero-lightbox-close" aria-label="Close expanded image" title="Close expanded image">
-              <X aria-hidden="true" />
-            </Button>
-          </DialogClose>
-          {onExplore && <Button variant="secondary" className="hero-lightbox-explore" onClick={onExplore}>SCROLL TO EXPLORE <ArrowDown aria-hidden="true" /></Button>}
-        </DialogPrimitive.Content>
-      </DialogPortal>
-    </Dialog>
-  );
-}
+  export function HeroImageLightbox({
+    image,
+    onClose,
+    onExplore,
+    onAfterClose,
+  }: {
+    image: ExpandedHeroImage | null;
+    onClose: () => void;
+    onExplore?: () => void;
+    onAfterClose?: () => void;
+  }) {
+    const trigger = useRef<HTMLElement | null>(null);
+    if (image) trigger.current = image.trigger;
+    return (
+      <Dialog
+        open={image !== null}
+        onOpenChange={(open) => {
+          if (!open) onClose();
+        }}
+      >
+        <DialogPortal>
+          <DialogPrimitive.Overlay className="hero-lightbox-backdrop" />
+          <DialogPrimitive.Content
+            className="hero-lightbox"
+            aria-describedby={undefined}
+            onCloseAutoFocus={(event) => {
+              event.preventDefault();
+              trigger.current?.focus({ preventScroll: true });
+              onAfterClose?.();
+            }}
+          >
+            <DialogTitle className="sr-only">{image?.alt}</DialogTitle>
+            {image && <img src={image.src} alt={image.alt} className="hero-lightbox-image" />}
+            <DialogClose asChild>
+              <Button
+                variant="secondary"
+                size="icon"
+                className="hero-lightbox-close"
+                aria-label="Close expanded image"
+                title="Close expanded image"
+              >
+                <X aria-hidden="true" />
+              </Button>
+            </DialogClose>
+            {onExplore && (
+              <Button variant="secondary" className="hero-lightbox-explore" onClick={onExplore}>
+                SCROLL TO EXPLORE <ArrowDown aria-hidden="true" />
+              </Button>
+            )}
+          </DialogPrimitive.Content>
+        </DialogPortal>
+      </Dialog>
+    );
+  }
 }
 
 // ===== components/Hero.tsx =====
 namespace Module_components_Hero {
-import Button = Module_components_ui_button.Button;
+  import Button = Module_components_ui_button.Button;
 
-import HeroImageLightbox = Module_components_HeroImageLightbox.HeroImageLightbox;
-import ExpandedHeroImage = Module_components_HeroImageLightbox.ExpandedHeroImage;
+  import HeroImageLightbox = Module_components_HeroImageLightbox.HeroImageLightbox;
+  import ExpandedHeroImage = Module_components_HeroImageLightbox.ExpandedHeroImage;
 
-const h0541 = asset_assets_hero_0541_jpg;
-const h0545 = asset_assets_hero_0545_jpg;
-const h0556 = asset_assets_hero_0556_jpg;
-const h1616 = asset_assets_hero_1616b_jpg;
-const h1627 = asset_assets_hero_1627_jpg;
-const h1628 = asset_assets_hero_1628_jpg;
-const h1629 = asset_assets_hero_1629_jpg;
-const h1630 = asset_assets_hero_1630_jpg;
-const h1631 = asset_assets_hero_1631_jpg;
+  const h0541 = asset_assets_hero_0541_jpg;
+  const h0545 = asset_assets_hero_0545_jpg;
+  const h0556 = asset_assets_hero_0556_jpg;
+  const h1616 = asset_assets_hero_1616b_jpg;
+  const h1627 = asset_assets_hero_1627_jpg;
+  const h1628 = asset_assets_hero_1628_jpg;
+  const h1629 = asset_assets_hero_1629_jpg;
+  const h1630 = asset_assets_hero_1630_jpg;
+  const h1631 = asset_assets_hero_1631_jpg;
 
-export const HERO_COLUMNS = [
-  [{ src: h1616, alt: "Garment sketches and colour palette" }, { src: h0541, alt: "Fashion seminar audience" }],
-  [{ src: h1627, alt: "Artistic fashion portrait collage" }, { src: h1628, alt: "Geometric textile designs and embroidered shoes" }, { src: h0545, alt: "Colour and styling workshop" }],
-  [{ src: h1629, alt: "Fashion portrait design board" }, { src: h1631, alt: "Fashion illustrations in printed garments" }, { src: h1630, alt: "Floral textile pattern" }, { src: h0556, alt: "Fashion and colour theory seminar" }],
-];
-export const PHRASES = ["Design & Styling Workshops", "Creating Looks", "Personal Image Consulting", "Fashion Forecasting", "Creating Fashion Collections", "Design Aesthetics Workshops"];
+  export const HERO_COLUMNS = [
+    [
+      { src: h1616, alt: "Garment sketches and colour palette" },
+      { src: h0541, alt: "Fashion seminar audience" },
+    ],
+    [
+      { src: h1627, alt: "Artistic fashion portrait collage" },
+      { src: h1628, alt: "Geometric textile designs and embroidered shoes" },
+      { src: h0545, alt: "Colour and styling workshop" },
+    ],
+    [
+      { src: h1629, alt: "Fashion portrait design board" },
+      { src: h1631, alt: "Fashion illustrations in printed garments" },
+      { src: h1630, alt: "Floral textile pattern" },
+      { src: h0556, alt: "Fashion and colour theory seminar" },
+    ],
+  ];
+  export const PHRASES = [
+    "Design & Styling Workshops",
+    "Creating Looks",
+    "Personal Image Consulting",
+    "Fashion Forecasting",
+    "Creating Fashion Collections",
+    "Design Aesthetics Workshops",
+  ];
 
-export function Hero() {
-  const reduced = useReducedMotion();
-  const [expandedImage, setExpandedImage] = useState<ExpandedHeroImage | null>(null);
-  const [gridPaused, setGridPaused] = useState(false);
-  const galleryRef = useRef<HTMLDivElement>(null);
-  const continueAfterClose = useRef(false);
+  export function Hero() {
+    const reduced = useReducedMotion();
+    const [expandedImage, setExpandedImage] = useState<ExpandedHeroImage | null>(null);
+    const [gridPaused, setGridPaused] = useState(false);
+    const galleryRef = useRef<HTMLDivElement>(null);
+    const continueAfterClose = useRef(false);
 
-  useEffect(() => {
-    const gallery = galleryRef.current;
-    if (!gallery) return;
-    // Native delegation survives LogoIntro temporarily moving this node to body.
-    const click = (event: MouseEvent) => {
-      if (gallery.dataset['phase'] !== "hold" && gallery.dataset['phase'] !== "movement") return;
-      const target = event.target;
-      if (!(target instanceof Element)) return;
-      const cell = target.closest<HTMLElement>("[data-column-image]");
-      const image = cell?.querySelector<HTMLImageElement>("img");
-      if (!cell || !image) return;
-      gallery.dispatchEvent(new CustomEvent("grid-lightbox", { detail: true }));
-      setExpandedImage({ src: image.currentSrc || image.src, alt: image.alt, trigger: cell });
+    useEffect(() => {
+      const gallery = galleryRef.current;
+      if (!gallery) return;
+      // Native delegation survives LogoIntro temporarily moving this node to body.
+      const click = (event: MouseEvent) => {
+        if (gallery.dataset["phase"] !== "hold" && gallery.dataset["phase"] !== "movement") return;
+        const target = event.target;
+        if (!(target instanceof Element)) return;
+        const cell = target.closest<HTMLElement>("[data-column-image]");
+        const image = cell?.querySelector<HTMLImageElement>("img");
+        if (!cell || !image) return;
+        gallery.dispatchEvent(new CustomEvent("grid-lightbox", { detail: true }));
+        setExpandedImage({ src: image.currentSrc || image.src, alt: image.alt, trigger: cell });
+      };
+      const state = (event: Event) =>
+        setGridPaused(Boolean((event as CustomEvent<boolean>).detail));
+      gallery.addEventListener("click", click);
+      gallery.addEventListener("grid-pause-state", state);
+      return () => {
+        gallery.removeEventListener("click", click);
+        gallery.removeEventListener("grid-pause-state", state);
+      };
+    }, []);
+
+    const closeImage = () => {
+      setExpandedImage(null);
+      // Wait for the dialog's exit and scroll-lock release before restarting.
+      galleryRef.current?.dispatchEvent(new CustomEvent("grid-lightbox", { detail: false }));
     };
-    const state = (event: Event) => setGridPaused(Boolean((event as CustomEvent<boolean>).detail));
-    gallery.addEventListener("click", click);
-    gallery.addEventListener("grid-pause-state", state);
-    return () => { gallery.removeEventListener("click", click); gallery.removeEventListener("grid-pause-state", state); };
-  }, []);
 
-  const closeImage = () => {
-    setExpandedImage(null);
-    // Wait for the dialog's exit and scroll-lock release before restarting.
-    galleryRef.current?.dispatchEvent(new CustomEvent("grid-lightbox", { detail: false }));
-  };
+    const navigateToServices = () => {
+      const services = document.getElementById("services");
+      if (!services) return;
+      services.focus({ preventScroll: true });
+      services.scrollIntoView({ behavior: reduced ? "instant" : "smooth", block: "start" });
+    };
+    const explore = () => {
+      galleryRef.current?.dispatchEvent(new CustomEvent("grid-explore"));
+      if (expandedImage) {
+        continueAfterClose.current = true;
+        closeImage();
+      } else navigateToServices();
+    };
+    const afterClose = () => {
+      if (!continueAfterClose.current) return;
+      continueAfterClose.current = false;
+      requestAnimationFrame(navigateToServices);
+    };
 
-  const navigateToServices = () => {
-    const services = document.getElementById("services");
-    if (!services) return;
-    services.focus({ preventScroll: true });
-    services.scrollIntoView({ behavior: reduced ? "instant" : "smooth", block: "start" });
-  };
-  const explore = () => {
-    galleryRef.current?.dispatchEvent(new CustomEvent("grid-explore"));
-    if (expandedImage) { continueAfterClose.current = true; closeImage(); }
-    else navigateToServices();
-  };
-  const afterClose = () => {
-    if (!continueAfterClose.current) return;
-    continueAfterClose.current = false;
-    requestAnimationFrame(navigateToServices);
-  };
-
-  return (
-    <section id="top" className="cinematic-hero bg-background" aria-label="Balance Design & Fashion Consultancy">
-      <h1 className="sr-only">Balance Design &amp; Fashion Consultancy</h1>
-      <div ref={galleryRef} data-hero-gallery className="cinematic-gallery" aria-label="Balance Design image gallery">
-        {HERO_COLUMNS.map((photos, column) => (
-          <div key={column} data-hero-column className="cinematic-column">
-            <div data-column-track className="cinematic-track">
-              {Array.from({ length: 16 }, (_, repetition) => photos.map((photo, photoIndex) => (
-                <Button key={`${repetition}-${photo.src}`} variant="ghost" tabIndex={-1} aria-label={`Expand ${photo.alt}`} data-column-image data-cycle-start={photoIndex === 0 ? "true" : undefined} className="cinematic-image">
-                  <img src={photo.src} alt={photo.alt} data-intro-image={repetition === 0 ? "true" : undefined} loading="eager" decoding="async" />
-                </Button>
-              )))}
+    return (
+      <section
+        id="top"
+        className="cinematic-hero bg-background"
+        aria-label="Balance Design & Fashion Consultancy"
+      >
+        <h1 className="sr-only">Balance Design &amp; Fashion Consultancy</h1>
+        <div
+          ref={galleryRef}
+          data-hero-gallery
+          className="cinematic-gallery"
+          aria-label="Balance Design image gallery"
+        >
+          {HERO_COLUMNS.map((photos, column) => (
+            <div key={column} data-hero-column className="cinematic-column">
+              <div data-column-track className="cinematic-track">
+                {Array.from({ length: 16 }, (_, repetition) =>
+                  photos.map((photo, photoIndex) => (
+                    <Button
+                      key={`${repetition}-${photo.src}`}
+                      variant="ghost"
+                      tabIndex={-1}
+                      aria-label={`Expand ${photo.alt}`}
+                      data-column-image
+                      data-cycle-start={photoIndex === 0 ? "true" : undefined}
+                      className="cinematic-image"
+                    >
+                      <img
+                        src={photo.src}
+                        alt={photo.alt}
+                        data-intro-image={repetition === 0 ? "true" : undefined}
+                        loading="eager"
+                        decoding="async"
+                      />
+                    </Button>
+                  )),
+                )}
+              </div>
             </div>
-          </div>
-        ))}
-        <Button variant="secondary" size="icon" data-grid-toggle className="grid-motion-toggle" aria-label={gridPaused ? "Resume grid animation" : "Pause grid animation"} title={gridPaused ? "Resume grid animation" : "Pause grid animation"} aria-pressed={gridPaused}>
-          {gridPaused ? <Play aria-hidden="true" /> : <Pause aria-hidden="true" />}
-        </Button>
-        <Button variant="ghost" data-grid-explore className="grid-explore-cue" onClick={explore}>
-          SCROLL TO EXPLORE <ArrowDown aria-hidden="true" />
-        </Button>
-      </div>
-      <HeroImageLightbox image={expandedImage} onClose={closeImage} onExplore={explore} onAfterClose={afterClose} />
-    </section>
-  );
-}
+          ))}
+          <Button
+            variant="secondary"
+            size="icon"
+            data-grid-toggle
+            className="grid-motion-toggle"
+            aria-label={gridPaused ? "Resume grid animation" : "Pause grid animation"}
+            title={gridPaused ? "Resume grid animation" : "Pause grid animation"}
+            aria-pressed={gridPaused}
+          >
+            {gridPaused ? <Play aria-hidden="true" /> : <Pause aria-hidden="true" />}
+          </Button>
+          <Button variant="ghost" data-grid-explore className="grid-explore-cue" onClick={explore}>
+            SCROLL TO EXPLORE <ArrowDown aria-hidden="true" />
+          </Button>
+        </div>
+        <HeroImageLightbox
+          image={expandedImage}
+          onClose={closeImage}
+          onExplore={explore}
+          onAfterClose={afterClose}
+        />
+      </section>
+    );
+  }
 }
 
 // ===== components/LogoIntro.tsx =====
 namespace Module_components_LogoIntro {
-const originalLogo = asset_assets_balance_logo_navbar_png;
+  const originalLogo = asset_assets_balance_logo_navbar_png;
 
-/** One entrance clock owns the unchanged loader, grid reveal and slow travel. */
-export function LogoIntro({ onReveal, onComplete, onFinish }: { onReveal: () => void; onComplete: () => void; onFinish: () => void }) {
-  const layerRef = useRef<HTMLDivElement>(null);
-  const surfaceRef = useRef<HTMLDivElement>(null);
-  const logoRef = useRef<HTMLDivElement>(null);
-  const counterRef = useRef<HTMLParagraphElement>(null);
-  useEffect(() => {
-    const layer = layerRef.current;
-    const surface = surfaceRef.current;
-    const logo = logoRef.current;
-    const counter = counterRef.current;
-    const gallery = document.querySelector<HTMLElement>("[data-hero-gallery]");
-    if (!layer || !surface || !logo || !counter || !gallery) {
-      onReveal(); onComplete(); onFinish(); return;
-    }
-    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    let disposed = false;
-    let entrance: gsap.core.Timeline | undefined;
-    const columns = Array.from(gallery.querySelectorAll<HTMLElement>("[data-hero-column]"));
-    const tracks = Array.from(gallery.querySelectorAll<HTMLElement>("[data-column-track]"));
-    const geometry = { travel: 0 };
-    let offscreen = false;
-    const manual = { offset: 0 };
-    let manualTarget = 0;
-    let manualTween: gsap.core.Tween | undefined;
-    let resumeTimer: ReturnType<typeof setTimeout> | undefined;
-    let userPaused = false;
-    let lightboxOpen = false;
-    let touchY: number | undefined;
-    let dragged = false;
-    const interactive = () => gallery.dataset['phase'] === "hold" || gallery.dataset['phase'] === "movement";
-    const announce = () => gallery.dispatchEvent(new CustomEvent("grid-pause-state", { detail: userPaused || reduced || Boolean(entrance?.paused()) }));
-    const pause = () => { clearTimeout(resumeTimer); entrance?.pause(); announce(); };
-    const resume = () => {
-      if (disposed || userPaused || lightboxOpen || touchY !== undefined || document.hidden || offscreen || reduced || !interactive()) return;
-      manualTween?.kill(); manualTarget = manual.offset;
-      entrance?.resume(); announce();
-    };
-    const resumeLater = () => { clearTimeout(resumeTimer); resumeTimer = setTimeout(resume, 1600); };
-    const phase = (value: string) => {
-      layer.dataset['phase'] = value;
-      gallery.dataset['phase'] = value;
-      if (value === "movement") entrance?.timeScale(0.55);
-      place();
-    };
-    const previousOverflow = document.documentElement.style.overflow;
-    document.documentElement.style.overflow = "hidden";
-    layer.dataset['phase'] = "loading";
-    gsap.set(gallery, { opacity: 1 });
-    gsap.set(columns, { clipPath: "inset(100% 0 0 0)" });
-    const place = () => {
-      const height = window.innerHeight;
-      columns.forEach((column, i) => {
-        const track = tracks[i];
-        if (!track) return;
-        const cycles = track.querySelectorAll<HTMLElement>("[data-cycle-start]");
-        const first = cycles[0];
-        const next = cycles[1];
-        if (!first || !next) return;
-        const cycleHeight = next.offsetTop - first.offsetTop;
-        if (cycleHeight <= 0) return;
-        const distance = height * (i === 0 ? 0.7 : i === 1 ? 0.6 : 0.85);
-        // Measure natural photo stacks, never impose a uniform cell height.
-        // Leave several complete cycles above and below every viewport.
-        const start = Math.min(-cycleHeight, -cycleHeight * 3 + (i === 0 ? height * 0.18 + distance * 0.776 : i === 1 ? -height * 0.45 : -height * 0.12));
-        const travel = distance * geometry.travel + manual.offset;
-        const wrapped = gsap.utils.wrap(-cycleHeight, cycleHeight, travel);
-        gsap.set(track, { y: start + (i === 1 ? 1 : -1) * wrapped });
-        track.querySelectorAll<HTMLElement>("[data-column-image]").forEach(cell => {
-          const rect = cell.getBoundingClientRect();
-          cell.tabIndex = interactive() && rect.bottom > 0 && rect.top < height ? 0 : -1;
+  /** One entrance clock owns the unchanged loader, grid reveal and slow travel. */
+  export function LogoIntro({
+    onReveal,
+    onComplete,
+    onFinish,
+  }: {
+    onReveal: () => void;
+    onComplete: () => void;
+    onFinish: () => void;
+  }) {
+    const layerRef = useRef<HTMLDivElement>(null);
+    const surfaceRef = useRef<HTMLDivElement>(null);
+    const logoRef = useRef<HTMLDivElement>(null);
+    const counterRef = useRef<HTMLParagraphElement>(null);
+    useEffect(() => {
+      const layer = layerRef.current;
+      const surface = surfaceRef.current;
+      const logo = logoRef.current;
+      const counter = counterRef.current;
+      const gallery = document.querySelector<HTMLElement>("[data-hero-gallery]");
+      if (!layer || !surface || !logo || !counter || !gallery) {
+        onReveal();
+        onComplete();
+        onFinish();
+        return;
+      }
+      const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      let disposed = false;
+      let entrance: gsap.core.Timeline | undefined;
+      const columns = Array.from(gallery.querySelectorAll<HTMLElement>("[data-hero-column]"));
+      const tracks = Array.from(gallery.querySelectorAll<HTMLElement>("[data-column-track]"));
+      const geometry = { travel: 0 };
+      let offscreen = false;
+      const manual = { offset: 0 };
+      let manualTarget = 0;
+      let manualTween: gsap.core.Tween | undefined;
+      let resumeTimer: ReturnType<typeof setTimeout> | undefined;
+      let userPaused = false;
+      let lightboxOpen = false;
+      let touchY: number | undefined;
+      let dragged = false;
+      const interactive = () =>
+        gallery.dataset["phase"] === "hold" || gallery.dataset["phase"] === "movement";
+      const announce = () =>
+        gallery.dispatchEvent(
+          new CustomEvent("grid-pause-state", {
+            detail: userPaused || reduced || Boolean(entrance?.paused()),
+          }),
+        );
+      const pause = () => {
+        clearTimeout(resumeTimer);
+        entrance?.pause();
+        announce();
+      };
+      const resume = () => {
+        if (
+          disposed ||
+          userPaused ||
+          lightboxOpen ||
+          touchY !== undefined ||
+          document.hidden ||
+          offscreen ||
+          reduced ||
+          !interactive()
+        )
+          return;
+        manualTween?.kill();
+        manualTarget = manual.offset;
+        entrance?.resume();
+        announce();
+      };
+      const resumeLater = () => {
+        clearTimeout(resumeTimer);
+        resumeTimer = setTimeout(resume, 1600);
+      };
+      const phase = (value: string) => {
+        layer.dataset["phase"] = value;
+        gallery.dataset["phase"] = value;
+        if (value === "movement") entrance?.timeScale(0.55);
+        place();
+      };
+      const previousOverflow = document.documentElement.style.overflow;
+      document.documentElement.style.overflow = "hidden";
+      layer.dataset["phase"] = "loading";
+      gsap.set(gallery, { opacity: 1 });
+      gsap.set(columns, { clipPath: "inset(100% 0 0 0)" });
+      const place = () => {
+        const height = window.innerHeight;
+        columns.forEach((column, i) => {
+          const track = tracks[i];
+          if (!track) return;
+          const cycles = track.querySelectorAll<HTMLElement>("[data-cycle-start]");
+          const first = cycles[0];
+          const next = cycles[1];
+          if (!first || !next) return;
+          const cycleHeight = next.offsetTop - first.offsetTop;
+          if (cycleHeight <= 0) return;
+          const distance = height * (i === 0 ? 0.7 : i === 1 ? 0.6 : 0.85);
+          // Measure natural photo stacks, never impose a uniform cell height.
+          // Leave several complete cycles above and below every viewport.
+          const start = Math.min(
+            -cycleHeight,
+            -cycleHeight * 3 +
+              (i === 0
+                ? height * 0.18 + distance * 0.776
+                : i === 1
+                  ? -height * 0.45
+                  : -height * 0.12),
+          );
+          const travel = distance * geometry.travel + manual.offset;
+          const wrapped = gsap.utils.wrap(-cycleHeight, cycleHeight, travel);
+          gsap.set(track, { y: start + (i === 1 ? 1 : -1) * wrapped });
+          track.querySelectorAll<HTMLElement>("[data-column-image]").forEach((cell) => {
+            const rect = cell.getBoundingClientRect();
+            cell.tabIndex = interactive() && rect.bottom > 0 && rect.top < height ? 0 : -1;
+          });
         });
+      };
+      const move = (delta: number) => {
+        if (!interactive() || lightboxOpen) return;
+        pause();
+        // Bounded travel retains ample repeated cycles on either side of the viewport.
+        const cycles = tracks[0]?.querySelectorAll<HTMLElement>("[data-cycle-start]");
+        const cycle =
+          cycles?.[1] && cycles[0] ? cycles[1].offsetTop - cycles[0].offsetTop : window.innerHeight;
+        manualTarget = Math.max(-cycle * 1.5, Math.min(cycle * 6, manualTarget + delta));
+        manualTween?.kill();
+        manualTween = gsap.to(manual, {
+          offset: manualTarget,
+          duration: 0.65,
+          ease: "power2.out",
+          onUpdate: place,
+        });
+        resumeLater();
+      };
+      const wheel = (event: WheelEvent) => {
+        if (!interactive() || lightboxOpen || event.ctrlKey) return;
+        const unit = event.deltaMode === 1 ? 16 : event.deltaMode === 2 ? window.innerHeight : 1;
+        move(Math.max(-100, Math.min(100, event.deltaY * unit * 0.35)));
+      };
+      const touchStart = (event: TouchEvent) => {
+        if (interactive()) {
+          touchY = event.touches[0]?.clientY;
+          dragged = false;
+          pause();
+        }
+      };
+      const touchMove = (event: TouchEvent) => {
+        const next = event.touches[0]?.clientY;
+        if (!interactive() || lightboxOpen || touchY === undefined || next === undefined) return;
+        const delta = touchY - next;
+        if (Math.abs(delta) > 2) dragged = true;
+        move(delta * 0.55);
+        touchY = next;
+      };
+      const touchEnd = () => {
+        touchY = undefined;
+        resumeLater();
+      };
+      const click = (event: MouseEvent) => {
+        if (dragged && event.detail > 0) {
+          event.preventDefault();
+          event.stopImmediatePropagation();
+          dragged = false;
+          return;
+        }
+        dragged = false;
+        if (
+          !interactive() ||
+          !(event.target instanceof Element) ||
+          !event.target.closest("[data-grid-toggle]")
+        )
+          return;
+        userPaused = !userPaused;
+        if (userPaused) pause();
+        else resume();
+      };
+      const lightbox = (event: Event) => {
+        lightboxOpen = Boolean((event as CustomEvent<boolean>).detail);
+        if (lightboxOpen) {
+          pause();
+          manualTween?.kill();
+          manualTarget = manual.offset;
+        } else resumeLater();
+      };
+      const explore = () => {
+        userPaused = true;
+        pause();
+        manualTween?.kill();
+        manualTarget = manual.offset;
+      };
+      const visibility = () => {
+        if (document.hidden && interactive()) pause();
+        else resumeLater();
+      };
+      const focus = () => {
+        if (interactive()) pause();
+      };
+      const blur = () => {
+        if (!lightboxOpen) resumeLater();
+      };
+      gallery.addEventListener("wheel", wheel, { passive: true });
+      gallery.addEventListener("touchstart", touchStart, { passive: true });
+      gallery.addEventListener("touchmove", touchMove, { passive: true });
+      gallery.addEventListener("touchend", touchEnd);
+      gallery.addEventListener("touchcancel", touchEnd);
+      gallery.addEventListener("click", click, true);
+      gallery.addEventListener("grid-explore", explore);
+      gallery.addEventListener("grid-lightbox", lightbox);
+      gallery.addEventListener("focusin", focus);
+      gallery.addEventListener("focusout", blur);
+      document.addEventListener("visibilitychange", visibility);
+      const observer = new IntersectionObserver(([entry]) => {
+        offscreen = !entry?.isIntersecting;
+        if (offscreen && interactive()) pause();
+        else resumeLater();
       });
-    };
-    const move = (delta: number) => {
-      if (!interactive() || lightboxOpen) return;
-      pause();
-      // Bounded travel retains ample repeated cycles on either side of the viewport.
-      const cycles = tracks[0]?.querySelectorAll<HTMLElement>("[data-cycle-start]");
-      const cycle = cycles?.[1] && cycles[0] ? cycles[1].offsetTop - cycles[0].offsetTop : window.innerHeight;
-      manualTarget = Math.max(-cycle * 1.5, Math.min(cycle * 6, manualTarget + delta));
-      manualTween?.kill();
-      manualTween = gsap.to(manual, { offset: manualTarget, duration: 0.65, ease: "power2.out", onUpdate: place });
-      resumeLater();
-    };
-    const wheel = (event: WheelEvent) => {
-      if (!interactive() || lightboxOpen || event.ctrlKey) return;
-      const unit = event.deltaMode === 1 ? 16 : event.deltaMode === 2 ? window.innerHeight : 1;
-      move(Math.max(-100, Math.min(100, event.deltaY * unit * 0.35)));
-    };
-    const touchStart = (event: TouchEvent) => { if (interactive()) { touchY = event.touches[0]?.clientY; dragged = false; pause(); } };
-    const touchMove = (event: TouchEvent) => {
-      const next = event.touches[0]?.clientY;
-      if (!interactive() || lightboxOpen || touchY === undefined || next === undefined) return;
-      const delta = touchY - next;
-      if (Math.abs(delta) > 2) dragged = true;
-      move(delta * 0.55); touchY = next;
-    };
-    const touchEnd = () => { touchY = undefined; resumeLater(); };
-    const click = (event: MouseEvent) => {
-      if (dragged && event.detail > 0) { event.preventDefault(); event.stopImmediatePropagation(); dragged = false; return; }
-      dragged = false;
-      if (!interactive() || !(event.target instanceof Element) || !event.target.closest("[data-grid-toggle]")) return;
-      userPaused = !userPaused;
-      if (userPaused) pause(); else resume();
-    };
-    const lightbox = (event: Event) => {
-      lightboxOpen = Boolean((event as CustomEvent<boolean>).detail);
-      if (lightboxOpen) { pause(); manualTween?.kill(); manualTarget = manual.offset; }
-      else resumeLater();
-    };
-    const explore = () => { userPaused = true; pause(); manualTween?.kill(); manualTarget = manual.offset; };
-    const visibility = () => { if (document.hidden && interactive()) pause(); else resumeLater(); };
-    const focus = () => { if (interactive()) pause(); };
-    const blur = () => { if (!lightboxOpen) resumeLater(); };
-    gallery.addEventListener("wheel", wheel, { passive: true });
-    gallery.addEventListener("touchstart", touchStart, { passive: true });
-    gallery.addEventListener("touchmove", touchMove, { passive: true });
-    gallery.addEventListener("touchend", touchEnd);
-    gallery.addEventListener("touchcancel", touchEnd);
-    gallery.addEventListener("click", click, true);
-    gallery.addEventListener("grid-explore", explore);
-    gallery.addEventListener("grid-lightbox", lightbox);
-    gallery.addEventListener("focusin", focus);
-    gallery.addEventListener("focusout", blur);
-    document.addEventListener("visibilitychange", visibility);
-    const observer = new IntersectionObserver(([entry]) => {
-      offscreen = !entry?.isIntersecting;
-      if (offscreen && interactive()) pause(); else resumeLater();
-    });
-    observer.observe(gallery);
-    place();
-    let watchdog: ReturnType<typeof setTimeout> | undefined;
-    const prepare = async () => {
-      const images = Array.from(document.querySelectorAll<HTMLImageElement>("[data-intro-image], [data-intro-logo]"));
-      await Promise.all(images.map(async image => { try { await image.decode(); } catch { /* Failed assets cannot trap the loader. */ } }));
-    };
-    const assetsReady = Promise.race([prepare(), new Promise<void>(resolve => { watchdog = setTimeout(resolve, 8000); })]);
-    const begin = () => {
-      if (disposed) return;
-      clearTimeout(watchdog);
+      observer.observe(gallery);
       place();
-      entrance = gsap.timeline();
-      entrance.call(() => { phase("reveal"); }, [], 0)
-        .to(counter, { opacity: 0, duration: 0.4 }, 0)
-        .to(surface, { opacity: 0, duration: 0.85, ease: "power2.inOut" }, 0.2)
-        .to(columns, { clipPath: "inset(0% 0 0 0)", duration: 0.9, stagger: 0.08, ease: "power3.inOut" }, 0.2)
-        .to(logo, { opacity: 0, duration: 0.6 }, 0.3)
-        .call(() => {
-          phase("hold");
-          // Only loading locks the page. The grid never owns page navigation.
-          document.documentElement.style.overflow = previousOverflow;
-          gsap.set(layer, { display: "none" });
-          onReveal(); onComplete(); onFinish();
-        }, [], 1.26)
-        .call(() => { phase("movement"); }, [], 3.01)
-        .to(geometry, { travel: 1, duration: 3.4, ease: "power2.inOut", onUpdate: place }, 3.01)
-        .to(geometry, { travel: "+=1", duration: 12, repeat: -1, repeatRefresh: true, ease: "none", onUpdate: place });
-    };
-    const progress = { value: 0 };
-    const loading = gsap.timeline();
-    if (reduced) {
-      phase("hold");
-      gsap.set(columns, { clipPath: "inset(0% 0 0 0)" });
-      gsap.set(layer, { display: "none" });
-      document.documentElement.style.overflow = previousOverflow;
-      userPaused = true;
-      onReveal(); onComplete(); onFinish();
-      announce();
-    } else loading.to(progress, { value: 94, duration: 3.15, ease: "none", onUpdate: () => { counter.textContent = `${Math.floor(progress.value)}%`; } });
-    if (!reduced) loading.call(() => {
-      void assetsReady.then(() => {
+      let watchdog: ReturnType<typeof setTimeout> | undefined;
+      const prepare = async () => {
+        const images = Array.from(
+          document.querySelectorAll<HTMLImageElement>("[data-intro-image], [data-intro-logo]"),
+        );
+        await Promise.all(
+          images.map(async (image) => {
+            try {
+              await image.decode();
+            } catch {
+              /* Failed assets cannot trap the loader. */
+            }
+          }),
+        );
+      };
+      const assetsReady = Promise.race([
+        prepare(),
+        new Promise<void>((resolve) => {
+          watchdog = setTimeout(resolve, 8000);
+        }),
+      ]);
+      const begin = () => {
         if (disposed) return;
-        loading.to(progress, { value: 100, duration: 0.3, ease: "none", onUpdate: () => { counter.textContent = `${Math.floor(progress.value)}%`; } })
-          .to({}, { duration: 0.3 }).call(begin);
-      });
-    });
-    window.addEventListener("resize", place);
-    return () => {
-      disposed = true;
-      clearTimeout(resumeTimer);
-      manualTween?.kill();
-      gallery.removeEventListener("wheel", wheel);
-      gallery.removeEventListener("touchstart", touchStart);
-      gallery.removeEventListener("touchmove", touchMove);
-      gallery.removeEventListener("touchend", touchEnd);
-      gallery.removeEventListener("touchcancel", touchEnd);
-      gallery.removeEventListener("click", click, true);
-      gallery.removeEventListener("grid-explore", explore);
-      observer.disconnect();
-      gallery.removeEventListener("grid-lightbox", lightbox);
-      gallery.removeEventListener("focusin", focus);
-      gallery.removeEventListener("focusout", blur);
-      document.removeEventListener("visibilitychange", visibility);
-      delete gallery.dataset['phase'];
-      clearTimeout(watchdog);
-      loading.kill(); entrance?.kill();
-      window.removeEventListener("resize", place);
-      document.documentElement.style.overflow = previousOverflow;
-      gsap.set(gallery, { clearProps: "opacity" });
-      gsap.set(tracks, { clearProps: "transform" });
-      gsap.set(columns, { clearProps: "transform,opacity,clipPath" });
-    };
-  }, [onReveal, onComplete, onFinish]);
-  return (
-    <div ref={layerRef} data-logo-intro className="fixed inset-0 z-[80] pointer-events-none" aria-label="Loading Balance Design">
-      <div ref={surfaceRef} data-loader-surface className="absolute inset-0 bg-intro-background" />
-      <div ref={logoRef} className="intro-logo">
-        <img src={originalLogo} data-intro-logo alt="Balance Design" width={800} height={648} className="absolute inset-0 w-full h-full object-contain" />
+        clearTimeout(watchdog);
+        place();
+        entrance = gsap.timeline();
+        entrance
+          .call(
+            () => {
+              phase("reveal");
+            },
+            [],
+            0,
+          )
+          .to(counter, { opacity: 0, duration: 0.4 }, 0)
+          .to(surface, { opacity: 0, duration: 0.85, ease: "power2.inOut" }, 0.2)
+          .to(
+            columns,
+            { clipPath: "inset(0% 0 0 0)", duration: 0.9, stagger: 0.08, ease: "power3.inOut" },
+            0.2,
+          )
+          .to(logo, { opacity: 0, duration: 0.6 }, 0.3)
+          .call(
+            () => {
+              phase("hold");
+              // Only loading locks the page. The grid never owns page navigation.
+              document.documentElement.style.overflow = previousOverflow;
+              gsap.set(layer, { display: "none" });
+              onReveal();
+              onComplete();
+              onFinish();
+            },
+            [],
+            1.26,
+          )
+          .call(
+            () => {
+              phase("movement");
+            },
+            [],
+            3.01,
+          )
+          .to(geometry, { travel: 1, duration: 3.4, ease: "power2.inOut", onUpdate: place }, 3.01)
+          .to(geometry, {
+            travel: "+=1",
+            duration: 12,
+            repeat: -1,
+            repeatRefresh: true,
+            ease: "none",
+            onUpdate: place,
+          });
+      };
+      const progress = { value: 0 };
+      const loading = gsap.timeline();
+      if (reduced) {
+        phase("hold");
+        gsap.set(columns, { clipPath: "inset(0% 0 0 0)" });
+        gsap.set(layer, { display: "none" });
+        document.documentElement.style.overflow = previousOverflow;
+        userPaused = true;
+        onReveal();
+        onComplete();
+        onFinish();
+        announce();
+      } else
+        loading.to(progress, {
+          value: 94,
+          duration: 3.15,
+          ease: "none",
+          onUpdate: () => {
+            counter.textContent = `${Math.floor(progress.value)}%`;
+          },
+        });
+      if (!reduced)
+        loading.call(() => {
+          void assetsReady.then(() => {
+            if (disposed) return;
+            loading
+              .to(progress, {
+                value: 100,
+                duration: 0.3,
+                ease: "none",
+                onUpdate: () => {
+                  counter.textContent = `${Math.floor(progress.value)}%`;
+                },
+              })
+              .to({}, { duration: 0.3 })
+              .call(begin);
+          });
+        });
+      window.addEventListener("resize", place);
+      return () => {
+        disposed = true;
+        clearTimeout(resumeTimer);
+        manualTween?.kill();
+        gallery.removeEventListener("wheel", wheel);
+        gallery.removeEventListener("touchstart", touchStart);
+        gallery.removeEventListener("touchmove", touchMove);
+        gallery.removeEventListener("touchend", touchEnd);
+        gallery.removeEventListener("touchcancel", touchEnd);
+        gallery.removeEventListener("click", click, true);
+        gallery.removeEventListener("grid-explore", explore);
+        observer.disconnect();
+        gallery.removeEventListener("grid-lightbox", lightbox);
+        gallery.removeEventListener("focusin", focus);
+        gallery.removeEventListener("focusout", blur);
+        document.removeEventListener("visibilitychange", visibility);
+        delete gallery.dataset["phase"];
+        clearTimeout(watchdog);
+        loading.kill();
+        entrance?.kill();
+        window.removeEventListener("resize", place);
+        document.documentElement.style.overflow = previousOverflow;
+        gsap.set(gallery, { clearProps: "opacity" });
+        gsap.set(tracks, { clearProps: "transform" });
+        gsap.set(columns, { clearProps: "transform,opacity,clipPath" });
+      };
+    }, [onReveal, onComplete, onFinish]);
+    return (
+      <div
+        ref={layerRef}
+        data-logo-intro
+        className="fixed inset-0 z-[80] pointer-events-none"
+        aria-label="Loading Balance Design"
+      >
+        <div
+          ref={surfaceRef}
+          data-loader-surface
+          className="absolute inset-0 bg-intro-background"
+        />
+        <div ref={logoRef} className="intro-logo">
+          <img
+            src={originalLogo}
+            data-intro-logo
+            alt="Balance Design"
+            width={800}
+            height={648}
+            className="absolute inset-0 w-full h-full object-contain"
+          />
+        </div>
+        <p
+          ref={counterRef}
+          data-loading-counter
+          className="intro-counter text-intro-foreground"
+          aria-live="off"
+        >
+          0%
+        </p>
       </div>
-      <p ref={counterRef} data-loading-counter className="intro-counter text-intro-foreground" aria-live="off">0%</p>
-    </div>
-  );
-}
+    );
+  }
 }
 
 // ===== components/Reveal.tsx =====
 namespace Module_components_Reveal {
-export function Reveal({
-  children,
-  delay = 0,
-  className = "",
-}: {
-  children: ReactNode;
-  delay?: number;
-  className?: string;
-}) {
-  const ref = useRef<HTMLDivElement>(null);
-  const [shown, setShown] = useState(false);
+  export function Reveal({
+    children,
+    delay = 0,
+    className = "",
+  }: {
+    children: ReactNode;
+    delay?: number;
+    className?: string;
+  }) {
+    const ref = useRef<HTMLDivElement>(null);
+    const [shown, setShown] = useState(false);
 
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    const io = new IntersectionObserver(
-      ([entry]) => {
-        if (entry?.isIntersecting) {
-          setShown(true);
-          io.disconnect();
-        }
-      },
-      { threshold: 0.12, rootMargin: "0px 0px -6% 0px" },
+    useEffect(() => {
+      const el = ref.current;
+      if (!el) return;
+      const io = new IntersectionObserver(
+        ([entry]) => {
+          if (entry?.isIntersecting) {
+            setShown(true);
+            io.disconnect();
+          }
+        },
+        { threshold: 0.12, rootMargin: "0px 0px -6% 0px" },
+      );
+      io.observe(el);
+      return () => io.disconnect();
+    }, []);
+
+    return (
+      <div
+        ref={ref}
+        className={`reveal ${shown ? "reveal-in" : ""} ${className}`}
+        style={{ transitionDelay: `${delay}ms` }}
+      >
+        {children}
+      </div>
     );
-    io.observe(el);
-    return () => io.disconnect();
-  }, []);
-
-  return (
-    <div
-      ref={ref}
-      className={`reveal ${shown ? "reveal-in" : ""} ${className}`}
-      style={{ transitionDelay: `${delay}ms` }}
-    >
-      {children}
-    </div>
-  );
-}
+  }
 }
 
 // ===== components/LogoMark.tsx =====
 namespace Module_components_LogoMark {
-const logoMark = asset_assets_balance_logo_mark_png;
+  const logoMark = asset_assets_balance_logo_mark_png;
 
-export function LogoMark({ className = "" }: { className?: string }) {
-  return (
-    <img
-      src={logoMark}
-      alt="Balance Design diamond mark"
-      className={`mx-auto h-10 w-auto object-contain md:h-14 ${className}`}
-      width={120}
-      height={80}
-    />
-  );
-}
+  export function LogoMark({ className = "" }: { className?: string }) {
+    return (
+      <img
+        src={logoMark}
+        alt="Balance Design diamond mark"
+        className={`mx-auto h-10 w-auto object-contain md:h-14 ${className}`}
+        width={120}
+        height={80}
+      />
+    );
+  }
 }
 
 // ===== components/Testimonials.tsx =====
 namespace Module_components_Testimonials {
-const videoOne = asset_assets_testimonial_1_mp4;
-const videoTwo = asset_assets_testimonial_2_mp4;
-const posterOne = asset_assets_testimonial_1_poster_jpg;
-const posterTwo = asset_assets_testimonial_2_poster_jpg;
-const videoThree = asset_assets_testimonial_3_mp4;
-const videoFour = asset_assets_testimonial_4_mp4;
-const posterThree = asset_assets_testimonial_3_poster_jpg;
-const posterFour = asset_assets_testimonial_4_poster_jpg;
-const video5 = asset_assets_testimonial_5_mp4;
-const video6 = asset_assets_testimonial_6_mp4;
-const video7 = asset_assets_testimonial_7_mp4;
-const video8 = asset_assets_testimonial_8_mp4;
-const video9 = asset_assets_testimonial_9_mp4;
-const video10 = asset_assets_testimonial_10_mp4;
-const video11 = asset_assets_testimonial_11_mp4;
-const video12 = asset_assets_testimonial_12_mp4;
-const video13 = asset_assets_testimonial_13_mp4;
-const poster5 = asset_assets_testimonial_5_poster_jpg;
-const poster6 = asset_assets_testimonial_6_poster_jpg;
-const poster7 = asset_assets_testimonial_7_poster_jpg;
-const poster8 = asset_assets_testimonial_8_poster_jpg;
-const poster9 = asset_assets_testimonial_9_poster_jpg;
-const poster10 = asset_assets_testimonial_10_poster_jpg;
-const poster11 = asset_assets_testimonial_11_poster_jpg;
-const poster12 = asset_assets_testimonial_12_poster_jpg;
-const poster13 = asset_assets_testimonial_13_poster_jpg;
+  const videoOne = asset_assets_testimonial_1_mp4;
+  const videoTwo = asset_assets_testimonial_2_mp4;
+  const posterOne = asset_assets_testimonial_1_poster_jpg;
+  const posterTwo = asset_assets_testimonial_2_poster_jpg;
+  const videoThree = asset_assets_testimonial_3_mp4;
+  const videoFour = asset_assets_testimonial_4_mp4;
+  const posterThree = asset_assets_testimonial_3_poster_jpg;
+  const posterFour = asset_assets_testimonial_4_poster_jpg;
+  const video5 = asset_assets_testimonial_5_mp4;
+  const video6 = asset_assets_testimonial_6_mp4;
+  const video7 = asset_assets_testimonial_7_mp4;
+  const video8 = asset_assets_testimonial_8_mp4;
+  const video9 = asset_assets_testimonial_9_mp4;
+  const video10 = asset_assets_testimonial_10_mp4;
+  const video11 = asset_assets_testimonial_11_mp4;
+  const video12 = asset_assets_testimonial_12_mp4;
+  const video13 = asset_assets_testimonial_13_mp4;
+  const poster5 = asset_assets_testimonial_5_poster_jpg;
+  const poster6 = asset_assets_testimonial_6_poster_jpg;
+  const poster7 = asset_assets_testimonial_7_poster_jpg;
+  const poster8 = asset_assets_testimonial_8_poster_jpg;
+  const poster9 = asset_assets_testimonial_9_poster_jpg;
+  const poster10 = asset_assets_testimonial_10_poster_jpg;
+  const poster11 = asset_assets_testimonial_11_poster_jpg;
+  const poster12 = asset_assets_testimonial_12_poster_jpg;
+  const poster13 = asset_assets_testimonial_13_poster_jpg;
 
+  import LogoMark = Module_components_LogoMark.LogoMark;
 
-import LogoMark = Module_components_LogoMark.LogoMark;
+  import Reveal = Module_components_Reveal.Reveal;
 
-import Reveal = Module_components_Reveal.Reveal;
-
-
-type VideoTestimonial = {
-  id: string;
-  name: string;
-  role: string;
-  video: string;
-  poster: string;
-};
-
-const TESTIMONIALS: VideoTestimonial[] = [
-  { id: "t1", name: "", role: "", video: videoOne, poster: posterOne },
-  { id: "t2", name: "", role: "", video: videoTwo, poster: posterTwo },
-  { id: "t3", name: "", role: "", video: videoThree, poster: posterThree },
-  { id: "t4", name: "", role: "", video: videoFour, poster: posterFour },
-  { id: "t5", name: "", role: "", video: video5, poster: poster5 },
-  { id: "t6", name: "", role: "", video: video6, poster: poster6 },
-  { id: "t7", name: "", role: "", video: video7, poster: poster7 },
-  { id: "t8", name: "", role: "", video: video8, poster: poster8 },
-  { id: "t9", name: "", role: "", video: video9, poster: poster9 },
-  { id: "t10", name: "", role: "", video: video10, poster: poster10 },
-  { id: "t11", name: "", role: "", video: video11, poster: poster11 },
-  { id: "t12", name: "", role: "", video: video12, poster: poster12 },
-  { id: "t13", name: "", role: "", video: video13, poster: poster13 },
-];
-
-const COUNT = TESTIMONIALS.length;
-
-function offsetFrom(index: number, active: number) {
-  let diff = index - active;
-  if (diff > COUNT / 2) diff -= COUNT;
-  if (diff < -COUNT / 2) diff += COUNT;
-  return diff;
-}
-
-export function Testimonials() {
-  const [active, setActive] = useState(0);
-  const [, setTimerKey] = useState(0);
-  const [inView, setInView] = useState(false);
-  const [soundOn, setSoundOn] = useState(true);
-  const [reach, setReach] = useState(2);
-
-  useEffect(() => {
-    const mq = window.matchMedia("(min-width: 1024px)");
-    const update = () => setReach(mq.matches ? 2 : 1);
-    update();
-    mq.addEventListener("change", update);
-    return () => mq.removeEventListener("change", update);
-  }, []);
-  const sectionRef = useRef<HTMLElement | null>(null);
-  const videoRefs = useRef<Array<HTMLVideoElement | null>>([]);
-  const drag = useRef<{ x: number; active: boolean }>({ x: 0, active: false });
-
-  const go = useCallback((dir: number) => {
-    setActive((v) => (v + dir + COUNT) % COUNT);
-    setTimerKey((k) => k + 1);
-  }, []);
-
-  const select = useCallback((index: number) => {
-    setActive(index);
-    setTimerKey((k) => k + 1);
-  }, []);
-
-  // Track viewport visibility
-  useEffect(() => {
-    const el = sectionRef.current;
-    if (!el) return;
-    const io = new IntersectionObserver(
-      ([entry]) => setInView(!!entry && entry.isIntersecting && entry.intersectionRatio > 0.25),
-      { threshold: [0, 0.25, 0.5] },
-    );
-    io.observe(el);
-    return () => io.disconnect();
-  }, []);
-
-  // Only the active card plays
-  useEffect(() => {
-    videoRefs.current.forEach((video, index) => {
-      if (!video) return;
-      if (index === active && inView) {
-        video.muted = !soundOn;
-        const play = video.play();
-        if (play && typeof play.catch === "function")
-          play.catch(() => {
-            video.muted = true;
-            setSoundOn(false);
-            video.play().catch(() => {});
-          });
-      } else {
-        video.pause();
-        video.muted = true;
-        if (index !== active) video.currentTime = 0;
-      }
-    });
-  }, [active, inView, soundOn]);
-
-
-  const onPointerDown = (event: React.PointerEvent) => {
-    drag.current = { x: event.clientX, active: true };
-  };
-  const onPointerUp = (event: React.PointerEvent) => {
-    if (!drag.current.active) return;
-    const delta = event.clientX - drag.current.x;
-    drag.current.active = false;
-    if (Math.abs(delta) > 48) go(delta < 0 ? 1 : -1);
+  type VideoTestimonial = {
+    id: string;
+    name: string;
+    role: string;
+    video: string;
+    poster: string;
   };
 
-  return (
-    <section
-      ref={sectionRef}
-      className="overflow-hidden border-t border-border bg-background py-16 md:py-24"
-      aria-roledescription="carousel"
-      aria-label="Video testimonials"
-    >
-      <div className="mx-auto max-w-5xl px-6 md:px-12">
-        <Reveal>
-          <LogoMark className="mb-8 md:mb-10" />
-        </Reveal>
-        <Reveal delay={80}>
-          <p className="label-xs text-center text-red">Testimonials</p>
-          <h2 className="display mt-4 mb-12 text-center text-4xl leading-[1.05] md:mb-16 md:text-6xl">
-            What Brands and Customers Say About Us
-          </h2>
-        </Reveal>
-      </div>
+  const TESTIMONIALS: VideoTestimonial[] = [
+    { id: "t1", name: "", role: "", video: videoOne, poster: posterOne },
+    { id: "t2", name: "", role: "", video: videoTwo, poster: posterTwo },
+    { id: "t3", name: "", role: "", video: videoThree, poster: posterThree },
+    { id: "t4", name: "", role: "", video: videoFour, poster: posterFour },
+    { id: "t5", name: "", role: "", video: video5, poster: poster5 },
+    { id: "t6", name: "", role: "", video: video6, poster: poster6 },
+    { id: "t7", name: "", role: "", video: video7, poster: poster7 },
+    { id: "t8", name: "", role: "", video: video8, poster: poster8 },
+    { id: "t9", name: "", role: "", video: video9, poster: poster9 },
+    { id: "t10", name: "", role: "", video: video10, poster: poster10 },
+    { id: "t11", name: "", role: "", video: video11, poster: poster11 },
+    { id: "t12", name: "", role: "", video: video12, poster: poster12 },
+    { id: "t13", name: "", role: "", video: video13, poster: poster13 },
+  ];
 
-      <Reveal>
-        <div
-          className="relative mx-auto flex h-[112vw] max-h-[40rem] min-h-[27rem] w-full touch-pan-y select-none items-center justify-center md:h-[37rem] md:w-[92vw] lg:h-[max(30vw,30rem)] lg:max-h-[38rem] lg:w-[92vw]"
-          onPointerDown={onPointerDown}
-          onPointerUp={onPointerUp}
-          onPointerCancel={() => (drag.current.active = false)}
-        >
-          {TESTIMONIALS.map((item, index) => {
-            const offset = offsetFrom(index, active);
-            const isActive = offset === 0;
-            const dist = Math.abs(offset);
-            const hidden = dist > reach;
-            const sign = Math.sign(offset);
-            // Position (in card widths) and depth per distance from center.
-            const POS = reach === 2 ? [0, 0.98, 1.84, 2.5] : [0, 0.92, 1.6, 2.2];
-            const SCALE = reach === 2 ? [1, 0.85, 0.72, 0.6] : [1, 0.82, 0.66, 0.6];
-            const OPACITY = reach === 2 ? [1, 0.72, 0.42, 0] : [1, 0.68, 0, 0];
-            const step = Math.min(dist, 3);
-            return (
-              <article
-                key={item.id}
-                aria-hidden={!isActive}
-                onClick={() => !isActive && !hidden && select(index)}
-                className="absolute top-1/2 left-1/2 w-[64vw] transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] motion-reduce:transition-none sm:w-[52vw] md:w-[min(38vw,23rem)] lg:w-[min(18vw,22rem)]"
-                style={{
-                  transform: `translate3d(calc(-50% + ${sign * (POS[step] ?? 0) * 100}%), -50%, 0) scale(${SCALE[step] ?? 1})`,
-                  opacity: hidden ? 0 : (OPACITY[step] ?? 0),
-                  zIndex: 20 - dist,
-                  pointerEvents: hidden ? "none" : "auto",
-                  cursor: isActive ? "default" : "pointer",
-                }}
-              >
-                <div className="relative aspect-[3/4] overflow-hidden rounded-[1.75rem] bg-muted shadow-[0_30px_80px_-50px_rgba(0,0,0,0.5)]">
-                  <video
-                    ref={(el) => {
-                      videoRefs.current[index] = el;
-                    }}
-                    src={item.video}
-                    poster={item.poster}
-                    muted
-                    playsInline
-                    preload="metadata"
-                    onEnded={() => isActive && go(1)}
-                    className="h-full w-full object-cover"
-                  />
-                  {isActive && (
-                    <button
-                      type="button"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        setSoundOn((v) => !v);
-                      }}
-                      onPointerDown={(e) => e.stopPropagation()}
-                      aria-label={soundOn ? "Mute video" : "Unmute video"}
-                      className="absolute bottom-4 right-4 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-charcoal/50 text-ivory backdrop-blur-sm transition-colors hover:bg-charcoal/80"
-                    >
-                      {soundOn ? <Volume2 className="h-5 w-5" /> : <VolumeX className="h-5 w-5" />}
-                    </button>
-                  )}
-                </div>
-              </article>
-            );
-          })}
+  const COUNT = TESTIMONIALS.length;
 
-          <button
-            type="button"
-            aria-label="Previous testimonial"
-            onClick={() => go(-1)}
-            className="group absolute top-[calc(50%-2rem)] left-2 z-30 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-foreground/25 text-foreground/70 transition-all duration-300 hover:scale-105 hover:border-foreground hover:bg-foreground hover:text-background md:left-4 lg:left-2"
-          >
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7" /></svg>
-          </button>
-          <button
-            type="button"
-            aria-label="Next testimonial"
-            onClick={() => go(1)}
-            className="group absolute top-[calc(50%-2rem)] right-2 z-30 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-foreground/25 text-foreground/70 transition-all duration-300 hover:scale-105 hover:border-foreground hover:bg-foreground hover:text-background md:right-4 lg:right-2"
-          >
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7" /></svg>
-          </button>
+  function offsetFrom(index: number, active: number) {
+    let diff = index - active;
+    if (diff > COUNT / 2) diff -= COUNT;
+    if (diff < -COUNT / 2) diff += COUNT;
+    return diff;
+  }
+
+  export function Testimonials() {
+    const [active, setActive] = useState(0);
+    const [, setTimerKey] = useState(0);
+    const [inView, setInView] = useState(false);
+    const [soundOn, setSoundOn] = useState(true);
+    const [reach, setReach] = useState(2);
+
+    useEffect(() => {
+      const mq = window.matchMedia("(min-width: 1024px)");
+      const update = () => setReach(mq.matches ? 2 : 1);
+      update();
+      mq.addEventListener("change", update);
+      return () => mq.removeEventListener("change", update);
+    }, []);
+    const sectionRef = useRef<HTMLElement | null>(null);
+    const videoRefs = useRef<Array<HTMLVideoElement | null>>([]);
+    const drag = useRef<{ x: number; active: boolean }>({ x: 0, active: false });
+
+    const go = useCallback((dir: number) => {
+      setActive((v) => (v + dir + COUNT) % COUNT);
+      setTimerKey((k) => k + 1);
+    }, []);
+
+    const select = useCallback((index: number) => {
+      setActive(index);
+      setTimerKey((k) => k + 1);
+    }, []);
+
+    // Track viewport visibility
+    useEffect(() => {
+      const el = sectionRef.current;
+      if (!el) return;
+      const io = new IntersectionObserver(
+        ([entry]) => setInView(!!entry && entry.isIntersecting && entry.intersectionRatio > 0.25),
+        { threshold: [0, 0.25, 0.5] },
+      );
+      io.observe(el);
+      return () => io.disconnect();
+    }, []);
+
+    // Only the active card plays
+    useEffect(() => {
+      videoRefs.current.forEach((video, index) => {
+        if (!video) return;
+        if (index === active && inView) {
+          video.muted = !soundOn;
+          const play = video.play();
+          if (play && typeof play.catch === "function")
+            play.catch(() => {
+              video.muted = true;
+              setSoundOn(false);
+              video.play().catch(() => {});
+            });
+        } else {
+          video.pause();
+          video.muted = true;
+          if (index !== active) video.currentTime = 0;
+        }
+      });
+    }, [active, inView, soundOn]);
+
+    const onPointerDown = (event: React.PointerEvent) => {
+      drag.current = { x: event.clientX, active: true };
+    };
+    const onPointerUp = (event: React.PointerEvent) => {
+      if (!drag.current.active) return;
+      const delta = event.clientX - drag.current.x;
+      drag.current.active = false;
+      if (Math.abs(delta) > 48) go(delta < 0 ? 1 : -1);
+    };
+
+    return (
+      <section
+        ref={sectionRef}
+        className="overflow-hidden border-t border-border bg-background py-16 md:py-24"
+        aria-roledescription="carousel"
+        aria-label="Video testimonials"
+      >
+        <div className="mx-auto max-w-5xl px-6 md:px-12">
+          <Reveal>
+            <LogoMark className="mb-8 md:mb-10" />
+          </Reveal>
+          <Reveal delay={80}>
+            <p className="label-xs text-center text-red">Testimonials</p>
+            <h2 className="display mt-4 mb-12 text-center text-4xl leading-[1.05] md:mb-16 md:text-6xl">
+              What Brands and Customers Say About Us
+            </h2>
+          </Reveal>
         </div>
-      </Reveal>
-    </section>
-  );
-}
+
+        <Reveal>
+          <div
+            className="relative mx-auto flex h-[112vw] max-h-[40rem] min-h-[27rem] w-full touch-pan-y select-none items-center justify-center md:h-[37rem] md:w-[92vw] lg:h-[max(30vw,30rem)] lg:max-h-[38rem] lg:w-[92vw]"
+            onPointerDown={onPointerDown}
+            onPointerUp={onPointerUp}
+            onPointerCancel={() => (drag.current.active = false)}
+          >
+            {TESTIMONIALS.map((item, index) => {
+              const offset = offsetFrom(index, active);
+              const isActive = offset === 0;
+              const dist = Math.abs(offset);
+              const hidden = dist > reach;
+              const sign = Math.sign(offset);
+              // Position (in card widths) and depth per distance from center.
+              const POS = reach === 2 ? [0, 0.98, 1.84, 2.5] : [0, 0.92, 1.6, 2.2];
+              const SCALE = reach === 2 ? [1, 0.85, 0.72, 0.6] : [1, 0.82, 0.66, 0.6];
+              const OPACITY = reach === 2 ? [1, 0.72, 0.42, 0] : [1, 0.68, 0, 0];
+              const step = Math.min(dist, 3);
+              return (
+                <article
+                  key={item.id}
+                  aria-hidden={!isActive}
+                  onClick={() => !isActive && !hidden && select(index)}
+                  className="absolute top-1/2 left-1/2 w-[64vw] transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] motion-reduce:transition-none sm:w-[52vw] md:w-[min(38vw,23rem)] lg:w-[min(18vw,22rem)]"
+                  style={{
+                    transform: `translate3d(calc(-50% + ${sign * (POS[step] ?? 0) * 100}%), -50%, 0) scale(${SCALE[step] ?? 1})`,
+                    opacity: hidden ? 0 : (OPACITY[step] ?? 0),
+                    zIndex: 20 - dist,
+                    pointerEvents: hidden ? "none" : "auto",
+                    cursor: isActive ? "default" : "pointer",
+                  }}
+                >
+                  <div className="relative aspect-[3/4] overflow-hidden rounded-[1.75rem] bg-muted shadow-[0_30px_80px_-50px_rgba(0,0,0,0.5)]">
+                    <video
+                      ref={(el) => {
+                        videoRefs.current[index] = el;
+                      }}
+                      src={item.video}
+                      poster={item.poster}
+                      muted
+                      playsInline
+                      preload="metadata"
+                      onEnded={() => isActive && go(1)}
+                      className="h-full w-full object-cover"
+                    />
+                    {isActive && (
+                      <button
+                        type="button"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setSoundOn((v) => !v);
+                        }}
+                        onPointerDown={(e) => e.stopPropagation()}
+                        aria-label={soundOn ? "Mute video" : "Unmute video"}
+                        className="absolute bottom-4 right-4 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-charcoal/50 text-ivory backdrop-blur-sm transition-colors hover:bg-charcoal/80"
+                      >
+                        {soundOn ? (
+                          <Volume2 className="h-5 w-5" />
+                        ) : (
+                          <VolumeX className="h-5 w-5" />
+                        )}
+                      </button>
+                    )}
+                  </div>
+                </article>
+              );
+            })}
+
+            <button
+              type="button"
+              aria-label="Previous testimonial"
+              onClick={() => go(-1)}
+              className="group absolute top-[calc(50%-2rem)] left-2 z-30 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-foreground/25 text-foreground/70 transition-all duration-300 hover:scale-105 hover:border-foreground hover:bg-foreground hover:text-background md:left-4 lg:left-2"
+            >
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M15 5l-7 7 7 7" />
+              </svg>
+            </button>
+            <button
+              type="button"
+              aria-label="Next testimonial"
+              onClick={() => go(1)}
+              className="group absolute top-[calc(50%-2rem)] right-2 z-30 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-foreground/25 text-foreground/70 transition-all duration-300 hover:scale-105 hover:border-foreground hover:bg-foreground hover:text-background md:right-4 lg:right-2"
+            >
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M9 5l7 7-7 7" />
+              </svg>
+            </button>
+          </div>
+        </Reveal>
+      </section>
+    );
+  }
 }
 
 // ===== components/CtaSection.tsx =====
 namespace Module_components_CtaSection {
-import Reveal = Module_components_Reveal.Reveal;
+  import Reveal = Module_components_Reveal.Reveal;
 
-
-export function CtaSection() {
-  return (
-    <section id="contact" className="bg-red text-primary-foreground py-28 md:py-44">
-      <div className="mx-auto max-w-7xl px-6 md:px-12">
-        <Reveal>
-          <h2 className="display max-w-4xl text-[2.75rem] leading-[0.95] sm:text-6xl md:text-[6rem]">
-            Let&rsquo;s create a
-            <br />
-            stronger presence.
-          </h2>
-        </Reveal>
-        <Reveal delay={100}>
-          <p className="label-xs mt-10 opacity-80">Design &amp; Fashion Consultancy</p>
-        </Reveal>
-        <Reveal delay={180}>
-          <a
-            href="mailto:contact@balancedesign.in"
-            className="btn-ghost label-xs mt-12 inline-block hover:bg-background hover:text-red"
-          >
-            Book an appointment
-          </a>
-        </Reveal>
-      </div>
-    </section>
-  );
-}
+  export function CtaSection() {
+    return (
+      <section id="contact" className="bg-red text-primary-foreground py-28 md:py-44">
+        <div className="mx-auto max-w-7xl px-6 md:px-12">
+          <Reveal>
+            <h2 className="display max-w-4xl text-[2.75rem] leading-[0.95] sm:text-6xl md:text-[6rem]">
+              Let&rsquo;s create a
+              <br />
+              stronger presence.
+            </h2>
+          </Reveal>
+          <Reveal delay={100}>
+            <p className="label-xs mt-10 opacity-80">Design &amp; Fashion Consultancy</p>
+          </Reveal>
+          <Reveal delay={180}>
+            <a
+              href="mailto:contact@balancedesign.in"
+              className="btn-ghost label-xs mt-12 inline-block hover:bg-background hover:text-red"
+            >
+              Book an appointment
+            </a>
+          </Reveal>
+        </div>
+      </section>
+    );
+  }
 }
 
 // ===== components/SiteFooter.tsx =====
 namespace Module_components_SiteFooter {
-const logoLight = asset_assets_balance_logo_on_black_png;
+  const logoLight = asset_assets_balance_logo_on_black_png;
 
-export function SiteFooter() {
-  const ref = useRef<HTMLElement>(null);
-  const [progress, setProgress] = useState(0);
+  export function SiteFooter() {
+    const ref = useRef<HTMLElement>(null);
+    const [progress, setProgress] = useState(0);
 
-  useEffect(() => {
-    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const mobile = window.innerWidth < 768;
-    let target = 0;
-    let value = 0;
-    let velocity = 0;
-    let raf = 0;
-    let running = false;
+    useEffect(() => {
+      const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      const mobile = window.innerWidth < 768;
+      let target = 0;
+      let value = 0;
+      let velocity = 0;
+      let raf = 0;
+      let running = false;
 
-    const measure = () => {
-      const el = ref.current;
-      if (!el) return 0;
-      const rect = el.getBoundingClientRect();
-      const vh = window.innerHeight;
-      // 0 when the footer first enters, 1 when it is fully revealed
-      return Math.min(1, Math.max(0, (vh - rect.top) / Math.min(rect.height, vh)));
-    };
+      const measure = () => {
+        const el = ref.current;
+        if (!el) return 0;
+        const rect = el.getBoundingClientRect();
+        const vh = window.innerHeight;
+        // 0 when the footer first enters, 1 when it is fully revealed
+        return Math.min(1, Math.max(0, (vh - rect.top) / Math.min(rect.height, vh)));
+      };
 
-    // Spring-driven reveal: the footer settles with a light elastic overshoot
-    // whose strength follows how fast the reader scrolled into it, and unwinds
-    // the same way when scrolling back up.
-    const tick = () => {
-      const stiffness = mobile ? 0.14 : 0.11;
-      const damping = mobile ? 0.74 : 0.8;
-      velocity += (target - value) * stiffness;
-      velocity *= damping;
-      value += velocity;
-      setProgress(value);
-      if (Math.abs(target - value) > 0.0008 || Math.abs(velocity) > 0.0008) {
-        raf = window.requestAnimationFrame(tick);
-      } else {
-        value = target;
-        velocity = 0;
+      // Spring-driven reveal: the footer settles with a light elastic overshoot
+      // whose strength follows how fast the reader scrolled into it, and unwinds
+      // the same way when scrolling back up.
+      const tick = () => {
+        const stiffness = mobile ? 0.14 : 0.11;
+        const damping = mobile ? 0.74 : 0.8;
+        velocity += (target - value) * stiffness;
+        velocity *= damping;
+        value += velocity;
         setProgress(value);
-        running = false;
-      }
-    };
+        if (Math.abs(target - value) > 0.0008 || Math.abs(velocity) > 0.0008) {
+          raf = window.requestAnimationFrame(tick);
+        } else {
+          value = target;
+          velocity = 0;
+          setProgress(value);
+          running = false;
+        }
+      };
 
-    const onScroll = () => {
-      const next = measure();
-      if (reduce) {
-        setProgress(next);
-        return;
-      }
-      velocity += (next - target) * (mobile ? 0.18 : 0.3);
-      target = next;
-      if (!running) {
-        running = true;
-        raf = window.requestAnimationFrame(tick);
-      }
-    };
+      const onScroll = () => {
+        const next = measure();
+        if (reduce) {
+          setProgress(next);
+          return;
+        }
+        velocity += (next - target) * (mobile ? 0.18 : 0.3);
+        target = next;
+        if (!running) {
+          running = true;
+          raf = window.requestAnimationFrame(tick);
+        }
+      };
 
-    target = measure();
-    value = target;
-    setProgress(target);
-    window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onScroll);
-    return () => {
-      window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", onScroll);
-      if (raf) window.cancelAnimationFrame(raf);
-    };
-  }, []);
+      target = measure();
+      value = target;
+      setProgress(target);
+      window.addEventListener("scroll", onScroll, { passive: true });
+      window.addEventListener("resize", onScroll);
+      return () => {
+        window.removeEventListener("scroll", onScroll);
+        window.removeEventListener("resize", onScroll);
+        if (raf) window.cancelAnimationFrame(raf);
+      };
+    }, []);
 
-  return (
-    <footer
-      ref={ref}
-      id="contact"
-      className="relative z-0 overflow-hidden bg-charcoal text-ivory"
-    >
-      <div className="mx-auto max-w-7xl px-6 pb-4 pt-20 md:px-12 md:pt-28">
-        <div
-          className="transition-none"
-          style={{
-            opacity: Math.max(0, Math.min(1, progress * 1.6)),
-            transform: `translateY(${((1 - progress * 1.4) * 40).toFixed(2)}px)`,
-          }}
-        >
-          <img
-            src={logoLight}
-            alt="Balance Design & Fashion Consultancy logo"
-            className="h-24 w-auto md:h-32"
-          />
+    return (
+      <footer
+        ref={ref}
+        id="contact"
+        className="relative z-0 overflow-hidden bg-charcoal text-ivory"
+      >
+        <div className="mx-auto max-w-7xl px-6 pb-4 pt-20 md:px-12 md:pt-28">
+          <div
+            className="transition-none"
+            style={{
+              opacity: Math.max(0, Math.min(1, progress * 1.6)),
+              transform: `translateY(${((1 - progress * 1.4) * 40).toFixed(2)}px)`,
+            }}
+          >
+            <img
+              src={logoLight}
+              alt="Balance Design & Fashion Consultancy logo"
+              className="h-24 w-auto md:h-32"
+            />
 
-          <p className="label-xs mt-6 opacity-60">Design &amp; Fashion Consultancy</p>
+            <p className="label-xs mt-6 opacity-60">Design &amp; Fashion Consultancy</p>
 
-          <div className="mt-14 grid grid-cols-1 gap-10 border-t border-ivory/15 pt-10 sm:grid-cols-3">
-            <nav className="flex flex-col gap-4">
-              {[
-                { l: "Home", h: "/#top" },
-                { l: "About Us", h: "/about" },
-                { l: "Events", h: "/events" },
-                { l: "Contact Us", h: "/contact" },
-              ].map((n) => (
-                <a
-                  key={n.l}
-                  href={n.h}
-                  className="label-xs transition-opacity duration-500 hover:opacity-50"
-                >
-                  {n.l}
-                </a>
-              ))}
-            </nav>
-            <div>
-              <p className="label-xs opacity-50">Enquiries</p>
-              <a
-                href="mailto:info@balancedesign.in"
-                className="link-underline mt-4 inline-block font-display text-2xl md:text-3xl"
-              >
-                info@balancedesign.in
-              </a>
-            </div>
-            <div>
-              <p className="label-xs opacity-50">Connect with us</p>
-              <div className="mt-5 flex items-center gap-5">
+            <div className="mt-14 grid grid-cols-1 gap-10 border-t border-ivory/15 pt-10 sm:grid-cols-3">
+              <nav className="flex flex-col gap-4">
                 {[
-                  { label: "Facebook", href: "https://www.facebook.com", Icon: Facebook },
-                  { label: "LinkedIn", href: "https://www.linkedin.com/in/upmashrian", Icon: Linkedin },
-                  { label: "Instagram", href: "https://www.instagram.com", Icon: Instagram },
-                  { label: "Twitter", href: "https://x.com/upmashrian?s=11", Icon: Twitter },
-                  { label: "YouTube", href: "https://www.youtube.com/@upmashrianyourstylestateme8378", Icon: Youtube },
-                ].map(({ label, href, Icon }) => (
+                  { l: "Home", h: "/#top" },
+                  { l: "About Us", h: "/about" },
+                  { l: "Events", h: "/events" },
+                  { l: "Contact Us", h: "/contact" },
+                ].map((n) => (
                   <a
-                    key={label}
-                    href={href}
-                    target="_blank"
-                    rel="noreferrer"
-                    aria-label={label}
-                    className="transition-opacity duration-500 hover:opacity-50"
+                    key={n.l}
+                    href={n.h}
+                    className="label-xs transition-opacity duration-500 hover:opacity-50"
                   >
-                    <Icon aria-hidden="true" size={23} strokeWidth={1.4} />
+                    {n.l}
                   </a>
                 ))}
+              </nav>
+              <div>
+                <p className="label-xs opacity-50">Enquiries</p>
+                <a
+                  href="mailto:info@balancedesign.in"
+                  className="link-underline mt-4 inline-block font-display text-2xl md:text-3xl"
+                >
+                  info@balancedesign.in
+                </a>
+              </div>
+              <div>
+                <p className="label-xs opacity-50">Connect with us</p>
+                <div className="mt-5 flex items-center gap-5">
+                  {[
+                    { label: "Facebook", href: "https://www.facebook.com", Icon: Facebook },
+                    {
+                      label: "LinkedIn",
+                      href: "https://www.linkedin.com/in/upmashrian",
+                      Icon: Linkedin,
+                    },
+                    { label: "Instagram", href: "https://www.instagram.com", Icon: Instagram },
+                    { label: "Twitter", href: "https://x.com/upmashrian?s=11", Icon: Twitter },
+                    {
+                      label: "YouTube",
+                      href: "https://www.youtube.com/@upmashrianyourstylestateme8378",
+                      Icon: Youtube,
+                    },
+                  ].map(({ label, href, Icon }) => (
+                    <a
+                      key={label}
+                      href={href}
+                      target="_blank"
+                      rel="noreferrer"
+                      aria-label={label}
+                      className="transition-opacity duration-500 hover:opacity-50"
+                    >
+                      <Icon aria-hidden="true" size={23} strokeWidth={1.4} />
+                    </a>
+                  ))}
+                </div>
               </div>
             </div>
-          </div>
 
-          <div className="mt-14 flex flex-wrap items-center gap-8 border-t border-ivory/15 pt-8">
-            <span className="label-xs opacity-40">
-              &copy; 2026 Balance Design. All Rights Reserved.
-            </span>
-            <span className="label-xs opacity-40">Privacy</span>
-            <span className="label-xs opacity-40">Terms</span>
+            <div className="mt-14 flex flex-wrap items-center gap-8 border-t border-ivory/15 pt-8">
+              <span className="label-xs opacity-40">
+                &copy; 2026 Balance Design. All Rights Reserved.
+              </span>
+              <span className="label-xs opacity-40">Privacy</span>
+              <span className="label-xs opacity-40">Terms</span>
+            </div>
           </div>
-
         </div>
-      </div>
-
-    </footer>
-  );
-}
+      </footer>
+    );
+  }
 }
 
 // ===== components/ScrollStory.tsx =====
 namespace Module_components_ScrollStory {
-function clamp(value: number) {
-  return Math.min(1, Math.max(0, value));
-}
+  function clamp(value: number) {
+    return Math.min(1, Math.max(0, value));
+  }
 
-export function ScrollStory({ children }: { children: ReactNode }) {
-  const rootRef = useRef<HTMLDivElement>(null);
+  export function ScrollStory({ children }: { children: ReactNode }) {
+    const rootRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    const root = rootRef.current;
-    if (!root || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    useEffect(() => {
+      const root = rootRef.current;
+      if (!root || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
-    const scenes = Array.from(root.querySelectorAll<HTMLElement>("[data-scroll-scene]"));
-    let frame = 0;
+      const scenes = Array.from(root.querySelectorAll<HTMLElement>("[data-scroll-scene]"));
+      let frame = 0;
 
-    const update = () => {
-      frame = 0;
-      const viewportHeight = window.innerHeight;
-      const mobile = window.innerWidth < 768;
+      const update = () => {
+        frame = 0;
+        const viewportHeight = window.innerHeight;
+        const mobile = window.innerWidth < 768;
 
-      scenes.forEach((scene) => {
-        const rect = scene.getBoundingClientRect();
-        const enter = clamp((viewportHeight - rect.top) / (viewportHeight * 0.78));
-        const exit = clamp((viewportHeight * 0.34 - rect.bottom) / (viewportHeight * 0.66));
-        const travel = mobile ? 20 : 52;
-        const exitTravel = mobile ? 12 : 32;
-        const y = (1 - enter) * travel - exit * exitTravel;
-        const scale = 0.985 + enter * 0.015 - exit * (mobile ? 0.006 : 0.014);
-        const opacity = Math.min(1, enter * 1.7) * (1 - exit * (mobile ? 0.16 : 0.38));
-        const clip = (1 - enter) * (mobile ? 2.5 : 7);
-        const centerReveal = (1 - enter) * 50;
+        scenes.forEach((scene) => {
+          const rect = scene.getBoundingClientRect();
+          const enter = clamp((viewportHeight - rect.top) / (viewportHeight * 0.78));
+          const exit = clamp((viewportHeight * 0.34 - rect.bottom) / (viewportHeight * 0.66));
+          const travel = mobile ? 20 : 52;
+          const exitTravel = mobile ? 12 : 32;
+          const y = (1 - enter) * travel - exit * exitTravel;
+          const scale = 0.985 + enter * 0.015 - exit * (mobile ? 0.006 : 0.014);
+          const opacity = Math.min(1, enter * 1.7) * (1 - exit * (mobile ? 0.16 : 0.38));
+          const clip = (1 - enter) * (mobile ? 2.5 : 7);
+          const centerReveal = (1 - enter) * 50;
 
-        scene.style.setProperty("--story-y", `${y.toFixed(2)}px`);
-        scene.style.setProperty("--story-scale", scale.toFixed(4));
-        scene.style.setProperty("--story-opacity", opacity.toFixed(3));
-        scene.style.setProperty("--story-clip", `${clip.toFixed(2)}%`);
-        scene.style.setProperty("--story-center-reveal", `${centerReveal.toFixed(2)}%`);
-        scene.style.setProperty("--story-depth", `${((1 - enter) * (mobile ? 8 : 22)).toFixed(2)}px`);
-      });
-    };
+          scene.style.setProperty("--story-y", `${y.toFixed(2)}px`);
+          scene.style.setProperty("--story-scale", scale.toFixed(4));
+          scene.style.setProperty("--story-opacity", opacity.toFixed(3));
+          scene.style.setProperty("--story-clip", `${clip.toFixed(2)}%`);
+          scene.style.setProperty("--story-center-reveal", `${centerReveal.toFixed(2)}%`);
+          scene.style.setProperty(
+            "--story-depth",
+            `${((1 - enter) * (mobile ? 8 : 22)).toFixed(2)}px`,
+          );
+        });
+      };
 
-    const requestUpdate = () => {
-      if (frame) return;
-      frame = window.requestAnimationFrame(update);
-    };
+      const requestUpdate = () => {
+        if (frame) return;
+        frame = window.requestAnimationFrame(update);
+      };
 
-    update();
-    window.addEventListener("scroll", requestUpdate, { passive: true });
-    window.addEventListener("resize", requestUpdate);
-    return () => {
-      window.removeEventListener("scroll", requestUpdate);
-      window.removeEventListener("resize", requestUpdate);
-      if (frame) window.cancelAnimationFrame(frame);
-    };
-  }, []);
+      update();
+      window.addEventListener("scroll", requestUpdate, { passive: true });
+      window.addEventListener("resize", requestUpdate);
+      return () => {
+        window.removeEventListener("scroll", requestUpdate);
+        window.removeEventListener("resize", requestUpdate);
+        if (frame) window.cancelAnimationFrame(frame);
+      };
+    }, []);
 
-  return (
-    <div ref={rootRef} className="scroll-story">
-      {children}
-    </div>
-  );
-}
+    return (
+      <div ref={rootRef} className="scroll-story">
+        {children}
+      </div>
+    );
+  }
 
-export function StoryScene({
-  children,
-  className = "",
-}: {
-  children: ReactNode;
-  className?: string;
-}) {
-  return (
-    <div data-scroll-scene className={`story-scene ${className}`}>
-      <div className="story-scene-content">{children}</div>
-    </div>
-  );
-}
+  export function StoryScene({
+    children,
+    className = "",
+  }: {
+    children: ReactNode;
+    className?: string;
+  }) {
+    return (
+      <div data-scroll-scene className={`story-scene ${className}`}>
+        <div className="story-scene-content">{children}</div>
+      </div>
+    );
+  }
 }
 
 // ===== components/SlideStack.tsx =====
 namespace Module_components_SlideStack {
-gsap.registerPlugin(ScrollTrigger);
+  gsap.registerPlugin(ScrollTrigger);
 
-/**
- * Full-screen editorial panels. Each panel sticks to the top of the viewport
- * while the following panel slides up over it, scrubbed directly by scroll.
- * The outgoing panel recedes slightly for depth — no fades to white, no bounce.
- */
-export function SlideStack({ children }: { children: ReactNode }) {
-  const rootRef = useRef<HTMLDivElement>(null);
+  /**
+   * Full-screen editorial panels. Each panel sticks to the top of the viewport
+   * while the following panel slides up over it, scrubbed directly by scroll.
+   * The outgoing panel recedes slightly for depth — no fades to white, no bounce.
+   */
+  export function SlideStack({ children }: { children: ReactNode }) {
+    const rootRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    const root = rootRef.current;
-    if (!root) return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    useEffect(() => {
+      const root = rootRef.current;
+      if (!root) return;
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
-    const panels = Array.from(root.querySelectorAll<HTMLElement>("[data-slide-panel]"));
+      const panels = Array.from(root.querySelectorAll<HTMLElement>("[data-slide-panel]"));
 
-    // Panels taller than the viewport must finish scrolling through fully
-    // before pinning, otherwise their lower content (e.g. carousels) is
-    // covered by the incoming panel. Stick them at a negative offset equal
-    // to their overflow so the entire panel is visible before the next
-    // one slides over.
-    const setPanelOffsets = () => {
-      const vh = window.innerHeight;
-      panels.forEach((panel, i) => {
-        // The last panel is position: relative (it never gets covered), so a
-        // negative top would shift it up over the previous panel — skip it.
-        if (i === panels.length - 1) return;
-        const overflow = panel.offsetHeight - vh;
-        panel.style.top = overflow > 0 ? `${-overflow}px` : "0px";
-      });
-      ScrollTrigger.refresh();
-    };
-    setPanelOffsets();
-    const ro = new ResizeObserver(setPanelOffsets);
-    panels.forEach((panel) => ro.observe(panel));
-    window.addEventListener("resize", setPanelOffsets);
-
-    const ctx = gsap.context(() => {
-      panels.forEach((panel, i) => {
-        const next = panels[i + 1];
-        if (!next) return;
-        const inner = panel.querySelector<HTMLElement>(".slide-panel-inner");
-        if (!inner) return;
-
-        // Panels taller than the viewport sit stuck with their bottom flush
-        // to the viewport bottom — a vertical recede would push their lower
-        // content (carousels) out of view, so only scale/fade those.
-        const tallerThanViewport = panel.offsetHeight > window.innerHeight;
-
-        gsap.to(inner, {
-          yPercent: tallerThanViewport ? 0 : -10,
-          scale: 0.98,
-          opacity: 0.55,
-          ease: "none",
-          scrollTrigger: {
-            trigger: next,
-            start: "top bottom",
-            end: "top top",
-            scrub: true,
-          },
+      // Panels taller than the viewport must finish scrolling through fully
+      // before pinning, otherwise their lower content (e.g. carousels) is
+      // covered by the incoming panel. Stick them at a negative offset equal
+      // to their overflow so the entire panel is visible before the next
+      // one slides over.
+      const setPanelOffsets = () => {
+        const vh = window.innerHeight;
+        panels.forEach((panel, i) => {
+          // The last panel is position: relative (it never gets covered), so a
+          // negative top would shift it up over the previous panel — skip it.
+          if (i === panels.length - 1) return;
+          const overflow = panel.offsetHeight - vh;
+          panel.style.top = overflow > 0 ? `${-overflow}px` : "0px";
         });
-      });
-    }, root);
+        ScrollTrigger.refresh();
+      };
+      setPanelOffsets();
+      const ro = new ResizeObserver(setPanelOffsets);
+      panels.forEach((panel) => ro.observe(panel));
+      window.addEventListener("resize", setPanelOffsets);
 
-    const refresh = () => ScrollTrigger.refresh();
-    window.addEventListener("load", refresh);
-    return () => {
-      window.removeEventListener("load", refresh);
-      window.removeEventListener("resize", setPanelOffsets);
-      ro.disconnect();
-      ctx.revert();
-    };
-  }, []);
+      const ctx = gsap.context(() => {
+        panels.forEach((panel, i) => {
+          const next = panels[i + 1];
+          if (!next) return;
+          const inner = panel.querySelector<HTMLElement>(".slide-panel-inner");
+          if (!inner) return;
 
-  return (
-    <div ref={rootRef} className="slide-stack">
-      {children}
-    </div>
-  );
-}
+          // Panels taller than the viewport sit stuck with their bottom flush
+          // to the viewport bottom — a vertical recede would push their lower
+          // content (carousels) out of view, so only scale/fade those.
+          const tallerThanViewport = panel.offsetHeight > window.innerHeight;
 
-export function SlidePanel({
-  children,
-  className = "",
-}: {
-  children: ReactNode;
-  className?: string;
-}) {
-  return (
-    <div data-slide-panel className={`slide-panel ${className}`}>
-      <div className="slide-panel-inner">{children}</div>
-    </div>
-  );
-}
+          gsap.to(inner, {
+            yPercent: tallerThanViewport ? 0 : -10,
+            scale: 0.98,
+            opacity: 0.55,
+            ease: "none",
+            scrollTrigger: {
+              trigger: next,
+              start: "top bottom",
+              end: "top top",
+              scrub: true,
+            },
+          });
+        });
+      }, root);
+
+      const refresh = () => ScrollTrigger.refresh();
+      window.addEventListener("load", refresh);
+      return () => {
+        window.removeEventListener("load", refresh);
+        window.removeEventListener("resize", setPanelOffsets);
+        ro.disconnect();
+        ctx.revert();
+      };
+    }, []);
+
+    return (
+      <div ref={rootRef} className="slide-stack">
+        {children}
+      </div>
+    );
+  }
+
+  export function SlidePanel({
+    children,
+    className = "",
+  }: {
+    children: ReactNode;
+    className?: string;
+  }) {
+    return (
+      <div data-slide-panel className={`slide-panel ${className}`}>
+        <div className="slide-panel-inner">{children}</div>
+      </div>
+    );
+  }
 }
 
 // ===== components/CurvedSlider.tsx =====
 namespace Module_components_CurvedSlider {
-export type CurvedImage = {
-  src: string;
-  alt: string;
-  /** Words written on the slide itself: a line, then a line beneath it in capitals. */
-  caption?: { title: string; sub: string };
-};
+  export type CurvedImage = {
+    src: string;
+    alt: string;
+    /** Words written on the slide itself: a line, then a line beneath it in capitals. */
+    caption?: { title: string; sub: string };
+  };
 
-/** Convex, auto-advancing image row (one step every 2s). Hover gently enlarges an image. */
-export function CurvedSlider({ images, imageFit = "cover" }: { images: CurvedImage[]; contain?: boolean; imageFit?: "cover" | "contain" }) {
-  const [offset, setOffset] = useState(0);
-  const [hovered, setHovered] = useState<number | null>(null);
-  // Cloned slides (3 copies) so the wrap-around happens far off-screen — seamless loop.
-  const slides = [...images, ...images, ...images];
-  const n = slides.length;
-  const half = Math.floor(n / 2);
-  const VISIBLE = 4;
+  /** Convex, auto-advancing image row (one step every 2s). Hover gently enlarges an image. */
+  export function CurvedSlider({
+    images,
+    imageFit = "cover",
+  }: {
+    images: CurvedImage[];
+    contain?: boolean;
+    imageFit?: "cover" | "contain";
+  }) {
+    const [offset, setOffset] = useState(0);
+    const [hovered, setHovered] = useState<number | null>(null);
+    // Cloned slides (3 copies) so the wrap-around happens far off-screen — seamless loop.
+    const slides = [...images, ...images, ...images];
+    const n = slides.length;
+    const half = Math.floor(n / 2);
+    const VISIBLE = 4;
 
-  useEffect(() => {
-    if (hovered !== null) return;
-    const id = window.setInterval(() => setOffset((o) => o + 1), 2000);
-    return () => window.clearInterval(id);
-  }, [hovered]);
+    useEffect(() => {
+      if (hovered !== null) return;
+      const id = window.setInterval(() => setOffset((o) => o + 1), 2000);
+      return () => window.clearInterval(id);
+    }, [hovered]);
 
-  return (
-    <div
-      className="relative mx-auto h-[340px] w-full gap-[var(--slide-gap)] overflow-hidden [--slide-gap:16px] sm:h-[430px] sm:[--slide-gap:24px] md:h-[520px] md:[--slide-gap:28px]"
-      style={{ perspective: "1400px" }}
-    >
-      {slides.map((img, i) => {
-        const pos = ((((i - offset) % n) + n) % n) - half;
-        const abs = Math.abs(pos);
-        const wrapping = abs >= half; // only at the far hidden edge
-        const hidden = abs > VISIBLE;
-        const z = Math.min(abs, VISIBLE + 1);
-        return (
-          <div
-            key={`${img.src}-${i}`}
-            className="absolute left-1/2 top-1/2 w-[73vw] sm:w-[50vw] md:w-[37vw] lg:w-[32vw]"
-            style={{
-              transform: `translate(-50%, -50%) translateX(calc(${pos * 100}% + ${pos} * var(--slide-gap))) translateZ(${z * z * 22}px) rotateY(${-Math.max(-VISIBLE - 1, Math.min(VISIBLE + 1, pos)) * 14}deg)`,
-              opacity: hidden ? 0 : 1,
-              visibility: hidden ? "hidden" : "visible",
-              zIndex: hovered === i ? 50 : 10 - z,
-              transition: wrapping
-                ? "none"
-                : "transform 1.2s cubic-bezier(0.65,0,0.35,1), opacity 1.2s ease",
-            }}
-            onMouseEnter={() => setHovered(i)}
-            onMouseLeave={() => setHovered((h) => (h === i ? null : h))}
-          >
+    return (
+      <div
+        className="relative mx-auto h-[340px] w-full gap-[var(--slide-gap)] overflow-hidden [--slide-gap:16px] sm:h-[430px] sm:[--slide-gap:24px] md:h-[520px] md:[--slide-gap:28px]"
+        style={{ perspective: "1400px" }}
+      >
+        {slides.map((img, i) => {
+          const pos = ((((i - offset) % n) + n) % n) - half;
+          const abs = Math.abs(pos);
+          const wrapping = abs >= half; // only at the far hidden edge
+          const hidden = abs > VISIBLE;
+          const z = Math.min(abs, VISIBLE + 1);
+          return (
             <div
-              className="aspect-[4/3] overflow-hidden transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]"
-              style={{ transform: `scale(${hovered === i ? 1.25 : 1})` }}
+              key={`${img.src}-${i}`}
+              className="absolute left-1/2 top-1/2 w-[73vw] sm:w-[50vw] md:w-[37vw] lg:w-[32vw]"
+              style={{
+                transform: `translate(-50%, -50%) translateX(calc(${pos * 100}% + ${pos} * var(--slide-gap))) translateZ(${z * z * 22}px) rotateY(${-Math.max(-VISIBLE - 1, Math.min(VISIBLE + 1, pos)) * 14}deg)`,
+                opacity: hidden ? 0 : 1,
+                visibility: hidden ? "hidden" : "visible",
+                zIndex: hovered === i ? 50 : 10 - z,
+                transition: wrapping
+                  ? "none"
+                  : "transform 1.2s cubic-bezier(0.65,0,0.35,1), opacity 1.2s ease",
+              }}
+              onMouseEnter={() => setHovered(i)}
+              onMouseLeave={() => setHovered((h) => (h === i ? null : h))}
             >
-              <img src={img.src} alt={img.alt} loading="lazy" className={`block h-full w-full object-center ${imageFit === "contain" ? "object-contain" : "object-cover"}`} />
-            </div>
-            {img.caption && (
-              <div className="pointer-events-none absolute inset-x-0 bottom-0 flex flex-col items-center gap-1.5 px-4 pb-5 pt-14 text-center">
-                <span
-                  aria-hidden="true"
-                  className="absolute inset-0 bg-gradient-to-t from-charcoal/80 via-charcoal/35 to-transparent"
+              <div
+                className="aspect-[4/3] overflow-hidden transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]"
+                style={{ transform: `scale(${hovered === i ? 1.25 : 1})` }}
+              >
+                <img
+                  src={img.src}
+                  alt={img.alt}
+                  loading="lazy"
+                  className={`block h-full w-full object-center ${imageFit === "contain" ? "object-contain" : "object-cover"}`}
                 />
-                <p className="label-xs relative font-semibold text-ivory/85">{img.caption.title}</p>
-                <p className="display relative text-[1.05rem] uppercase leading-none tracking-[0.18em] text-ivory sm:text-[1.3rem]">
-                  {img.caption.sub}
-                </p>
               </div>
-            )}
-          </div>
-        );
-      })}
-    </div>
-  );
-}
-}
-
-// ===== integrations/supabase/types.ts =====
-namespace Module_integrations_supabase_types {
-export type Json =
-  | string
-  | number
-  | boolean
-  | null
-  | { [key: string]: Json | undefined }
-  | Json[]
-
-export type Database = {
-  // Allows to automatically instantiate createClient with right options
-  // instead of createClient<Database, { PostgrestVersion: 'XX' }>(URL, KEY)
-  __InternalSupabase: {
-    PostgrestVersion: "14.18"
-  }
-  public: {
-    Tables: {
-      booking_requests: {
-        Row: {
-          age_group: string | null
-          created_at: string
-          email: string
-          id: string
-          message: string | null
-          name: string
-          phone: string | null
-          profession: string | null
-          workshop: string | null
-        }
-        Insert: {
-          age_group?: string | null
-          created_at?: string
-          email: string
-          id?: string
-          message?: string | null
-          name: string
-          phone?: string | null
-          profession?: string | null
-          workshop?: string | null
-        }
-        Update: {
-          age_group?: string | null
-          created_at?: string
-          email?: string
-          id?: string
-          message?: string | null
-          name?: string
-          phone?: string | null
-          profession?: string | null
-          workshop?: string | null
-        }
-        Relationships: []
-      }
-    }
-    Views: {
-      [_ in never]: never
-    }
-    Functions: {
-      [_ in never]: never
-    }
-    Enums: {
-      [_ in never]: never
-    }
-    CompositeTypes: {
-      [_ in never]: never
-    }
-  }
-}
-
-type DatabaseWithoutInternals = Omit<Database, "__InternalSupabase">
-
-type DefaultSchema = DatabaseWithoutInternals[Extract<keyof Database, "public">]
-
-export type Tables<
-  DefaultSchemaTableNameOrOptions extends
-    | keyof (DefaultSchema["Tables"] & DefaultSchema["Views"])
-    | { schema: keyof DatabaseWithoutInternals },
-  TableName extends (DefaultSchemaTableNameOrOptions extends {
-    schema: keyof DatabaseWithoutInternals
-  }
-    ? keyof (DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"] &
-        DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Views"])
-    : never) = never,
-> = DefaultSchemaTableNameOrOptions extends {
-  schema: keyof DatabaseWithoutInternals
-}
-  ? (DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"] &
-      DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Views"])[TableName] extends {
-      Row: infer R
-    }
-    ? R
-    : never
-  : DefaultSchemaTableNameOrOptions extends keyof (DefaultSchema["Tables"] &
-        DefaultSchema["Views"])
-    ? (DefaultSchema["Tables"] &
-        DefaultSchema["Views"])[DefaultSchemaTableNameOrOptions] extends {
-        Row: infer R
-      }
-      ? R
-      : never
-    : never
-
-export type TablesInsert<
-  DefaultSchemaTableNameOrOptions extends
-    | keyof DefaultSchema["Tables"]
-    | { schema: keyof DatabaseWithoutInternals },
-  TableName extends (DefaultSchemaTableNameOrOptions extends {
-    schema: keyof DatabaseWithoutInternals
-  }
-    ? keyof DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"]
-    : never) = never,
-> = DefaultSchemaTableNameOrOptions extends {
-  schema: keyof DatabaseWithoutInternals
-}
-  ? DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"][TableName] extends {
-      Insert: infer I
-    }
-    ? I
-    : never
-  : DefaultSchemaTableNameOrOptions extends keyof DefaultSchema["Tables"]
-    ? DefaultSchema["Tables"][DefaultSchemaTableNameOrOptions] extends {
-        Insert: infer I
-      }
-      ? I
-      : never
-    : never
-
-export type TablesUpdate<
-  DefaultSchemaTableNameOrOptions extends
-    | keyof DefaultSchema["Tables"]
-    | { schema: keyof DatabaseWithoutInternals },
-  TableName extends (DefaultSchemaTableNameOrOptions extends {
-    schema: keyof DatabaseWithoutInternals
-  }
-    ? keyof DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"]
-    : never) = never,
-> = DefaultSchemaTableNameOrOptions extends {
-  schema: keyof DatabaseWithoutInternals
-}
-  ? DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"][TableName] extends {
-      Update: infer U
-    }
-    ? U
-    : never
-  : DefaultSchemaTableNameOrOptions extends keyof DefaultSchema["Tables"]
-    ? DefaultSchema["Tables"][DefaultSchemaTableNameOrOptions] extends {
-        Update: infer U
-      }
-      ? U
-      : never
-    : never
-
-export type Enums<
-  DefaultSchemaEnumNameOrOptions extends
-    | keyof DefaultSchema["Enums"]
-    | { schema: keyof DatabaseWithoutInternals },
-  EnumName extends (DefaultSchemaEnumNameOrOptions extends {
-    schema: keyof DatabaseWithoutInternals
-  }
-    ? keyof DatabaseWithoutInternals[DefaultSchemaEnumNameOrOptions["schema"]]["Enums"]
-    : never) = never,
-> = DefaultSchemaEnumNameOrOptions extends {
-  schema: keyof DatabaseWithoutInternals
-}
-  ? DatabaseWithoutInternals[DefaultSchemaEnumNameOrOptions["schema"]]["Enums"][EnumName]
-  : DefaultSchemaEnumNameOrOptions extends keyof DefaultSchema["Enums"]
-    ? DefaultSchema["Enums"][DefaultSchemaEnumNameOrOptions]
-    : never
-
-export type CompositeTypes<
-  PublicCompositeTypeNameOrOptions extends
-    | keyof DefaultSchema["CompositeTypes"]
-    | { schema: keyof DatabaseWithoutInternals },
-  CompositeTypeName extends (PublicCompositeTypeNameOrOptions extends {
-    schema: keyof DatabaseWithoutInternals
-  }
-    ? keyof DatabaseWithoutInternals[PublicCompositeTypeNameOrOptions["schema"]]["CompositeTypes"]
-    : never) = never,
-> = PublicCompositeTypeNameOrOptions extends {
-  schema: keyof DatabaseWithoutInternals
-}
-  ? DatabaseWithoutInternals[PublicCompositeTypeNameOrOptions["schema"]]["CompositeTypes"][CompositeTypeName]
-  : PublicCompositeTypeNameOrOptions extends keyof DefaultSchema["CompositeTypes"]
-    ? DefaultSchema["CompositeTypes"][PublicCompositeTypeNameOrOptions]
-    : never
-
-export const Constants = {
-  public: {
-    Enums: {},
-  },
-} as const
-}
-
-// ===== integrations/supabase/previewAuthStorage.ts =====
-namespace Module_integrations_supabase_previewAuthStorage {
-// This file is automatically generated. Do not edit it directly.
-
-// On a Lovable preview surface, broker the auth session to the editor over
-// postMessage so the project's preview surfaces share one login; else localStorage.
-export function brokeredPreviewStorage() {
-  if (typeof window === 'undefined') return undefined;
-  const host = location.hostname;
-  const PREVIEW_ZONES = ['lovableproject.com', 'lovableproject-dev.com', 'lovable.app', 'gpt-eng.com', 'gptengineer.run'];
-  const onPreviewZone = PREVIEW_ZONES.some((z) => host === z || host.endsWith('.' + z));
-  // Read the id only from non-user-controlled host positions, so a user-named
-  // preview--<name> host can't smuggle another project's id.
-  const UUID = '[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}';
-  const projectId = onPreviewZone
-    ? (host.match(new RegExp('^(?:id-preview(?:-[a-z0-9]+)?|project)--(' + UUID + ')(?:-dev)?(?=\\.|$)', 'i'))?.[1]
-        ?? host.match(new RegExp('^(' + UUID + ')(?=[.-])', 'i'))?.[1])
-    : undefined;
-  const framed = window.parent && window.parent !== window;
-  if (!projectId || !framed) return localStorage;
-
-  // Post only to the real editor ancestor, validated as a Lovable origin, so the
-  // session token can never reach an untrusted embedder.
-  const dev = host.endsWith('.lovableproject-dev.com') || host.endsWith('.gpt-eng.com');
-  const EDITOR = dev
-    ? /^https:\/\/([a-z0-9-]+\.)*(lovable\.dev|gptengineer\.app)$|^http:\/\/localhost:3000$/
-    : /^https:\/\/([a-z0-9-]+\.)*(lovable\.dev|gptengineer\.app)$/;
-  const ancestor = (location.ancestorOrigins && location.ancestorOrigins[0]) || (document.referrer ? new URL(document.referrer).origin : '');
-  const editorOrigins = ancestor && EDITOR.test(ancestor)
-    ? [ancestor]
-    : (dev ? ['https://lovable.dev', 'http://localhost:3000'] : ['https://lovable.dev']);
-  const RESULT = 'lovable-preview-auth:result';
-  const TIMEOUT = 2000;
-  const newId = () => Math.random().toString(36).slice(2) + Date.now().toString(36);
-
-  const request = (type: string, key: string, value?: string): Promise<{ ok: boolean; value?: string | null } | null> =>
-    new Promise((resolve) => {
-      const requestId = newId();
-      let done = false;
-      let timer: ReturnType<typeof setTimeout>;
-      const finish = (r: { ok: boolean; value?: string | null } | null) => {
-        if (done) return;
-        done = true;
-        clearTimeout(timer);
-        window.removeEventListener('message', onMessage);
-        resolve(r);
-      };
-      const onMessage = (e: MessageEvent) => {
-        if (editorOrigins.indexOf(e.origin) < 0) return;
-        const d = e.data;
-        if (d && d.type === RESULT && d.requestId === requestId) finish(d);
-      };
-      window.addEventListener('message', onMessage);
-      const msg: Record<string, unknown> = { type, requestId, projectId, key };
-      if (value !== undefined) msg['value'] = value;
-      // targetOrigin per trusted editor origin, so a session token never reaches an arbitrary embedder.
-      for (const origin of editorOrigins) window.parent.postMessage(msg, origin);
-      timer = setTimeout(() => finish(null), TIMEOUT);
-    });
-
-  // The editor may not be listening yet at the first getItem, so retry once.
-  let firstGet = true;
-  const RETRY_DELAY = 250;
-  // Blocked third-party storage throws here; seeding must not break broker reads.
-  const readLocal = (key: string) => { try { return localStorage.getItem(key); } catch { return undefined; } };
-
-  return {
-    getItem: async (key: string) => {
-      // Sent with GET and REMOVE so an editor that never cached this session can check or revoke it.
-      const local = readLocal(key);
-      let res = await request('lovable-preview-auth:get', key, local ?? undefined);
-      if (!res && firstGet) {
-        await new Promise((r) => setTimeout(r, RETRY_DELAY));
-        res = await request('lovable-preview-auth:get', key, local ?? undefined);
-      }
-      firstGet = false;
-      // '' is the logout tombstone: clear the local copy too so it can't resurrect if
-      // the broker later goes silent. A null reply means never-synced -> keep local.
-      if (res && res.ok && typeof res.value === 'string') {
-        if (res.value === '') {
-          if (local !== undefined && readLocal(key) === local) localStorage.removeItem(key);
-          return null;
-        }
-        // Seed this origin so a new tab, whose editor holds no session, stays signed in.
-        if (local === null && readLocal(key) === null) {
-          try { localStorage.setItem(key, res.value); } catch { /* storage full: still return the editor's session */ }
-        }
-        return res.value;
-      }
-      return localStorage.getItem(key);
-    },
-    setItem: (key: string, value: string) => {
-      localStorage.setItem(key, value);
-      return request('lovable-preview-auth:set', key, value).then((res) => {
-        if (res && res.ok && typeof res.value === 'string' && localStorage.getItem(key) === value) {
-          if (res.value === '') localStorage.removeItem(key);
-          else localStorage.setItem(key, res.value);
-        }
-      });
-    },
-    removeItem: (key: string) => {
-      const local = readLocal(key);
-      localStorage.removeItem(key);
-      return request('lovable-preview-auth:remove', key, local ?? undefined).then(() => undefined);
-    },
-  };
-}
-}
-
-// ===== integrations/supabase/client.ts =====
-namespace Module_integrations_supabase_client {
-// This file is automatically generated. Do not edit it directly.
-
-import Database = Module_integrations_supabase_types.Database;
-
-import brokeredPreviewStorage = Module_integrations_supabase_previewAuthStorage.brokeredPreviewStorage;
-
-
-function isNewSupabaseApiKey(value: string): boolean {
-  return value.startsWith('sb_publishable_') || value.startsWith('sb_secret_');
-}
-
-// The public URL can be reachable only from the browser, so server requests go to the runtime URL of the same backend.
-function serverSupabaseUrl(publicUrl: string, supabaseKey: string): string | undefined {
-  if (typeof window !== 'undefined' || typeof process === 'undefined') return undefined;
-  const serverUrl = process.env['SUPABASE_URL']?.replace(/\/+$/, '');
-  if (!serverUrl || serverUrl === publicUrl || process.env['SUPABASE_PUBLISHABLE_KEY'] !== supabaseKey) return undefined;
-  return serverUrl;
-}
-
-function createSupabaseFetch(supabaseUrl: string, supabaseKey: string): typeof fetch {
-  const publicUrl = supabaseUrl.replace(/\/+$/, '');
-  const serverUrl = serverSupabaseUrl(publicUrl, supabaseKey);
-  return (input, init) => {
-    const headers = new Headers(
-      typeof Request !== 'undefined' && input instanceof Request ? input.headers : undefined,
+              {img.caption && (
+                <div className="pointer-events-none absolute inset-x-0 bottom-0 flex flex-col items-center gap-1.5 px-4 pb-5 pt-14 text-center">
+                  <span
+                    aria-hidden="true"
+                    className="absolute inset-0 bg-gradient-to-t from-charcoal/80 via-charcoal/35 to-transparent"
+                  />
+                  <p className="label-xs relative font-semibold text-ivory/85">
+                    {img.caption.title}
+                  </p>
+                  <p className="display relative text-[1.05rem] uppercase leading-none tracking-[0.18em] text-ivory sm:text-[1.3rem]">
+                    {img.caption.sub}
+                  </p>
+                </div>
+              )}
+            </div>
+          );
+        })}
+      </div>
     );
-
-    if (init?.headers) {
-      new Headers(init.headers).forEach((value, key) => headers.set(key, value));
-    }
-
-    // New Supabase API keys are opaque strings, not bearer JWTs.
-    if (isNewSupabaseApiKey(supabaseKey) && headers.get('Authorization') === `Bearer ${supabaseKey}`) {
-      headers.delete('Authorization');
-    }
-
-    headers.set('apikey', supabaseKey);
-    if (serverUrl) {
-      const url = typeof input === 'string' ? input : input instanceof URL ? input.href : input.url;
-      if (url.startsWith(`${publicUrl}/`)) {
-        const target = serverUrl + url.slice(publicUrl.length);
-        const request = typeof input === 'string' || input instanceof URL ? target : new Request(target, input);
-        return fetch(request, { ...init, headers });
-      }
-    }
-    return fetch(input, { ...init, headers });
-  };
-}
-
-
-function createSupabaseClient() {
-  // Use import.meta.env for client-side (Vite build-time replacement)
-  // Fall back to process.env for SSR (server-side rendering)
-  const SUPABASE_URL = import.meta.env['VITE_SUPABASE_URL'] || process.env['SUPABASE_URL'];
-  const SUPABASE_PUBLISHABLE_KEY = import.meta.env['VITE_SUPABASE_PUBLISHABLE_KEY'] || process.env['SUPABASE_PUBLISHABLE_KEY'];
-
-  if (!SUPABASE_URL || !SUPABASE_PUBLISHABLE_KEY) {
-    const missing = [
-      ...(!SUPABASE_URL ? ['SUPABASE_URL'] : []),
-      ...(!SUPABASE_PUBLISHABLE_KEY ? ['SUPABASE_PUBLISHABLE_KEY'] : []),
-    ];
-    const message = `Missing Supabase environment variable(s): ${missing.join(', ')}. Connect Supabase in Lovable Cloud.`;
-    console.error(`[Supabase] ${message}`);
-    throw new Error(message);
   }
-
-  return createClient<Database>(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY, {
-    global: {
-      fetch: createSupabaseFetch(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY),
-    },
-    auth: {
-      storage: brokeredPreviewStorage(),
-      persistSession: true,
-      autoRefreshToken: true,
-    },
-  });
-}
-
-let _supabase: ReturnType<typeof createSupabaseClient> | undefined;
-
-// Import the supabase client like this:
-// import { supabase } from "@/integrations/supabase/client";
-export const supabase = new Proxy({} as ReturnType<typeof createSupabaseClient>, {
-  get(_, prop, receiver) {
-    if (!_supabase) _supabase = createSupabaseClient();
-    return Reflect.get(_supabase, prop, receiver);
-  },
-});
 }
 
 // ===== components/BookWorkshopCta.tsx =====
 namespace Module_components_BookWorkshopCta {
-import supabase = Module_integrations_supabase_client.supabase;
+  import Dialog = Module_components_ui_dialog.Dialog;
+  import DialogContent = Module_components_ui_dialog.DialogContent;
+  import DialogDescription = Module_components_ui_dialog.DialogDescription;
+  import DialogHeader = Module_components_ui_dialog.DialogHeader;
+  import DialogTitle = Module_components_ui_dialog.DialogTitle;
 
-import Dialog = Module_components_ui_dialog.Dialog;
-import DialogContent = Module_components_ui_dialog.DialogContent;
-import DialogDescription = Module_components_ui_dialog.DialogDescription;
-import DialogHeader = Module_components_ui_dialog.DialogHeader;
-import DialogTitle = Module_components_ui_dialog.DialogTitle;
+  const inputClass =
+    "w-full border border-foreground/20 bg-background px-5 py-3.5 text-base text-foreground placeholder:text-foreground/40 focus:border-red focus:outline-none";
 
+  /**
+   * The shared enquiry popup (the same "Enquire about this workshop" form).
+   * Controlled by the caller so any custom trigger can open it.
+   */
+  export function BookingDialog({
+    open,
+    onOpenChange,
+  }: {
+    open: boolean;
+    onOpenChange: (open: boolean) => void;
+  }) {
+    const [submitted, setSubmitted] = useState(false);
+    const [sending, setSending] = useState(false);
+    const [error, setError] = useState<string | null>(null);
 
-const inputClass =
-  "w-full border border-foreground/20 bg-background px-5 py-3.5 text-base text-foreground placeholder:text-foreground/40 focus:border-red focus:outline-none";
-
-/**
- * The shared enquiry popup (the same "Enquire about this workshop" form).
- * Controlled by the caller so any custom trigger can open it.
- */
-export function BookingDialog({
-  open,
-  onOpenChange,
-}: {
-  open: boolean;
-  onOpenChange: (open: boolean) => void;
-}) {
-  const [submitted, setSubmitted] = useState(false);
-  const [sending, setSending] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-
-  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    setSending(true);
-    setError(null);
-    const data = new FormData(e.currentTarget);
-    const { error: insertError } = await supabase.from("booking_requests").insert({
-      name: String(data.get("name") || "").trim(),
-      email: String(data.get("email") || "").trim(),
-      phone: String(data.get("phone") || "").trim() || null,
-      workshop: String(data.get("workshop") || "").trim() || null,
-      age_group: String(data.get("ageGroup") || "").trim() || null,
-      profession: String(data.get("profession") || "").trim() || null,
-      message: String(data.get("message") || "").trim() || null,
-    });
-    setSending(false);
-    if (insertError) {
-      setError("Something went wrong. Please try again.");
-      return;
+    async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+      e.preventDefault();
+      setSending(true);
+      setError(null);
+      const data = new FormData(e.currentTarget);
+      const { error: insertError } = await supabase.from("booking_requests").insert({
+        name: String(data.get("name") || "").trim(),
+        email: String(data.get("email") || "").trim(),
+        phone: String(data.get("phone") || "").trim() || null,
+        workshop: String(data.get("workshop") || "").trim() || null,
+        age_group: String(data.get("ageGroup") || "").trim() || null,
+        profession: String(data.get("profession") || "").trim() || null,
+        message: String(data.get("message") || "").trim() || null,
+      });
+      setSending(false);
+      if (insertError) {
+        setError("Something went wrong. Please try again.");
+        return;
+      }
+      setSubmitted(true);
     }
-    setSubmitted(true);
+
+    return (
+      <Dialog
+        open={open}
+        onOpenChange={(next) => {
+          onOpenChange(next);
+          if (!next) {
+            setSubmitted(false);
+            setError(null);
+          }
+        }}
+      >
+        <DialogContent className="max-w-xl border-foreground/10 bg-background p-7 sm:p-9">
+          {submitted ? (
+            <div className="py-6 text-center">
+              <DialogHeader>
+                <DialogTitle className="font-display text-3xl tracking-wide text-red">
+                  Thank you for reaching out
+                </DialogTitle>
+                <DialogDescription className="pt-3 text-lg text-foreground/70">
+                  Our team will contact you soon.
+                </DialogDescription>
+              </DialogHeader>
+              <button
+                type="button"
+                onClick={() => onOpenChange(false)}
+                className="btn-red label-xs mt-8"
+              >
+                Close
+              </button>
+            </div>
+          ) : (
+            <>
+              <DialogHeader>
+                <DialogTitle className="font-display text-3xl tracking-wide text-red">
+                  Enquire about this workshop
+                </DialogTitle>
+                <DialogDescription className="text-base text-foreground/70">
+                  Tell us a little about yourself and the workshop you're interested in.
+                </DialogDescription>
+              </DialogHeader>
+              <form onSubmit={handleSubmit} className="mt-6 flex flex-col gap-4">
+                <input name="name" required placeholder="Your name" className={inputClass} />
+                <input
+                  name="email"
+                  type="email"
+                  required
+                  placeholder="Email address"
+                  className={inputClass}
+                />
+                <input name="phone" type="tel" placeholder="Phone" className={inputClass} />
+                <input
+                  name="workshop"
+                  placeholder="Name of the workshop/seminar"
+                  className={inputClass}
+                />
+                <select
+                  name="ageGroup"
+                  required
+                  defaultValue=""
+                  aria-label="Age group"
+                  className={`${inputClass} appearance-none`}
+                >
+                  <option value="" disabled>
+                    Age group
+                  </option>
+                  <option value="18-25">18-25</option>
+                  <option value="25-35">25-35</option>
+                  <option value="35-45">35-45</option>
+                  <option value="Above 45">Above 45</option>
+                </select>
+                <input
+                  name="profession"
+                  placeholder="Profession / Industry"
+                  className={inputClass}
+                />
+                <textarea
+                  name="message"
+                  rows={4}
+                  placeholder="Kindly share your requirement/queries (optional)"
+                  className={`${inputClass} resize-none`}
+                />
+                {error && <p className="text-sm text-red">{error}</p>}
+                <button
+                  type="submit"
+                  disabled={sending}
+                  className="btn-red label-xs mt-4 self-center"
+                >
+                  {sending ? "Sending…" : "Send your enquiry"}
+                </button>
+              </form>
+            </>
+          )}
+        </DialogContent>
+      </Dialog>
+    );
   }
 
-  return (
-    <Dialog
-      open={open}
-      onOpenChange={(next) => {
-        onOpenChange(next);
-        if (!next) {
-          setSubmitted(false);
-          setError(null);
-        }
-      }}
-    >
-      <DialogContent className="max-w-xl border-foreground/10 bg-background p-7 sm:p-9">
-        {submitted ? (
-          <div className="py-6 text-center">
-            <DialogHeader>
-              <DialogTitle className="font-display text-3xl tracking-wide text-red">
-                Thank you for reaching out
-              </DialogTitle>
-              <DialogDescription className="pt-3 text-lg text-foreground/70">
-                Our team will contact you soon.
-              </DialogDescription>
-            </DialogHeader>
-            <button
-              type="button"
-              onClick={() => onOpenChange(false)}
-              className="btn-red label-xs mt-8"
-            >
-              Close
-            </button>
-          </div>
-        ) : (
-          <>
-            <DialogHeader>
-              <DialogTitle className="font-display text-3xl tracking-wide text-red">
-                Enquire about this workshop
-              </DialogTitle>
-              <DialogDescription className="text-base text-foreground/70">
-                Tell us a little about yourself and the workshop you're interested in.
-              </DialogDescription>
-            </DialogHeader>
-            <form onSubmit={handleSubmit} className="mt-6 flex flex-col gap-4">
-              <input name="name" required placeholder="Your name" className={inputClass} />
-              <input
-                name="email"
-                type="email"
-                required
-                placeholder="Email address"
-                className={inputClass}
-              />
-              <input name="phone" type="tel" placeholder="Phone" className={inputClass} />
-              <input
-                name="workshop"
-                placeholder="Name of the workshop/seminar"
-                className={inputClass}
-              />
-              <select
-                name="ageGroup"
-                required
-                defaultValue=""
-                aria-label="Age group"
-                className={`${inputClass} appearance-none`}
-              >
-                <option value="" disabled>
-                  Age group
-                </option>
-                <option value="18-25">18-25</option>
-                <option value="25-35">25-35</option>
-                <option value="35-45">35-45</option>
-                <option value="Above 45">Above 45</option>
-              </select>
-              <input
-                name="profession"
-                placeholder="Profession / Industry"
-                className={inputClass}
-              />
-              <textarea
-                name="message"
-                rows={4}
-                placeholder="Kindly share your requirement/queries (optional)"
-                className={`${inputClass} resize-none`}
-              />
-              {error && <p className="text-sm text-red">{error}</p>}
-              <button type="submit" disabled={sending} className="btn-red label-xs mt-4 self-center">
-                {sending ? "Sending…" : "Send your enquiry"}
-              </button>
-            </form>
-          </>
-        )}
-      </DialogContent>
-    </Dialog>
-  );
-}
+  /** Shared red "Enquire about this workshop" call-to-action used at the end of every service section. Opens the enquiry popup. */
+  export function BookWorkshopCta({
+    className = "mt-4 md:mt-6",
+    label = "Enquire about this workshop",
+  }: {
+    className?: string;
+    label?: string;
+  }) {
+    const [open, setOpen] = useState(false);
 
-/** Shared red "Enquire about this workshop" call-to-action used at the end of every service section. Opens the enquiry popup. */
-export function BookWorkshopCta({
-  className = "mt-4 md:mt-6",
-  label = "Enquire about this workshop",
-}: {
-  className?: string;
-  label?: string;
-}) {
-  const [open, setOpen] = useState(false);
+    return (
+      <div className={`flex justify-center ${className}`}>
+        <button type="button" onClick={() => setOpen(true)} className="btn-red label-xs">
+          {label}
+        </button>
 
-  return (
-    <div className={`flex justify-center ${className}`}>
-      <button type="button" onClick={() => setOpen(true)} className="btn-red label-xs">
-        {label}
-      </button>
-
-      <BookingDialog open={open} onOpenChange={setOpen} />
-    </div>
-  );
-}
+        <BookingDialog open={open} onOpenChange={setOpen} />
+      </div>
+    );
+  }
 }
 
 // ===== components/RotatingPoints.tsx =====
 namespace Module_components_RotatingPoints {
-const diamond = asset_assets_balance_diamond_png;
+  const diamond = asset_assets_balance_diamond_png;
 
-const TERMS = ["Design Aesthetics", "Fashion Styling", "Trend Forecasting & VM"];
-const POINT_MS = 3000;
-const TERM_MS = 3000;
-const FADE_MS = 700;
+  const TERMS = ["Design Aesthetics", "Fashion Styling", "Trend Forecasting & VM"];
+  const POINT_MS = 3000;
+  const TERM_MS = 3000;
+  const FADE_MS = 700;
 
-/** Step 0 = point 1; steps 1..3 = point 2 with each rotating term. */
-export function RotatingPoints() {
-  const [step, setStep] = useState(0);
-  const [visible, setVisible] = useState(true);
-  const [termVisible, setTermVisible] = useState(true);
+  /** Step 0 = point 1; steps 1..3 = point 2 with each rotating term. */
+  export function RotatingPoints() {
+    const [step, setStep] = useState(0);
+    const [visible, setVisible] = useState(true);
+    const [termVisible, setTermVisible] = useState(true);
 
-  useEffect(() => {
-    let t: number;
-    const isLastOfPoint = step === 0 || step === TERMS.length;
-    const hold = step === 0 ? POINT_MS : TERM_MS;
-    if (isLastOfPoint) {
-      t = window.setTimeout(() => setVisible(false), hold);
+    useEffect(() => {
+      let t: number;
+      const isLastOfPoint = step === 0 || step === TERMS.length;
+      const hold = step === 0 ? POINT_MS : TERM_MS;
+      if (isLastOfPoint) {
+        t = window.setTimeout(() => setVisible(false), hold);
+        const t2 = window.setTimeout(() => {
+          setStep((s) => (s === 0 ? 1 : 0));
+          setVisible(true);
+        }, hold + FADE_MS);
+        return () => {
+          window.clearTimeout(t);
+          window.clearTimeout(t2);
+        };
+      }
+      t = window.setTimeout(() => setTermVisible(false), hold - 300);
       const t2 = window.setTimeout(() => {
-        setStep((s) => (s === 0 ? 1 : 0));
-        setVisible(true);
-      }, hold + FADE_MS);
+        setStep((s) => s + 1);
+        setTermVisible(true);
+      }, hold);
       return () => {
         window.clearTimeout(t);
         window.clearTimeout(t2);
       };
-    }
-    t = window.setTimeout(() => setTermVisible(false), hold - 300);
-    const t2 = window.setTimeout(() => {
-      setStep((s) => s + 1);
-      setTermVisible(true);
-    }, hold);
-    return () => {
-      window.clearTimeout(t);
-      window.clearTimeout(t2);
-    };
-  }, [step]);
+    }, [step]);
 
-  return (
-    <div className="mt-8 min-h-[4.5rem] md:mt-10">
-      <p
-        className="flex items-start justify-center gap-3 text-center text-lg leading-snug text-foreground md:text-xl"
-        style={{ opacity: visible ? 1 : 0, transition: `opacity ${FADE_MS}ms ease-in-out` }}
-        aria-live="polite"
-      >
-        <img src={diamond} alt="" aria-hidden="true" className="mt-[0.3em] h-4 w-auto shrink-0 md:h-5" />
-        {step === 0 ? (
-          <span>Elevate their skill and knowledge</span>
-        ) : (
-          <span>
-            Enhance productivity in areas of{" "}
-            <span
-              className="inline-block"
-              style={{ opacity: termVisible ? 1 : 0, transition: "opacity 300ms ease-in-out" }}
-            >
-              {TERMS[step - 1]}
+    return (
+      <div className="mt-8 min-h-[4.5rem] md:mt-10">
+        <p
+          className="flex items-start justify-center gap-3 text-center text-lg leading-snug text-foreground md:text-xl"
+          style={{ opacity: visible ? 1 : 0, transition: `opacity ${FADE_MS}ms ease-in-out` }}
+          aria-live="polite"
+        >
+          <img
+            src={diamond}
+            alt=""
+            aria-hidden="true"
+            className="mt-[0.3em] h-4 w-auto shrink-0 md:h-5"
+          />
+          {step === 0 ? (
+            <span>Elevate their skill and knowledge</span>
+          ) : (
+            <span>
+              Enhance productivity in areas of{" "}
+              <span
+                className="inline-block"
+                style={{ opacity: termVisible ? 1 : 0, transition: "opacity 300ms ease-in-out" }}
+              >
+                {TERMS[step - 1]}
+              </span>
             </span>
-          </span>
-        )}
-      </p>
-    </div>
-  );
-}
+          )}
+        </p>
+      </div>
+    );
+  }
 }
 
 // ===== components/StylingWorkshops.tsx =====
 namespace Module_components_StylingWorkshops {
-import Reveal = Module_components_Reveal.Reveal;
+  import Reveal = Module_components_Reveal.Reveal;
 
-import CurvedSlider = Module_components_CurvedSlider.CurvedSlider;
+  import CurvedSlider = Module_components_CurvedSlider.CurvedSlider;
 
-import BookWorkshopCta = Module_components_BookWorkshopCta.BookWorkshopCta;
+  import BookWorkshopCta = Module_components_BookWorkshopCta.BookWorkshopCta;
 
-import RotatingPoints = Module_components_RotatingPoints.RotatingPoints;
+  import RotatingPoints = Module_components_RotatingPoints.RotatingPoints;
 
+  const daw1 = asset_assets_daw_1_jpeg;
+  const daw2 = asset_assets_daw_2_jpeg;
+  const daw3 = asset_assets_daw_3_jpeg;
+  const daw4 = asset_assets_daw_4_jpeg;
+  const daw5 = asset_assets_daw_5_jpeg;
+  const dawNew1 = asset_assets_daw_new_1_jpg;
+  const dawNew2 = asset_assets_daw_new_2_jpg;
+  const dawNew3 = asset_assets_daw_new_3_jpg;
+  const dawNew4 = asset_assets_daw_new_4_jpg;
 
-const daw1 = asset_assets_daw_1_jpeg;
-const daw2 = asset_assets_daw_2_jpeg;
-const daw3 = asset_assets_daw_3_jpeg;
-const daw4 = asset_assets_daw_4_jpeg;
-const daw5 = asset_assets_daw_5_jpeg;
-const dawNew1 = asset_assets_daw_new_1_jpg;
-const dawNew2 = asset_assets_daw_new_2_jpg;
-const dawNew3 = asset_assets_daw_new_3_jpg;
-const dawNew4 = asset_assets_daw_new_4_jpg;
+  const FILM = [
+    { src: daw1, alt: "Workshop audience learning about the complementary colour scheme" },
+    { src: daw2, alt: "Participants seated along long tables watching a presentation" },
+    { src: daw3, alt: "Facilitator addressing a styling workshop in a studio classroom" },
+    { src: daw4, alt: "Workshop audience watching a video presentation" },
+    { src: daw5, alt: "Facilitator speaking with engaged workshop participants" },
+    { src: dawNew1, alt: "Retail team seated around long tables at a workshop" },
+    { src: dawNew2, alt: "Team members attending a workshop session" },
+    { src: dawNew3, alt: "Facilitator addressing a retail team workshop" },
+    { src: dawNew4, alt: "Team watching a styling presentation on screen" },
+  ];
 
-
-const FILM = [
-  { src: daw1, alt: "Workshop audience learning about the complementary colour scheme" },
-  { src: daw2, alt: "Participants seated along long tables watching a presentation" },
-  { src: daw3, alt: "Facilitator addressing a styling workshop in a studio classroom" },
-  { src: daw4, alt: "Workshop audience watching a video presentation" },
-  { src: daw5, alt: "Facilitator speaking with engaged workshop participants" },
-  { src: dawNew1, alt: "Retail team seated around long tables at a workshop" },
-  { src: dawNew2, alt: "Team members attending a workshop session" },
-  { src: dawNew3, alt: "Facilitator addressing a retail team workshop" },
-  { src: dawNew4, alt: "Team watching a styling presentation on screen" },
-];
-
-export function StylingWorkshops() {
-  return (
-    <section
-      aria-label="Design Aesthetics and Styling Workshops"
-      className="bg-background px-6 py-16 sm:py-20 md:px-12 md:py-24"
-    >
-      <div className="mx-auto max-w-[1500px]">
-        <div className="flex flex-col items-center text-center">
-          <Reveal>
-            <p className="label-xs font-semibold text-muted-foreground">
-              Design Workshops &amp; Seminars
-            </p>
-          </Reveal>
-          <Reveal delay={80}>
-            <h2 className="display mx-auto mt-6 max-w-5xl text-[2.4rem] leading-[1.02] uppercase sm:text-6xl md:text-[4.6rem]">
-              <span className="text-primary">Design Aesthetics</span> &amp; Styling Workshops
-            </h2>
-          </Reveal>
-          <RotatingPoints />
-          <Reveal delay={160}>
-            <p className="mx-auto mt-8 max-w-5xl text-pretty text-center text-[calc(1.294rem+2px)] font-medium leading-relaxed text-red md:text-balance md:text-[calc(1.4375rem+2px)]">
-              For <span className="font-medium">TEAMS</span> of fashion and retail brands.
-              <br className="hidden md:inline" />{" "}
-              For <span className="font-medium">Visual Merchandising teams</span>, such that the retail space
-              <br className="hidden md:inline" />{" "}
-              look more attractive to shop &amp; experience.
-              <br className="hidden md:inline" />{" "}
-              For <span className="font-medium">Sales team</span> such that they become stylists
-              <br className="hidden md:inline" />{" "}
-              <br className="sm:hidden" />{" "}
-              for the customers{" "}
-              <span className="whitespace-nowrap">and guide them as they shop.</span>
-            </p>
-          </Reveal>
-        </div>
-
-        <Reveal delay={200}>
-          <div className="relative left-1/2 mt-10 w-screen -translate-x-1/2 md:mt-14">
-            <CurvedSlider images={FILM} />
-          </div>
-        </Reveal>
-
-        <Reveal delay={260}>
-          <BookWorkshopCta />
-        </Reveal>
-      </div>
-    </section>
-  );
-}
-}
-
-// ===== components/CorporateImageConsulting.tsx =====
-namespace Module_components_CorporateImageConsulting {
-import CurvedSlider = Module_components_CurvedSlider.CurvedSlider;
-
-import BookWorkshopCta = Module_components_BookWorkshopCta.BookWorkshopCta;
-
-const diamond = asset_assets_balance_diamond_png;
-
-const c1 = asset_assets_corp_new_1_jpg;
-const v1 = asset_assets_corp_vh_1_jpg;
-const v2 = asset_assets_corp_vh_2_jpg;
-const v3 = asset_assets_corp_vh_3_jpg;
-const v4 = asset_assets_corp_vh_4_jpg;
-const c6 = asset_assets_corp_new_6_jpg;
-const c7 = asset_assets_corp_new_7_jpg;
-
-// Written on the slides themselves: the service, then the client beneath it.
-const VH = { title: "Corporate Image Consulting", sub: "VAN HEUSEN" };
-const RAYMOND = { title: "Corporate Image Consulting", sub: "The Raymond Shop" };
-
-const IMAGES = [
-  { src: c1, alt: "Van Heusen Master the Right Dress Code seminar audience", caption: VH },
-  {
-    src: v1,
-    alt: "Presenter addressing participants seated at round tables at a Van Heusen corporate seminar",
-    caption: VH,
-  },
-  {
-    src: v2,
-    alt: "Participants completing seminar exercises at round tables beside a Van Heusen standee",
-    caption: VH,
-  },
-  {
-    src: v3,
-    alt: "Presenter beside a projection screen at a Van Heusen corporate image consulting seminar",
-    caption: VH,
-  },
-  {
-    src: v4,
-    alt: "Presenter guiding four participants demonstrating dress styles at a Van Heusen seminar",
-    caption: VH,
-  },
-  {
-    src: c6,
-    alt: "Colour wheel presentation at a corporate seminar",
-    caption: RAYMOND,
-  },
-  {
-    src: c7,
-    alt: "Upma Shrian engaging participants at a corporate seminar",
-    caption: RAYMOND,
-  },
-];
-
-// The five questions the seminar puts to a working professional.
-const ribbonStatements = [
-  "Do you represent yourself or your brand and come out as a confident personality by way of your dressing up?",
-  "Are you comfortable in being yourself, as you represent your company?",
-  "Do you feel powerful in your attire, as you rub shoulders with the top brass of various segments of your industry?",
-  "Are you aware of Fashion's do's and don'ts as you meet your clients and alliances worldwide?",
-  "Do you feel your wardrobe represents your professional success and stature?",
-];
-
-export function CorporateImageConsulting() {
-  const sectionRef = useRef<HTMLElement>(null);
-  const [visible, setVisible] = useState(false);
-
-  useEffect(() => {
-    const section = sectionRef.current;
-    if (!section) return;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry?.isIntersecting) {
-          setVisible(true);
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.16, rootMargin: "0px 0px -8% 0px" },
-    );
-
-    observer.observe(section);
-    return () => observer.disconnect();
-  }, []);
-
-  const reveal = visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4";
-
-  return (
-    <section
-      ref={sectionRef}
-      aria-labelledby="corporate-image-consulting-title"
-      className="bg-background px-6 py-16 sm:py-20 md:px-12 md:py-24"
-    >
-      <div className="mx-auto max-w-[1500px]">
-        <div className="flex flex-col items-center gap-8 text-center">
-          <div>
-            <p
-              className={`label-xs mb-6 font-semibold text-muted-foreground transition-[opacity,transform] duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] ${reveal}`}
-            >
-              Design Workshops &amp; Seminars
-            </p>
-            <h2
-              id="corporate-image-consulting-title"
-              className={`display text-[2rem] leading-[0.98] uppercase transition-[opacity,transform] delay-100 duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] sm:text-5xl md:text-[3.4rem] lg:text-[4.2rem] ${reveal}`}
-            >
-              <span className="block text-red">Corporate</span>
-              <span className="block whitespace-nowrap text-foreground">Image Consulting</span>
-            </h2>
-          </div>
-
-          <p
-            className={`mx-auto max-w-4xl text-center text-[calc(1.294rem+2px)] font-medium leading-relaxed text-red transition-[opacity,transform] delay-200 duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)]  md:text-[calc(1.4375rem+2px)] ${reveal}`}
-          >
-            We coach professionals to look sharp and stylish, build self confidence and have a
-            personality that is magnetic. Through a combination of styling sessions and mindset
-            coaching, professionals learn to command respect, and own their presence in meetings,
-            presentations and high stake conversations.
-          </p>
-
-          {/* The shared red enquiry button, the same one that closes every other service section. */}
-          <div
-            className={`transition-[opacity,transform] delay-300 duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] ${reveal}`}
-          >
-            <BookWorkshopCta className="" />
-          </div>
-        </div>
-
-        <div
-          className={`relative left-1/2 mt-10 w-screen -translate-x-1/2 transition-opacity delay-300 duration-[1400ms] md:mt-14 ${visible ? "opacity-100" : "opacity-0"}`}
-        >
-          <CurvedSlider images={IMAGES} contain />
-        </div>
-      </div>
-
-      {/* Full-bleed editorial question ribbon, directly connected to the slider above. */}
-      <div
-        className="-mx-6 mt-7 overflow-hidden border-y border-border/70 bg-charcoal py-5 md:-mx-12 md:py-6"
-        role="marquee"
+  export function StylingWorkshops() {
+    return (
+      <section
+        aria-label="Design Aesthetics and Styling Workshops"
+        className="bg-background px-6 py-16 sm:py-20 md:px-12 md:py-24"
       >
-        <div className="ribbon-track flex w-max items-center">
-          {[0, 1].map((copy) => (
-            <div key={copy} aria-hidden={copy === 1} className="flex items-center">
-              {ribbonStatements.map((statement) => (
-                <span key={statement} className="flex items-center">
-                  <span className="whitespace-nowrap px-8 text-[calc(0.95rem+2px)] leading-relaxed text-background md:px-10 md:text-[calc(1.125rem+2px)]">
-                    {statement}
-                  </span>
-                  <img
-                    src={diamond}
-                    alt=""
-                    aria-hidden="true"
-                    className="h-3 w-auto shrink-0 md:h-4"
-                    loading="lazy"
-                  />
-                </span>
-              ))}
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-}
-
-// ===== components/PersonalImageConsulting.tsx =====
-namespace Module_components_PersonalImageConsulting {
-const s1 = asset_assets_pers_sq_1_jpg;
-const s2 = asset_assets_pers_sq_2_jpg;
-const s3 = asset_assets_pers_sq_3_jpg;
-const s4 = asset_assets_pers_sq_4_jpg;
-const s5 = asset_assets_pers_sq_5_jpg;
-const slide2 = asset_assets_pers_slide_2_jpg;
-const slide3 = asset_assets_pers_slide_3_jpg;
-const slide4 = asset_assets_pers_slide_4_jpg;
-const slide4_1 = asset_assets_pers_slide_4_1_jpg;
-const slide5 = asset_assets_pers_slide_5_jpg;
-const diamond = asset_assets_balance_diamond_png;
-import BookWorkshopCta = Module_components_BookWorkshopCta.BookWorkshopCta;
-
-
-const squareImages: { src: string; alt: string; fit: "cover" | "contain" }[] = [
-  { src: s1, alt: "Colour combinations with outfit examples - contrast of dark with light, light with light, and dark with dark", fit: "contain" },
-  { src: s2, alt: "Five styled looks under the heading Dressing in Colour, showing colour combinations with outfits", fit: "contain" },
-  { src: s3, alt: "Three outfit examples under the heading Dressing in Colour, combining blue, yellow, red, green and pink", fit: "contain" },
-  { src: s4, alt: "Three outfit examples under the heading Dressing in Colour, with striped, white, mustard and floral styling", fit: "contain" },
-  { src: s5, alt: "Colour wheel with outfit examples showing colour combinations used in dressing", fit: "contain" },
-];
-
-const landscapeImages: { src: string; alt: string; fit: "cover" | "contain" }[] = [
-  { src: slide2, alt: "Five styled day-to-evening outfits in contrasting colour combinations", fit: "contain" },
-  { src: slide3, alt: "Four colour-blocking outfits in red, royal blue and bright yellow", fit: "contain" },
-  { src: slide4, alt: "Analogous colour outfits in purple, berry, deep red and coral with a colour palette", fit: "contain" },
-  { src: slide4_1, alt: "Contrast of plain with pattern and print outfits in black and white", fit: "contain" },
-  { src: slide5, alt: "Three monochromatic outfits in yellow, green and blush pink", fit: "contain" },
-];
-
-const ribbonStatements = [
-  "Clarity for a lifetime: on what to pick up for one’s body type and skin tone. One picks up a wider range of products which one was reluctant to try earlier.",
-  "Get the exposure to new fits, colours, styles, patterns and silhouettes that most importantly work for you.",
-  "Get aware of which trends to pick up and which ones to drop.",
-  "Creating wardrobes that enhance our strength areas and diminish our problem areas.",
-];
-
-export function PersonalImageConsulting() {
-  const sectionRef = useRef<HTMLElement>(null);
-  const [visible, setVisible] = useState(false);
-  const [activeImage, setActiveImage] = useState(0);
-
-  useEffect(() => {
-    const section = sectionRef.current;
-    if (!section) return;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry?.isIntersecting) {
-          setVisible(true);
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.16, rootMargin: "0px 0px -8% 0px" },
-    );
-
-    observer.observe(section);
-    return () => observer.disconnect();
-  }, []);
-
-  useEffect(() => {
-    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-    if (reduceMotion.matches) return;
-
-    const interval = window.setInterval(() => {
-      setActiveImage((current) => (current + 1) % landscapeImages.length);
-    }, 5200);
-
-    return () => window.clearInterval(interval);
-  }, []);
-
-  const reveal = visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4";
-  const imageReveal = visible
-    ? "opacity-100 translate-y-0 [clip-path:inset(0_0_0_0)]"
-    : "opacity-0 translate-y-5 [clip-path:inset(10%_0_18%_0)]";
-
-  return (
-    <section
-      ref={sectionRef}
-      aria-labelledby="personal-image-consulting-title"
-      className="bg-background px-6 py-16 sm:py-20 md:px-12 md:py-24"
-    >
-      <div className="mx-auto max-w-[1500px]">
-        <div className="flex flex-col items-center gap-8 text-center">
-          <div>
-            <p
-              className={`label-xs mb-6 font-semibold text-muted-foreground transition-[opacity,transform] duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] ${reveal}`}
-            >
-              Design Workshops &amp; Seminars
-            </p>
-            <h2
-              id="personal-image-consulting-title"
-              className={`display text-[clamp(1.2rem,5vw,4.2rem)] leading-[0.98] uppercase transition-[opacity,transform] delay-100 duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] ${reveal}`}
-            >
-              <span className="mb-[0.35em] block whitespace-nowrap text-red sm:mb-[0.12em]">
-                Personal Image Consulting
-              </span>
-              <span className="block text-foreground">Master the Right Dress Code</span>
-            </h2>
-          </div>
-
-          <p
-            className={`mx-auto max-w-4xl text-center text-[calc(1.294rem+2px)] font-medium leading-relaxed text-red transition-[opacity,transform] delay-200 duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)]  md:text-[calc(1.4375rem+2px)] ${reveal}`}
-          >
-            "Master the Right Dress Code" is a highly visual and interactive seminar, sharing the
-            design tools, such that the individual can make decisions for themselves, about which
-            colour, fit and style shall suit their skin tone, height and body type.
-            <span className="mt-5 block">
-              Our styling seminars transform the way YOU dress up, such that your visual impact is
-              more powerful and confident for your lifetime.
-            </span>
-          </p>
-        </div>
-
-        <div className="mt-10 grid grid-cols-1 gap-8 md:mt-14 md:grid-cols-12 md:items-stretch md:gap-x-8 lg:gap-x-12">
-          <div
-            className={`relative aspect-[16/10] overflow-hidden bg-white transition-[clip-path,opacity,transform] delay-300 duration-[1400ms] ease-[cubic-bezier(0.16,1,0.3,1)] md:col-span-7 ${imageReveal}`}
-          >
-            {landscapeImages.map((image, index) => (
-              <img
-                key={image.src}
-                src={image.src}
-                alt={image.alt}
-                loading="lazy"
-                decoding="async"
-                style={{ objectFit: image.fit, objectPosition: "center" }}
-                className={`absolute inset-0 h-full w-full transition-[opacity,transform] duration-[1800ms] ease-[cubic-bezier(0.16,1,0.3,1)] motion-reduce:transition-none ${
-                  activeImage === index ? "scale-100 opacity-100" : "scale-[1.025] opacity-0"
-                }`}
-              />
-            ))}
-          </div>
-
-          <div
-            className={`relative aspect-[7/5] overflow-hidden bg-white transition-[clip-path,opacity,transform] delay-500 duration-[1400ms] ease-[cubic-bezier(0.16,1,0.3,1)] md:col-span-5 md:aspect-auto ${imageReveal}`}
-          >
-            {squareImages.map((image, index) => (
-              <img
-                key={image.src}
-                src={image.src}
-                alt={image.alt}
-                loading="lazy"
-                decoding="async"
-                style={{ objectFit: image.fit, objectPosition: "center" }}
-                className={`absolute inset-0 h-full w-full transition-[opacity,transform] duration-[1800ms] ease-[cubic-bezier(0.16,1,0.3,1)] motion-reduce:transition-none ${
-                  activeImage % squareImages.length === index
-                    ? "scale-100 opacity-100"
-                    : "scale-[1.025] opacity-0"
-                }`}
-              />
-            ))}
-          </div>
-        </div>
-      </div>
-
-      {/* Full-bleed editorial statement ribbon, directly connected to the slider above. */}
-      <div
-        className="-mx-6 mt-7 overflow-hidden border-y border-border/70 bg-charcoal py-5 md:-mx-12 md:py-6"
-        role="marquee"
-      >
-        <div className="ribbon-track flex w-max items-center">
-          {[0, 1].map((copy) => (
-            <div
-              key={copy}
-              aria-hidden={copy === 1}
-              className="flex items-center"
-            >
-              {ribbonStatements.map((statement) => (
-                <span key={statement} className="flex items-center">
-                  <span className="whitespace-nowrap px-8 text-[calc(0.95rem+2px)] leading-relaxed text-background md:px-10 md:text-[calc(1.125rem+2px)]">
-                    {statement}
-                  </span>
-                  <img
-                    src={diamond}
-                    alt=""
-                    aria-hidden="true"
-                    className="h-3 w-auto shrink-0 md:h-4"
-                    loading="lazy"
-                  />
-                </span>
-              ))}
-            </div>
-          ))}
-        </div>
-      </div>
-      <BookWorkshopCta />
-    </section>
-  );
-}
-}
-
-// ===== components/OwnYourSpotlight.tsx =====
-namespace Module_components_OwnYourSpotlight {
-import Reveal = Module_components_Reveal.Reveal;
-
-import BookWorkshopCta = Module_components_BookWorkshopCta.BookWorkshopCta;
-
-
-const s1 = asset_assets_oys_1_png;
-const s2 = asset_assets_oys_2_png;
-const s3 = asset_assets_oys_3_png;
-const s4 = asset_assets_oys_4_png;
-const s5 = asset_assets_oys_5_png;
-
-const SLIDES = [s1, s2, s3, s4, s5];
-
-export function OwnYourSpotlight() {
-  const [idx, setIdx] = useState(0);
-  useEffect(() => {
-    const t = setInterval(() => setIdx((i) => (i + 1) % SLIDES.length), 2000);
-    return () => clearInterval(t);
-  }, []);
-  return (
-    <section
-      aria-labelledby="own-your-spotlight-title"
-      className="bg-background px-6 py-16 sm:py-20 md:px-12 md:py-24"
-    >
-      <div className="mx-auto max-w-[1500px]">
-        <div className="flex flex-col items-center gap-10 text-center">
-          <div>
+        <div className="mx-auto max-w-[1500px]">
+          <div className="flex flex-col items-center text-center">
             <Reveal>
               <p className="label-xs font-semibold text-muted-foreground">
                 Design Workshops &amp; Seminars
               </p>
             </Reveal>
             <Reveal delay={80}>
-              <h2
-                id="own-your-spotlight-title"
-                className="display mt-6 text-[2.4rem] leading-[1.02] uppercase text-balance sm:text-6xl md:text-[4.6rem]"
-              >
-                <span className="text-primary">Own</span> Your Spotlight Webinar
+              <h2 className="display mx-auto mt-6 max-w-5xl text-[2.4rem] leading-[1.02] uppercase sm:text-6xl md:text-[4.6rem]">
+                <span className="text-primary">Design Aesthetics</span> &amp; Styling Workshops
               </h2>
             </Reveal>
-          </div>
-          <div>
+            <RotatingPoints />
             <Reveal delay={160}>
-              <p className="mx-auto max-w-2xl text-[calc(1.294rem+2px)] leading-relaxed md:text-[calc(1.4375rem+2px)] font-medium text-red">
-                We coach professionals to look sharp and stylish, build self confidence and have a
-                personality that is magnetic, as they meet and interact with world.
+              <p className="mx-auto mt-8 max-w-5xl text-pretty text-center text-[calc(1.294rem+2px)] font-medium leading-relaxed text-red md:text-balance md:text-[calc(1.4375rem+2px)]">
+                For <span className="font-medium">TEAMS</span> of fashion and retail brands.
+                <br className="hidden md:inline" /> For{" "}
+                <span className="font-medium">Visual Merchandising teams</span>, such that the
+                retail space
+                <br className="hidden md:inline" /> look more attractive to shop &amp; experience.
+                <br className="hidden md:inline" /> For{" "}
+                <span className="font-medium">Sales team</span> such that they become stylists
+                <br className="hidden md:inline" /> <br className="sm:hidden" /> for the customers{" "}
+                <span className="whitespace-nowrap">and guide them as they shop.</span>
               </p>
             </Reveal>
           </div>
+
+          <Reveal delay={200}>
+            <div className="relative left-1/2 mt-10 w-screen -translate-x-1/2 md:mt-14">
+              <CurvedSlider images={FILM} />
+            </div>
+          </Reveal>
+
+          <Reveal delay={260}>
+            <BookWorkshopCta />
+          </Reveal>
+        </div>
+      </section>
+    );
+  }
+}
+
+// ===== components/CorporateImageConsulting.tsx =====
+namespace Module_components_CorporateImageConsulting {
+  import CurvedSlider = Module_components_CurvedSlider.CurvedSlider;
+
+  import BookWorkshopCta = Module_components_BookWorkshopCta.BookWorkshopCta;
+
+  const diamond = asset_assets_balance_diamond_png;
+
+  const c1 = asset_assets_corp_new_1_jpg;
+  const v1 = asset_assets_corp_vh_1_jpg;
+  const v2 = asset_assets_corp_vh_2_jpg;
+  const v3 = asset_assets_corp_vh_3_jpg;
+  const v4 = asset_assets_corp_vh_4_jpg;
+  const c6 = asset_assets_corp_new_6_jpg;
+  const c7 = asset_assets_corp_new_7_jpg;
+
+  // Written on the slides themselves: the service, then the client beneath it.
+  const VH = { title: "Corporate Image Consulting", sub: "VAN HEUSEN" };
+  const RAYMOND = { title: "Corporate Image Consulting", sub: "The Raymond Shop" };
+
+  const IMAGES = [
+    { src: c1, alt: "Van Heusen Master the Right Dress Code seminar audience", caption: VH },
+    {
+      src: v1,
+      alt: "Presenter addressing participants seated at round tables at a Van Heusen corporate seminar",
+      caption: VH,
+    },
+    {
+      src: v2,
+      alt: "Participants completing seminar exercises at round tables beside a Van Heusen standee",
+      caption: VH,
+    },
+    {
+      src: v3,
+      alt: "Presenter beside a projection screen at a Van Heusen corporate image consulting seminar",
+      caption: VH,
+    },
+    {
+      src: v4,
+      alt: "Presenter guiding four participants demonstrating dress styles at a Van Heusen seminar",
+      caption: VH,
+    },
+    {
+      src: c6,
+      alt: "Colour wheel presentation at a corporate seminar",
+      caption: RAYMOND,
+    },
+    {
+      src: c7,
+      alt: "Upma Shrian engaging participants at a corporate seminar",
+      caption: RAYMOND,
+    },
+  ];
+
+  // The five questions the seminar puts to a working professional.
+  const ribbonStatements = [
+    "Do you represent yourself or your brand and come out as a confident personality by way of your dressing up?",
+    "Are you comfortable in being yourself, as you represent your company?",
+    "Do you feel powerful in your attire, as you rub shoulders with the top brass of various segments of your industry?",
+    "Are you aware of Fashion's do's and don'ts as you meet your clients and alliances worldwide?",
+    "Do you feel your wardrobe represents your professional success and stature?",
+  ];
+
+  export function CorporateImageConsulting() {
+    const sectionRef = useRef<HTMLElement>(null);
+    const [visible, setVisible] = useState(false);
+
+    useEffect(() => {
+      const section = sectionRef.current;
+      if (!section) return;
+
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          if (entry?.isIntersecting) {
+            setVisible(true);
+            observer.disconnect();
+          }
+        },
+        { threshold: 0.16, rootMargin: "0px 0px -8% 0px" },
+      );
+
+      observer.observe(section);
+      return () => observer.disconnect();
+    }, []);
+
+    const reveal = visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4";
+
+    return (
+      <section
+        ref={sectionRef}
+        aria-labelledby="corporate-image-consulting-title"
+        className="bg-background px-6 py-16 sm:py-20 md:px-12 md:py-24"
+      >
+        <div className="mx-auto max-w-[1500px]">
+          <div className="flex flex-col items-center gap-8 text-center">
+            <div>
+              <p
+                className={`label-xs mb-6 font-semibold text-muted-foreground transition-[opacity,transform] duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] ${reveal}`}
+              >
+                Design Workshops &amp; Seminars
+              </p>
+              <h2
+                id="corporate-image-consulting-title"
+                className={`display text-[2rem] leading-[0.98] uppercase transition-[opacity,transform] delay-100 duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] sm:text-5xl md:text-[3.4rem] lg:text-[4.2rem] ${reveal}`}
+              >
+                <span className="block text-red">Corporate</span>
+                <span className="block whitespace-nowrap text-foreground">Image Consulting</span>
+              </h2>
+            </div>
+
+            <p
+              className={`mx-auto max-w-4xl text-center text-[calc(1.294rem+2px)] font-medium leading-relaxed text-red transition-[opacity,transform] delay-200 duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)]  md:text-[calc(1.4375rem+2px)] ${reveal}`}
+            >
+              We coach professionals to look sharp and stylish, build self confidence and have a
+              personality that is magnetic. Through a combination of styling sessions and mindset
+              coaching, professionals learn to command respect, and own their presence in meetings,
+              presentations and high stake conversations.
+            </p>
+
+            {/* The shared red enquiry button, the same one that closes every other service section. */}
+            <div
+              className={`transition-[opacity,transform] delay-300 duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] ${reveal}`}
+            >
+              <BookWorkshopCta className="" />
+            </div>
+          </div>
+
+          <div
+            className={`relative left-1/2 mt-10 w-screen -translate-x-1/2 transition-opacity delay-300 duration-[1400ms] md:mt-14 ${visible ? "opacity-100" : "opacity-0"}`}
+          >
+            <CurvedSlider images={IMAGES} contain />
+          </div>
         </div>
 
-        <Reveal delay={200}>
-          <div className="relative mt-10 aspect-[16/10] overflow-hidden bg-foreground sm:aspect-[3/2] md:mt-14 md:aspect-[16/9]">
-            {SLIDES.map((src, i) => (
-              <img
-                key={src}
-                src={src}
-                alt={i === idx ? "Own Your Spotlight online coaching session" : ""}
-                aria-hidden={i !== idx}
-                className={`absolute inset-0 h-full w-full object-contain transition-opacity duration-1000 ease-in-out md:object-cover ${i === idx ? "opacity-100" : "opacity-0"}`}
-              />
+        {/* Full-bleed editorial question ribbon, directly connected to the slider above. */}
+        <div
+          className="-mx-6 mt-7 overflow-hidden border-y border-border/70 bg-charcoal py-5 md:-mx-12 md:py-6"
+          role="marquee"
+        >
+          <div className="ribbon-track flex w-max items-center">
+            {[0, 1].map((copy) => (
+              <div key={copy} aria-hidden={copy === 1} className="flex items-center">
+                {ribbonStatements.map((statement) => (
+                  <span key={statement} className="flex items-center">
+                    <span className="whitespace-nowrap px-8 text-[calc(0.95rem+2px)] leading-relaxed text-background md:px-10 md:text-[calc(1.125rem+2px)]">
+                      {statement}
+                    </span>
+                    <img
+                      src={diamond}
+                      alt=""
+                      aria-hidden="true"
+                      className="h-3 w-auto shrink-0 md:h-4"
+                      loading="lazy"
+                    />
+                  </span>
+                ))}
+              </div>
             ))}
           </div>
-        </Reveal>
-        <BookWorkshopCta />
-      </div>
-    </section>
-  );
+        </div>
+      </section>
+    );
+  }
 }
+
+// ===== components/PersonalImageConsulting.tsx =====
+namespace Module_components_PersonalImageConsulting {
+  const s1 = asset_assets_pers_sq_1_jpg;
+  const s2 = asset_assets_pers_sq_2_jpg;
+  const s3 = asset_assets_pers_sq_3_jpg;
+  const s4 = asset_assets_pers_sq_4_jpg;
+  const s5 = asset_assets_pers_sq_5_jpg;
+  const slide2 = asset_assets_pers_slide_2_jpg;
+  const slide3 = asset_assets_pers_slide_3_jpg;
+  const slide4 = asset_assets_pers_slide_4_jpg;
+  const slide4_1 = asset_assets_pers_slide_4_1_jpg;
+  const slide5 = asset_assets_pers_slide_5_jpg;
+  const diamond = asset_assets_balance_diamond_png;
+  import BookWorkshopCta = Module_components_BookWorkshopCta.BookWorkshopCta;
+
+  const squareImages: { src: string; alt: string; fit: "cover" | "contain" }[] = [
+    {
+      src: s1,
+      alt: "Colour combinations with outfit examples - contrast of dark with light, light with light, and dark with dark",
+      fit: "contain",
+    },
+    {
+      src: s2,
+      alt: "Five styled looks under the heading Dressing in Colour, showing colour combinations with outfits",
+      fit: "contain",
+    },
+    {
+      src: s3,
+      alt: "Three outfit examples under the heading Dressing in Colour, combining blue, yellow, red, green and pink",
+      fit: "contain",
+    },
+    {
+      src: s4,
+      alt: "Three outfit examples under the heading Dressing in Colour, with striped, white, mustard and floral styling",
+      fit: "contain",
+    },
+    {
+      src: s5,
+      alt: "Colour wheel with outfit examples showing colour combinations used in dressing",
+      fit: "contain",
+    },
+  ];
+
+  const landscapeImages: { src: string; alt: string; fit: "cover" | "contain" }[] = [
+    {
+      src: slide2,
+      alt: "Five styled day-to-evening outfits in contrasting colour combinations",
+      fit: "contain",
+    },
+    {
+      src: slide3,
+      alt: "Four colour-blocking outfits in red, royal blue and bright yellow",
+      fit: "contain",
+    },
+    {
+      src: slide4,
+      alt: "Analogous colour outfits in purple, berry, deep red and coral with a colour palette",
+      fit: "contain",
+    },
+    {
+      src: slide4_1,
+      alt: "Contrast of plain with pattern and print outfits in black and white",
+      fit: "contain",
+    },
+    {
+      src: slide5,
+      alt: "Three monochromatic outfits in yellow, green and blush pink",
+      fit: "contain",
+    },
+  ];
+
+  const ribbonStatements = [
+    "Clarity for a lifetime: on what to pick up for one’s body type and skin tone. One picks up a wider range of products which one was reluctant to try earlier.",
+    "Get the exposure to new fits, colours, styles, patterns and silhouettes that most importantly work for you.",
+    "Get aware of which trends to pick up and which ones to drop.",
+    "Creating wardrobes that enhance our strength areas and diminish our problem areas.",
+  ];
+
+  export function PersonalImageConsulting() {
+    const sectionRef = useRef<HTMLElement>(null);
+    const [visible, setVisible] = useState(false);
+    const [activeImage, setActiveImage] = useState(0);
+
+    useEffect(() => {
+      const section = sectionRef.current;
+      if (!section) return;
+
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          if (entry?.isIntersecting) {
+            setVisible(true);
+            observer.disconnect();
+          }
+        },
+        { threshold: 0.16, rootMargin: "0px 0px -8% 0px" },
+      );
+
+      observer.observe(section);
+      return () => observer.disconnect();
+    }, []);
+
+    useEffect(() => {
+      const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+      if (reduceMotion.matches) return;
+
+      const interval = window.setInterval(() => {
+        setActiveImage((current) => (current + 1) % landscapeImages.length);
+      }, 5200);
+
+      return () => window.clearInterval(interval);
+    }, []);
+
+    const reveal = visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4";
+    const imageReveal = visible
+      ? "opacity-100 translate-y-0 [clip-path:inset(0_0_0_0)]"
+      : "opacity-0 translate-y-5 [clip-path:inset(10%_0_18%_0)]";
+
+    return (
+      <section
+        ref={sectionRef}
+        aria-labelledby="personal-image-consulting-title"
+        className="bg-background px-6 py-16 sm:py-20 md:px-12 md:py-24"
+      >
+        <div className="mx-auto max-w-[1500px]">
+          <div className="flex flex-col items-center gap-8 text-center">
+            <div>
+              <p
+                className={`label-xs mb-6 font-semibold text-muted-foreground transition-[opacity,transform] duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] ${reveal}`}
+              >
+                Design Workshops &amp; Seminars
+              </p>
+              <h2
+                id="personal-image-consulting-title"
+                className={`display text-[clamp(1.2rem,5vw,4.2rem)] leading-[0.98] uppercase transition-[opacity,transform] delay-100 duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] ${reveal}`}
+              >
+                <span className="mb-[0.35em] block whitespace-nowrap text-red sm:mb-[0.12em]">
+                  Personal Image Consulting
+                </span>
+                <span className="block text-foreground">Master the Right Dress Code</span>
+              </h2>
+            </div>
+
+            <p
+              className={`mx-auto max-w-4xl text-center text-[calc(1.294rem+2px)] font-medium leading-relaxed text-red transition-[opacity,transform] delay-200 duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)]  md:text-[calc(1.4375rem+2px)] ${reveal}`}
+            >
+              "Master the Right Dress Code" is a highly visual and interactive seminar, sharing the
+              design tools, such that the individual can make decisions for themselves, about which
+              colour, fit and style shall suit their skin tone, height and body type.
+              <span className="mt-5 block">
+                Our styling seminars transform the way YOU dress up, such that your visual impact is
+                more powerful and confident for your lifetime.
+              </span>
+            </p>
+          </div>
+
+          <div className="mt-10 grid grid-cols-1 gap-8 md:mt-14 md:grid-cols-12 md:items-stretch md:gap-x-8 lg:gap-x-12">
+            <div
+              className={`relative aspect-[16/10] overflow-hidden bg-white transition-[clip-path,opacity,transform] delay-300 duration-[1400ms] ease-[cubic-bezier(0.16,1,0.3,1)] md:col-span-7 ${imageReveal}`}
+            >
+              {landscapeImages.map((image, index) => (
+                <img
+                  key={image.src}
+                  src={image.src}
+                  alt={image.alt}
+                  loading="lazy"
+                  decoding="async"
+                  style={{ objectFit: image.fit, objectPosition: "center" }}
+                  className={`absolute inset-0 h-full w-full transition-[opacity,transform] duration-[1800ms] ease-[cubic-bezier(0.16,1,0.3,1)] motion-reduce:transition-none ${
+                    activeImage === index ? "scale-100 opacity-100" : "scale-[1.025] opacity-0"
+                  }`}
+                />
+              ))}
+            </div>
+
+            <div
+              className={`relative aspect-[7/5] overflow-hidden bg-white transition-[clip-path,opacity,transform] delay-500 duration-[1400ms] ease-[cubic-bezier(0.16,1,0.3,1)] md:col-span-5 md:aspect-auto ${imageReveal}`}
+            >
+              {squareImages.map((image, index) => (
+                <img
+                  key={image.src}
+                  src={image.src}
+                  alt={image.alt}
+                  loading="lazy"
+                  decoding="async"
+                  style={{ objectFit: image.fit, objectPosition: "center" }}
+                  className={`absolute inset-0 h-full w-full transition-[opacity,transform] duration-[1800ms] ease-[cubic-bezier(0.16,1,0.3,1)] motion-reduce:transition-none ${
+                    activeImage % squareImages.length === index
+                      ? "scale-100 opacity-100"
+                      : "scale-[1.025] opacity-0"
+                  }`}
+                />
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Full-bleed editorial statement ribbon, directly connected to the slider above. */}
+        <div
+          className="-mx-6 mt-7 overflow-hidden border-y border-border/70 bg-charcoal py-5 md:-mx-12 md:py-6"
+          role="marquee"
+        >
+          <div className="ribbon-track flex w-max items-center">
+            {[0, 1].map((copy) => (
+              <div key={copy} aria-hidden={copy === 1} className="flex items-center">
+                {ribbonStatements.map((statement) => (
+                  <span key={statement} className="flex items-center">
+                    <span className="whitespace-nowrap px-8 text-[calc(0.95rem+2px)] leading-relaxed text-background md:px-10 md:text-[calc(1.125rem+2px)]">
+                      {statement}
+                    </span>
+                    <img
+                      src={diamond}
+                      alt=""
+                      aria-hidden="true"
+                      className="h-3 w-auto shrink-0 md:h-4"
+                      loading="lazy"
+                    />
+                  </span>
+                ))}
+              </div>
+            ))}
+          </div>
+        </div>
+        <BookWorkshopCta />
+      </section>
+    );
+  }
+}
+
+// ===== components/OwnYourSpotlight.tsx =====
+namespace Module_components_OwnYourSpotlight {
+  import Reveal = Module_components_Reveal.Reveal;
+
+  import BookWorkshopCta = Module_components_BookWorkshopCta.BookWorkshopCta;
+
+  const s1 = asset_assets_oys_1_png;
+  const s2 = asset_assets_oys_2_png;
+  const s3 = asset_assets_oys_3_png;
+  const s4 = asset_assets_oys_4_png;
+  const s5 = asset_assets_oys_5_png;
+
+  const SLIDES = [s1, s2, s3, s4, s5];
+
+  export function OwnYourSpotlight() {
+    const [idx, setIdx] = useState(0);
+    useEffect(() => {
+      const t = setInterval(() => setIdx((i) => (i + 1) % SLIDES.length), 2000);
+      return () => clearInterval(t);
+    }, []);
+    return (
+      <section
+        aria-labelledby="own-your-spotlight-title"
+        className="bg-background px-6 py-16 sm:py-20 md:px-12 md:py-24"
+      >
+        <div className="mx-auto max-w-[1500px]">
+          <div className="flex flex-col items-center gap-10 text-center">
+            <div>
+              <Reveal>
+                <p className="label-xs font-semibold text-muted-foreground">
+                  Design Workshops &amp; Seminars
+                </p>
+              </Reveal>
+              <Reveal delay={80}>
+                <h2
+                  id="own-your-spotlight-title"
+                  className="display mt-6 text-[2.4rem] leading-[1.02] uppercase text-balance sm:text-6xl md:text-[4.6rem]"
+                >
+                  <span className="text-primary">Own</span> Your Spotlight Webinar
+                </h2>
+              </Reveal>
+            </div>
+            <div>
+              <Reveal delay={160}>
+                <p className="mx-auto max-w-2xl text-[calc(1.294rem+2px)] leading-relaxed md:text-[calc(1.4375rem+2px)] font-medium text-red">
+                  We coach professionals to look sharp and stylish, build self confidence and have a
+                  personality that is magnetic, as they meet and interact with world.
+                </p>
+              </Reveal>
+            </div>
+          </div>
+
+          <Reveal delay={200}>
+            <div className="relative mt-10 aspect-[16/10] overflow-hidden bg-foreground sm:aspect-[3/2] md:mt-14 md:aspect-[16/9]">
+              {SLIDES.map((src, i) => (
+                <img
+                  key={src}
+                  src={src}
+                  alt={i === idx ? "Own Your Spotlight online coaching session" : ""}
+                  aria-hidden={i !== idx}
+                  className={`absolute inset-0 h-full w-full object-contain transition-opacity duration-1000 ease-in-out md:object-cover ${i === idx ? "opacity-100" : "opacity-0"}`}
+                />
+              ))}
+            </div>
+          </Reveal>
+          <BookWorkshopCta />
+        </div>
+      </section>
+    );
+  }
 }
 
 // ===== components/RedEditorialService.tsx =====
 namespace Module_components_RedEditorialService {
-const logoMark = asset_assets_balance_logo_mark_png;
-import Button = Module_components_ui_button.Button;
+  const logoMark = asset_assets_balance_logo_mark_png;
+  import Button = Module_components_ui_button.Button;
 
-import BookWorkshopCta = Module_components_BookWorkshopCta.BookWorkshopCta;
+  import BookWorkshopCta = Module_components_BookWorkshopCta.BookWorkshopCta;
 
-import Reveal = Module_components_Reveal.Reveal;
+  import Reveal = Module_components_Reveal.Reveal;
 
-import CurvedSlider = Module_components_CurvedSlider.CurvedSlider;
+  import CurvedSlider = Module_components_CurvedSlider.CurvedSlider;
 
+  /** Repeat short image lists so the curved slider always looks full. */
+  function padImages<T>(list: T[]): T[] {
+    if (list.length === 0) return list;
+    const out = [...list];
+    while (out.length < 8) out.push(...list);
+    return out;
+  }
 
-/** Repeat short image lists so the curved slider always looks full. */
-function padImages<T>(list: T[]): T[] {
-  if (list.length === 0) return list;
-  const out = [...list];
-  while (out.length < 8) out.push(...list);
-  return out;
-}
+  type ServiceImage = { src: string; alt: string };
 
-type ServiceImage = { src: string; alt: string };
-
-type RedEditorialServiceProps = {
-  eyebrow?: string;
-  sectionLabel?: string;
-  headline: React.ReactNode;
-  description?: string;
-  images: ServiceImage[];
-  single?: boolean;
-  imageFit?: "cover" | "contain";
-  wideDescription?: boolean;
-  ctaLabel?: string;
-};
-
-function SingleImageSlideshow({ images, label }: { images: ServiceImage[]; label: string }) {
-  const oddLast = images.length % 2 === 1 && images.length > 1;
-  return (
-    <div
-      className="mx-auto grid w-full max-w-6xl grid-cols-1 items-start gap-6 px-6 sm:grid-cols-2 md:gap-8 md:px-12"
-      aria-label={`${label} image gallery`}
-    >
-      {images.map((image, i) => {
-        const wide = oddLast && i === images.length - 1;
-        return (
-          <figure
-            key={image.src}
-            className={`overflow-hidden bg-background/95 p-3 md:p-4 ${wide ? "sm:col-span-2" : ""} ${
-              i % 2 === 1 && !wide ? "sm:mt-16" : ""
-            }`}
-          >
-            <img
-              src={image.src}
-              alt={image.alt}
-              loading="lazy"
-              decoding="async"
-              className="block h-auto w-full object-contain transition-transform duration-700 ease-out hover:scale-[1.02]"
-            />
-          </figure>
-        );
-      })}
-    </div>
-  );
-}
-
-const AUTOPLAY_DELAY = 2000;
-
-function EditorialCarousel({ images, label }: { images: ServiceImage[]; label: string }) {
-  const [position, setPosition] = useState(1);
-  const [animated, setAnimated] = useState(true);
-  const [paused, setPaused] = useState(false);
-  const [timerKey, setTimerKey] = useState(0);
-  const track = [images[images.length - 1], ...images, images[0]].filter(
-    (image): image is ServiceImage => Boolean(image),
-  );
-
-  const move = useCallback((direction: number, manual = false) => {
-    setAnimated(true);
-    setPosition((current) => current + direction);
-    if (manual) setTimerKey((current) => current + 1);
-  }, []);
-
-  useEffect(() => {
-    if (paused || images.length < 2) return;
-    const timer = window.setInterval(() => move(1), AUTOPLAY_DELAY);
-    return () => window.clearInterval(timer);
-  }, [images.length, move, paused, timerKey]);
-
-  const settleLoop = () => {
-    if (position === 0) {
-      setAnimated(false);
-      setPosition(images.length);
-    } else if (position === images.length + 1) {
-      setAnimated(false);
-      setPosition(1);
-    }
+  type RedEditorialServiceProps = {
+    eyebrow?: string;
+    sectionLabel?: string;
+    headline: React.ReactNode;
+    description?: string;
+    images: ServiceImage[];
+    single?: boolean;
+    imageFit?: "cover" | "contain";
+    wideDescription?: boolean;
+    ctaLabel?: string;
   };
 
-  const activeIndex = (position - 1 + images.length) % images.length;
-  const carouselStyle = { "--gallery-index": position } as CSSProperties;
-
-  return (
-    <div
-      className="red-service-carousel relative overflow-hidden"
-      aria-label={`${label} image gallery`}
-      onMouseEnter={() => setPaused(true)}
-      onMouseLeave={() => setPaused(false)}
-    >
+  function SingleImageSlideshow({ images, label }: { images: ServiceImage[]; label: string }) {
+    const oddLast = images.length % 2 === 1 && images.length > 1;
+    return (
       <div
-        className={`red-service-carousel-track ${animated ? "red-service-carousel-track-animated" : ""}`}
-        style={carouselStyle}
-        onTransitionEnd={settleLoop}
+        className="mx-auto grid w-full max-w-6xl grid-cols-1 items-start gap-6 px-6 sm:grid-cols-2 md:gap-8 md:px-12"
+        aria-label={`${label} image gallery`}
       >
-        {track.map((image, index) => {
-          const logicalIndex = (index - 1 + images.length) % images.length;
-          const isActive = logicalIndex === activeIndex && index === position;
+        {images.map((image, i) => {
+          const wide = oddLast && i === images.length - 1;
           return (
             <figure
-              key={`${image.src}-${index}`}
-              className={`red-service-carousel-slide ${isActive ? "red-service-carousel-slide-active" : ""}`}
-              aria-hidden={!isActive}
+              key={image.src}
+              className={`overflow-hidden bg-background/95 p-3 md:p-4 ${wide ? "sm:col-span-2" : ""} ${
+                i % 2 === 1 && !wide ? "sm:mt-16" : ""
+              }`}
             >
               <img
                 src={image.src}
-                alt={isActive ? image.alt : ""}
-                className="h-full w-full object-cover"
-                loading={index < 3 ? "eager" : "lazy"}
+                alt={image.alt}
+                loading="lazy"
                 decoding="async"
+                className="block h-auto w-full object-contain transition-transform duration-700 ease-out hover:scale-[1.02]"
               />
             </figure>
           );
         })}
       </div>
+    );
+  }
 
-      {images.length > 1 && (
-        <>
-          <Button
-            type="button"
-            variant="ghost"
-            size="icon"
-            aria-label={`Previous ${label} image`}
-            onClick={() => move(-1, true)}
-            className="absolute left-4 top-1/2 z-10 size-11 -translate-y-1/2 rounded-none border border-primary-foreground/55 bg-foreground/55 text-primary-foreground hover:bg-foreground hover:text-primary-foreground md:left-8 md:size-12"
-          >
-            <ArrowLeft aria-hidden="true" />
-          </Button>
-          <Button
-            type="button"
-            variant="ghost"
-            size="icon"
-            aria-label={`Next ${label} image`}
-            onClick={() => move(1, true)}
-            className="absolute right-4 top-1/2 z-10 size-11 -translate-y-1/2 rounded-none border border-primary-foreground/55 bg-foreground/55 text-primary-foreground hover:bg-foreground hover:text-primary-foreground md:right-8 md:size-12"
-          >
-            <ArrowRight aria-hidden="true" />
-          </Button>
-        </>
-      )}
-    </div>
-  );
-}
+  const AUTOPLAY_DELAY = 2000;
 
-export function RedEditorialService({
-  eyebrow,
-  sectionLabel,
-  headline,
-  description,
-  images,
-  single = false,
-  imageFit = "cover",
-  wideDescription = false,
-  ctaLabel = "Enquire about this workshop",
-}: RedEditorialServiceProps) {
-  return (
-    <section className="overflow-hidden bg-background py-16 text-foreground sm:py-20 md:py-24" aria-label={sectionLabel ?? (typeof eyebrow === "string" && eyebrow ? eyebrow : "Service")}>
-      <div className="mx-auto px-6 text-center md:px-12">
-        <Reveal>
-          <img
-            src={logoMark}
-            alt="Balance Design"
-            data-bg-logo
-            className="mx-auto h-14 w-auto object-contain md:h-20"
-            width={120}
-            height={80}
-          />
-        </Reveal>
-        {eyebrow && (
-          <Reveal delay={80}>
-            <p className="label-xs mt-8 font-semibold text-muted-foreground">{eyebrow}</p>
-          </Reveal>
-        )}
-        <Reveal delay={150}>
-          <h2 className="display mx-auto mt-7 max-w-5xl text-[2.65rem] leading-[1.02] sm:text-6xl md:text-[5.25rem]">
-            {headline}
-          </h2>
-        </Reveal>
+  function EditorialCarousel({ images, label }: { images: ServiceImage[]; label: string }) {
+    const [position, setPosition] = useState(1);
+    const [animated, setAnimated] = useState(true);
+    const [paused, setPaused] = useState(false);
+    const [timerKey, setTimerKey] = useState(0);
+    const track = [images[images.length - 1], ...images, images[0]].filter(
+      (image): image is ServiceImage => Boolean(image),
+    );
+
+    const move = useCallback((direction: number, manual = false) => {
+      setAnimated(true);
+      setPosition((current) => current + direction);
+      if (manual) setTimerKey((current) => current + 1);
+    }, []);
+
+    useEffect(() => {
+      if (paused || images.length < 2) return;
+      const timer = window.setInterval(() => move(1), AUTOPLAY_DELAY);
+      return () => window.clearInterval(timer);
+    }, [images.length, move, paused, timerKey]);
+
+    const settleLoop = () => {
+      if (position === 0) {
+        setAnimated(false);
+        setPosition(images.length);
+      } else if (position === images.length + 1) {
+        setAnimated(false);
+        setPosition(1);
+      }
+    };
+
+    const activeIndex = (position - 1 + images.length) % images.length;
+    const carouselStyle = { "--gallery-index": position } as CSSProperties;
+
+    return (
+      <div
+        className="red-service-carousel relative overflow-hidden"
+        aria-label={`${label} image gallery`}
+        onMouseEnter={() => setPaused(true)}
+        onMouseLeave={() => setPaused(false)}
+      >
         <div
-          className={`mx-auto mt-9 min-h-20 md:min-h-24 ${
-            wideDescription ? "max-w-[900px] xl:max-w-[1100px]" : "max-w-2xl"
-          }`}
+          className={`red-service-carousel-track ${animated ? "red-service-carousel-track-animated" : ""}`}
+          style={carouselStyle}
+          onTransitionEnd={settleLoop}
         >
-          {description && (
-            <Reveal delay={230}>
-              <p className="text-[calc(1.294rem+2px)] leading-relaxed md:text-[calc(1.4375rem+2px)] font-medium text-red">
-                {description}
-              </p>
+          {track.map((image, index) => {
+            const logicalIndex = (index - 1 + images.length) % images.length;
+            const isActive = logicalIndex === activeIndex && index === position;
+            return (
+              <figure
+                key={`${image.src}-${index}`}
+                className={`red-service-carousel-slide ${isActive ? "red-service-carousel-slide-active" : ""}`}
+                aria-hidden={!isActive}
+              >
+                <img
+                  src={image.src}
+                  alt={isActive ? image.alt : ""}
+                  className="h-full w-full object-cover"
+                  loading={index < 3 ? "eager" : "lazy"}
+                  decoding="async"
+                />
+              </figure>
+            );
+          })}
+        </div>
+
+        {images.length > 1 && (
+          <>
+            <Button
+              type="button"
+              variant="ghost"
+              size="icon"
+              aria-label={`Previous ${label} image`}
+              onClick={() => move(-1, true)}
+              className="absolute left-4 top-1/2 z-10 size-11 -translate-y-1/2 rounded-none border border-primary-foreground/55 bg-foreground/55 text-primary-foreground hover:bg-foreground hover:text-primary-foreground md:left-8 md:size-12"
+            >
+              <ArrowLeft aria-hidden="true" />
+            </Button>
+            <Button
+              type="button"
+              variant="ghost"
+              size="icon"
+              aria-label={`Next ${label} image`}
+              onClick={() => move(1, true)}
+              className="absolute right-4 top-1/2 z-10 size-11 -translate-y-1/2 rounded-none border border-primary-foreground/55 bg-foreground/55 text-primary-foreground hover:bg-foreground hover:text-primary-foreground md:right-8 md:size-12"
+            >
+              <ArrowRight aria-hidden="true" />
+            </Button>
+          </>
+        )}
+      </div>
+    );
+  }
+
+  export function RedEditorialService({
+    eyebrow,
+    sectionLabel,
+    headline,
+    description,
+    images,
+    single = false,
+    imageFit = "cover",
+    wideDescription = false,
+    ctaLabel = "Enquire about this workshop",
+  }: RedEditorialServiceProps) {
+    return (
+      <section
+        className="overflow-hidden bg-background py-16 text-foreground sm:py-20 md:py-24"
+        aria-label={sectionLabel ?? (typeof eyebrow === "string" && eyebrow ? eyebrow : "Service")}
+      >
+        <div className="mx-auto px-6 text-center md:px-12">
+          <Reveal>
+            <img
+              src={logoMark}
+              alt="Balance Design"
+              data-bg-logo
+              className="mx-auto h-14 w-auto object-contain md:h-20"
+              width={120}
+              height={80}
+            />
+          </Reveal>
+          {eyebrow && (
+            <Reveal delay={80}>
+              <p className="label-xs mt-8 font-semibold text-muted-foreground">{eyebrow}</p>
             </Reveal>
           )}
+          <Reveal delay={150}>
+            <h2 className="display mx-auto mt-7 max-w-5xl text-[2.65rem] leading-[1.02] sm:text-6xl md:text-[5.25rem]">
+              {headline}
+            </h2>
+          </Reveal>
+          <div
+            className={`mx-auto mt-9 min-h-20 md:min-h-24 ${
+              wideDescription ? "max-w-[900px] xl:max-w-[1100px]" : "max-w-2xl"
+            }`}
+          >
+            {description && (
+              <Reveal delay={230}>
+                <p className="text-[calc(1.294rem+2px)] leading-relaxed md:text-[calc(1.4375rem+2px)] font-medium text-red">
+                  {description}
+                </p>
+              </Reveal>
+            )}
+          </div>
         </div>
-      </div>
 
-      <Reveal delay={390} className="mt-10 md:mt-14">
-        <CurvedSlider images={padImages(images)} imageFit={imageFit} />
-      </Reveal>
-      <BookWorkshopCta className="mt-4 md:mt-6" label={ctaLabel} />
-    </section>
-  );
-}
+        <Reveal delay={390} className="mt-10 md:mt-14">
+          <CurvedSlider images={padImages(images)} imageFit={imageFit} />
+        </Reveal>
+        <BookWorkshopCta className="mt-4 md:mt-6" label={ctaLabel} />
+      </section>
+    );
+  }
 }
 
 // ===== components/AboutMe.tsx =====
 namespace Module_components_AboutMe {
-const aboutMe1 = asset_assets_about_me_1_jpg;
-const aboutMe2 = asset_assets_about_me_2_jpg;
-import Button = Module_components_ui_button.Button;
+  const aboutMe1 = asset_assets_about_me_1_jpg;
+  const aboutMe2 = asset_assets_about_me_2_jpg;
+  import Button = Module_components_ui_button.Button;
 
-import Reveal = Module_components_Reveal.Reveal;
+  import Reveal = Module_components_Reveal.Reveal;
 
+  const PORTRAITS = [
+    {
+      src: aboutMe1,
+      alt: "Upma Shrian seated on a red sofa in a polka-dot top",
+      position: "object-[center_30%]",
+    },
+    {
+      src: aboutMe2,
+      alt: "Upma Shrian in a burgundy top with a silver necklace",
+      position: "object-[center_30%]",
+    },
+  ];
 
-const PORTRAITS = [
-  {
-    src: aboutMe1,
-    alt: "Upma Shrian seated on a red sofa in a polka-dot top",
-    position: "object-[center_30%]",
-  },
-  {
-    src: aboutMe2,
-    alt: "Upma Shrian in a burgundy top with a silver necklace",
-    position: "object-[center_30%]",
-  },
-];
+  const AUTOPLAY_MS = 2000;
 
-const AUTOPLAY_MS = 2000;
+  export function AboutMe() {
+    const [active, setActive] = useState(0);
+    const [timerKey, setTimerKey] = useState(0);
+    const [reducedMotion, setReducedMotion] = useState(false);
 
-export function AboutMe() {
-  const [active, setActive] = useState(0);
-  const [timerKey, setTimerKey] = useState(0);
-  const [reducedMotion, setReducedMotion] = useState(false);
+    useEffect(() => {
+      const media = window.matchMedia("(prefers-reduced-motion: reduce)");
+      const update = () => setReducedMotion(media.matches);
+      update();
+      media.addEventListener("change", update);
+      return () => media.removeEventListener("change", update);
+    }, []);
 
-  useEffect(() => {
-    const media = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const update = () => setReducedMotion(media.matches);
-    update();
-    media.addEventListener("change", update);
-    return () => media.removeEventListener("change", update);
-  }, []);
+    useEffect(() => {
+      if (reducedMotion) return;
+      const interval = window.setInterval(
+        () => setActive((current) => (current + 1) % PORTRAITS.length),
+        AUTOPLAY_MS,
+      );
+      return () => window.clearInterval(interval);
+    }, [reducedMotion, timerKey]);
 
-  useEffect(() => {
-    if (reducedMotion) return;
-    const interval = window.setInterval(
-      () => setActive((current) => (current + 1) % PORTRAITS.length),
-      AUTOPLAY_MS,
-    );
-    return () => window.clearInterval(interval);
-  }, [reducedMotion, timerKey]);
+    const selectPortrait = (index: number) => {
+      setActive(index);
+      setTimerKey((key) => key + 1);
+    };
 
-  const selectPortrait = (index: number) => {
-    setActive(index);
-    setTimerKey((key) => key + 1);
-  };
+    return (
+      <section
+        aria-labelledby="about-me-title"
+        className="bg-background px-6 py-24 md:px-10 md:py-32 lg:px-12 lg:py-40"
+      >
+        <div className="mx-auto grid max-w-[1500px] grid-cols-1 items-center gap-14 md:grid-cols-[minmax(0,28fr)_minmax(19rem,35fr)_minmax(0,28fr)] md:gap-8 lg:gap-14 xl:gap-20">
+          <Reveal className="md:pr-2">
+            <div className="mx-auto max-w-sm md:mx-0">
+              <h2
+                id="about-me-title"
+                className="display text-[2.5rem] leading-[1.03] uppercase sm:text-5xl md:text-[2.25rem] lg:text-[2.8rem]"
+              >
+                About the Founder:
+              </h2>
+              <p className="mt-8 font-normal text-[calc(1rem+2px)] leading-[1.75] text-muted-foreground lg:text-[calc(1.125rem+2px)]">
+                With close to three decades of experience in the fashion and apparel industry, Upma
+                Shrian has specialized in defining design direction that aligns with business
+                strategy and evolving consumer trends. She also imparts training to enhance team
+                performance in the Apparel and Fashion Industry.
+              </p>
+            </div>
+          </Reveal>
 
-  return (
-    <section aria-labelledby="about-me-title" className="bg-background px-6 py-24 md:px-10 md:py-32 lg:px-12 lg:py-40">
-      <div className="mx-auto grid max-w-[1500px] grid-cols-1 items-center gap-14 md:grid-cols-[minmax(0,28fr)_minmax(19rem,35fr)_minmax(0,28fr)] md:gap-8 lg:gap-14 xl:gap-20">
-        <Reveal className="md:pr-2">
-          <div className="mx-auto max-w-sm md:mx-0">
-            <h2 id="about-me-title" className="display text-[2.5rem] leading-[1.03] uppercase sm:text-5xl md:text-[2.25rem] lg:text-[2.8rem]">
-              About the Founder:
-            </h2>
-            <p className="mt-8 font-normal text-[calc(1rem+2px)] leading-[1.75] text-muted-foreground lg:text-[calc(1.125rem+2px)]">
-              With close to three decades of experience in the fashion and apparel industry, Upma
-              Shrian has specialized in defining design direction that aligns with business strategy
-              and evolving consumer trends. She also imparts training to enhance team performance in
-              the Apparel and Fashion Industry.
-            </p>
-          </div>
-        </Reveal>
-
-        <Reveal delay={120} className="mx-auto w-full max-w-[31rem]">
-          <div className="relative aspect-[4/5] overflow-hidden rounded-[1.5rem] bg-muted">
-            {PORTRAITS.map((portrait, index) => (
-              <img
-                key={portrait.src}
-                src={portrait.src}
-                alt={portrait.alt}
-                width={1200}
-                height={1500}
-                loading={index === 0 ? "eager" : "lazy"}
-                decoding="async"
-                className={`absolute inset-0 h-full w-full object-cover ${portrait.position}`}
-                style={{
-                  opacity: active === index ? 1 : 0,
-                  transform: reducedMotion ? undefined : `scale(${active === index ? 1 : 1.015})`,
-                  transition: reducedMotion
-                    ? "opacity 300ms ease"
-                    : "opacity 1100ms cubic-bezier(0.16, 1, 0.3, 1), transform 1600ms cubic-bezier(0.16, 1, 0.3, 1)",
-                }}
-              />
-            ))}
-
-            <div className="absolute inset-x-0 bottom-5 z-10 flex justify-center gap-3" aria-label="Choose portrait">
+          <Reveal delay={120} className="mx-auto w-full max-w-[31rem]">
+            <div className="relative aspect-[4/5] overflow-hidden rounded-[1.5rem] bg-muted">
               {PORTRAITS.map((portrait, index) => (
-                <Button
+                <img
                   key={portrait.src}
-                  type="button"
-                  variant="ghost"
-                  size="icon"
-                  onClick={() => selectPortrait(index)}
-                  aria-label={`Show portrait ${index + 1}`}
-                  aria-current={active === index ? "true" : undefined}
-                  className="h-5 w-5 rounded-full p-0 hover:bg-primary-foreground/15"
-                >
-                  <span
-                    className={`block h-2.5 w-2.5 rounded-full border border-primary-foreground transition-colors duration-500 ${
-                      active === index ? "bg-primary-foreground" : "bg-foreground/20"
-                    }`}
-                  />
-                </Button>
+                  src={portrait.src}
+                  alt={portrait.alt}
+                  width={1200}
+                  height={1500}
+                  loading={index === 0 ? "eager" : "lazy"}
+                  decoding="async"
+                  className={`absolute inset-0 h-full w-full object-cover ${portrait.position}`}
+                  style={{
+                    opacity: active === index ? 1 : 0,
+                    transform: reducedMotion ? undefined : `scale(${active === index ? 1 : 1.015})`,
+                    transition: reducedMotion
+                      ? "opacity 300ms ease"
+                      : "opacity 1100ms cubic-bezier(0.16, 1, 0.3, 1), transform 1600ms cubic-bezier(0.16, 1, 0.3, 1)",
+                  }}
+                />
               ))}
-            </div>
-          </div>
-        </Reveal>
 
-        <Reveal delay={240}>
-          <div className="mx-auto max-w-sm text-left md:mx-0 md:text-center">
-            <div aria-hidden="true" className="mx-auto mb-9 hidden w-16 flex-col items-center gap-2 text-border md:flex">
-              <span className="h-12 w-px rotate-12 bg-border" />
-              <span className="h-px w-10 -rotate-6 bg-border" />
-              <span className="h-8 w-px -rotate-12 bg-border" />
+              <div
+                className="absolute inset-x-0 bottom-5 z-10 flex justify-center gap-3"
+                aria-label="Choose portrait"
+              >
+                {PORTRAITS.map((portrait, index) => (
+                  <Button
+                    key={portrait.src}
+                    type="button"
+                    variant="ghost"
+                    size="icon"
+                    onClick={() => selectPortrait(index)}
+                    aria-label={`Show portrait ${index + 1}`}
+                    aria-current={active === index ? "true" : undefined}
+                    className="h-5 w-5 rounded-full p-0 hover:bg-primary-foreground/15"
+                  >
+                    <span
+                      className={`block h-2.5 w-2.5 rounded-full border border-primary-foreground transition-colors duration-500 ${
+                        active === index ? "bg-primary-foreground" : "bg-foreground/20"
+                      }`}
+                    />
+                  </Button>
+                ))}
+              </div>
             </div>
-            <p className="font-normal text-[calc(1rem+2px)] leading-[1.75] text-muted-foreground lg:text-[calc(1.125rem+2px)]">
-              Her mission is to transform creativity into measurable business impact. Whether it’s
-              launching a new label, crafting consumer-centric brand stories, scaling design
-              processes for growth, directing design teams, or mentoring the next generation of
-              fashion leaders.
-            </p>
-            <p
-              aria-hidden="true"
-              className="mt-10 text-right text-[2.75rem] leading-none text-foreground md:text-[3.25rem]"
-              style={{ fontFamily: "'Mr Dafoe', cursive" }}
-            >
-              Upma Shrian
-            </p>
-          </div>
-        </Reveal>
-      </div>
-    </section>
-  );
-}
+          </Reveal>
+
+          <Reveal delay={240}>
+            <div className="mx-auto max-w-sm text-left md:mx-0 md:text-center">
+              <div
+                aria-hidden="true"
+                className="mx-auto mb-9 hidden w-16 flex-col items-center gap-2 text-border md:flex"
+              >
+                <span className="h-12 w-px rotate-12 bg-border" />
+                <span className="h-px w-10 -rotate-6 bg-border" />
+                <span className="h-8 w-px -rotate-12 bg-border" />
+              </div>
+              <p className="font-normal text-[calc(1rem+2px)] leading-[1.75] text-muted-foreground lg:text-[calc(1.125rem+2px)]">
+                Her mission is to transform creativity into measurable business impact. Whether it’s
+                launching a new label, crafting consumer-centric brand stories, scaling design
+                processes for growth, directing design teams, or mentoring the next generation of
+                fashion leaders.
+              </p>
+              <p
+                aria-hidden="true"
+                className="mt-10 text-right text-[2.75rem] leading-none text-foreground md:text-[3.25rem]"
+                style={{ fontFamily: "'Mr Dafoe', cursive" }}
+              >
+                Upma Shrian
+              </p>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+    );
+  }
 }
 
 // ===== Homepage =====
@@ -3055,8 +3049,6 @@ import OwnYourSpotlight = Module_components_OwnYourSpotlight.OwnYourSpotlight;
 import RedEditorialService = Module_components_RedEditorialService.RedEditorialService;
 
 import AboutMe = Module_components_AboutMe.AboutMe;
-
-
 
 const trend1 = asset_assets_Picture8_jpg;
 const trend2 = asset_assets_Picture9_jpg;
@@ -3130,28 +3122,57 @@ export const Route = createFileRoute("/")({
 });
 
 const TREND_IMAGES = [
-  { src: trend1606, alt: "Night Sparkles Girls 9-14 yrs trend board with kaleidoscopic mosaic prints" },
+  {
+    src: trend1606,
+    alt: "Night Sparkles Girls 9-14 yrs trend board with kaleidoscopic mosaic prints",
+  },
   { src: trend1607, alt: "Multi-colour stripes trend board with knitwear and digital prints" },
   { src: trend1612, alt: "Assembling Girls 2-8 yrs folk theme trend board with Pantone palette" },
   { src: trend1613, alt: "Fusion of art and craft trend board with crochet bags and folk motifs" },
-  { src: trend1614, alt: "Scrapbook Boys 2-8 yrs trend board with illustration and Pantone palette" },
-  { src: trend1615, alt: "Fabrics and Prints board with graphic tees, stripes and overlapped prints" },
+  {
+    src: trend1614,
+    alt: "Scrapbook Boys 2-8 yrs trend board with illustration and Pantone palette",
+  },
+  {
+    src: trend1615,
+    alt: "Fabrics and Prints board with graphic tees, stripes and overlapped prints",
+  },
   { src: trend1616, alt: "Boys outerwear and shirt CAD flats board with Pantone palette" },
-  { src: trend1629, alt: "Illusive — Tweens Girls board, model in black lace body paint with 'Which is the real skin'" },
+  {
+    src: trend1629,
+    alt: "Illusive — Tweens Girls board, model in black lace body paint with 'Which is the real skin'",
+  },
   { src: trend1630, alt: "Black and white ornamental geometric print board" },
   { src: trend1631, alt: "Prints board with four illustrated figures in swirling retro prints" },
 ];
 
 const GRAPHIC_IMAGES = [
-  { src: graphic1Asset, alt: "Infants/Toddlers A/W 09-10 theme board with cow illustration on red" },
-  { src: graphic2Asset, alt: "Infants/Toddlers boys mood board with giraffe, cow and dragonfly illustrations and Pantone colour chips" },
-  { src: graphic3Asset, alt: "Infants/Toddlers girls mood board with bunny, birds, trees and fabric print tiles" },
-  { src: graphic4Asset, alt: "Fabrics and Prints board with kidswear cargo pants, graphic tees and striped shorts" },
-  { src: graphic6Asset, alt: "Child-inspired psychedelic pattern board with mosaic florals and overlapping circles" },
+  {
+    src: graphic1Asset,
+    alt: "Infants/Toddlers A/W 09-10 theme board with cow illustration on red",
+  },
+  {
+    src: graphic2Asset,
+    alt: "Infants/Toddlers boys mood board with giraffe, cow and dragonfly illustrations and Pantone colour chips",
+  },
+  {
+    src: graphic3Asset,
+    alt: "Infants/Toddlers girls mood board with bunny, birds, trees and fabric print tiles",
+  },
+  {
+    src: graphic4Asset,
+    alt: "Fabrics and Prints board with kidswear cargo pants, graphic tees and striped shorts",
+  },
+  {
+    src: graphic6Asset,
+    alt: "Child-inspired psychedelic pattern board with mosaic florals and overlapping circles",
+  },
   { src: graphic7Asset, alt: "Geometric print board beside pink embroidered slip-on shoes" },
-  { src: graphic10Asset, alt: "Uniform design board with black-and-white chevron print, pink lotus motifs, matching shoes and a bow tie" },
+  {
+    src: graphic10Asset,
+    alt: "Uniform design board with black-and-white chevron print, pink lotus motifs, matching shoes and a bow tie",
+  },
 ];
-
 
 function Index() {
   const [introComplete, setIntroComplete] = useState(false);
@@ -3169,36 +3190,40 @@ function Index() {
         <ScrollStory>
           <SlideStack>
             <SlidePanel>
-            <section
-              id="services"
-              tabIndex={-1}
-              className="px-6 pt-20 pb-14 text-center sm:pt-24 sm:pb-12 md:px-12 md:pt-32 md:pb-16"
-            >
-              <Reveal>
-                <LogoMark className="mb-8" />
-              </Reveal>
-              <Reveal delay={80}>
-                <h2 className="display mx-auto mt-8 max-w-4xl text-[2.5rem] sm:text-6xl md:text-[5rem]">
-                  Design workshops &amp; seminars
-                </h2>
-              </Reveal>
-              <Reveal delay={160}>
-                <p className="mx-auto mt-10 max-w-5xl text-[calc(1.294rem+2px)] font-medium leading-relaxed text-red md:text-[calc(1.4375rem+2px)]">
-                  Are conducted For TEAMS of Apparel and Fashion Brands
-                  <br />
-                  in areas of <span className="font-medium">Design Aesthetics, Fashion Styling and Trend Forecasting</span>.
-                </p>
-              </Reveal>
-              <Reveal delay={200}>
-                <div className="-mx-6 mt-10 md:-mx-12 md:mt-14">
-                  <CurvedSlider images={WORKSHOP_IMAGES} contain />
-                </div>
-              </Reveal>
-              <Reveal delay={260}>
-                <BookWorkshopCta className="mt-4 md:mt-6" />
-              </Reveal>
-            </section>
-          </SlidePanel>
+              <section
+                id="services"
+                tabIndex={-1}
+                className="px-6 pt-20 pb-14 text-center sm:pt-24 sm:pb-12 md:px-12 md:pt-32 md:pb-16"
+              >
+                <Reveal>
+                  <LogoMark className="mb-8" />
+                </Reveal>
+                <Reveal delay={80}>
+                  <h2 className="display mx-auto mt-8 max-w-4xl text-[2.5rem] sm:text-6xl md:text-[5rem]">
+                    Design workshops &amp; seminars
+                  </h2>
+                </Reveal>
+                <Reveal delay={160}>
+                  <p className="mx-auto mt-10 max-w-5xl text-[calc(1.294rem+2px)] font-medium leading-relaxed text-red md:text-[calc(1.4375rem+2px)]">
+                    Are conducted For TEAMS of Apparel and Fashion Brands
+                    <br />
+                    in areas of{" "}
+                    <span className="font-medium">
+                      Design Aesthetics, Fashion Styling and Trend Forecasting
+                    </span>
+                    .
+                  </p>
+                </Reveal>
+                <Reveal delay={200}>
+                  <div className="-mx-6 mt-10 md:-mx-12 md:mt-14">
+                    <CurvedSlider images={WORKSHOP_IMAGES} contain />
+                  </div>
+                </Reveal>
+                <Reveal delay={260}>
+                  <BookWorkshopCta className="mt-4 md:mt-6" />
+                </Reveal>
+              </section>
+            </SlidePanel>
           </SlideStack>
 
           <StylingWorkshops />
