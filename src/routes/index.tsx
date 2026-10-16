@@ -3,7 +3,7 @@
  * Includes the loader, photo grid, scroll animations, sliders, enquiry popup, header and footer.
  * Replace src/routes/index.tsx with this file in the existing Balance Design project.
  * Requires its npm packages, shared src/styles.css, src/assets media and configured enquiry connection.
- * File-local namespaces preserve each section's original variables and types.
+ * Section-prefixed names preserve each section's original variables and types.
  */
 import { createFileRoute } from "@tanstack/react-router";
 import * as React from "react";

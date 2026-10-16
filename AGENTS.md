@@ -18,5 +18,5 @@
 - Keep LogoIntro mounted after loading to own the persistent grid clock; hide its completed loader layer instead of unmounting the animation owner.
 - The grid and image dialog share a Services cue; close the dialog and release its scroll lock before navigating, with focus restoration using preventScroll to retain the grid position.
 
-- The homepage route contains its presentation elements and animation logic in file-local namespaces; other pages retain their shared modules so homepage consolidation does not change their public imports.
+- The homepage route contains its presentation elements and animation logic with section-prefixed local names; other pages retain their shared modules so homepage consolidation does not change their public imports.
 - Keep the homepage's enquiry client and global stylesheet shared with the application to avoid duplicating its connection or theme.
