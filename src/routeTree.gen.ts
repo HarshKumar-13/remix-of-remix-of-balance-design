@@ -15,6 +15,7 @@ import { Route as BlogRouteImport } from './routes/blog'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as EventsRouteImport } from './routes/events'
 import { Route as FindYourServiceRouteImport } from './routes/find-your-service'
+import { Route as ZzMergeCheckRouteImport } from './routes/zz-merge-check'
 import { Route as BlogIndexRouteImport } from './routes/blog.index'
 import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 import { Route as ServicesFashionApparelWorkshopsRouteImport } from './routes/services.fashion-apparel-workshops'
@@ -49,6 +50,11 @@ const FindYourServiceRoute = FindYourServiceRouteImport.update({
   path: '/find-your-service',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ZzMergeCheckRoute = ZzMergeCheckRouteImport.update({
+  id: '/zz-merge-check',
+  path: '/zz-merge-check',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const BlogIndexRoute = BlogIndexRouteImport.update({
   id: '/',
   path: '/',
@@ -73,6 +79,7 @@ export interface FileRoutesByFullPath {
   '/contact': typeof ContactRoute
   '/events': typeof EventsRoute
   '/find-your-service': typeof FindYourServiceRoute
+  '/zz-merge-check': typeof ZzMergeCheckRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/services/fashion-apparel-workshops': typeof ServicesFashionApparelWorkshopsRoute
   '/blog/': typeof BlogIndexRoute
@@ -83,6 +90,7 @@ export interface FileRoutesByTo {
   '/contact': typeof ContactRoute
   '/events': typeof EventsRoute
   '/find-your-service': typeof FindYourServiceRoute
+  '/zz-merge-check': typeof ZzMergeCheckRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/services/fashion-apparel-workshops': typeof ServicesFashionApparelWorkshopsRoute
   '/blog': typeof BlogIndexRoute
@@ -95,6 +103,7 @@ export interface FileRoutesById {
   '/contact': typeof ContactRoute
   '/events': typeof EventsRoute
   '/find-your-service': typeof FindYourServiceRoute
+  '/zz-merge-check': typeof ZzMergeCheckRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/services/fashion-apparel-workshops': typeof ServicesFashionApparelWorkshopsRoute
   '/blog/': typeof BlogIndexRoute
@@ -108,6 +117,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/events'
     | '/find-your-service'
+    | '/zz-merge-check'
     | '/blog/$slug'
     | '/services/fashion-apparel-workshops'
     | '/blog/'
@@ -118,6 +128,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/events'
     | '/find-your-service'
+    | '/zz-merge-check'
     | '/blog/$slug'
     | '/services/fashion-apparel-workshops'
     | '/blog'
@@ -129,6 +140,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/events'
     | '/find-your-service'
+    | '/zz-merge-check'
     | '/blog/$slug'
     | '/services/fashion-apparel-workshops'
     | '/blog/'
@@ -141,6 +153,7 @@ export interface RootRouteChildren {
   ContactRoute: typeof ContactRoute
   EventsRoute: typeof EventsRoute
   FindYourServiceRoute: typeof FindYourServiceRoute
+  ZzMergeCheckRoute: typeof ZzMergeCheckRoute
   ServicesFashionApparelWorkshopsRoute: typeof ServicesFashionApparelWorkshopsRoute
 }
 
@@ -188,6 +201,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof FindYourServiceRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/zz-merge-check': {
+      id: '/zz-merge-check'
+      path: '/zz-merge-check'
+      fullPath: '/zz-merge-check'
+      preLoaderRoute: typeof ZzMergeCheckRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/blog/': {
       id: '/blog/'
       path: '/'
@@ -231,6 +251,7 @@ const rootRouteChildren: RootRouteChildren = {
   ContactRoute: ContactRoute,
   EventsRoute: EventsRoute,
   FindYourServiceRoute: FindYourServiceRoute,
+  ZzMergeCheckRoute: ZzMergeCheckRoute,
   ServicesFashionApparelWorkshopsRoute: ServicesFashionApparelWorkshopsRoute,
 }
 export const routeTree = rootRouteImport

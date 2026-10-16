@@ -267,7 +267,7 @@ namespace Module_components_ui_button {
 import cn = Module_lib_utils.cn;
 
 
-const buttonVariants = cva(
+export const buttonVariants = cva(
   "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium cursor-pointer transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 disabled:cursor-not-allowed [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
   {
     variants: {
@@ -299,7 +299,7 @@ export interface ButtonProps
   asChild?: boolean;
 }
 
-const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
+export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant, size, asChild = false, ...props }, ref) => {
     const Comp = asChild ? Slot : "button";
     return (
@@ -315,15 +315,15 @@ namespace Module_components_ui_dialog {
 import cn = Module_lib_utils.cn;
 
 
-const Dialog = DialogPrimitive.Root;
+export const Dialog = DialogPrimitive.Root;
 
-const DialogTrigger = DialogPrimitive.Trigger;
+export const DialogTrigger = DialogPrimitive.Trigger;
 
-const DialogPortal = DialogPrimitive.Portal;
+export const DialogPortal = DialogPrimitive.Portal;
 
-const DialogClose = DialogPrimitive.Close;
+export const DialogClose = DialogPrimitive.Close;
 
-const DialogOverlay = React.forwardRef<
+export const DialogOverlay = React.forwardRef<
   React.ElementRef<typeof DialogPrimitive.Overlay>,
   React.ComponentPropsWithoutRef<typeof DialogPrimitive.Overlay>
 >(({ className, ...props }, ref) => (
@@ -338,7 +338,7 @@ const DialogOverlay = React.forwardRef<
 ));
 DialogOverlay.displayName = DialogPrimitive.Overlay.displayName;
 
-const DialogContent = React.forwardRef<
+export const DialogContent = React.forwardRef<
   React.ElementRef<typeof DialogPrimitive.Content>,
   React.ComponentPropsWithoutRef<typeof DialogPrimitive.Content>
 >(({ className, children, ...props }, ref) => (
@@ -362,12 +362,12 @@ const DialogContent = React.forwardRef<
 ));
 DialogContent.displayName = DialogPrimitive.Content.displayName;
 
-const DialogHeader = ({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) => (
+export const DialogHeader = ({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) => (
   <div className={cn("flex flex-col space-y-1.5 text-center sm:text-left", className)} {...props} />
 );
 DialogHeader.displayName = "DialogHeader";
 
-const DialogFooter = ({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) => (
+export const DialogFooter = ({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) => (
   <div
     className={cn("flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2", className)}
     {...props}
@@ -375,7 +375,7 @@ const DialogFooter = ({ className, ...props }: React.HTMLAttributes<HTMLDivEleme
 );
 DialogFooter.displayName = "DialogFooter";
 
-const DialogTitle = React.forwardRef<
+export const DialogTitle = React.forwardRef<
   React.ElementRef<typeof DialogPrimitive.Title>,
   React.ComponentPropsWithoutRef<typeof DialogPrimitive.Title>
 >(({ className, ...props }, ref) => (
@@ -387,7 +387,7 @@ const DialogTitle = React.forwardRef<
 ));
 DialogTitle.displayName = DialogPrimitive.Title.displayName;
 
-const DialogDescription = React.forwardRef<
+export const DialogDescription = React.forwardRef<
   React.ElementRef<typeof DialogPrimitive.Description>,
   React.ComponentPropsWithoutRef<typeof DialogPrimitive.Description>
 >(({ className, ...props }, ref) => (
@@ -3107,7 +3107,7 @@ const WORKSHOP_IMAGES = [
   { src: dws9, alt: "Master the Right Dress Code seminar" },
 ];
 
-export const Route = createFileRoute("/zz-merge-check")({
+export const Route = createFileRoute("/zz-merge-check" as never)({
   head: () => ({
     meta: [
       { title: "Balance Design & Fashion Consultancy | Image, Identity, Impact" },
