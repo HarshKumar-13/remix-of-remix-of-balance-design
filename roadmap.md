@@ -116,5 +116,5 @@
 
 # Single-file homepage delivery
 
-- [ ] Consolidate the current homepage layout and animation code in the homepage route without changing visible behavior.
-- [ ] Verify the photo dialog, Services cue, enquiry form and desktop/mobile presentation; provide a downloadable source file.
+- [x] Consolidate the current homepage layout and animation code in the homepage route without changing visible behavior.
+- [x] Verify the photo dialog, Services cue, enquiry form and desktop/mobile presentation; provide a downloadable source file.
